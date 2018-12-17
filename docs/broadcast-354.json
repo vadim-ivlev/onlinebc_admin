@@ -1,0 +1,2678 @@
+HTTP Client
+  
+Request Settings
+Title:
+
+New HTTP Request
+URL:
+
+https: //outer.rg.ru/plain/online_translations/api/online.php?id=354
+
+GET
+Body:
+
+ From File
+Custom Headers
+Name	Value	Actions
+
+
+MD5 LEN
+ Execute Script   Send Request
+Responses
+Response #1
+200 - OK
+URL:https: //outer.rg.ru/plain/online_translations/api/online.php?id=354
+Method:GET
+Execution time: 37 ms
+RESPONSE
+REQUEST
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Cache-Control: no-store, no-cache, must-revalidate, no-cache
+Connection: close
+Content-Type: application/json
+Date: Thu,
+15 Nov 2018 09: 23: 09 GMT
+Expires: Thu,
+19 Nov 1981 08: 52: 00 GMT
+Pragma: no-cache
+Server: nginx/1.14.0
+Set-Cookie: rg_con=qqmpu12nn3i9mmj8pt7lbmdlo5; path=/
+Transfer-Encoding: chunked
+
+
+Reduced Variant Begin: -------------------------------------------------------
+
+{
+    "interval": 0,
+    "widgets": {
+        "instagram": 0,
+        "twitter": 0,
+        "facebook": 0
+    },
+    "online": {
+        "broadcast": [
+
+            {
+                "name": "&quot;Прямая линия&quot; с Владимиром Путиным",
+                "date": "07.06.2018",
+                "time": "11:15",
+                "info": "Трансляция завершена",
+                "uri": "http://rg.ru/2018/06/07/priamaia-liniia-s-vladimirom-putinym-onlajn-transliaciia.html",
+                "media": { "uri": "" },
+                "show_date": 0,
+                "show_time": 1,
+                "diary": 0,
+                "diary_author": "",
+                "posts": [],
+                "posts__length": 85
+            }
+
+        ],
+        "broadcast__length": 1,
+        "broadcast__id": 354,
+        "broadcast__completed": 1
+    }
+}
+
+Reduced Variant End: -------------------------------------------------------
+
+
+
+{
+    "interval": 0,
+    "widgets": {
+        "instagram": 0,
+        "twitter": 0,
+        "facebook": 0
+    },
+    "online": {
+        "broadcast": [
+            {
+                "name": "&quot;Прямая линия&quot; с Владимиром Путиным",
+                "date": "07.06.2018",
+                "time": "11:15",
+                "info": "Трансляция завершена",
+                "uri": "http://rg.ru/2018/06/07/priamaia-liniia-s-vladimirom-putinym-onlajn-transliaciia.html",
+                "media": {
+                    "uri": ""
+                },
+                "show_date": 0,
+                "show_time": 1,
+                "diary": 0,
+                "diary_author": "",
+                "posts": [
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "\"Прямая линия\" с Владимиром Путиным завершилась.<br />\r\n",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:26",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [],
+                        "posts__answer__length": 0,
+                        "posts__FIRST__": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Спасибо большое всем участникам этой встречи. Я знаю, что заданных вопросов гораздо больше, чем тех, на которые я смог ответить. Но хочу заверить, что мы проанализируем поступившие вопросы, сделаем это по максимуму, чтобы обобщить вашу озабоченность, чтобы поставить задачи для правительства на следующие годы. Поступило такое обращение: \"Страна вопросы задает, а я хочу вас поддержать в этот день\". Всем, кто так думает, спасибо.",
+                        "posts__type": "Цитата",
+                        "posts__quote": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:26",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [],
+                        "posts__answer__length": 0
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Прорыв невозможен без мобилизации. Какие слова вы могли бы сказать населению?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:20",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528377770.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528377770.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я знаю, что когда мы говорим о прорыве, то при обсуждении всегда вспоминают задачи, которые стояли перед страной в 1930-е и 1950-е годы. Обращаю ваше внимание на то, что тогда речь шла о выживании страны. В 1930-х мир стоял на пороге войны. В конце 1940-х возникла новая опасность - ядерное оружие. Сегодня угрозы вроде бы нет. Безопасность обеспечена. У нас образованные люди, большие запасы сырья. Но если мы отстанем в развитии и внедрении новых технологий, если не будем развивать инфраструктуру, здравоохранение, образование - мы можем отстать. Поэтому мы должны понять, что стоим на важном этапе развития. Мы должны быть во главе нового технологического уклада. И нет необходимости прибегать к крайним мерам, как раньше. Нам нужно раскрепостить людей, чтобы они могли реализовать свой потенциал. Мы в состоянии решить эту задачу и сделаем это. Проблем очень много, но если будем вместе, мы сделаем это.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:25",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "На прошедших выборах вы получили рекордный результат. Не одиноко ли вам на политическом Олимпе?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:19",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Нет, этот тот случай, когда один в поле не воин. У меня есть эффективная команда единомышленников.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:20",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Как вы определяете - кому верить, а кому нет?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:18",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "В деле, которым я занимаюсь, нужно оперировать другими категориями. Здесь вопрос не в доверии, а в гарантиях. И на международной арене, и даже внутри страны.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:19",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Готовите ли вы преемника?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:18",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "В классическом смысле слова нет, преемника определит народ. Конечно думаю о том, чтобы у нас подросло новое поколение управленцев.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:18",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Президенты и премьеры каких стран обращаются к вам на \"ты\"?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:16",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "В английском языке, как мы знаем, такого нет. В других языках существует. Со многими коллегами у нас сложились такие отношения. С лидерами Японии, Германии, Франции, например. Но некоторым я подчеркнуто говорю \"вы\". Например, президенту Чехии Земану, он все-таки постарше, думаю, это правильно. Со всеми - по именам. Взаимное уважение должно сохраняться при любых обстоятельствах.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:18",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Говорят, что проезд по Крымскому мосту станет платным.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:16",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Нет, проезд останется бесплатным.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:16",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Ирина, пациент Военно-медицинской академии имени Кирова, Санкт-Петербург: Спасибо, что обратили внимание на мою просьбу. Также огромное спасибо Сергею Шойгу и военным медикам. Я хочу вернуться к нормальной жизни, для этого мне нужны нормальные протезы. Но их выдают только гражданам РФ. Очень прошу вас предоставить мне гражданство. Также не могу воссоединиться с семьей - я гражданка Украины, они граждане Сирии.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:14",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528377318.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528377318.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я уже говорил о том, как мы должны относиться к получению гражданства нашими соотечественниками и теми, кто считают себя частью русского мира. Где бы они ни были. Это в первую очередь относится к украинцам. Но ваш случай особый, конечно. Ваши дети знают, что мама справляется. Хочу поблагодарить медиков. Уверен, здоровье ваше восстановится. Такие люди, как вы, нуждаются в помощи и получат ее. Я попрошу Минобороны, чтобы ваших родственников доставили в Россию. Сергей Кужугетович слышит.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:16",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Алтайский край: В нашем селе единственная школа, где местные дети могут учиться до 9 класса. Недавно стало известно, что школу закрывают. Если это случится, село умрет. Помогите, пожалуйста, не дайте закрыть школу. <br />\r\n<br />\r\nНаталья: Мой внук обучается в этой школе. На наши обращения все отвечают по-разному. Нашей школе 19 лет, в ней ни разу не было ремонта. Чиновникам проще ее закрыть. Детей предлагают возить в село, расположенное в 7 километрах от нас. Помогите решить нашу проблему!",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "16:07",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528376863.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528376863.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Проблема в целом понятна. Это не единственный случай подобного рода. Мы много говорили о проблемах подобного рода. 47 человек, как у вас, - это не такая уж малокомплектная школа. Вопрос в техническом обеспечении и укомплектовании школы преподавателями.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:08",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "У нас целые программы созданы по развитию школьного дела. Я хотел бы, чтобы и. о. губернатора обратился к этой проблеме и помог сохранить школу.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:09",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Виктор Томенко, врио губернатора Алтайского края: Школа является филиалом, она действительно малокомплектная, есть проблемы в укомплектовании преподавательского состава. Однако в планах закрытия ее нет, тут, видимо, был какой-то информационный сбой. Проблемы будут решаться.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:11",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 3
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Леонид Поздняков, школьник, Лобня: Министр образования сообщил, что с 2022 года будет введен обязательный ЕГЭ по английскому языку. Будут ли отменяться экзамены по выбору? Если нет, то как готовиться к такому количеству экзаменов?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:59",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528376436.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528376436.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Мне такие инициативы министерства пока неизвестны. Давайте послушаем министра образования.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:00",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Ольга Васильева, министр просвещения: Сейчас идут экзамены - школьники сдают и пишут ЕГЭ. У нас два обязательных экзамена - русский и математика. Раньше было больше. Еще один экзамен - по выбору. То есть всего три экзамена. Мы планируем с 2022 ввести пилотный ЕГЭ по иностранному языку в 19 регионах. Лишь незначительный процент выпускников сейчас выбирает иностранный язык, хотя обойтись без него в жизни практически невозможно. Нам необходимо подготовить педагогов иностранных языков. Требуются новые методики. Но главное - это мотивация самих школьников. В современном мире без иностранного языка невозможно.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "16:03",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Китай: Ездили ли вы на высокоскоростных китайских поездах? Планируете ли внедрять подобные технологии в России?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:57",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528376321.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528376321.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "На высокоскоростных поездах Китая я пока не ездил, но такая поездка с Си Цзиньпином у нас запланирована. Рассчитываю, что мы выйдем на положительную динамику в этой сфере в России, например, речь о магистрали Москва - Казань.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:59",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Рассматриваете ли вы возможность обмена российского журналиста Вышинского на режиссера Сенцова?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:55",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Дело в том, что наш журналист был задержан за свою профессиональную деятельность - журналистскую. Что касается Сенцова, то он задержан за подготовку теракта. Это разные вещи и несопоставимые. Я думаю, что здравый смысл <a href=\"/2018/06/07/putin-rf-poka-ne-dumala-ob-obmene-zhurnalista-vyshinskogo-na-sencova.html\">должен восторжествовать на Украине</a>. И наш журналист будет освобожден - в том числе под давлением международных организаций.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:57",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Дмитрий, Керчь: Я предприниматель. Хотел бы от лица крымчан поблагодарить вас за строительство моста. Спасибо! В первый же день в город хлынул поток гостей. Но цены на продукты остаются высокие. Когда же они начнут снижаться?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:53",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528376061.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528376061.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Вопрос понятен, проблема известна. Вот в чем дело. На некоторые товары и услуги цены ниже, чем в Краснодарском крае и Ростовской области. На некоторые - выше. Я рассчитываю, что после запуска моста взаимные потоки товаров приведут к тому, что <a href=\"/2018/06/07/reg-ufo/putin-rasskazal-kogda-sniziatsia-ceny-na-produkty-v-krymu.html\">цены уравняются и стабилизируются</a>. И прежде всего - после запуска грузового транспорта.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:55",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Не все дороги в нашей стране такого качества, как Крымский мост. Планируется ли увеличить финансирование дорожного строительства?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:48",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528375893.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528375893.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "У нас тема дорожного строительства звучит постоянно. И это справедливо. Страна у нас огромная. И в силу огромности сделано еще недостаточно. Но исторически так сложилось. Еще в 60-е годы хотели связать Дальний Восток дорогой с европейской частью. Одна из приоритетных задач, которую мы должны решать в ближайшую шестилетку, - дорожное строительство.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:50",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Если на федеральном уровне дороги более-менее приличные, на региональном уровне количество качественных дорог гораздо меньше. С 2012 до 2017 года мы истратили на дорожное строительство 5,1 трлн рублей. Планируем удвоить эти траты в ближайшие годы. Причем тратиться они будут в разных регионах.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:51",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Из разных городов приходят жалобы на задержки зарплат. Таких обращений очень много. Но появилась и новая проблема. Не успели бюджетники обрадоваться повышению зарплат, как после выборов их срезали до прошлогоднего уровня. <br />\r\n<br />\r\nВаганов, Якутия: С 1 января моя зарплата преподавателя повысилась. Но это продлилось всего три месяца. С апреля она снова уменьшилась. Хочу спросить, повышение носило временный характер или должно сохраниться?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:43",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528375434.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528375434.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Спасибо за пожелания, поддержку и вопрос. Он важный. Уровень должен быть не только сохранен, но и приумножен. Он должен быть выше, чем средний по региону или по отрасли. То, о чем вы говорите, связано с началом финансового года. Но я предупреждал и говорил коллегам, что <a href=\"/2018/06/07/putin-obeshchal-razobratsia-so-snizheniem-zarplat-vrachej-i-uchitelej.html\">нельзя понижать эту планку</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:45",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Хочу еще раз обратить внимание руководителей регионов - снижать зарплаты нельзя. Прошу правительство проанализировать ситуацию и доложить мне в самое ближайшее время.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:45",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Вы не пришлый человек, знаете регион, жду от вас доклада.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:46",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Айсен Николаев, губернатор Якутии: С данной ситуацией разберемся. Повышение у нас в республике произошло, никаких понижений не должно было быть. Я с этой ситуацией разберусь.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:46",
+                                "posts__answer__media": [
+                                    {
+                                        "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528375599.png",
+                                        "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528375599.png",
+                                        "source": ""
+                                    }
+                                ],
+                                "posts__answer__media__length": 1,
+                                "debug": "trans_data_id_354_1528375599.png|"
+                            }
+                        ],
+                        "posts__answer__length": 4
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Национализируйте \"нефтянку\".",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:39",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Мы уже много об этом говорили. Может быть, не стоило \"назначать новых миллиардеров\". Но это уже сделано. Национализировать всю \"нефтянку\" - это сложный, опасный процесс, который может навредить не только отрасли, но и всей экономике. Нам нужно, чтобы эти предприятия работали в рамках закона и на благо страны. На самом деле это у наших нефтяников получается.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:41",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Кругляк - в Китай?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:38",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Много решений было принято по стимулированию переработки дерева в стране. Еще раз рассмотрим эту проблему.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:39",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Запад не признает Асада, зачем признавать Порошенко?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:37",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Интересный вопрос.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:38",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Постройте футбольные стадионы на Урале, за Уралом и на Дальнем Востоке.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:37",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528375133.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528375133.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Нам сначала нужно посмотреть, как новые стадионы работают в европейской части страны. Но в названных регионах инфраструктуру тоже нужно обязательно развивать.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:38",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Когда будет построен мост на Сахалин?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:36",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Знаю об этой проблеме. <a href=\"/2018/06/07/reg-dfo/putin-rasskazal-o-perspektivah-stroitelstva-mosta-na-sahalin.html\">Учтем это</a>, когда будем обсуждать эти вопросы.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:37",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Верните ГОСТ.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:36",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Дело не в ГОСТе, а в качестве продукции.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:36",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Волга мелеет.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:35",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Да, проблема есть, хотя ситуация изменилась к лучшему. Хотя еще работать и работать.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:36",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Почему чиновники лечатся за границей?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:35",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я за границей не лечусь. Необходимо сделать все, чтобы люди могли получать необходимую помощь внутри страны.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:36",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Дороги в Моздоке. А вы говорите: \"Прорыв, прорыв\"...",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:34",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Да, есть такая проблема. Но прорыв нам для того и нужен, чтобы эти проблемы решались.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:34",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "После ВОВ было построено 9 тысяч заводов, а сегодня нет работы.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:34",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Это так и не так. Многие из тех заводов устарели еще в советское время, от этого возникли проблемы в экономике.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:34",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Школа прапорщиков - почему туда не берут учиться женщин?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:33",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Трудно сказать, у нас, кажется, и прапорщиков-то больше нет. А женщин в армии все больше.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:33",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Когда госкомпания перестанет финансировать \"Эхо Москвы\"?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:32",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528374834.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528374834.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "\"Газпром\" действительно финансирует эту компанию, и это свидетельствует о свободе прессы. Хотя некоторые вещи у них действительно надо фильтровать, я согласен.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:33",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Награды Шойгу - за что?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:32",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "За результаты в работе.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:32",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Почему мясо коровы называют говядиной?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:31",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Алексей Гордеев, зампред правительства: Не могу ответить на этот вопрос.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:32",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Путин: Вот видите, даже вы не знаете, а они хотят, чтобы я ответил.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:32",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Вопрос: Володя, ты не устал?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:31",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Пока нет.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:31",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Может, объединить усилия граждан, экологов и предпринимателей в борьбе с незаконными свалками и другими проблемами экологии?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:24",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528374283.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528374283.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Это - вопрос чрезвычайно важный и острый. Мы все больше обращаем на него внимание. В советское время практически никогда мусор не утилизировался. То есть его просто сваливали на полигоны и все. Сейчас страна производит в год более 70 млн тонн отходов. Огромная цифра. Десятки тысяч полигонов работают либо \"в серую\", либо не зарегистрированы. Утилизация может быть разным способом осуществлена. Не только сжигание, но и переработка. Мы должны кардинально изменить ситуацию и <a href=\"/2018/06/07/putin-do-2024-goda-nuzhno-postroit-200-zavodov-po-utilizacii-othodov.html\">построить 238 заводов по утилизации отходов</a>. Речь идет о предприятиях самых современных с новейшими технологиями. Например, в Японии они расположены чуть ли не в центре крупных мегаполисов. И никаких нареканий не имеется. Нам нужно идти по этому пути. Разумеется, в тесном контакте с волонтерами, ОНФ и региональными органами власти. От губернаторов очень многое будет зависеть в эффективности решения этой проблемы.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:28",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Следующий пункт - персональная ответственность. Новый вице-премьер Гордеев должен будет скоординировать работу в этой сфере.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:28",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Алексей Гордеев, зампред правительства: Вы практически все сказали. Добавлю несколько цифр. Сегодня только 8% перерабатывается. Эта проблема накопилась исторически. Через полгода вступают новые правила обращения с отходами. Каждый регион должен будет разработать территориальную схему работы с отходами при общественном обсуждение. Далее. Создание региональных операторов. Также в рамках региона будут утверждены единые тарифы. Кроме того, правительство завершает создание единого информационного портала \"Наша природа\".",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:30",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Очень важно, чтобы эти стратегии выполнялись.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:31",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 4
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "На Западе после вашего Послания появились публикации, где говорится, что некоторые вооружения, о которых вы говорили, еще испытываются. Скажите, так они все-таки у нас уже есть?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:16",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528374030.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528374030.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Еще в 2004 году я говорил, что мы начали разработку новых систем в качестве ответа на выход США из договора о ПРО. Речь шла о системе, которая получила название \"Авангард\". Не думаю, что такое оружие в ближайшие годы появится у других стран. Гиперзвуковая система \"Кинжал\" уже стоит на вооружении. Мы показали пуски этой ракеты. Лазерный боевой комплекс стоит уже на вооружении. \"Авангард\" уже пошел в серию, в 2019 году планируем поставить ее в Вооруженные силы. К 2020 году планируем поставить на вооружение ракету \"Сармат\". Есть и разработки с ядерными силовыми установками - крылатая ракета и подводный аппарат. Мы завершили самое главное - испытания силовой установки. Но и это еще не все, что мы планируем поставить на вооружение.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:20",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Какие уроки сирийской кампании вы бы назвали самыми важными?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:14",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528373848.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528373848.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Это не уроки, это опыт. Отмечу сразу: Сирия - это не полигон, но все-таки мы применяем там новое оружие. Одно дело - иметь его формально, другое - видеть его в действии.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:15",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Когда мы начали использовать новое оружие, в Сирию выехали целые бригады с предприятий-производителей, которые доводили его на месте. Это очень важно. Наши военачальники начали понимать, что такое современный военный конфликт. Это позволило сделать новый шаг в развитии наших вооруженных сил.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:16",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Сергей Михайлов, КЧР: Когда российские войска будут полностью выведены из Сирии?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:10",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "У нас не просто воинский контингент в САР. Во-первых, применение наших ВС в боевых условиях - уникальный опыт и уникальный инструмент совершенствования. Никакие учения не идут с этим в сравнение. Да, мы знаем, что это связано с потерями. Мы никогда о них не забудем. И никогда не оставим в беде семьи наших товарищей. Но это была важная и благородная миссия. Напомню, тысячи боевиков из наших республик и Средней Азии, с которой у нас нет контролируемых границ, были уничтожены там. Лучше с ними \"работать\" там, чем на своей территории.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:13",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Сирийская армия контролирует территории, на которых проживает свыше 90 процентов населения страны. Масштабные боевые действия с участием российских сил закончены. В Сирии у нас не просто контингент, у нас пункты базирования в Тартусе и Хмеймиме. Наши военные находятся там, чтобы обеспечить интересы России в этом регионе. И будут находиться там до тех пор, пока это будет необходимо. Пока <a href=\"/2018/06/07/putin-nashi-voennye-budut-v-sirii-poka-eto-vygodno-rossii.html\">не планируем выводить эти подразделения</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:14",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Батайск, Ростовская область: Мы переехали из Донецка четыре года назад. Ребенок болеет, вернуться мы не можем. Но и здесь столкнулись с проблемами. К примеру, закон о 90 днях. Нам некуда ехать на 90 дней. Справки, которые мы вынуждены собирать здесь, стоят очень дорого. Мы хотим быть полезными. Пожалуйста, обратите на нас внимание и упростите процедуру получения гражданства гражданами ЛНР И ДНР.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "15:05",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528373130.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528373130.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Мы уже говорили о ситуации в ЛНР, ДНР, в Донбассе в целом. Это трагедия украинского народа. Я всегда относился к Украине как к братской стране, уверен, что украинцы и русские - практически один народ, у нас общее прошлое и уверен - несмотря ни на что - общее будущее. Мне странно, что до сих пор существует проблема с трудоустройством. У нас есть проекты законов на этот счет, но они пока не реализованы. В вашем конкретном случае проблему решат. Но она имеет более широкий масштаб.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:06",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Убежден, что мы должны <a href=\"/2018/06/07/reg-ufo/putin-vyskazalsia-za-uproshchenie-procedury-polucheniia-grazhdanstva-rf.html\">пойти по пути либерализации всего</a>, что связано со сферой приобретения российского гражданства. В связи со сложной демографический ситуацией эта проблема приобретает экономический характер. Это последствия спада рождаемости 1990-х годов. Количество женщин детородного возраста сократилось. Один из путей решения проблемы - привлечение соотечественников в Россию. Необходимо принять кардинальные меры с учетом интересов граждан России.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:09",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Блогер: Я бы хотел спросить по поводу экологии. Вопрос об электрокарах. В этом году в России продали всего 28 электромобилей. Будут ли какие-то льготы для продавцов и владельцев электромобилей?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:59",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Для решения вопросов, связанных с проблемами экологии, многие страны поощряют экологические виды транспорта, в том числе - электрокары. Для нас это имеет некоторую специфику. Для электроэнергии нужен первичный источник, а для этого используется уголь - далеко не самый экологичный вид энергии. Более чистым является газ, и нам нужно переходить на газомоторное топливо. И тут встает вопрос о создании заправок. Но того, что сейчас делается, совершенно недостаточно, чтобы этот вид транспорта внедрялся как экономически целесообразный. Очень многое зависит от работы на местах. Мы сейчас занимаемся этим и будем двигаться в этом направлении.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "15:01",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Блогер: Будет ли в России своя криптовалюта? Будет ли это как-то контролироваться государством? Заменит ли криптовалюта обычные деньги?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:56",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528372671.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528372671.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Своей криптовалюты у России не может быть по определению, как у любой другой страны. Потому что криптовалюта выходит за национальные рамки. У нас майнинг не регулируется, и <a href=\"/2018/06/07/prezident-otvetil-na-vopros-o-rossijskoj-kriptovaliute.html\">мы относимся к этому осторожно</a>. В Японии это как-то используется, но в других странах это не работает. ЦБ считает, что криптовалюты не могут быть средством платежа, накопления. И они ничем не обеспечены. Так что мы должны относиться к этому осторожно. Но такое явление в мире имеет место, и мы должны смотреть, как мы можем его использовать в наших интересах.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:58",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Евгения Лаврик, Ставропольский край: Давайте я вам покажу нашу проблему. Наши дома пострадали от наводнения. В домах около 5 дней стояла вода. Течение было настолько сильным, что у нас даже уплыл порог. Из-за сырости проваливаются полы. С весны у нас появились новые сожители - это лягушки. Появляются все новые и новые трещины, с каждым днем их все больше. Дом находится в ужасном состоянии. Нам выдали акт о том, что наше жилье не пригодно для проживания. Нас поставили в очередь на жилищный сертификат. Но потом вывели из списка, так как наш дом с 2002 года находится в нежилом фонде.  Мы платим за газ, за свет. Нам никто не говорил, что мы не в жилом фонде. Пытались попасть к губернатору, но нам сказали, что прием населения он не ведет.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:50",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528372225.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528372225.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "В целом проблемы такого рода решаются, но бывают вопиющие случаи. Не знаю, в каком административном режиме формулируют местные власти вашу ситуацию. Если ваше жилье находится в зоне стихийного бедствия, конечно, вам должны помочь. Все остальное - бюрократические отговорки и проволочки. Возможно, это связано с проблемой контакта между региональными властями и МЧС. Я хочу вас заверить, что в вашем конкретном случае мы поразбираемся и буду ждать доклада от губернатора. Но в целом ситуация работает, и мы посмотрим, что нужно усовершенствовать в целом.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:52",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Владимиров, губернатор Ставропольского края: В 2011 году дом Евгении был возвращен в жилой фонд. Но в 2017 году он вновь пострадал от наводнения. Я уже обратился в профильные ведомства для того, чтобы этой семье выдали жилищный сертификат. Есть такие проблемы и у других семей.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:53",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Путин: Безусловно, этим семьям надо помочь, и <a href=\"/2018/06/07/reg-skfo/prezident-poobeshchal-pomoch-podtoplencam-stavropole.html\">мы это сделаем</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:54",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 3
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Как вам реновация в Москве?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:40",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528371809.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528371809.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Это масштабный проект. Почти миллион человек вовлечен в эту программу. На сегодняшний день основные озабоченности сняты, программа начала реализовываться. И думаю, что к 2024 году и потом она будет реализовываться в интересах москвичей.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:41",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Сергей Собянин, мэр Москвы: Хочу поблагодарить вас за поддержку закона о реновации. Мы выпустили все необходимые нормативно-правовые акты, обеспечили финансирование реализации первого этапа программы. Мы должны обеспечить комфортное проживание как тех, кто попадает под реновацию, так и тех, кто живет в соседних домах. Начато строительство на 250 стартовых площадках, которые дадут толчок к дальнейшей волне переселения.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:43",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Путин: Спасибо, Сергей Семенович, желаю вам успеха, уверен, что программа будет реализована. И она должна <a href=\"/2018/06/07/putin-prokommentiroval-programmu-renovacii-v-moskve.html\">затрагивать не только Москву</a>, но и другие регионы. Мы должны выйти в строительстве на 120 млн квадратных метров, и пять миллионов человек должны улучшить свои условия. Мы будем работать над созданием оборудованных инфраструктурой земельных участков, работать с банками и предпринимать другие шаги.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:45",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 3
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Многодетная семья, Иваново: У нас с женой трое детей. И ипотечный кредит по ставке 13 процентов, который мы взяли несколько лет назад. Недавно узнали о постановлении, которое дает право на снижение ставки с 13 процентов до 6. Но в банке нам отказали, так как у нас уже трое детей. В законе сказано, что льгота дается при рождении второго или третьего ребенка. То есть при рождении четвертого ребенка ее не предоставляют. Просим изменить формулировку, чтобы льгота предоставлялась не только на второго и третьего, но и на последующих детей.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:36",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528371405.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528371405.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Что я могу сказать? Вы правы. Это решение, о котором вы сказали, я разочарую сейчас Минфин, оно ошибочно. Его надо исправить. Это будет 9 млрд рублей. Это не такие большие деньги для решения демографических проблем, перед которыми стоит наша страна. Мы это сделаем. Мы это поправим. И хочу пожелать успехов вашей семье.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:36",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Станислав Воскресенский, губернатор Ивановской области: Обратим внимание на проблему этой семьи, встретимся с ними.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:38",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Путин: У нас действительно растут объемы ипотечной деятельности, многие семьи прибегают к ипотеке. К нам присоединился министр финансов Антон Силуанов.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:38",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Антон Силуанов, вице-премьер: Мы принимаем все меры по снижению ставок. Средняя ставка сейчас - 9,73. Стараемся поддержать семьи с 2, 3 и более детьми, примем решение, о котором вы говорили. Но основная задача - сделать ипотеку доступнее для всех граждан.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:40",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Путин: Я уже говорил в Послании, что мы должны ориентироваться на ставку в 8%, но <a href=\"/2018/06/07/putin-postavil-zadachu-snizit-stavku-ipoteki-do-7-procentov.html\">стремиться к 7%</a>. Что касается постановления правительства, оно должно быть поправлено, и мы это сделаем.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:40",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 5
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Есть регионы, в которых проблема обманутых дольщиков успешно решается. Но есть и негативный опыт. Например, есть соответствующие сообщения из Липецка и Владивостока. ",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:25",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528371067.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528371067.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я обещаю, что зафиксирую эти просьбы. Мы на это отреагируем. Проблема шире, чем эти конкретные случаи. Это связано с недостаточно внятным регулированием, имевшим место до сегодняшнего дня. Объем строительства очень большой. Всего в стране свыше 1 млн долевых договоров. Это огромные средства, и далеко не всегда они эффективно используются застройщиками. Большая ответственность лежит на плечах губернаторов. Мы должны отказаться от использования средств граждан в строительстве. Мы должны сделать так, чтобы в год примерно 5 млн семей могли улучшить свои жилищные условия. Это сложная, но реализуемая задача. Но если резко отказаться от использования средств граждан - получим еще больше претензий. Это резко снизит объемы строительства. С 1 июля 2019 года решено <a href=\"/2018/06/07/reg-dfo/putin-obiasnil-problemy-obmanutyh-dolshchikov-nevniatnym-regulirovaniem.html\">прекратить заключение долевых договоров</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:29",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Якушев, глава Минстроя: Уход от котлового метода (одно разрешение на строительство - один расчетный счет) и банковское сопровождение - эти два механизма должны заработать с 1 июля этого года. Создается механизм, который позволяет использовать деньги дольщиков и не создавать пирамид. Это позволит очистить рынок и заняться амбициозным проектом - застройки 120 млн квадратных метров жилья.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:31",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Для научных исследований в области медицины очень сложная процедура сертификации. Также многое сырье закупается за рубежом. Это касается не только медицинской сферы, но затрагивает и другие технологические сферы.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:22",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528370644.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528370644.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Это действительно интересно и перспективно. Я совсем недавно был в \"Курчатнике\". Знаю, что есть проблемы с сертификацией. Хотя у нас приняты нормативные документы, по которым внедрение должно происходить быстрее, чем за границей. Чтобы сделать выводы о том, как работает система сертификации, вам нужно как минимум пройти всю предусмотренную законом процедуру. Ваши изобретения безусловно нуждаются в поддержке, будем это делать.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:24",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Алексей Гончаров, Курск: Будет ли повышаться пенсионный возраст? Ведь после 50 лет у нас в стране на работу не берут. Будет ли ранний выход на пенсию для шахтеров, силовиков и других?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:15",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528370206.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528370206.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "В советское время, вы знаете, работающим пенсионерам не платили. Уместно или нет, правительство перенесло это в сегодняшний день. Об этом нужно подумать. Есть дефицит кадров в некоторых сферах. Учитывая ситуацию на рынке труда и низкие доходы этих людей, нужно об этом подумать.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:16",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Я всегда относился к этому в высшей степени осторожно. Одна из ключевых задач - <a href=\"/2018/06/07/reg-cfo/putin-poobeshchal-povysit-dohody-pensionerov.html\">значительное повышение доходов пенсионеров</a>. И это нужно обеспечить. Это позволит уменьшить количество людей, живущих за чертой бедности. Я надеюсь, что это будет сделано. Тогда уже будем говорить о мерах, которые правительством предлагаются.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:17",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Чем необходимо пожертвовать, чтобы быть президентом?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:13",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528370035.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528370035.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Личной сферой жизни, это неизбежно. Но это компенсируется осознанием того, что ты занимаешься важным и нужным делом.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:14",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Когда вы поверили в Бога?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:12",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Это очень интимный вопрос. Я думаю, каждый человек рождается с верой в Бога. Но каждый в разное время начинает эту веру осознавать. Во время Великой Отечественной в окопах, думаю, каждый, вставая, думал о Боге. В экстремальных ситуациях точно почти каждый думает о Боге.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:13",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Какой совет отца вы передали бы внукам?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:12",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Не врать.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:12",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Есть ли какой-то вопрос, на который у вас точно нет ответа?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:11",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я могу сказать, что если у меня нет ответа, я стараюсь его найти. Вместе со своими коллегами.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:12",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Самая удачная шутка за последнее время?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:10",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Недавно одно немецкое издание написало, что Трамп толкает Европу в руки Путина. Если совместить это со слухами о нашем вмешательстве в выборы в США, то все вместе звучит смешно: мы якобы повлияли на выборы президента США, а он подарил нам Европу. <a href=\"/2018/06/07/putin-poshutil-pro-trampa-i-rasskazal-chto-smeetsia-i-nad-soboj.html\">Полный бред</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:11",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Многие не раз отмечали ваше прекрасное чувство юмора. Приходилось ли смеяться над собой?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:10",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Часто. Я часто это делаю.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:10",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Что вы делаете, когда не знаете, что делать?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:09",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Есть такое правило: не уверен - не обгоняй. Цена ошибки велика. Если не знаю, что делать, я стараюсь найти решение и прийти к устойчивому мнению, что же именно нужно и целесообразно.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:10",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Инициативная группа, Струнино, Владимирская область: Отделение не работает. Сказали, что его не закрывали, но оно не работает. Мы ездим в Александров. Скорую перевели в новое здание, но оно не соответствует нормам. Мы просим восстановить то, что разрушилось.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:08",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Владимир Путин: Послушайте. Безусловно, это медицинское учреждение должно функционировать как современное и помогать людям. Что сохранить, как обустроить, все это должно быть сделано на региональном уровне. Понятно, что для каждого населенного пункта трудно это сделать, но это нужно сделать, потому что речь идет о здоровье людей.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:10",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Струнино, Владимирская область: Недавно местную больницу присоединили к районной и лишили статуса самостоятельной единицы. Из-за этого ремонт не проводится уже очень давно. Уже закрыты хирургическое, детское и многие другие отделения. До ближайшей районной больницы нужно ехать 30 минут на электричке. Жители города создали инициативную группу, чтобы отстаивать свою больницу. <br />\r\n<br />\r\nАнна Погодина, многодетная мать: У меня вопрос о закрытии детского отделения У меня 18 детей - я мама и бабушка. Мамочкам приходится ездить в Александров. Тяжело добираться и выстаивать очереди, записываться приходится за месяц-полтора. И лечения не дают.  <br />\r\n<br />\r\nИрина Георгиевна: У нас была прекрасная больница. Когда нас присоединили к райцентру, начали закрываться отделения. Не все могут ездить в Александров. У нас не хватает лекарств, оборудования и специалистов. Поликлиника тоже в плохом состоянии. Мы бы хотели новую, но если денег нет, надо хотя бы старую отремонтировать. Просим вашей помощи в решении этой проблемы. В нашей больнице обслуживаются около 30 тысяч человек.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "14:03",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528369442.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528369442.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "У нас наиболее острые проблемы возникли в малых населенных пунктах. Там мы планируем осуществить программы создания передвижных комплексов и акушерских пунктов. Но в вашем случае речь идет о гораздо более крупном населенном пункте. Первичное звено не должно уничтожаться, я согласен с вами.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:04",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Светлана Орлова, губернатор Владимирской области: Мы ничего не закрываем, выделили деньги на ремонт. Наш департамент работает с инициативной группой. Мы также добавим мобильные медицинские центры. В Александрове больницу отремонтировали, в Струнино перенесли больницу в новое здание. Мы построили 17 ФАПов на селе. Работаем над документацией по новой поликлинике. Я думаю, что мы поработаем над тем, чтобы сделать в Струнино поликлинику.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:06",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Путин: Судя по всему, что я вижу на экране, проблема является острой. Все позитивные моменты, о которых вы упомянули, наверное, состоялись, но то, что я вижу на экране, требует вашего внимания. Вероника Игоревна, я вас тоже попрошу внимательно к этому отнестись, вместе с губернатором <a href=\"/2018/06/07/reg-cfo/bolnicu-v-strunino-vosstanoviat-posle-zvonka-putinu.html\">заняться этой проблемой</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "14:07",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 3
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Очень много вопросов об онкологии. Во-первых, в регионах не хватает реабилитационных центров и квалифицированной помощи. Также - нехватка лекарств в больницах и \"скорой помощи\". Есть еще проблема неправильных диагнозов. Мы видим, что цепочка \"пациент - врач - диагностика - лечение\" не работает. Как нам решить эту проблему?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:51",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528368894.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528368894.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Вы безусловно правы. Это одна из очень острых и чувствительных проблем. Мы ставим пред собой сложные и амбициозные задачи по увеличению продолжительность жизни граждан. Этого нельзя добиться, не используя современные средства лечения. По сравнению с другими заболеваниями у нас здесь, в сфере онкологии, поменьше результатов. Необходима ранняя диагностика. Сегодня раннее выявление - это около 30 процентов, а должно быть 50-70 процентов. У нас 90 с лишним процентов излечения по детской гематологии. А было в районе 30 процентов и меньше. Результаты возможны. Второе, нужно уделить больше внимания ядерной медицине. Лекарственное обеспечение и химиотерапия должны проводиться отечественными препаратами. Программа готовится. Нужно строить новые онцкоцентры и дооборудовать уже имеющиеся. До 2024 года на эти цели <a href=\"/2018/06/07/putin-otvetil-na-vopros-kak-snizit-kolichestvo-onkozabolevanij.html\">будет потрачен триллион рублей</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:55",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Вероника Скворцова, глава Минздрава: С 2013 года мы запустили программу онкоскринингов. Когда риск рака наиболее высок, человек проходит обследование раз в два года. Проходят ежегодные обследования женщин. Для нас важная задача повысить бдительность участковых врачей к онкологическим заболеваниям.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:58",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Очень много шутливых вопросов про Мутко. Моряки спрашивают, можно ли рисовать его портреты на кораблях, чтобы они были непотопляемыми?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:47",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528368500.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528368500.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Наши корабли и так непотопляемые. Надеюсь, так и будет дальше. Что касается Мутко - в отношении него много слухов и разговоров, отдаю себе в этом отчет. За годы его работы в качестве министра спорта немало сделано в этой сфере. Надо обращаться к фактическим результатам его деятельности. Я все понимаю, но исхожу не из эмоциональных оценок, а из реалий.  Мы знаем, какая атака на него предпринималась. И в этих условиях <a href=\"/2018/06/07/putin-mutko-mnogogo-dobilsia-v-sporte-hot-ego-anglijskij-i-hromaet.html\">отправить его на пенсию невозможно</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:49",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Кто-то с сомнением относится к назначению Рогозина главой Роскосмоса. Кто-то уверен, что он сможет повести людей вперед. Что вы думаете?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:45",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Думаю, мне не нужно это комментировать, но раз такие вопросы звучат, скажу. Да, образование у него, возможно непрофильное. Но он - человек вполне компетентный в этой сфере, долгое время занимавшийся этими вопросами.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:46",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Один в поле не воин. Он будет создавать команду, которая способна держать технические задачи и привлекать организаторов.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:46",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Владислав, Санкт-Петербург: Не секрет, что наша страна была одной из двух мировых держав, обладающей технологией повторного запуска космического корабля. Считаю космическую отрасль одной из важнейших для страны. Возможно ли возродить технологию \"Бурана\", какие в целом у России планы по расширению своего присутствия в космосе?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:42",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528368185.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528368185.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Владислав, вы, безусловно, правы. Освоение космических технологий имеет большое значение для любой страны, и уже тем более - для нашей. Эти технологии развиваются и очень активно коммерциализируются. Мы должны вернуть себе наше первенство. Есть конкуренция - Франция, Азия, США. Это все очень хорошо, нормально, мы работаем со всеми партнерами. Несмотря на все сложности в отношениях с США, мы работаем с американскими учеными. У нас есть новые программы, например \"Сфера\". Качество связи будет такое, что сможет заменить кабельную связь, это будет прорыв и может привести к <a href=\"/2018/06/07/putin-rasskazal-o-revoliucionnyh-razrabotkah-v-sfere-sviazi.html\">абсолютной революции в сфере связи</a>. Есть исследования в области дальнего космоса. В общем и целом у нас большие и амбициозные планы в развитии космической сферы. Уверяю, мы и дальше будем идти по этому пути. Мы приложили немало усилий, чтобы создать космодром \"Восточный\". Мы будем и дальше его развивать.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:45",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Наталья Краснова, блогер: Я работаю блогером. И на данный момент это не профессия. Когда наступит момент, когда блогинг станет профессией?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:38",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528367997.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528367997.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Мы же знаем, за что живут блогеры. В том числе - за рекламные деньги. И, судя по всему, у вас неплохо это получается. Если вопрос в том, чтобы зафиксировать это в законодательстве, с точки зрения соцобеспечения, на будущее - наверное, <a href=\"/2018/06/07/reg-urfo/putin-rasskazal-stanet-li-bloging-oficialnoj-professiej.html\">это можно сделать</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:39",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Хусейн Гасанов, блогер: В интернете ходят слухи о закрытии таких соцсетей, как Instagram и YouTube. Что вы думаете по этому поводу?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:36",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528367867.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528367867.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я понимаю вашу озабоченность и озабоченность людей, с которыми вы работаете в интернете. Мы <a href=\"/2018/06/07/putin-otvetil-na-vopros-o-zakrytii-youtube-i-instagram-v-rossii.html\">не собираемся ничего закрывать</a>. Я хорошо знаком с ситуацией вокруг Telegram. Вот вы волнуетесь, но волнуюсь и я. Знаете за что? За безопасность людей. Спецслужбы сообщали, что во время подготовки теракта в Петербурге не могли отследить переписку террористов. Как на это еще реагировать? Но, конечно, легче всего запретить. Нужно, используя современные технологии, бороться с угрозами, не ограничивая пространство свободы.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:38",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Захар Прилепин, писатель: Как вы прокомментируете ситуацию на Донбассе и планы украинской власти в отношении ЛНР и ДНР?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:31",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528367556.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528367556.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я надеюсь, что до провокаций дело не дойдет. Если это произойдет, это <a href=\"/2018/06/07/putin-nyneshnee-rukovodstvo-ukrainy-ne-mozhet-reshit-problemu-donbassa.html\">может иметь последствия</a> для украинской государственности в целом. Я надеюсь, что ничего такого не произойдет. Да и нельзя запугать людей, которые живут в Донбассе, в ЛНР, ДНР. Мы оказываем обеим непризнанным республикам помощь и дальше будем это делать. Действующее украинское руководство не в состоянии решить эту проблему. Как можно считать эту территорию своей и этих граждан своими - и при этом блокировать территорию и обстреливать ее? Вот представители ОБСЕ фиксируют новые нарушения. Знаете, мне кажется, Украина вступает в новый политический цикл и ситуация усугубляется. Украина не может решить проблему ЛНР и ДНР - в том числе потому, что ей не нужны избиратели с этих территорий. Если и дальше украинские элиты будут действовать в своих личных интересах, продолжать грабить народ, ничего хорошего не выйдет. Мы продолжим содействовать тому, чтобы ситуация разрешилась в соответствии с Минскими договоренностями.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:35",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Наших бизнесменов на Западе начали \"кошмарить\". Например, проблемы у Романа Абрамовича. Что вы им посоветуете?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:25",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528367148.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528367148.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "По поводу представителей крупного бизнеса я уже говорил на одной из публичных встреч с бизнесменами. Я предупреждал, что такое развитие событий, с которым мы сталкиваемся сегодня, возможно. И рекомендовал держать капиталы в России и использовать их для развития российской экономики. В 2008 году многие наши крупные компании попали в сложную ситуацию, так как набрали большое количество кредитов на Западе. Их залоговая масса резко упала, они должны были или закрыть кредиты, или нарастить залоговую массу. Мы забрали их кредиты. Когда ситуация стабилизировалась - они выкупили их у нас. Правительство получило выгоду, все прошло нормально. Кто же будет им помогать за границей? Там их только преследуют. Это большая ошибка тех, кто это делает на Западе. Это подрывает доверие бизнеса к экономической политике ведущих стран мира.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:28",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Доллар - это универсальная резервная валюта мировая. У евро отчасти получается взять на себя функции. Но если США ограничивают расчеты в долларах, это подрывает доверие к доллару. Можно таким образом добиться каких-то краткосрочных результатов - да и то вряд ли. А в долгосрочной перспективе это вредно. Это контрпродуктивно. Уверен, это тоже пройдет. Кто-то говорит, что нужно помочь бизнесменам, а кто-то спрашивает: \"Когда воры - и дальше следуют фамилии - вернут свои деньги в Россию?\". Думаю, так стоит говорить о тех, кто незаконным способом заработал свои капиталы. Но <a href=\"/2018/06/07/putin-ocenil-problemy-abramovicha-i-drugih-krupnyh-biznesmenov.html\">капиталы лучше держать в России</a>. Мы уже объявляли амнистию капиталов.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:31",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "В антироссийской риторике, в вопросах антироссийских санкций выступил Лондон. И, похоже, даже занял лидирующие позиции. Сначала они хотели лишить нас чемпионата мира, затем прогремело \"дело Скрипалей\"...",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:24",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Нам бы хотелось, чтобы нам дали доступ к нашим гражданам. И дали <a href=\"/2018/06/07/prezident-rf-dolzhna-uchastvovat-v-rassledovanii-dela-skripalej.html\">возможность участвовать в расследовании</a>. До этого трудно что-либо комментировать.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:24",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Вы упомянули выход США из договора о ПРО. Впервые вы сказали об этом и о формировании однополярного мира в 2007 году в Мюнхене. Прошли годы, тогда вас никто особо не слушал. Теперь ЕС и Канада получают торговую войну от США. Недавно к вам приезжали лидеры Франции и Германии. В разговорах с глазу на глаз говорят ли они об этом?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:19",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528366894.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528366894.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Но ведь дело не только в наших разговорах с глазу на глаз. Хотя и в них тоже. Сейчас я был в Австрии, например. Они говорят не только на ухо, они публично уже говорят: сейчас премьер-министр Франции сказал, что США не должны становиться экономическим жандармом. В Германии говорили об отсутствии реального суверенитета.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:20",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Наши партнеры думали, что их эта контрпродуктивная политика санкций и ограничений не коснется. Но <a href=\"/2018/06/07/putin-nazval-poshliny-ssha-na-stal-i-aliuminij-sankciiami.html\">это случилось</a>. Это связано с прагматичными национальными интересами США. Нам нужно выработать единые правила поведения как в сфере безопасности, так и в сфере экономического взаимодействия. Понимание этого есть. В 2007 году я столкнулся с тем, что многие коллеги назвали мое выступление жестким и неуместным. Но именно то, о чем я тогда говорил, происходит сегодня. Происходит потому, что тогда никто не захотел слушать и делать что-либо, чтобы эта тенденция не развивалась. Важно то, что приходит осознание необходимости договариваться.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:23",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Сергей Шаргунов, писатель, депутат: Приветствую вас из Приморья. Россия всегда была, вопреки всему, страной свободомыслия. В последнее время получаю много тревожных сигналов из провинции. Молодых патриотичных ребят осудили за создание группы по проведению референдума об ответственности власти в стране. Нет ли смысла приостановить тех, кто ведет подобные дела?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:16",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528366680.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528366680.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я с вами согласен. Вспомним про классическую литературу, как говорил один из героев, \"забрать все книги бы да сжечь\". Но если нарушил, отвечай. Нужно разбираться. Давайте посмотрим. Попрошу коллег из ОНФ вместе проанализировать, что происходит. С одной стороны, нужен заслон против экстремизма. Разве кто-то против борьбы с пропагандой суицидов? Конечно, нет. Хочу вас заверить: в правоохранительной системе люди понимают свои задачи. Но если нужно дополнительное внимание обратить, давайте это сделаем.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:19",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Примите какие-нибудь меры против Латвии, которая запрещает учиться на русском языке. Введите какие-нибудь санкции.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:11",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Мы считаем, что введение санкций в одностороннем порядке не помогает решать проблемы, а усугубляет их. Мы постоянно обращаем внимание властей прибалтийских государств на проблемы русскоязычного населения. Понятие \"неграждане\" придумали в прибалтийских государствах, чтобы ограничить законные права этих людей.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:12",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Средства, которыми мы должны защищать наших соотечественников, должны быть такими, чтобы не усугублять наше положение. Поэтому <a href=\"/2018/06/07/putin-ne-odobril-ideiu-vvedeniia-sankcij-protiv-latvii.html\">мы будем вести диалог</a> с нашими партнерами. И надеемся, что им будет стыдно за такое нарушение прав людей, которые живут на территории ЕС. Это как раз тот случай, когда в чужом глазу соринку замечают, а в своем бревна не видят. Мы будем защищать наших соотечественников, но так, чтобы им не навредить.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:13",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "СМС-сообщение: Будет ли Третья мировая война?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:08",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528366343.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528366343.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Можно вспомнить Эйнштейна: \"Я не знаю, какими средствами будет вестись Третья мировая война, но Четвертая будет вестись с помощью камней и палок\". Я думаю, понимание опасности очень важно.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:09",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Кстати говоря, после Второй мировой мы живем в условиях глобального мира. Между ведущими военными державами установился стратегический паритет. Страх взаимного уничтожения сдерживал ведущие державы от резких движений и заставлял уважать друг друга. Выход США из договора по ПРО - попытка сломать этот паритет. Но <a href=\"/2018/06/07/putin-otvetil-na-vopros-o-vozmozhnosti-tretej-mirovoj-vojny.html\">наши новые вооружения сохранят этот паритет</a>. Необходимо найти формы взаимодействия, отвечающие реалиям сегодняшнего дня. Пора сесть за стол переговоров.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:11",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Когда этот период деградации отношений закончится?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:07",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Могу назвать условие, при котором это может произойти. Мы должны защищать свои интересы с сфере экономики и безопасности. Но мы всегда ищем компромиссы. Давление закончится тогда, когда наши партнеры поймут, что их действия контрпродуктивны.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:08",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Такое ощущение, что Россия у наших западных партнеров стала виновата буквально во всем. Как можно на таких условиях поддерживать рациональный диалог?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:06",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528366037.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528366037.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Неоднократно высказывался на этот счет, могу только повторить. Это такой способ сдерживания России. Эти обвинения создают базу для применения сдерживающих мер. <a href=\"/2018/06/07/putin-obiasnil-prichiny-beskonechnyh-obvinenij-zapada-v-adres-rossii.html\">В России видят угрозу и конкурента</a>. Это ошибочная политика. Нужно не сдерживать кого-либо, а наладить взаимодействие. И понимание этого все-таки приходит к нашим партнерам. Каждая страна имеет собственные интересы. Надеюсь, что этот процесс (понимания - примечание \"РГ\") будет набирать обороты.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:07",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Есть проблемы, актуальные именно для Дальнего Востока. Например, \"дальневосточный гектар\". Многие из участков находятся слишком далеко. Это связано с тем, что многие хорошие участки себе берут чиновники. Другая проблема - молодежь уезжает из-за нехватки рабочих мест. Еще одна проблема - мы себя чувствуем оторванными от остальной страны, билеты стоят очень дорого. Соответствующий пример приводит гражданин из Уссурийска.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "13:00",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528365680.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528365680.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Давайте начнем с удорожания билетов из Владивостока в другие части России. Кстати, хочу поблагодарить волонтеров за их работу. По поводу билетов. Есть программы, которые субсидируют перелеты. Первое, что нужно сделать, это расширить географию и время применения таких субсидий. И самое главное - вчера или позавчера было принято <a href=\"https://rg.ru/2018/06/06/reg-dfo/kabmin-osvobodit-ot-nds-aviaperevozki-na-dalnij-vostok.html\">решение об обнулении НДС</a> на такие перевозки.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:01",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "<a href=\"/2018/06/07/putin-rasskazal-o-planah-po-razvitiiu-promyshlennosti-na-dalnem-vostoke.html\">По поводу рынка труда</a> на Дальнем Востоке. Да, это одна из проблем. Очень жаль, что инженер должен работать маляром. Обращаю внимание, что мы все-таки поддерживаем те сферы, которые были созданы ранее на Дальнем Востоке. В том числе и авиастроение. Раньше было только военное самолетостроение, но теперь мы развиваем и гражданское. Например, Superjet. Мы это будем развивать наряду с кораблестроением, которое мы возрождаем. Будем развивать на Дальнем Востоке космическую отрасль. Также - технологии, включая автомобилестроение. Развиваем науку и образование - вспомним Дальневосточный федеральный университет. Здесь речь идет о больших циклах, но мы будем продолжать работу в этом направлении.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:05",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Теперь по поводу дальневосточного гектара. Программа работает. Сказать, что все хорошие участки забрали чиновники, - надеюсь, что это не так. Судя по тому, что такие вопросы возникают, эта программа востребована. Будем <a href=\"/2018/06/07/reg-dfo/putin-programma-dalnevostochnyj-gektar-rabotaet-pri-vseh-izderzhkah.html\">совершенствовать эту систему</a>.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "13:05",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 3
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Наталья Николаевна: Я многодетная мать, имеющая троих детей. Выделение бесплатных участков многодетным родителям в нашем регионе работает не очень. С 2015 года выделением этих участков занимаются регионы. В 2010 году я встала в очередь и была 739. И сегодня передо мной еще более 300 человек. Сколько еще ждать? Хотелось бы воспитывать детей на земле, приучать их к труду. Хотелось бы жить и работать на нашей русской земле. Мне уже 42 года. Еще 10 лет я простою, мне уже будет 52. Годы идут, хотелось бы молодой пожить на этой земле. Когда я обратилась к региональным властям, мне сказали, что с тремя детьми я должна стоять в общей очереди, а для получения земли нужно иметь четырех детей.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:53",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528365388.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528365388.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Спасибо, Наталья Николаевна. Для меня несколько странной является эта постановка вопроса - \"чтобы получить землю, нужно иметь четырех детей\". То, что у вас трое - это замечательно. Нужно, чтобы таких семей было больше. Нужно <a href=\"/2018/06/07/putin-prizval-razobratsia-s-voprosom-vydeleniia-zemli-mnogodetnym.html\">поощрять такие семьи</a>, как ваши.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:53",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Земля должна быть близко к инфраструктуре. Это требует затрат. Томск и Томская область - хороший регион. Вопрос в том, чтобы определить приоритеты бюджетных расходов.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:54",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Сергей Жвачкин, губернатор Томской области: Хочу спасибо сказать, вы частично уже ответили на вопрос, вы совершенно правы. Есть у нас такие программы, предусматривающие преференции для многодетных семей. Я обязательно лично встречусь с Натальей Николаевной. Кто-то из чиновников, наверное, не успел ей рассказать о ее правах. У нас в Сибири действительно много земли, но мы же не можем ее раздать без коммуникаций. Я встречусь лично с ней и доложу вам о решении.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:56",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Надо понять, какие чиновники так вольно трактуют закон. Надо создать такие условия, чтобы и другие семьи могли строить планы.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:56",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 4
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "В России есть традиция - после вступления в должность глава государства объявляет амнистию. Сохранится ли она?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:47",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528365209.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528365209.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Честно говоря, не знаю такой традиции. Такой традиции у нас нет. Объявление амнистии - по закону прерогатива не президента, а парламента. Время от времени мы это делаем, я поддерживаю такие инициативы. Они должны быть хорошо подготовленными и вызваны объективными обстоятельствами, а не внешними факторами - такими, как, например, выборы президента.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:49",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Валерий Газзаев: Ваш вопрос о качестве нашего футбола я воспринял как поручение. Вместе с коллегами мы проработали этот вопрос. Просмотрели практически весь мировой футбол и разработали программу развития нашего чемпионата и футбола во всех регионах РФ. Что касается нашего вопроса. Безусловно, все наше футбольное сообщество понимает, какая у вас загруженность и надеется, что футбол останется в центре вашего внимания. Я хочу вам пожелать крепкого здоровья, чтоб вас хранили Святой Георгий и Николай Чудотворец.",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:44",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528364693.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528364693.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я так понимаю, что речь идет о так называемом наследии Чемпионата мира. Вы правы, нам удалось решить очень сложную задачу - вся наша инфраструктура в Сочи загружена в течение всего года. Что касается новых стадионов. Конечно, мы истратили большие деньги на это. Инфраструктура должна работать на развитие массового и детского спорта. Надо, чтобы эти объекты были окупаемыми. Стадион - это не только поле, но и большое количество внутренних помещений. Там есть кафе, рестораны, спортклубы и многое другое. И многое будет зависеть от руководителей регионов. Ни в коем случае <a href=\"/2018/06/07/putin-novye-futbolnye-stadiony-ne-dolzhny-prevrashchatsia-v-rynki.html\">нельзя допустить</a>, чтобы на этих площадках возникли какие-то рынки, как на московских стадионах в 1990-е годы.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:46",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Ну и, конечно, РФС должен принять участие в том, чтобы загружать по уму эти объекты. Чтобы это способствовало формированию новых перспективных спортивных команд. Наша сборная не показывает ярких результатов в последнее время, но число поклонников этой красивой игры в нашей стране растет. Мы рассчитываем на то, что наша сборная на домашнем чемпионате выстрелит и покажет хороший результат.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:47",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 2
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Одна из самых острых тем сегодня - рост цен на бензин. Очень много вопросов на эту тему. Вопрос от автолюбителя из Санкт-Петербурга: \"Как долго они еще будут расти? Сколько можно? Остановите это!\"",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:27",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528363693.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528363693.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Спасибо за вопрос. Я думаю вы должны были обратить внимание на то, что правительство уже приняло ряд решений. То, что сейчас происходит, - недопустимо. Это результат неточного регулирования, которое было введено в сфере энергоресурсов. Правительство провело пересмотр некоторых налоговых мер по наполнению бюджета, предприняло налоговый маневр. Это привело к стимулированию вывоза сырой нефти за границу. Цены на нефть поднялись. Сейчас компании считают недополученные доходы от нефти, которую направляют на НПЗ, а могли бы экспортировать.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:29",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Правительство приняло уже ряд решений на этот счет. В диалоге с нашими ведущими нефтегазовыми компаниями снижен акциз. Принято решение отменить планировавшееся ранее дальнейшее повышение акцизов. К осени должны быть приняты дополнительные меры по стабилизации ситуации на рынке. Я буду следить за тем, чтобы на ситуацию не смотрели сквозь пальцы. Мы можем обратиться к министру энергетики РФ. Прямо сейчас.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:30",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Александр Новак, министр энергетики: Действительно, в мае был зафиксирован рост цен на топливо, превышающий уровень инфляции. На данный момент рост цен остановлен. Было принято решение снизить акцизы на топливо с 1 июня. Срочные фискальные меры оказали свое положительное влияние. С конца мая цены на АЗС не растут. Были достигнуты договоренности о стабилизации цен с нефтяными компаниями. На сегодняшний день существует необходимый объем топлива на внутреннем рынке. Мы также проработали ряд дополнительных мер - речь идет о возможности введения экспортной пошлины. Просим поддержать эту инициативу.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:32",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Дмитрий Козак, вице-премьер: Мы 30 мая договорились о замораживании цен. Договорились, что будем ежедневно <a href=\"/2018/06/07/reg-szfo/prezident-prosledit-za-situaciej-s-cenami-na-toplivo.html\">контролировать ситуацию с ценами</a>. Все компании выполняют свои обязательства. Если договоренности не будут выполняться, мы внесем в Госдуму предложение, о котором говорил министр энергетики. Нефтяные компании к этому относятся с пониманием. Надеемся, что применять эту инициативу не придется.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:37",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Владимир Путин: Готовьте этот законопроект, я его поддержу.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:37",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 5
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Очень много вопросов по налогам. В частности, НДФЛ. Будут ли поднимать налоги?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:21",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528364537.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528364537.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Действительно, речь идет о дополнительных 8 трлн рублей. Они не из воздуха синтезируются. Один из источников - настройка налоговой системы. <a href=\"/2018/06/07/putin-vvedenie-gibkoj-shkaly-ndfl-i-naloga-s-prodazh-necelesoobrazno.html\">Повышение НДФЛ и налога с продаж</a> в этом ключе обсуждались, мы много думали на этот счет. Казалось бы, кто больше получает - тот и должен больше платить. Но практика сложнее.  Как только его повышают, граждане с высокими доходами начинают их скрывать. Результат нулевой, а шума много. Поэтому повышение признано нецелесообразным.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:23",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Что касается налога с продаж. Тоже обсуждалось. Некоторые эксперты выступали за то, чтобы его ввести. У нас такой налог был. Это - серьезная нагрузка на экономику в целом, на граждан, это приведет к значительному росту инфляции. И мы пришли к выводу, что введение этого налога тоже нецелесообразно. Есть другие меры, которые будут приняты. Давайте дождемся этих решений, они будут приняты в ближайшее время.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:24",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Наша задача - уменьшить бедность в два раза. В период с 2000 по 2008 годы в два раза сократилось число бедных. Сейчас у нас рост зарплат 9,6 процента, рост реальных доходов - 3,8 процента. <a href=\"/2018/06/07/putin-rasskazal-gde-vziat-dengi-na-borbu-s-bednostiu.html\">Перераспределение в налоговой и бюджетной системе</a> направлено на сокращение числа бедных. Надо создать условия, при которых государство сможет оказывать помощь тем, кто в ней нуждается.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:25",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 3
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "У правительства есть реальные инструменты, чтобы добиться поставленных целей?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:17",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528364715.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528364715.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Нужно знать, что нужно делать и как. Даже сохранив костяк правительства, мы должны будем оформить соответствующие предложения. Нужно перейти в полномасштабном формате к программному принципу.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:19",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Одни говорят, что преимущества нового правительства - стабильность и опыт. Другие считают, что оно не способно на прорыв. Как вы считаете?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:17",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Я слышал эти дискуссии, и хорошо, что они возникают. Я прекрасно знаю, что, если бы мы на 100 процентов зачистили все правительство, даже если взяли бы самых грамотных людей, потребовалось бы минимум два года, чтобы сформулировать и поставить задачи. У нас нет этих двух лет.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:17",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 1
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Два года назад вас спросили, через какую полосу мы проходим - черную или белую. Тогда вы сказали, что полоса серая. Как бы вы ответили на этот вопрос сегодня?",
+                        "posts__type": "Вопрос",
+                        "posts__question": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:09",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528362766.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528362766.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [
+                            {
+                                "posts__answer__text": "Вопрос ожидаемый, конечно. Потому что должна идти речь о результатах нашей работы. Если говорить о том, в какой полосе мы сейчас находимся, мы двигаемся в сторону устойчивого белого цвета. Понятно, абсолютно белого не бывает - даже в Арктике. Но в целом мы двигаемся в правильном направлении.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:11",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Что дает основания так считать? Мы вышли на траекторию устойчивого роста экономики. Растет промышленность и сельское хозяйство. У нас исторический минимум по инфляции - это важная предпосылка для дальнейшего роста. У нас положительное сальдо торгового баланса. Низкий уровень задолженности, рост золотовалютных резервов говорят о том, что экономика в хорошем состоянии.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:13",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Растет экспорт сельхозпродукции. Он уже превысил экспорт вооружений. Мы двигаемся в направлении белой зоны.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:14",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Один из важнейших показателей - у нас продолжает расти продолжительность жизни. И доходы. Зарплаты <a href=\"/2018/06/07/putin-v-rossii-nachalsia-ustojchivyj-rost-dohodov-grazhdan.html\">выросли</a> на 1,9%, реальные доходы - на 3,8%. Конечно, не каждый человек на себе это ощущает. Но в целом это - объективные цифры. Это правда, на самом деле.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:14",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            },
+                            {
+                                "posts__answer__text": "Нам безусловно нужно персонифицировать ответственность. Это <a href=\"/2018/06/07/putin-nazval-optimalnym-novyj-sostav-pravitelstva-rf.html\">связано и с составом правительства</a>. Времени на раскачку нет. И, наконец, финансовая обеспеченность. Мы исходили из того, что на реализацию поставленных задач необходимо 8 трлн рублей. И мы знаем, где их взять.",
+                                "posts__answer__uri": "",
+                                "posts__answer__date": "07.06.2018",
+                                "posts__answer__time": "12:20",
+                                "posts__answer__media": [],
+                                "posts__answer__media__length": 0,
+                                "debug": "none_img|"
+                            }
+                        ],
+                        "posts__answer__length": 5
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "В эфире - президент Российской Федерации. \"Прямая линия с Владимиром Путиным\" началась.",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:09",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [],
+                        "posts__answer__length": 0
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Обращений уже больше двух миллионов",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:07",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [],
+                        "posts__answer__length": 0
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Владимир Путин вошел в студию, оборудованную в Гостином дворе.",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:06",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528362564.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528362564.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [],
+                        "posts__answer__length": 0
+                    },
+                    {
+                        "posts__author": "Дмитрий Сосновский",
+                        "posts__text": "Уже почти два миллиона вопросов задали президенту граждане",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "12:01",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528362434.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528362434.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [],
+                        "posts__answer__length": 0
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "В этом году в студии впервые не будет гостей. Вместо них - десятки интерактивных экранов с включениями со всей страны. Такие экраны могут одновременно принимать до 45 сигналов. На них будут появляться SMS, MMS, видеозвонки. Но и традиционные звонки в студию, конечно же, <a href=\"/2018/06/06/interaktivnye-ekrany-zameniat-gostej-na-priamoj-linii-s-putinym.html\" target=\"_blank\">не отменят</a>. <br />\r\n",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "11:46",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [],
+                        "posts__answer__length": 0
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Если сложить все время, которое Владимир Путин провел в прямом эфире в рамках \"прямых линий\", получится более полутора суток.",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "11:36",
+                        "posts__media": [
+                            {
+                                "uri": "//cdnimg.rg.ru/i/i/online_trans/original/trans_data_id_354_1528361436.png",
+                                "thumb": "//cdnimg.rg.ru/i/i/online_trans/trans_data_id_354_1528361436.png",
+                                "source": ""
+                            }
+                        ],
+                        "posts__media__length": 1,
+                        "posts__answer": [],
+                        "posts__answer__length": 0
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "На сайте \"Прямой линии\" уже опубликованы некоторые популярные вопросы. Традиционно много беспокойства о ценах на бензин, ЖКХ, транспорте, общем состоянии российской экономики.",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "11:25",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [],
+                        "posts__answer__length": 0
+                    },
+                    {
+                        "posts__author": "Илья Максимов",
+                        "posts__text": "Глава государства начнет отвечать на вопросы граждан в полдень. В call-центр в среднем поступает до нескольких тысяч обращений в час. Прием вопросов будет продолжаться вплоть до окончания трансляции.",
+                        "posts__type": "Событие",
+                        "posts__event": 1,
+                        "posts__uri": "",
+                        "posts__date": "07.06.2018",
+                        "posts__time": "11:17",
+                        "posts__media": [],
+                        "posts__media__length": 0,
+                        "posts__answer": [],
+                        "posts__answer__length": 0,
+                        "posts__LAST__": 1
+                    }
+                ],
+                "posts__length": 85
+            }
+        ],
+        "broadcast__length": 1,
+        "broadcast__id": 354,
+        "broadcast__completed": 1
+    }
+}
