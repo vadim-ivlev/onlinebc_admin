@@ -26,7 +26,7 @@ type Route struct {
 	Params  []Param                                      `json:",omitempty" yaml:",omitempty"`
 }
 
-// Query строит строку HTTP запроса по параметрам. Применяется в шаблонах документации API.
+// Query строит строку HTTP GET запроса по параметрам. Применяется в шаблонах документации API.
 func (r Route) Query() string {
 	s := r.Path + "?"
 	for _, p := range r.Params {
