@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"onlinebc/model/db"
-	"onlinebc/model/redis"
+	"onlinebc_admin/model/db"
 
 	"github.com/gorilla/mux"
 )
@@ -62,7 +61,6 @@ func GetRoutes(w http.ResponseWriter, req *http.Request) {
 func getByID(w http.ResponseWriter, r *http.Request, sqlText string) {
 	id := mux.Vars(r)["id"]
 	json := db.GetJSON(sqlText, id)
-	redis.Set(r.RequestURI, json)
 	fmt.Fprint(w, json)
 }
 
@@ -89,7 +87,6 @@ func GetBroadcast(w http.ResponseWriter, r *http.Request) {
 // GetBroadcasts Получить список трансляций
 func GetBroadcasts(w http.ResponseWriter, r *http.Request) {
 	json := db.GetJSON("SELECT get_broadcasts();")
-	redis.Set(r.RequestURI, json)
 	fmt.Fprint(w, json)
 }
 
@@ -101,6 +98,5 @@ func GetBroadcastList(w http.ResponseWriter, r *http.Request) {
 	num := vars["num"]
 	fmt.Printf("main=%v active=%v num=%v", main, active, num)
 	json := db.GetJSON("SELECT get_broadcasts();")
-	redis.Set(r.RequestURI, json)
 	fmt.Fprint(w, json)
 }

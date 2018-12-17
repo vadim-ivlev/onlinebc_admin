@@ -4,9 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"onlinebc/model/db"
-	"onlinebc/model/redis"
-	"onlinebc/router"
+	"onlinebc_admin/model/db"
+	"onlinebc_admin/router"
 	"os"
 	"strconv"
 )
@@ -14,7 +13,6 @@ import (
 func main() {
 	// считать конфиги
 	db.ReadConfig("./configs/db.yaml")
-	redis.ReadConfig("./configs/redis.yaml")
 
 	// считать параметры командной строки
 	serve, port := readCommandLineParams()
@@ -51,7 +49,6 @@ func readCommandLineParams() (bool, int) {
 	}
 	if *printParams {
 		db.PrintConfig()
-		redis.PrintConfig()
 		os.Exit(0)
 	}
 

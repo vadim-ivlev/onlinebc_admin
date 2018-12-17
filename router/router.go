@@ -3,8 +3,8 @@ package router
 import (
 	"log"
 	"net/http"
-	c "onlinebc/controller"
-	"onlinebc/middleware"
+	c "onlinebc_admin/controller"
+	"onlinebc_admin/middleware"
 
 	"github.com/gorilla/mux"
 )
@@ -48,6 +48,5 @@ func Serve(port string) {
 	InitRoutesArray()
 	defineRoutes(router)
 	router.Use(middleware.HeadersMiddleware)
-	router.Use(middleware.RedisMiddleware)
 	log.Fatal(http.ListenAndServe(port, router))
 }

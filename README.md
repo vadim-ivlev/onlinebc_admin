@@ -98,11 +98,6 @@ Postgre доступен на localhost:5432.
 	docker exec -it psql-com psql -U root onlinebc
 
 
-Командная строка Redis
-
-    docker exec -it psql-com redis redis-cli
-
-
 
 -------------------------------
 
