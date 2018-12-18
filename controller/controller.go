@@ -1,14 +1,13 @@
 package controller
 
 import (
-	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
 	"onlinebc_admin/model/db"
-	"strings"
 
 	"github.com/gorilla/mux"
+	yaml "gopkg.in/yaml.v2"
 )
 
 // Param - параметр запроса ?name=value&...
@@ -50,44 +49,47 @@ func GetBroadcast(w http.ResponseWriter, r *http.Request) {
 
 // UpdateMedium обновляет медиа по id
 func UpdateMedium(w http.ResponseWriter, r *http.Request) {
-	sqlText, vals := getUpdateSQL(mux.Vars(r))
-	db.ExequteSQL(sqlText, vals...)
-	// sqlText2 := getUpdateSQL2(mux.Vars(r))
-	// db.ExequteSQL(sqlText2)
-}
-
-func getUpdateSQL(vars map[string]string) (string, []interface{}) {
-	keys, values, qs := getKeysAndValues(vars)
-	sqlText := fmt.Sprintf("UPDATE media SET (%s) = (%s) WHERE id = %s",
-		strings.Join(keys, ", "),
-		strings.Join(qs, ", "),
-		vars["id"])
-
-	v := make([]interface{}, 0)
-	for _, s := range values {
-		v = append(v, s)
-	}
-
-	return sqlText, v
-}
-
-func getUpdateSQL2(vars map[string]string) string {
-	keys, values, _ := getKeysAndValues(vars)
-	sqlText := fmt.Sprintf("UPDATE media SET (%s) = (%s) WHERE id = %s",
-		strings.Join(keys, ", "),
-		strings.Join(values, ", "),
-		vars["id"])
-	return sqlText
+	db.UpdateRowByID("media", mux.Vars(r))
 }
 
 // UpdatePost обновляет пост по id
 func UpdatePost(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_post($1);")
+	db.UpdateRowByID("post", mux.Vars(r))
 }
 
 // UpdateBroadcast обновляет трансляцию по id
 func UpdateBroadcast(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_broadcast($1);")
+	db.UpdateRowByID("broadcast", mux.Vars(r))
+}
+
+// CreateMedium обновляет медиа по id
+func CreateMedium(w http.ResponseWriter, r *http.Request) {
+	db.CreateRow("media", mux.Vars(r))
+}
+
+// CreatePost обновляет пост по id
+func CreatePost(w http.ResponseWriter, r *http.Request) {
+	db.CreateRow("post", mux.Vars(r))
+}
+
+// CreateBroadcast обновляет трансляцию по id
+func CreateBroadcast(w http.ResponseWriter, r *http.Request) {
+	db.CreateRow("broadcast", mux.Vars(r))
+}
+
+// DeleteMedium обновляет медиа по id
+func DeleteMedium(w http.ResponseWriter, r *http.Request) {
+	db.DeleteRowByID("media", mux.Vars(r))
+}
+
+// DeletePost обновляет пост по id
+func DeletePost(w http.ResponseWriter, r *http.Request) {
+	db.DeleteRowByID("post", mux.Vars(r))
+}
+
+// DeleteBroadcast обновляет трансляцию по id
+func DeleteBroadcast(w http.ResponseWriter, r *http.Request) {
+	db.DeleteRowByID("broadcast", mux.Vars(r))
 }
 
 // ************************************************************************
@@ -105,7 +107,8 @@ func LandingPage(w http.ResponseWriter, req *http.Request) {
 
 // GetRoutes : Перечисляет доступные маршруты.  Документация API.
 func GetRoutes(w http.ResponseWriter, req *http.Request) {
-	bytes, _ := json.Marshal(Routes)
+	// bytes, _ := json.Marshal(Routes)
+	bytes, _ := yaml.Marshal(Routes)
 	fmt.Fprint(w, string(bytes))
 }
 
@@ -147,21 +150,6 @@ func GetBroadcastList(w http.ResponseWriter, r *http.Request) {
 }
 
 // FUNCTIONS *******************************************************
-
-// getKeysAndValues возвращает срезы ключей и значений
-func getKeysAndValues(m map[string]string) ([]string, []string, []string) {
-	// l := len(m)
-	keys := []string{}
-	values := make([]string, 0)
-	qustionMarks := []string{}
-
-	for key, val := range m {
-		keys = append(keys, key)
-		values = append(values, "'"+val+"'")
-		qustionMarks = append(qustionMarks, "?")
-	}
-	return keys, values, qustionMarks
-}
 
 // getByID возвращает что-то по его id в HTTP запросе запросе вида ?id=354
 func getByID(w http.ResponseWriter, r *http.Request, sqlText string) {
