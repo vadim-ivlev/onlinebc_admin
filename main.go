@@ -59,7 +59,7 @@ func readCommandLineParams() (bool, int) {
 }
 
 func printGreetings(port int) {
-	fmt.Printf(readTextFile("./docs/greetings.txt"), port, port)
+	fmt.Printf(readTextFile("./docs/greetings.txt"), port)
 }
 
 func readTextFile(fileName string) string {

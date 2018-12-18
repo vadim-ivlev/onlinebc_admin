@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+
 	//blank import
 	_ "github.com/lib/pq"
 )
@@ -18,11 +19,11 @@ func GetJSON(sqlText string, args ...interface{}) string {
 }
 
 // ExequteSQL исполняет запрос заданный строкой sqlText.
-func ExequteSQL(sqlText string) error {
+func ExequteSQL(sqlText string, args ...interface{}) error {
 	conn, err := sql.Open("postgres", connectStr)
 	panicIf(err)
 	defer conn.Close()
-	_, err1 := conn.Exec(sqlText)
+	_, err1 := conn.Exec(sqlText, args...)
 	printIf(err1)
 	return err1
 }

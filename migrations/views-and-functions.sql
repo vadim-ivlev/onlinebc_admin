@@ -4,6 +4,41 @@
 -- Все функции возвращают JSON.
 
 
+CREATE OR REPLACE FUNCTION public.get_medium(idd integer) RETURNS json LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN  ( select row_to_json( t, false ) from  ( SELECT * FROM media WHERE id = idd ) t );
+END; 
+$$
+;
+
+
+CREATE OR REPLACE FUNCTION public.get_post(idd integer) RETURNS json LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN  ( select row_to_json( t, false ) from  ( SELECT * FROM post WHERE id = idd ) t  );
+END; 
+$$
+;
+
+
+CREATE OR REPLACE FUNCTION public.get_broadcast(idd integer) RETURNS json LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN ( select row_to_json( t, false ) from ( SELECT * FROM broadcast WHERE id = idd ) t );
+END; 
+$$
+;
+
+
+
+
+
+
+
+
+-- ************************************************************************
+
 CREATE OR REPLACE FUNCTION public.get_media(idd integer)
  RETURNS json
  LANGUAGE plpgsql
@@ -63,11 +98,11 @@ $function$
 ;
 
 
--- get_broadcast - гланая функция.
+-- get_full_broadcast - гланая функция.
 -- Преобразует плоские таблицы базы данных в JSON
 -- с многоуровненвой иерархической структурой
 
-CREATE OR REPLACE FUNCTION public.get_broadcast(idd integer)
+CREATE OR REPLACE FUNCTION public.get_full_broadcast(idd integer)
  RETURNS json
  LANGUAGE plpgsql
 AS $function$

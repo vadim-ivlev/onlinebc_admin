@@ -58,8 +58,35 @@
             color: slategray
         }
 
+        .class-GET {
+            color: green;
+            font-weight: bold;
+        }
+
+        .class-HEAD {
+            color: gray;
+            font-weight: bold;
+
+        }
+
+        .class-DELETE {
+            color: red;
+            font-weight: bold;
+        }
+
+        .class-POST {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .class-PUT {
+            color: magenta;
+            font-weight: bold;
+        }
+
+
         .sss {
-            min-width: 70px;
+            min-width: 90px;
             display: inline-block;
         }
 
@@ -107,8 +134,9 @@
                 {{end}}
             </div>
             {{end}}
-            <div class="spec"><span class="sss">URI:</span>{{.Query}}</div>
-            <div class="example"><span class="sss">Пример:</span><a target="blank" href="{{.Example}}">{{.Example}}</a></div>
+            <div class="spec"><span class="sss">Methods</span>{{range .Methods}}<span class="class-{{.}}">{{.}}</span>&nbsp;&nbsp;{{end}}</div>
+            <div class="spec"><span class="sss">URL</span>{{.Path}}</div>
+            <div class="example"><span class="sss">Пример</span><a target="blank" href="{{.Example}}">{{.Example}}</a></div>
             <br>
         </li>
         {{end}}

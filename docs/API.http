@@ -1,6 +1,20 @@
+
+
+
 GET https://outer.rg.ru/plain/online_translations/api/online.php?id=247 HTTP/1.1
 
 
 ###
 
-https://outer.rg.ru/plain/online_translations/api/?main=0&active=0&num=3
+GET https://outer.rg.ru/plain/online_translations/api/
+    ?main=0
+    &active=0
+    &num=3
+
+###
+
+
+http://localhost:7777/broadcast/354
+
+
+
