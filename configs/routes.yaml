@@ -1,0 +1,213 @@
+# Бэкэнд ----------------------------------------------------
+
+#  Чтение ---------------------------------------------------
+- comment   : Получить Медиа с идентификатором id
+  methods   : [GET]
+  path      : /medium/{id}
+  example   : /medium/5330
+  controller: GetMedium
+
+
+- comment   : Получить Пост с идентификатором id
+  methods   : [GET]
+  path      : /post/{id}
+  example   : /post/23932
+  controller: GetPost
+
+
+- comment   : Получить Трансляцию с идентификатором id
+  methods   : [GET]
+  path      : /broadcast/{id}
+  example   : /broadcast/354
+  controller: GetBroadcast
+
+
+
+# Изменение ------------------------------------------------------------
+
+- comment   : Редактировать Медиа с идентификатором id
+  methods   : [PUT,GET]
+  path      : /update-medium/{id}
+  example   : /update-medium/5330?uri=uriimg&thumb=t&source=somesource
+  controller: UpdateMedium
+  params    :
+    - comment: URI изображения
+      name   : uri
+      value  : '{uri}'
+      test   : test_image.jpg
+    - comment: Уменьшенное изображение
+      name   : thumb
+      value  : '{thumb}'
+      test   : thumb.jpg
+    - comment: Источник
+      name   : source
+      value  : '{source}'
+      test   : телевизор
+
+
+- comment   : Редактировать Пост с идентификатором id
+  methods   : [PUT,GET]
+  path      : /update-post/{id}
+  example   : /update-post/23932
+  controller: UpdatePost
+  params    :
+  - comment : Идентификатор поста если это ответ
+    name    : id_parent
+    value   : '{id_parent}'
+    test    : 0
+  - comment : Идентификатор трансляции
+    name    : id_broadcast
+    value   : '{id_broadcast}'
+    test    : 354
+  - comment : Текст поста
+    name    : text
+    value   : '{text}'
+    test    : Текст поста
+  - comment : Время поста в формате UNIX
+    name    : post_time
+    value   : '{post_time}'
+    test    : 1528376820
+  - comment : Тип поста 1,2,3,4...
+    name    : post_type
+    value   : '{post_type}'
+    test    : 3
+  - comment : Ссылка
+    name    : link
+    value   : '{link}'
+    test    : http://google.com
+  - comment : Есть ли большое изображение 0,1
+    name    : has_big_img
+    value   : '{has_big_img}'
+    test    : 0
+  - comment : ФИО автора поста
+    name    : author
+    test    : Сидор Пупкин
+    value   : '{author}'
+
+
+
+
+
+- comment: Редактировать Трансляцию с идентификатором id
+  methods:
+  - PUT
+  path: /broadcast/{id}
+  example: /broadcast/354
+  controller: GetBroadcast
+
+
+
+#  Создание ---------------------------------------------------
+  
+  
+- comment: Создать Медиа с идентификатором id
+  methods: [POST]
+  path: /medium/{id}
+  example: /medium/5330
+  controller: GetMedium
+
+- comment: Создать Пост с идентификатором id
+  methods: [POST]
+  path: /post/{id}
+  example: /post/23932
+  controller: GetPost
+
+- comment: Создать Трансляцию с идентификатором id
+  methods: [POST]
+  path: /broadcast/{id}
+  example: /broadcast/354
+  controller: GetBroadcast
+
+# Удаление ---------------------------------------------------
+
+- comment: Удалить Медиа с идентификатором id
+  methods: [DELETE]
+  path: /medium/{id}
+  example: /medium/5330
+  controller: GetMedium
+
+- comment: Удалить Пост с идентификатором id
+  methods: [DELETE]
+  path: /post/{id}
+  example: /post/23932
+  controller: GetPost
+
+- comment: Удалить Трансляцию с идентификатором id
+  methods: [DELETE]
+  path: /broadcast/{id}
+  example: /broadcast/354
+  controller: GetBroadcast
+
+# Общие ---------------------------------------------------
+
+- comment: Стартовая страница
+  methods: [GET, HEAD]
+  path: /
+  example: /
+  controller: LandingPage
+
+- comment: JSON  маршрутов.  Документация API.
+  methods: [GET, HEAD]
+  path: /routes
+  example: /routes
+  controller: GetRoutes
+
+
+# Фронтэнд ---------------------------------------------------  
+
+
+- comment: Список трансляций
+  methods: [GET, HEAD]
+  path: /broadcasts
+  example: /broadcasts
+  controller: GetBroadcasts
+
+- comment: Трасляция с идентификатором id и ее постами
+  methods: [GET, HEAD]
+  path: /full-broadcast/{id}
+  example: /full-broadcast/354
+  controller: GetFullBroadcast
+
+- comment: Посты трансляции с идентификатором id
+  methods: [GET, HEAD]
+  path: /posts/{id}
+  example: /posts/354
+  controller: GetPosts
+
+- comment: Ответы к посту с идентификатором id
+  methods: [GET, HEAD]
+  path: /answers/{id}
+  example: /answers/23932
+  controller: GetAnswers
+
+- comment: Медиа записи поста с идентификатором id
+  methods: [GET, HEAD]
+  path: /media/{id}
+  example: /media/23932
+  controller: GetMedia
+
+- comment: Трасляция с идентификатором id и ее постами. Legacy
+  methods: [GET, HEAD]
+  path: /api/online.php
+  example: /api/online.php?id=354
+  controller: GetFullBroadcast
+  params:
+  - comment: Идентификатор трансляции
+    name: id
+    value: '{id}'
+
+- comment: Список трансляций.Legacy
+  methods: [GET, HEAD]
+  path: /api/
+  example: /api/?main=0&active=0&num=3
+  controller: GetBroadcastList
+  params:
+  - comment: Основная {0|1}
+    name: main
+    value: '{main}'
+  - comment: Активность {0|1}
+    name: active
+    value: '{active}'
+  - comment: Номер
+    name: num
+    value: '{num}'

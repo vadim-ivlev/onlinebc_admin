@@ -49,8 +49,8 @@
         }
 
         .param-name {
-            font-weight: bold;
-            min-width: 70px;
+            /* font-weight: bold; */
+            min-width: 110px;
             display: inline-block;
         }
 
@@ -84,6 +84,15 @@
             font-weight: bold;
         }
 
+        .formrow {
+            margin-left: 30px;
+            margin-top: 1px;
+        }
+
+        .formrow input {
+            width: 100px;
+            /* resize: horizontal; */
+        }
 
         .sss {
             min-width: 90px;
@@ -120,23 +129,37 @@
     <hr>
     <ul>
         {{range .}}
+        {{if eq .Path "/"}}
+        <h4 class="gr">Общие</h4>
+        <hr>
+        {{end}}
+        {{if eq .Path "/broadcasts"}}
+        <h4 class="gr">API для фронтэнда</h4>
+        <hr>
+        {{end}}
+
         <li>
             <div class="comment">{{.Comment}}</div>
-            {{if .Params}}
-            <div class="params">
-                <div>Параметры запроса:</div>
-                {{range .Params }}
-                <ul>
-                    <li>
-                        <span class="param-name">{{.Name}}</span>-&nbsp;&nbsp;<span class="param-comment">{{.Comment}}</span>
-                    </li>
-                </ul>
-                {{end}}
-            </div>
-            {{end}}
             <div class="spec"><span class="sss">Methods</span>{{range .Methods}}<span class="class-{{.}}">{{.}}</span>&nbsp;&nbsp;{{end}}</div>
             <div class="spec"><span class="sss">URL</span>{{.Path}}</div>
-            <div class="example"><span class="sss">Пример</span><a target="blank" href="{{.Example}}">{{.Example}}</a></div>
+            {{if .Params}}
+            <form class="params" method="{{index .Methods 0}}" action="{{.Example}}">
+                <div>Параметры запроса:</div>
+                {{range .Params }}
+                <div class="formrow">
+                    <span class="param-name">{{.Name}}</span>
+                    <input length="20" name="{{.Name}}" value="{{.Test}}">
+                    &nbsp;&nbsp;<span class="param-comment">{{.Comment}}</span>
+                </div>
+                {{end}}
+                <div class="formrow">
+                    <span class="param-name"></span>
+                    <input type="submit" value="test">
+                </div>
+
+            </form>
+            {{end}}
+            <div class="example"><span class="sss">Пример</span><a target="_blank" href="{{.Example}}">{{.Example}}</a></div>
             <br>
         </li>
         {{end}}

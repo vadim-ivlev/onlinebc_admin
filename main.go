@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"onlinebc_admin/controller"
 	"onlinebc_admin/model/db"
 	"onlinebc_admin/router"
 	"os"
@@ -13,6 +14,7 @@ import (
 func main() {
 	// считать конфиги
 	db.ReadConfig("./configs/db.yaml")
+	controller.ReadConfig("./configs/routes.yaml")
 
 	// считать параметры командной строки
 	serve, port := readCommandLineParams()
@@ -59,7 +61,7 @@ func readCommandLineParams() (bool, int) {
 }
 
 func printGreetings(port int) {
-	fmt.Printf(readTextFile("./docs/greetings.txt"), port)
+	fmt.Printf(readTextFile("./templates/greetings.txt"), port)
 }
 
 func readTextFile(fileName string) string {

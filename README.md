@@ -105,4 +105,4 @@ TODO: add golang container to docker-compose,
 
 
 - dump with ----inserts or --column-inserts (for go)
-- Fill c.Routes in router.go, move it to routes.yaml
+- Fill c.Routes in router.go,
