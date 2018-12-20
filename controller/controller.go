@@ -15,52 +15,51 @@ import (
 
 // GetMedium возвращает медиа по id
 func (dummy) GetMedium(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_medium($1);")
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_medium($1);", mux.Vars(r)["id"]))
 }
 
 // GetPost возвращает пост по id
 func (dummy) GetPost(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_post($1);")
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_post($1);", mux.Vars(r)["id"]))
 }
 
 // GetBroadcast возвращает трансляцию по id
 func (dummy) GetBroadcast(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_broadcast($1);")
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_broadcast($1);", mux.Vars(r)["id"]))
 }
 
 // ************************************************************************
 
 // UpdateMedium обновляет медиа по id
 func (dummy) UpdateMedium(w http.ResponseWriter, r *http.Request) {
-	db.UpdateRowByID("media", mux.Vars(r))
+	fmt.Fprintf(w, "%v", db.UpdateRowByID("media", mux.Vars(r)))
 }
 
 // UpdatePost обновляет пост по id
 func (dummy) UpdatePost(w http.ResponseWriter, r *http.Request) {
-	db.UpdateRowByID("post", mux.Vars(r))
+	fmt.Fprintf(w, "%v", db.UpdateRowByID("post", mux.Vars(r)))
 }
 
 // UpdateBroadcast обновляет трансляцию по id
 func (dummy) UpdateBroadcast(w http.ResponseWriter, r *http.Request) {
-	db.UpdateRowByID("broadcast", mux.Vars(r))
+	fmt.Fprintf(w, "%v", db.UpdateRowByID("broadcast", mux.Vars(r)))
 }
 
 // ************************************************************************
 
 // CreateMedium Создать медиа поста с идентификатором id
 func (dummy) CreateMedium(w http.ResponseWriter, r *http.Request) {
-	newid := db.CreateRow("media", mux.Vars(r))
-	fmt.Fprint(w, newid)
+	fmt.Fprint(w, db.CreateRow("media", mux.Vars(r)))
 }
 
 // CreatePost Создать пост трансляции с идентификатором id
 func (dummy) CreatePost(w http.ResponseWriter, r *http.Request) {
-	db.CreateRow("post", mux.Vars(r))
+	fmt.Fprint(w, db.CreateRow("post", mux.Vars(r)))
 }
 
 // CreateBroadcast Создать  трансляцию
 func (dummy) CreateBroadcast(w http.ResponseWriter, r *http.Request) {
-	db.CreateRow("broadcast", mux.Vars(r))
+	fmt.Fprint(w, db.CreateRow("broadcast", mux.Vars(r)))
 }
 
 // ************************************************************************
@@ -104,32 +103,31 @@ func (dummy) GetRoutes(w http.ResponseWriter, req *http.Request) {
 
 // GetMedia возвращает все медиа поста по его id
 func (dummy) GetMedia(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_media($1);")
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_media($1);", mux.Vars(r)["id"]))
+
 }
 
 // GetAnswers возвращает ответы к посту по его id
 func (dummy) GetAnswers(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_answers($1);")
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_answers($1);", mux.Vars(r)["id"]))
 }
 
 // GetPosts возвращает посты трансляции по её id
 func (dummy) GetPosts(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_posts($1);")
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_posts($1);", mux.Vars(r)["id"]))
 }
 
 // GetFullBroadcast возвращает трасляцию с постами по её id
 func (dummy) GetFullBroadcast(w http.ResponseWriter, r *http.Request) {
-	getByID(w, r, "SELECT get_full_broadcast($1);")
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_full_broadcast($1);", mux.Vars(r)["id"]))
 }
 
 // GetBroadcasts Получить список трансляций
 func (dummy) GetBroadcasts(w http.ResponseWriter, r *http.Request) {
-	json := db.GetJSON("SELECT get_broadcasts();")
-	fmt.Fprint(w, json)
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_broadcasts();"))
 }
 
 // GetBroadcastList Получить список трансляций. Legacy.
 func (dummy) GetBroadcastList(w http.ResponseWriter, r *http.Request) {
-	json := db.GetJSON("SELECT get_broadcasts();")
-	fmt.Fprint(w, json)
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_broadcasts();"))
 }

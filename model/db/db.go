@@ -10,19 +10,23 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// GetJSON возвращает JSON результатов запроса заданного sqlText, с возможными параметрами.
-func GetJSON(sqlText string, args ...interface{}) string {
+// QueryRowResult возвращает результат запроса заданного sqlText, с возможными параметрами args.
+// Применяется для исполнения запросов , INSERT, SELECT.
+// Возвращает единственное значение определенное в тексте запроса.
+func QueryRowResult(sqlText string, args ...interface{}) interface{} {
 	conn, err := sql.Open("postgres", connectStr)
 	panicIf(err)
 	defer conn.Close()
-	var json string
-	err = conn.QueryRow(sqlText, args...).Scan(&json)
+	var result interface{}
+	err = conn.QueryRow(sqlText, args...).Scan(&result)
 	printIf(err)
-	return json
+	return result
 }
 
-// ExequteSQL исполняет запрос заданный строкой sqlText.
-func ExequteSQL(sqlText string, args ...interface{}) sql.Result {
+// GetExecResult исполняет запрос заданный строкой sqlText, с возможными параметрами args.
+// Применяется для исполнения запросов UPDATE, DELETE.
+// sql.Result.RowsAffected() возвращает количество записей затронутых запросом.
+func GetExecResult(sqlText string, args ...interface{}) sql.Result {
 	conn, err := sql.Open("postgres", connectStr)
 	panicIf(err)
 	defer conn.Close()
@@ -33,28 +37,32 @@ func ExequteSQL(sqlText string, args ...interface{}) sql.Result {
 
 // CreateRow Вставляет запись в таблицу tableName.
 // Хэш vars задает имена и значения полей таблицы.
-func CreateRow(tableName string, vars map[string]string) int64 {
+// Возвращает идентификатор id вставленной записи.
+func CreateRow(tableName string, vars map[string]string) interface{} {
 	keys, values, dollars := getKeysAndValues(vars)
-	sqlText := fmt.Sprintf("INSERT INTO %s ( %s ) VALUES ( %s ) ;",
+	sqlText := fmt.Sprintf("INSERT INTO %s ( %s ) VALUES ( %s ) RETURNING id;",
 		tableName,
 		strings.Join(keys, ", "),
 		strings.Join(dollars, ", "))
-	res := ExequteSQL(sqlText, values...)
-	newid, _ := res.LastInsertId()
-	return newid
+	res := QueryRowResult(sqlText, values...)
+	return res
 }
 
 // UpdateRowByID обновляет запись в таблице tableName по ее id
 // полученному как значение ключа 'id' в хэше vars.
 // Хэш vars задает имена и значения полей таблицы.
-func UpdateRowByID(tableName string, vars map[string]string) {
+// Возвращает количество записей затронутых запросом.
+func UpdateRowByID(tableName string, vars map[string]string) int64 {
 	keys, values, dollars := getKeysAndValues(vars)
 	sqlText := fmt.Sprintf("UPDATE %s SET ( %s ) = ( %s ) WHERE id = %v ;",
 		tableName,
 		strings.Join(keys, ", "),
 		strings.Join(dollars, ", "),
 		vars["id"])
-	ExequteSQL(sqlText, values...)
+	res := GetExecResult(sqlText, values...)
+	num, err := res.RowsAffected()
+	printIf(err)
+	return num
 }
 
 // DeleteRowByID удаляет запись в таблице tableName по ее id
@@ -62,7 +70,7 @@ func DeleteRowByID(tableName string, vars map[string]string) {
 	sqlText := fmt.Sprintf("DELETE FROM %s WHERE id = %v ;",
 		tableName,
 		vars["id"])
-	ExequteSQL(sqlText)
+	GetExecResult(sqlText)
 }
 
 // getKeysAndValues возвращает срезы ключей и значений

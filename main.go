@@ -41,12 +41,12 @@ func readCommandLineParams() (bool, int) {
 
 	if *initdb {
 		fmt.Println("инициализация БД...")
-		db.ExequteSQL(readTextFile("./migrations/onlinebc-dump.sql"))
+		db.GetExecResult(readTextFile("./migrations/onlinebc-dump.sql"))
 		os.Exit(0)
 	}
 	if *createDbFunctions {
 		fmt.Println("Порождение функций БД...")
-		db.ExequteSQL(readTextFile("./migrations/views-and-functions.sql"))
+		db.GetExecResult(readTextFile("./migrations/views-and-functions.sql"))
 		os.Exit(0)
 	}
 	if *printParams {

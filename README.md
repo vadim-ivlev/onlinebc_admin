@@ -98,11 +98,3 @@ Postgre доступен на localhost:5432.
 	docker exec -it psql-com psql -U root onlinebc
 
 
-
--------------------------------
-
-TODO: add golang container to docker-compose, 
-
-
-- dump with ----inserts or --column-inserts (for go)
-- Fill c.Routes in router.go,

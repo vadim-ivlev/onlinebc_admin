@@ -39,10 +39,10 @@
 
 - comment   : Редактировать Медиа с идентификатором id
   methods   : 
-  - POST 
+  - GET 
   - PUT
   path      : /update-medium/{id}
-  example   : 
+  example   : /update-medium/5330
   controller: UpdateMedium
   params    :
   - comment: идентификатор поста
