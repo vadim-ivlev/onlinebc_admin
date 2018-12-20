@@ -22,24 +22,26 @@ func GetJSON(sqlText string, args ...interface{}) string {
 }
 
 // ExequteSQL исполняет запрос заданный строкой sqlText.
-func ExequteSQL(sqlText string, args ...interface{}) error {
+func ExequteSQL(sqlText string, args ...interface{}) sql.Result {
 	conn, err := sql.Open("postgres", connectStr)
 	panicIf(err)
 	defer conn.Close()
-	_, err1 := conn.Exec(sqlText, args...)
+	result, err1 := conn.Exec(sqlText, args...)
 	printIf(err1)
-	return err1
+	return result
 }
 
 // CreateRow Вставляет запись в таблицу tableName.
 // Хэш vars задает имена и значения полей таблицы.
-func CreateRow(tableName string, vars map[string]string) {
+func CreateRow(tableName string, vars map[string]string) int64 {
 	keys, values, dollars := getKeysAndValues(vars)
 	sqlText := fmt.Sprintf("INSERT INTO %s ( %s ) VALUES ( %s ) ;",
 		tableName,
 		strings.Join(keys, ", "),
 		strings.Join(dollars, ", "))
-	ExequteSQL(sqlText, values...)
+	res := ExequteSQL(sqlText, values...)
+	newid, _ := res.LastInsertId()
+	return newid
 }
 
 // UpdateRowByID обновляет запись в таблице tableName по ее id

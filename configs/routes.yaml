@@ -1,48 +1,93 @@
 # Бэкэнд ----------------------------------------------------
 
-#  Чтение ---------------------------------------------------
+#  media ---------------------------------------------------
+
+
 - comment   : Получить Медиа с идентификатором id
-  methods   : [GET]
+  methods   :
+  - GET
   path      : /medium/{id}
   example   : /medium/5330
   controller: GetMedium
 
+- comment: Создать медиа поста с идентификатором post_id
+  methods: 
+  - GET
+  - POST
+  path: /create-medium/
+  example: /create-medium/
+  controller: CreateMedium
+  params    :
+  - comment: идентификатор поста
+    name   : post_id
+    value  : '{post_id}'
+    test   : 23932
+  - comment: URI изображения
+    name   : uri
+    value  : '{uri}'
+    test   : created_image.jpg
+  - comment: Уменьшенное изображение
+    name   : thumb
+    value  : '{thumb}'
+    test   : created_thumb.jpg
+  - comment: Источник
+    name   : source
+    value  : '{source}'
+    test   : новый телевизор
 
-- comment   : Получить Пост с идентификатором id
-  methods   : [GET]
+
+
+- comment   : Редактировать Медиа с идентификатором id
+  methods   : 
+  - POST 
+  - PUT
+  path      : /update-medium/{id}
+  example   : 
+  controller: UpdateMedium
+  params    :
+  - comment: идентификатор поста
+    name   : post_id
+    value  : '{post_id}'
+    test   : 23932
+  - comment: URI изображения
+    name   : uri
+    value  : '{uri}'
+    test   : updated_image.jpg
+  - comment: Уменьшенное изображение
+    name   : thumb
+    value  : '{thumb}'
+    test   : updated_thumb.jpg
+  - comment: Источник
+    name   : source
+    value  : '{source}'
+    test   : updated телевизор
+
+
+- comment: Удалить Медиа с идентификатором id
+  methods: 
+  - POST
+  - DELETE
+  path: /delete-medium/{id}
+  example: /delete-medium/5330
+  controller: DeleteMedium
+
+
+# post ------------------------------------------------------------
+
+
+- comment   : Получить пост с идентификатором id
+  methods   : 
+  - GET
   path      : /post/{id}
   example   : /post/23932
   controller: GetPost
 
 
-- comment   : Получить Трансляцию с идентификатором id
-  methods   : [GET]
-  path      : /broadcast/{id}
-  example   : /broadcast/354
-  controller: GetBroadcast
-
-
-
-# Изменение ------------------------------------------------------------
-
-- comment   : Редактировать Медиа с идентификатором id
-  methods   : [PUT,GET]
-  path      : /update-medium/{id}
-  example   : /update-medium/5330?uri=uriimg&thumb=t&source=somesource
-  controller: UpdateMedium
-  params    :
-    - comment: URI изображения
-      name   : uri
-      value  : '{uri}'
-      test   : test_image.jpg
-    - comment: Уменьшенное изображение
-      name   : thumb
-      value  : '{thumb}'
-      test   : thumb.jpg
-    - comment: Источник
-      name   : source
-      value  : '{source}'
-      test   : телевизор
+- comment: Создать пост трансляции с идентификатором id
+  methods: [POST]
+  path: /post/{id}
+  example: /post/23932
+  controller: GetPost
 
 
 - comment   : Редактировать Пост с идентификатором id
@@ -86,53 +131,40 @@
 
 
 
-
-
-- comment: Редактировать Трансляцию с идентификатором id
-  methods:
-  - PUT
-  path: /broadcast/{id}
-  example: /broadcast/354
-  controller: GetBroadcast
-
-
-
-#  Создание ---------------------------------------------------
-  
-  
-- comment: Создать Медиа с идентификатором id
-  methods: [POST]
-  path: /medium/{id}
-  example: /medium/5330
-  controller: GetMedium
-
-- comment: Создать Пост с идентификатором id
-  methods: [POST]
-  path: /post/{id}
-  example: /post/23932
-  controller: GetPost
-
-- comment: Создать Трансляцию с идентификатором id
-  methods: [POST]
-  path: /broadcast/{id}
-  example: /broadcast/354
-  controller: GetBroadcast
-
-# Удаление ---------------------------------------------------
-
-- comment: Удалить Медиа с идентификатором id
-  methods: [DELETE]
-  path: /medium/{id}
-  example: /medium/5330
-  controller: GetMedium
-
 - comment: Удалить Пост с идентификатором id
   methods: [DELETE]
   path: /post/{id}
   example: /post/23932
   controller: GetPost
 
-- comment: Удалить Трансляцию с идентификатором id
+
+
+
+#  broadcast ---------------------------------------------------
+
+- comment   : Получить трансляцию с идентификатором id
+  methods   : [GET]
+  path      : /broadcast/{id}
+  example   : /broadcast/354
+  controller: GetBroadcast
+
+
+- comment: Создать трансляцию
+  methods: [POST]
+  path: /broadcast/{id}
+  example: /broadcast/354
+  controller: GetBroadcast
+
+ 
+- comment: Редактировать трансляцию с идентификатором id
+  methods:
+  - PUT
+  path: /broadcast/{id}
+  example: /broadcast/354
+  controller: GetBroadcast
+
+ 
+- comment: Удалить трансляцию с идентификатором id
   methods: [DELETE]
   path: /broadcast/{id}
   example: /broadcast/354

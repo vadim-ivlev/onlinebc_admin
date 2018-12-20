@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+
 	"fmt"
 	"html/template"
 	"net/http"
@@ -46,17 +47,18 @@ func (dummy) UpdateBroadcast(w http.ResponseWriter, r *http.Request) {
 
 // ************************************************************************
 
-// CreateMedium обновляет медиа по id
+// CreateMedium Создать медиа поста с идентификатором id
 func (dummy) CreateMedium(w http.ResponseWriter, r *http.Request) {
-	db.CreateRow("media", mux.Vars(r))
+	newid := db.CreateRow("media", mux.Vars(r))
+	fmt.Fprint(w, newid)
 }
 
-// CreatePost обновляет пост по id
+// CreatePost Создать пост трансляции с идентификатором id
 func (dummy) CreatePost(w http.ResponseWriter, r *http.Request) {
 	db.CreateRow("post", mux.Vars(r))
 }
 
-// CreateBroadcast обновляет трансляцию по id
+// CreateBroadcast Создать  трансляцию
 func (dummy) CreateBroadcast(w http.ResponseWriter, r *http.Request) {
 	db.CreateRow("broadcast", mux.Vars(r))
 }
