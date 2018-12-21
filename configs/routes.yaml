@@ -63,13 +63,14 @@
     test   : updated телевизор
 
 
-- comment: Удалить Медиа с идентификатором id
-  methods: 
-  - POST
+- comment   : Удалить Медиа с идентификатором id
+  methods   : 
+  - GET
   - DELETE
-  path: /delete-medium/{id}
-  example: /delete-medium/5330
+  path      : /delete-medium/{id}
+  example   : /delete-medium/5389
   controller: DeleteMedium
+
 
 
 # post ------------------------------------------------------------
@@ -84,14 +85,52 @@
 
 
 - comment: Создать пост трансляции с идентификатором id
-  methods: [POST]
-  path: /post/{id}
-  example: /post/23932
-  controller: GetPost
+  methods:
+  - GET
+  - POST
+  path: /create-post/
+  example: /create-post/
+  controller: CreatePost
+  params    :
+  - comment : Идентификатор поста если это ответ
+    name    : id_parent
+    value   : '{id_parent}'
+    test    : 0
+  - comment : Идентификатор трансляции
+    name    : id_broadcast
+    value   : '{id_broadcast}'
+    test    : 354
+  - comment : Текст поста
+    name    : text
+    value   : '{text}'
+    test    : Текст поста
+  - comment : Время поста в формате UNIX
+    name    : post_time
+    value   : '{post_time}'
+    test    : 1528376820
+  - comment : Тип поста 1,2,3,4...
+    name    : post_type
+    value   : '{post_type}'
+    test    : 3
+  - comment : Ссылка
+    name    : link
+    value   : '{link}'
+    test    : http://google.com
+  - comment : Есть ли большое изображение 0,1
+    name    : has_big_img
+    value   : '{has_big_img}'
+    test    : 0
+  - comment : ФИО автора поста
+    name    : author
+    test    : Сидор Пупкин
+    value   : '{author}'
+
 
 
 - comment   : Редактировать Пост с идентификатором id
-  methods   : [PUT,GET]
+  methods   : 
+  - GET
+  - PUT
   path      : /update-post/{id}
   example   : /update-post/23932
   controller: UpdatePost
@@ -131,11 +170,13 @@
 
 
 
-- comment: Удалить Пост с идентификатором id
-  methods: [DELETE]
-  path: /post/{id}
-  example: /post/23932
-  controller: GetPost
+- comment   : Удалить Пост с идентификаторомid
+  methods   :
+  - GET
+  - DELETE
+  path      : /delete-post/{id}
+  example   : /delete-post/23932
+  controller: DeletePost
 
 
 

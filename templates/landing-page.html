@@ -30,7 +30,7 @@
         }
 
         .rgru {
-            letter-spacing: -3px;
+            letter-spacing: -6px;
             font-family: 'Open Sans';
         }
 
@@ -137,9 +137,10 @@
 </head>
 
 <body>
+    <!-- <img src="templates/rgru.png" style="width:66px;" alt="rgru.png"> -->
     <h1>
         <span class="rgru">
-            <span class="gr">RG</span><span class="or">RU</span>
+            <span class="gr">RG.</span><span class="or">RU</span>
         </span>
     </h1>
     <h4 class="gr">
@@ -165,11 +166,13 @@
             <form class="params" method="{{index .Methods 0}}" action="{{.Example}}">
                 <div>Параметры запроса:</div>
                 {{range .Params }}
+                {{if .Name}}
                 <div class="formrow">
                     <span class="param-name">{{.Name}}</span>
                     <input length="20" name="{{.Name}}" value="{{.Test}}">
                     &nbsp;&nbsp;<span class="param-comment">{{.Comment}}</span>
                 </div>
+                {{end}}
                 {{end}}
                 <div class="formrow">
                     <span class="param-name"></span>

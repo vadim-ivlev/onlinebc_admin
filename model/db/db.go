@@ -66,11 +66,14 @@ func UpdateRowByID(tableName string, vars map[string]string) int64 {
 }
 
 // DeleteRowByID удаляет запись в таблице tableName по ее id
-func DeleteRowByID(tableName string, vars map[string]string) {
+func DeleteRowByID(tableName string, vars map[string]string) int64 {
 	sqlText := fmt.Sprintf("DELETE FROM %s WHERE id = %v ;",
 		tableName,
 		vars["id"])
-	GetExecResult(sqlText)
+	res := GetExecResult(sqlText)
+	num, err := res.RowsAffected()
+	printIf(err)
+	return num
 }
 
 // getKeysAndValues возвращает срезы ключей и значений

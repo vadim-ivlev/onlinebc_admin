@@ -66,17 +66,17 @@ func (dummy) CreateBroadcast(w http.ResponseWriter, r *http.Request) {
 
 // DeleteMedium обновляет медиа по id
 func (dummy) DeleteMedium(w http.ResponseWriter, r *http.Request) {
-	db.DeleteRowByID("media", mux.Vars(r))
+	fmt.Fprintf(w, "%v", db.DeleteRowByID("media", mux.Vars(r)))
 }
 
 // DeletePost обновляет пост по id
 func (dummy) DeletePost(w http.ResponseWriter, r *http.Request) {
-	db.DeleteRowByID("post", mux.Vars(r))
+	fmt.Fprintf(w, "%v", db.DeleteRowByID("post", mux.Vars(r)))
 }
 
 // DeleteBroadcast обновляет трансляцию по id
 func (dummy) DeleteBroadcast(w http.ResponseWriter, r *http.Request) {
-	db.DeleteRowByID("broadcast", mux.Vars(r))
+	fmt.Fprintf(w, "%v", db.DeleteRowByID("broadcast", mux.Vars(r)))
 }
 
 // ************************************************************************
