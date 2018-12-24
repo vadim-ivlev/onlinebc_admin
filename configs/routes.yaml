@@ -12,7 +12,7 @@
 
 - comment: Создать медиа поста с идентификатором post_id
   methods: 
-  - GET
+  # - GET
   - POST
   path: /create-medium/
   example: /create-medium/
@@ -39,7 +39,7 @@
 
 - comment   : Редактировать Медиа с идентификатором id
   methods   : 
-  - GET 
+  - GET
   - PUT
   path      : /update-medium/{id}
   example   : /update-medium/5330
@@ -132,13 +132,13 @@
   - GET
   - PUT
   path      : /update-post/{id}
-  example   : /update-post/23932
+  example   : /update-post/30001
   controller: UpdatePost
   params    :
   - comment : Идентификатор поста если это ответ
     name    : id_parent
     value   : '{id_parent}'
-    test    : 0
+    test    : 
   - comment : Идентификатор трансляции
     name    : id_broadcast
     value   : '{id_broadcast}'
@@ -175,7 +175,7 @@
   - GET
   - DELETE
   path      : /delete-post/{id}
-  example   : /delete-post/23932
+  example   : /delete-post/30001
   controller: DeletePost
 
 
@@ -184,32 +184,153 @@
 #  broadcast ---------------------------------------------------
 
 - comment   : Получить трансляцию с идентификатором id
-  methods   : [GET]
+  methods   : 
+  - GET
   path      : /broadcast/{id}
   example   : /broadcast/354
   controller: GetBroadcast
 
 
 - comment: Создать трансляцию
-  methods: [POST]
-  path: /broadcast/{id}
-  example: /broadcast/354
-  controller: GetBroadcast
+  methods: 
+  - GET
+  - POST
+  path: /create-broadcast/
+  example: /create-broadcast/
+  controller: CreateBroadcast
+  params    :
+  - comment : Название трансляции
+    name    : title
+    value   : '{title}'
+    test    : Новая трансляция
+  - comment : Время создания
+    name    : time_created
+    value   : '{time_created}'
+    test    : 1528376820
+  - comment : Время начала
+    name    : time_begin
+    value   : '{time_begin}'
+    test    : 1528376820
+  - comment : Завершена 0 1
+    name    : is_ended
+    value   : '{is_ended}'
+    test    : 1
+  - comment : Показывать дату 0 1
+    name    : show_date
+    value   : '{show_date}'
+    test    : 1
+  - comment : Показывать время 0 1
+    name    : show_time
+    value   : '{show_time}'
+    test    : 0
+  - comment : Яндекс трансляция 0 1
+    name    : is_yandex
+    value   : '{is_yandex}'
+    test    : 
+  - comment : Идентификаторы Яндекс трансляций
+    name    : yandex_ids
+    value   : '{yandex_ids}'
+    test    : 2, 333, 555
+  - comment : Показывать на главной странице 0 1
+    name    : show_main_page
+    value   : '{show_main_page}'
+    test    : 0
+  - comment : Ссылка
+    name    : link_article
+    value   : '{link_article}'
+    test    : http://www.rg.ru/2013/08/09/zhrebiy-site-anons.html
+  - comment : Ссылка на изображение
+    name    : link_img
+    value   : '{link_img}'
+    test    : //cdnimg.rg.ru/pril/article/126/55/62/lukjanov-zavrazhin100.jpg
+  - comment : groups_create
+    name    : groups_create
+    value   : '{groups_create}'
+    test    : 0
+  - comment : Дневник 0 1
+    name    : is_diary
+    value   : '{is_diary}'
+    test    : 0
+  - comment : Автор Дневника
+    name    : diary_author
+    value   : '{diary_author}'
+    test    : Новиков 
 
  
 - comment: Редактировать трансляцию с идентификатором id
   methods:
+  - GET
   - PUT
-  path: /broadcast/{id}
-  example: /broadcast/354
-  controller: GetBroadcast
+  path: /update-broadcast/{id}
+  example: /update-broadcast/354
+  controller: UpdateBroadcast
+  params    :
+  - comment : Название трансляции
+    name    : title
+    value   : '{title}'
+    test    : Обновленная трансляция
+  - comment : Время создания
+    name    : time_created
+    value   : '{time_created}'
+    test    : 1528376820
+  - comment : Время начала
+    name    : time_begin
+    value   : '{time_begin}'
+    test    : 1528376820
+  - comment : Завершена 0 1
+    name    : is_ended
+    value   : '{is_ended}'
+    test    : 1
+  - comment : Показывать дату 0 1
+    name    : show_date
+    value   : '{show_date}'
+    test    : 1
+  - comment : Показывать время 0 1
+    name    : show_time
+    value   : '{show_time}'
+    test    : 0
+  - comment : Яндекс трансляция 0 1
+    name    : is_yandex
+    value   : '{is_yandex}'
+    test    : 
+  - comment : Идентификаторы Яндекс трансляций
+    name    : yandex_ids
+    value   : '{yandex_ids}'
+    test    : 2, 333, 555
+  - comment : Показывать на главной странице 0 1
+    name    : show_main_page
+    value   : '{show_main_page}'
+    test    : 0
+  - comment : Ссылка
+    name    : link_article
+    value   : '{link_article}'
+    test    : http://www.rg.ru/2013/08/09/zhrebiy-site-anons.html
+  - comment : Ссылка на изображение
+    name    : link_img
+    value   : '{link_img}'
+    test    : //cdnimg.rg.ru/pril/article/126/55/62/lukjanov-zavrazhin100.jpg
+  - comment : groups_create
+    name    : groups_create
+    value   : '{groups_create}'
+    test    : 0
+  - comment : Дневник 0 1
+    name    : is_diary
+    value   : '{is_diary}'
+    test    : 0
+  - comment : Автор Дневника
+    name    : diary_author
+    value   : '{diary_author}'
+    test    : Новиков 
+
 
  
 - comment: Удалить трансляцию с идентификатором id
-  methods: [DELETE]
-  path: /broadcast/{id}
-  example: /broadcast/354
-  controller: GetBroadcast
+  methods: 
+  - GET
+  - DELETE
+  path: /delete-broadcast/{id}
+  example: /delete-broadcast/777
+  controller: DeleteBroadcast
 
 # Общие ---------------------------------------------------
 

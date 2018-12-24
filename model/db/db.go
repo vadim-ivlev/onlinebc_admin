@@ -83,8 +83,14 @@ func getKeysAndValues(vars map[string]string) ([]string, []interface{}, []string
 	qustionMarks := []string{}
 	n := 1
 	for key, val := range vars {
+
+		if val == "" {
+			values = append(values, nil)
+		} else {
+			values = append(values, val)
+		}
 		keys = append(keys, key)
-		values = append(values, val)
+
 		qustionMarks = append(qustionMarks, fmt.Sprintf("$%v", n))
 		n++
 	}
