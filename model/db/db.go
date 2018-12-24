@@ -36,10 +36,10 @@ func GetExecResult(sqlText string, args ...interface{}) sql.Result {
 }
 
 // CreateRow Вставляет запись в таблицу tableName.
-// Хэш vars задает имена и значения полей таблицы.
+// Хэш fieldValues задает имена и значения полей таблицы.
 // Возвращает идентификатор id вставленной записи.
-func CreateRow(tableName string, vars map[string]string) interface{} {
-	keys, values, dollars := getKeysAndValues(vars)
+func CreateRow(tableName string, fieldValues map[string]string) interface{} {
+	keys, values, dollars := getKeysAndValues(fieldValues)
 	sqlText := fmt.Sprintf("INSERT INTO %s ( %s ) VALUES ( %s ) RETURNING id;",
 		tableName,
 		strings.Join(keys, ", "),
@@ -48,17 +48,13 @@ func CreateRow(tableName string, vars map[string]string) interface{} {
 	return res
 }
 
-// UpdateRowByID обновляет запись в таблице tableName по ее id
-// полученному как значение ключа 'id' в хэше vars.
-// Хэш vars задает имена и значения полей таблицы.
+// UpdateRowByID обновляет запись в таблице tableName по ее id.
+// Хэш fieldValues задает имена и значения полей таблицы.
 // Возвращает количество записей затронутых запросом.
-func UpdateRowByID(tableName string, vars map[string]string) int64 {
-	keys, values, dollars := getKeysAndValues(vars)
+func UpdateRowByID(tableName string, fieldValues map[string]string, id string) int64 {
+	keys, values, dollars := getKeysAndValues(fieldValues)
 	sqlText := fmt.Sprintf("UPDATE %s SET ( %s ) = ( %s ) WHERE id = %v ;",
-		tableName,
-		strings.Join(keys, ", "),
-		strings.Join(dollars, ", "),
-		vars["id"])
+		tableName, strings.Join(keys, ", "), strings.Join(dollars, ", "), id)
 	res := GetExecResult(sqlText, values...)
 	num, err := res.RowsAffected()
 	printIf(err)
@@ -66,10 +62,8 @@ func UpdateRowByID(tableName string, vars map[string]string) int64 {
 }
 
 // DeleteRowByID удаляет запись в таблице tableName по ее id
-func DeleteRowByID(tableName string, vars map[string]string) int64 {
-	sqlText := fmt.Sprintf("DELETE FROM %s WHERE id = %v ;",
-		tableName,
-		vars["id"])
+func DeleteRowByID(tableName string, id string) int64 {
+	sqlText := fmt.Sprintf("DELETE FROM %s WHERE id = %v ;", tableName, id)
 	res := GetExecResult(sqlText)
 	num, err := res.RowsAffected()
 	printIf(err)
@@ -80,7 +74,7 @@ func DeleteRowByID(tableName string, vars map[string]string) int64 {
 func getKeysAndValues(vars map[string]string) ([]string, []interface{}, []string) {
 	keys := []string{}
 	values := make([]interface{}, 0)
-	qustionMarks := []string{}
+	questionMarks := []string{}
 	n := 1
 	for key, val := range vars {
 
@@ -91,8 +85,8 @@ func getKeysAndValues(vars map[string]string) ([]string, []interface{}, []string
 		}
 		keys = append(keys, key)
 
-		qustionMarks = append(qustionMarks, fmt.Sprintf("$%v", n))
+		questionMarks = append(questionMarks, fmt.Sprintf("$%v", n))
 		n++
 	}
-	return keys, values, qustionMarks
+	return keys, values, questionMarks
 }

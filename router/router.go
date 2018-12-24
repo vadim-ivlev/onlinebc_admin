@@ -1,7 +1,6 @@
 package router
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	c "onlinebc_admin/controller"
@@ -14,12 +13,13 @@ import (
 func defineRoutes(router *mux.Router) {
 	for _, route := range c.Routes {
 		controllerFunc := c.GetFunctionByName(route.Controller)
-		r := router.HandleFunc(route.Path, controllerFunc).Methods(route.Methods...)
-		mm, _ := r.GetMethods()
-		fmt.Printf("%v", mm)
-		for _, param := range route.Params {
-			r.Queries(param.Name, param.Value)
-		}
+		router.HandleFunc(route.Path, controllerFunc).Methods(route.Methods...)
+		// r := router.HandleFunc(route.Path, controllerFunc).Methods(route.Methods...)
+		// mm, _ := r.GetMethods()
+		// fmt.Printf("%v", mm)
+		// for _, param := range route.Params {
+		// 	r.Queries(param.Name, param.Value)
+		// }
 	}
 }
 

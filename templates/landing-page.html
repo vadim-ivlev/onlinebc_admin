@@ -6,11 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>onlinebc_admin API RG.RU</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" ></script>
- 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+
+    <!-- <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css"> -->
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+
+
     <style>
         @import url('https://fonts.googleapis.com/css?family=Open+Sans:800|Roboto:400,900&subset=cyrillic');
 
@@ -56,12 +64,12 @@
         }
 
         .params {
-            margin-left: 70px;
+            margin-left: 20px;
         }
 
         .param-name {
             /* font-weight: bold; */
-            min-width: 110px;
+            min-width: 140px;
             display: inline-block;
         }
 
@@ -95,13 +103,10 @@
             font-weight: bold;
         }
 
-        .formrow {
-            margin-left: 30px;
-        }
-
-        input {
-            width: 200px;
+        input[type=text] {
+            width: 200px ;
             margin-bottom: 2px;
+            height: 24px;
         }
 
         input[type=submit] {
@@ -115,14 +120,10 @@
 
         .spec {
             color: slategray;
-            margin-left: 70px;
+            margin-left: 50px;
 
         }
 
-        .example {
-            color: slategray;
-            margin-left: 70px;
-        }
 
         ol li {
         list-style-position: outside;
@@ -136,9 +137,10 @@
         }
 
         pre {
-            max-height: 200px;
+            max-height: 400px;
             padding-left: 5px;
             overflow:auto;
+            font-size: 80%;
         }
     </style>
 </head>
@@ -162,43 +164,40 @@
         {{end}}
         {{if eq .Path "/broadcasts"}}
         <h4 class="gr">API для фронтэнда</h4>
-        
+
         {{end}}
-        
+
         <li>
             <div class="comment">{{.Comment}}</div>
-            <div class="spec"><span class="sss">Methods</span>{{range .Methods}}<span class="class-{{.}}">{{.}}</span>&nbsp;&nbsp;{{end}}</div>
-            <div class="spec"><span class="sss">URL</span>{{.Path}}</div>
-            <!-- <div class="example"><span class="sss">Пример</span><a target="_blank" href="{{.Example}}">{{.Example}}</a></div> -->
-            <div class="example"><span class="sss">Пример</span><input value="{{.Example}}"></div>
-            <form id="form{{$i}}" class="params" 
-            onsubmit="event.preventDefault();
-                $('#form{{$i}}').ajaxSubmit({
-                    url: '{{.Example}}', 
+            <div class="spec"><span class="param-name">Methods</span>{{range .Methods}}<span class="class-{{.}}">{{.}}</span>&nbsp;&nbsp;{{end}}</div>
+            <div class="spec"><span class="param-name">URL</span>{{.Path}}</div>
+            <div class="spec"><span class="param-name">test URL </span><input id="example{{$i}}" type="text" value="{{.Example}}"></div>
+            <form class="spec" id="form{{$i}}" class="params" onsubmit="event.preventDefault();
+                $(this).ajaxSubmit({
+                    url: $('#example{{$i}}').val(), 
                     type: '{{index .Methods 0}}',
-                    target: '#result{{$i}}'
+                    success: function(response) {$('#result{{$i}}').text(JSON.stringify(response, null,'  '));}
                 });">
                 {{if .Params}}
-                <div>Параметры запроса:</div>
+                <!-- <div>Параметры запроса:</div> -->
                 {{range .Params }}
                 {{if .Name}}
-                <div class="formrow">
+                <div>
                     <span class="param-name">{{.Name}}</span>
-                    <input length="20" name="{{.Name}}" value="{{.Test}}">
+                    <input type="text" length="20" name="{{.Name}}" value="{{.Test}}">
                     &nbsp;&nbsp;<span class="param-comment">{{.Comment}}</span>
                 </div>
                 {{end}}
                 {{end}}
                 {{end}}
-                <div class="formrow">
+                <div>
                     <span class="param-name"></span>
                     <input type="submit" value="TEST">
                 </div>
 
             </form>
-            <br>
         </li>
-        <textarea id="result{{$i}}"></textarea>
+        <pre id="result{{$i}}"></pre>
         {{end}}
     </ol>
     <hr>

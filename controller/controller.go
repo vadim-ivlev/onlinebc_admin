@@ -32,51 +32,51 @@ func (dummy) GetBroadcast(w http.ResponseWriter, r *http.Request) {
 
 // UpdateMedium обновляет медиа по id
 func (dummy) UpdateMedium(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.UpdateRowByID("media", mux.Vars(r)))
+	fmt.Fprintf(w, "%v", db.UpdateRowByID("media", getFormFields(r), mux.Vars(r)["id"]))
 }
 
 // UpdatePost обновляет пост по id
 func (dummy) UpdatePost(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.UpdateRowByID("post", mux.Vars(r)))
+	fmt.Fprintf(w, "%v", db.UpdateRowByID("post", getFormFields(r), mux.Vars(r)["id"]))
 }
 
 // UpdateBroadcast обновляет трансляцию по id
 func (dummy) UpdateBroadcast(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.UpdateRowByID("broadcast", mux.Vars(r)))
+	fmt.Fprintf(w, "%v", db.UpdateRowByID("broadcast", getFormFields(r), mux.Vars(r)["id"]))
 }
 
 // ************************************************************************
 
 // CreateMedium Создать медиа поста с идентификатором id
 func (dummy) CreateMedium(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, db.CreateRow("media", mux.Vars(r)))
+	fmt.Fprint(w, db.CreateRow("media", getFormFields(r)))
 }
 
 // CreatePost Создать пост трансляции с идентификатором id
 func (dummy) CreatePost(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, db.CreateRow("post", mux.Vars(r)))
+	fmt.Fprint(w, db.CreateRow("post", getFormFields(r)))
 }
 
 // CreateBroadcast Создать  трансляцию
 func (dummy) CreateBroadcast(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, db.CreateRow("broadcast", mux.Vars(r)))
+	fmt.Fprint(w, db.CreateRow("broadcast", getFormFields(r)))
 }
 
 // ************************************************************************
 
 // DeleteMedium обновляет медиа по id
 func (dummy) DeleteMedium(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.DeleteRowByID("media", mux.Vars(r)))
+	fmt.Fprintf(w, "%v", db.DeleteRowByID("media", mux.Vars(r)["id"]))
 }
 
 // DeletePost обновляет пост по id
 func (dummy) DeletePost(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.DeleteRowByID("post", mux.Vars(r)))
+	fmt.Fprintf(w, "%v", db.DeleteRowByID("post", mux.Vars(r)["id"]))
 }
 
 // DeleteBroadcast обновляет трансляцию по id
 func (dummy) DeleteBroadcast(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.DeleteRowByID("broadcast", mux.Vars(r)))
+	fmt.Fprintf(w, "%v", db.DeleteRowByID("broadcast", mux.Vars(r)["id"]))
 }
 
 // ************************************************************************
@@ -120,6 +120,13 @@ func (dummy) GetPosts(w http.ResponseWriter, r *http.Request) {
 // GetFullBroadcast возвращает трасляцию с постами по её id
 func (dummy) GetFullBroadcast(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_full_broadcast($1);", mux.Vars(r)["id"]))
+}
+
+// GetFullBroadcast возвращает трасляцию с постами по её id
+func (dummy) GetFullBroadcastLegacy(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	id := r.FormValue("id")
+	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_full_broadcast($1);", id))
 }
 
 // GetBroadcasts Получить список трансляций
