@@ -1,5 +1,30 @@
 # Бэкэнд ----------------------------------------------------
 
+
+# GraphQL --------------------------------------------------
+
+- comment   : GraphQL запрос
+  methods   :
+  - POST
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : >- 
+      {
+          songs(album: "ts-fearless") {
+              title,
+              duration
+          }
+      }
+
+
+
+
+
 #  media ---------------------------------------------------
 
 

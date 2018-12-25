@@ -28,7 +28,7 @@ func defineRoutes(router *mux.Router) {
 func Serve(port string) {
 	router := mux.NewRouter().StrictSlash(true)
 	defineRoutes(router)
-	router.PathPrefix("/templates/").Handler(http.StripPrefix("/templates/", http.FileServer(http.Dir("./templates/"))))
+	router.PathPrefix("/templates/").Handler(http.StripPrefix("/templates/", http.FileServer(http.Dir("templates/"))))
 	router.Use(middleware.HeadersMiddleware)
 	log.Fatal(http.ListenAndServe(port, router))
 }

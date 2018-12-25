@@ -13,6 +13,14 @@ import (
 
 // ************************************************************************
 
+// GraphQL исполняет GraphQL запрос
+func (dummy) GraphQL(w http.ResponseWriter, r *http.Request) {
+	// fmt.Fprintf(w, "%s", `{"resp":"Hello GraphQLL"}`)
+	GraphQLHandler(w, r)
+}
+
+// ************************************************************************
+
 // GetMedium возвращает медиа по id
 func (dummy) GetMedium(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_medium($1);", mux.Vars(r)["id"]))
@@ -84,7 +92,7 @@ func (dummy) DeleteBroadcast(w http.ResponseWriter, r *http.Request) {
 // LandingPage : To test API in browser.
 func (dummy) LandingPage(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl, err := template.ParseFiles("templates/landing-page.html")
+	tmpl, err := template.ParseFiles("templates/index.html", "templates/index.css")
 	if err == nil {
 		tmpl.Execute(w, Routes)
 	} else {
@@ -95,7 +103,6 @@ func (dummy) LandingPage(w http.ResponseWriter, req *http.Request) {
 // GetRoutes : Перечисляет доступные маршруты.  Документация API.
 func (dummy) GetRoutes(w http.ResponseWriter, req *http.Request) {
 	bytes, _ := json.Marshal(Routes)
-	// bytes, _ := yaml.Marshal(Routes)
 	fmt.Fprint(w, string(bytes))
 }
 
