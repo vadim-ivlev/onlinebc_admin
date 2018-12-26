@@ -38,6 +38,7 @@
                 <div class="spec"><span class="param-name">Methods</span>{{range .Methods}}<span class="class-{{.}}">{{.}}</span>&nbsp;&nbsp;{{end}}</div>
                 <div class="spec"><span class="param-name">URL</span>{{.Path}}</div>
                 <div class="spec"><span class="param-name">test URL </span><input id="example{{$i}}" type="text" value="{{.Example}}"></div>
+                <!-- enctype="multipart/form-data"  -->
                 <form id="form{{$i}}" onsubmit="event.preventDefault();
                 $(this).ajaxSubmit({
                     url: $('#example{{$i}}').val(), 
