@@ -13,14 +13,6 @@ import (
 
 // ************************************************************************
 
-// GraphQL исполняет GraphQL запрос
-func (dummy) GraphQL(w http.ResponseWriter, r *http.Request) {
-	// fmt.Fprintf(w, "%s", `{"resp":"Hello GraphQLL"}`)
-	GraphQLHandler(w, r)
-}
-
-// ************************************************************************
-
 // GetMedium возвращает медиа по id
 func (dummy) GetMedium(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_medium($1);", mux.Vars(r)["id"]))

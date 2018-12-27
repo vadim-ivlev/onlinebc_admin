@@ -21,23 +21,23 @@
 </head>
 
 <body>
-    <h1><span class="rgru"><span class="gr">RG.</span><span class="or">RU</span></span></h1>
-    <h5 class="gr">API Онлайн трансляций для бэкэнда</h4>
+    <h1><span class="rgru"><span>RG.</span><span class="or">RU</span></span></h1>
+    <h5>API Онлайн трансляций для бэкэнда</h4>
 
         <ol>
             {{range $i, $r := .}}
 
-            {{if eq .Path "/graphql"}}<h4 class="gr">GraphQL</h4>{{end}}
-            {{if eq .Path "/medium/{id}"}}<h4 class="gr">REST</h4>{{end}}
-            {{if eq .Path "/"}}<h4 class="gr">Общие</h4>{{end}}
-            {{if eq .Path "/broadcasts"}}<h4 class="gr">API для фронтэнда</h4>{{end}}
+            {{if eq .Path "/graphql"}}<h4>GraphQL</h4>{{end}}
+            {{if eq .Path "/medium/{id}"}}<h4>REST</h4>{{end}}
+            {{if eq .Path "/"}}<h4>Общие</h4>{{end}}
+            {{if eq .Path "/broadcasts"}}<h4>API для фронтэнда</h4>{{end}}
 
 
             <li>
                 <div class="comment">{{.Comment}}</div>
-                <div class="spec"><span class="param-name">Methods</span>{{range .Methods}}<span class="class-{{.}}">{{.}}</span>&nbsp;&nbsp;{{end}}</div>
-                <div class="spec"><span class="param-name">URL</span>{{.Path}}</div>
-                <div class="spec"><span class="param-name">test URL </span><input id="example{{$i}}" type="text" value="{{.Example}}"></div>
+                <div><span class="param-name">Methods</span>{{range .Methods}}<span class="class-{{.}}">{{.}}</span>&nbsp;&nbsp;{{end}}</div>
+                <div><span class="param-name">URL</span>{{.Path}}</div>
+                <div><span class="param-name">test URL </span><input id="example{{$i}}" type="text" value="{{.Example}}"></div>
                 <!-- enctype="multipart/form-data"  -->
                 <form id="form{{$i}}" onsubmit="event.preventDefault();
                 $(this).ajaxSubmit({
@@ -49,10 +49,10 @@
                     <!-- <div>Параметры запроса:</div> -->
                     {{range .Params }}
                     {{if .Name}}
-                    <div class="spec">
+                    <div>
                         <span class="form-param-name">{{.Name}}</span>
 
-                        {{if eq .Name "query"}}
+                        {{if or (eq .Name "query") (eq .Name "variables") }}
                         <textarea name="{{.Name}}">{{.Test}}</textarea>
                         {{else}}
                         <input type="text" name="{{.Name}}" value="{{.Test}}">
@@ -64,7 +64,7 @@
                     {{end}}
                     {{end}}
                     {{end}}
-                    <div class="spec">
+                    <div>
                         <span class="param-name"></span>
                         <input type="submit" value="TEST">
                     </div>
@@ -75,7 +75,7 @@
             {{end}}
         </ol>
         <hr>
-        <div>
+        <div class="comment">
             <a target="_blank" href="https://git.rgwork.ru/web/onlinebc_admin/tree/master">
 
                 <svg width="24" height="24" class="gitlab-logo" viewBox="0 0 36 36">

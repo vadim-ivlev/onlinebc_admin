@@ -5,7 +5,8 @@
 
 - comment   : GraphQL запрос
   methods   :
-  - post
+  - POST
+  - GET    
   path      : /graphql
   example   : /graphql
   controller: GraphQL
@@ -20,6 +21,12 @@
             title,  
             duration 
           }
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : >- 
+      { 
       }
 
 

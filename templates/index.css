@@ -2,16 +2,19 @@
 
 body {
     margin: 30px;
-    font-family: 'Roboto', sans-serif;
 }
 
 a {
     text-decoration: none;
 }
 
+h4 {
+    border-top: 1px solid silver;
+    font-weight: bold;
+}
 
-.gr {
-    color: slategray;
+h5 {
+    font-weight:400;
 }
 
 .or {
@@ -23,36 +26,35 @@ a {
     font-family: 'Open Sans';
 }
 
-h4 {
-    font-family: 'Roboto', sans-serif;
-    border-top: 3px solid silver;
 
-}
+
 .comment {
-    color:black;
-    border-top: 1px solid silver;
+    color: black;
+    background-color:rgb(236 ,236,236);
+    font-weight: 400;
 }
 
 .comment::first-letter {
-    /* text-transform: uppercase; */
-    color: orangered;
+    color:rgb(155,77,202);
     font-size: 140%;
     vertical-align: middle;
     font-weight: bold;
 }
 
 .param-name {
-    /* font-weight: bold; */
+    
     min-width: 140px;
     display: inline-block;
     vertical-align: top;
+    color:black;
 }
 
 .form-param-name {
-    /* font-weight: bold; */
+    padding-left: 10px;
     min-width: 137px;
     display: inline-block;
     vertical-align: top;
+    font-size: 90%;
 }
 
 
@@ -62,6 +64,7 @@ h4 {
     display: inline-block;
     vertical-align: top;
 }
+
 
 .class-GET {
     color: green;
@@ -107,23 +110,6 @@ textarea {
     resize: both;
 }
 
-.sss {
-    min-width: 90px;
-    display: inline-block;
-}
-
-.spec {
-    color: slategray;
-    margin-left: 50px;
-
-}
-
-.fspec {
-    color:dimgrey;
-    margin-left: 45px;
-
-}
-
 
 
 ol li {
@@ -147,4 +133,4 @@ pre {
 form {
     padding: 0;
     margin: 0 !important;
-}
+}  

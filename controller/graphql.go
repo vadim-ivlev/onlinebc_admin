@@ -2,8 +2,8 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/graphql-go/graphql"
 )
@@ -103,34 +103,110 @@ var albumType = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
+// ************************************************************************
+func Filter(songs []Song, f func(Song) bool) []Song {
+	vsf := make([]Song, 0)
+	for _, v := range songs {
+		if f(v) {
+			vsf = append(vsf, v)
+		}
+	}
+	return vsf
+}
+
 var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Query",
 	Fields: graphql.Fields{
 		"songs": &graphql.Field{
 			Type: graphql.NewList(songType),
-			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-				return songs, nil
+			// Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			// 	return songs, nil
+			// },
+
+			Args: graphql.FieldConfigArgument{
+				"album": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				album := params.Args["album"].(string)
+				filtered := Filter(songs, func(v Song) bool {
+					return strings.Contains(v.Album, album)
+				})
+				return filtered, nil
+			},
+		},
+
+		"album": &graphql.Field{
+			Type: albumType,
+			Args: graphql.FieldConfigArgument{
+				"id": &graphql.ArgumentConfig{
+					Type: graphql.NewNonNull(graphql.String),
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				id := params.Args["id"].(string)
+				for _, album := range albums {
+					if album.ID == id {
+						return album, nil
+					}
+				}
+				return nil, nil
 			},
 		},
 	},
 })
 
-// schema, _ := graphql.NewSchema(graphql.SchemaConfig{})
+var rootMutation = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Mutation",
+	Fields: graphql.Fields{
 
-var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
-	Query: rootQuery,
+		"createSong": &graphql.Field{
+			Type: songType,
+			Args: graphql.FieldConfigArgument{
+				"id":       &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+				"album":    &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+				"title":    &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+				"duration": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				var song Song
+				song.ID = params.Args["id"].(string)
+				song.Album = params.Args["album"].(string)
+				song.Title = params.Args["title"].(string)
+				song.Duration = params.Args["duration"].(string)
+				songs = append(songs, song)
+				return song, nil
+			},
+		},
+		// =====================================================
+
+	},
 })
 
-// GraphQLHandler выполняет graphql запрос
-func GraphQLHandler(w http.ResponseWriter, r *http.Request) {
-	if err := r.ParseMultipartForm(1024 * 1024); err != nil {
-		fmt.Println(err)
-	}
-	r.ParseForm()
+var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
+	Query:    rootQuery,
+	Mutation: rootMutation,
+})
+
+// *******************************************************************************8
+
+// GraphQL исполняет GraphQL запрос
+func (dummy) GraphQL(w http.ResponseWriter, r *http.Request) {
+	m := getPayload(r)
 	result := graphql.Do(graphql.Params{
-		Schema: schema,
-		// RequestString: r.URL.Query().Get("query"),
-		RequestString: r.FormValue("query"),
+		Schema:        schema,
+		RequestString: m["query"].(string),
 	})
 	json.NewEncoder(w).Encode(result)
+}
+
+// getPayload builds a map with keys "query", "variables", "operationName".
+// Decoded body has precedence over POST over GET.
+func getPayload(r *http.Request) map[string]interface{} {
+	m := make(map[string]interface{})
+	r.ParseForm()
+	for k := range r.Form {
+		m[k] = r.FormValue(k)
+	}
+	json.NewDecoder(r.Body).Decode(&m)
+	return m
 }
