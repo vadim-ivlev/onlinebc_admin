@@ -104,10 +104,14 @@ input[type=submit] {
 
 textarea {
     width: 300px ;
-    height: 200px; 
+    height: 10px; 
+    min-height: 1rem; 
     margin-top: 4px;
     margin-bottom: 2px;
     resize: both;
+    /* font-size: 80%; */
+    color: darkmagenta;
+    font-family: monospace;
 }
 
 

@@ -2,8 +2,37 @@
 
 
 # GraphQL --------------------------------------------------
+- comment   : GraphQL1 запрос
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql1
+  example   : /graphql1
+  controller: GraphQL1
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : >- 
+      {
+        broadcast (id: "354") {
+          id
+          title
+          time_created
+          link_article
+        }
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
 
-- comment   : GraphQL запрос
+
+
+
+
+
+- comment   : GraphQL0 запрос
   methods   :
   - POST
   - GET    
@@ -15,12 +44,17 @@
     name   : query
     value  : '{query}'
     test   : >- 
-      { 
-        songs 
-          { 
-            title,  
-            duration 
-          }
+      {
+        album(id: "ts-fearless") {
+          id
+          title
+          artist
+        }
+        songs(album: "ts-fearless") {
+          title
+          id
+          album
+        }
       }
   - comment: переменные
     name   : variables

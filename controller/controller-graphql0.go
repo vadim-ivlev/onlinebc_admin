@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -114,7 +115,7 @@ func Filter(songs []Song, f func(Song) bool) []Song {
 	return vsf
 }
 
-var rootQuery = graphql.NewObject(graphql.ObjectConfig{
+var rootQuery0 = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Query",
 	Fields: graphql.Fields{
 		"songs": &graphql.Field{
@@ -124,12 +125,38 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 			// },
 
 			Args: graphql.FieldConfigArgument{
-				"album": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+				// "album": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.String)},
+				"album": &graphql.ArgumentConfig{Type: graphql.String},
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				album := params.Args["album"].(string)
+
+				songsFields := getSelectedFields([]string{"songs"}, params)
+				fmt.Println(songsFields)
+
+				album := params.Args["album"]
+				if album == nil {
+					s := `
+					[
+						{
+							"album": "ts-fearless",
+							"title": "Fearless"
+						},
+						{
+							"album": "ts-fearless",
+							"title": "Fifteen"
+						}
+						]
+					`
+					var r []map[string]interface{}
+					err := json.Unmarshal([]byte(s), &r)
+					if err != nil {
+						println(err.Error())
+					}
+					return r, nil
+
+				}
 				filtered := Filter(songs, func(v Song) bool {
-					return strings.Contains(v.Album, album)
+					return strings.Contains(v.Album, album.(string))
 				})
 				return filtered, nil
 			},
@@ -155,7 +182,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
-var rootMutation = graphql.NewObject(graphql.ObjectConfig{
+var rootMutation0 = graphql.NewObject(graphql.ObjectConfig{
 	Name: "Mutation",
 	Fields: graphql.Fields{
 
@@ -182,9 +209,9 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
-var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
-	Query:    rootQuery,
-	Mutation: rootMutation,
+var schema0, _ = graphql.NewSchema(graphql.SchemaConfig{
+	Query:    rootQuery0,
+	Mutation: rootMutation0,
 })
 
 // *******************************************************************************8
@@ -193,7 +220,7 @@ var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 func (dummy) GraphQL0(w http.ResponseWriter, r *http.Request) {
 	m := getPayload(r)
 	result := graphql.Do(graphql.Params{
-		Schema:        schema,
+		Schema:        schema0,
 		RequestString: m["query"].(string),
 	})
 	json.NewEncoder(w).Encode(result)

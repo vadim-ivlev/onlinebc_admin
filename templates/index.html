@@ -91,7 +91,13 @@
             </a>
         </div>
 
+        <script>
 
+            $("textarea").each(function (textarea) {
+                $(this).height($(this)[0].scrollHeight);
+            });
+
+        </script>
 </body>
 
 </html>
