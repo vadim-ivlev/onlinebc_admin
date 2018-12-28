@@ -1,11 +1,11 @@
 package controller
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"reflect"
-	"strings"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -46,13 +46,26 @@ func GetFunctionByName(funcName string) func(http.ResponseWriter, *http.Request)
 	return mCallable
 }
 
+// TODO: GET RID OF
 // getFormFields извлекает хэш имен-значений полей формы из запроса
 func getFormFields(r *http.Request) map[string]string {
-	r.ParseForm()
 	m := make(map[string]string)
-	for key, value := range r.Form {
-		m[key] = strings.Join(value, ", ")
+	r.ParseForm()
+	for k := range r.Form {
+		m[k] = r.FormValue(k)
 	}
+	return m
+}
+
+// getPayload builds a map with keys "query", "variables", "operationName".
+// Decoded body has precedence over POST over GET.
+func getPayload(r *http.Request) map[string]interface{} {
+	m := make(map[string]interface{})
+	r.ParseForm()
+	for k := range r.Form {
+		m[k] = r.FormValue(k)
+	}
+	json.NewDecoder(r.Body).Decode(&m)
 	return m
 }
 

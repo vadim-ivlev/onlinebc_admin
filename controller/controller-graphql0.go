@@ -189,24 +189,12 @@ var schema, _ = graphql.NewSchema(graphql.SchemaConfig{
 
 // *******************************************************************************8
 
-// GraphQL исполняет GraphQL запрос
-func (dummy) GraphQL(w http.ResponseWriter, r *http.Request) {
+// GraphQL0 исполняет GraphQL запрос
+func (dummy) GraphQL0(w http.ResponseWriter, r *http.Request) {
 	m := getPayload(r)
 	result := graphql.Do(graphql.Params{
 		Schema:        schema,
 		RequestString: m["query"].(string),
 	})
 	json.NewEncoder(w).Encode(result)
-}
-
-// getPayload builds a map with keys "query", "variables", "operationName".
-// Decoded body has precedence over POST over GET.
-func getPayload(r *http.Request) map[string]interface{} {
-	m := make(map[string]interface{})
-	r.ParseForm()
-	for k := range r.Form {
-		m[k] = r.FormValue(k)
-	}
-	json.NewDecoder(r.Body).Decode(&m)
-	return m
 }
