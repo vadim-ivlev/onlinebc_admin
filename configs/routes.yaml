@@ -6,9 +6,9 @@
   methods   :
   - POST
   - GET    
-  path      : /graphql1
-  example   : /graphql1
-  controller: GraphQL1
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
   params    :
   - comment: запрос
     name   : query

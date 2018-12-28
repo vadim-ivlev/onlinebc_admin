@@ -7,6 +7,7 @@ import (
 
 	//blank import
 
+	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
@@ -23,15 +24,15 @@ func QueryRowResult(sqlText string, args ...interface{}) interface{} {
 	return result
 }
 
-// QueryRowResult1 возвращает результат запроса заданного sqlText, с возможными параметрами args.
+// QueryRowMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
 // Применяется для исполнения запросов , INSERT, SELECT.
 // Возвращает единственное значение определенное в тексте запроса.
-func QueryRowResult1(sqlText string, args ...interface{}) interface{} {
-	conn, err := sql.Open("postgres", connectStr)
+func QueryRowMap(sqlText string, args ...interface{}) map[string]interface{} {
+	conn, err := sqlx.Open("postgres", connectStr)
 	panicIf(err)
 	defer conn.Close()
-	var result []interface{}
-	err = conn.QueryRow(sqlText, args...).Scan(&result)
+	result := make(map[string]interface{})
+	err = conn.QueryRowx(sqlText, args...).MapScan(result)
 	printIf(err)
 	return result
 }
@@ -83,7 +84,7 @@ func DeleteRowByID(tableName string, id string) int64 {
 	return num
 }
 
-// getKeysAndValues возвращает срезы ключей и значений
+// getKeysAndValues возвращает срезы ключей, значений
 func getKeysAndValues(vars map[string]string) ([]string, []interface{}, []string) {
 	keys := []string{}
 	values := make([]interface{}, 0)

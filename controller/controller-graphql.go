@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"onlinebc_admin/model/db"
+	"strings"
 
 	gq "github.com/graphql-go/graphql"
 )
@@ -58,9 +59,39 @@ var mediumType = gq.NewObject(gq.ObjectConfig{
 
 // ************************************************************************
 
-var rootQuery1 = gq.NewObject(gq.ObjectConfig{
+var rootQuery = gq.NewObject(gq.ObjectConfig{
 	Name: "Query",
 	Fields: gq.Fields{
+
+		"broadcast": &gq.Field{
+			Type: broadcastType,
+			Args: gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)}},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				fields := getSelectedFields([]string{"broadcast"}, params)
+				m := db.QueryRowMap("SELECT "+strings.Join(fields, ", ")+" FROM broadcast WHERE id=$1;", params.Args["id"].(string))
+				return m, nil
+			},
+		},
+
+		"post": &gq.Field{
+			Type: broadcastType,
+			Args: gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)}},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				fields := getSelectedFields([]string{"post"}, params)
+				m := db.QueryRowMap("SELECT "+strings.Join(fields, ", ")+" FROM post WHERE id=$1;", params.Args["id"].(string))
+				return m, nil
+			},
+		},
+
+		"medium": &gq.Field{
+			Type: broadcastType,
+			Args: gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)}},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				fields := getSelectedFields([]string{"medium"}, params)
+				m := db.QueryRowMap("SELECT "+strings.Join(fields, ", ")+" FROM medium WHERE id=$1;", params.Args["id"].(string))
+				return m, nil
+			},
+		},
 
 		"posts": &gq.Field{
 			Type: gq.NewList(postType),
@@ -69,51 +100,34 @@ var rootQuery1 = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				// idBroadcast := params.Args["id_broadcast"].(string)
-
 				var posts interface{}
 				return posts, nil
-			},
-		},
-
-		"broadcast": &gq.Field{
-			Type: broadcastType,
-			Args: gq.FieldConfigArgument{
-				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-			},
-			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				id := params.Args["id"].(string)
-				// selectedFields := getSelectedFields([]string{"broadcast"}, params)
-				// fieldList := strings.Join(selectedFields, ", ")
-				broadcast := db.QueryRowResult1("SELECT * FROM broadcast WHERE id=$1;", id)
-				// broadcast := db.QueryRowResult1("SELECT $1 FROM broadcast WHERE id=$2;", fieldList, id)
-				// var broadcast interface{}
-				return broadcast, nil
 			},
 		},
 	},
 })
 
-var rootMutation1 = gq.NewObject(gq.ObjectConfig{
+var rootMutation = gq.NewObject(gq.ObjectConfig{
 	Name: "Mutation",
 	Fields: gq.Fields{
 		"createBroadcast": &gq.Field{
 			Type: broadcastType,
 			Args: gq.FieldConfigArgument{
 				// "id":             &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"title":          &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"time_created":   &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"time_begin":     &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"is_ended":       &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"show_date":      &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"show_time":      &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"is_yandex":      &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"yandex_ids":     &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"show_main_page": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"link_article":   &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"link_img":       &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"groups_create":  &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"is_diary":       &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
-				"diary_author":   &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)},
+				"title":          &gq.ArgumentConfig{Type: gq.String},
+				"time_created":   &gq.ArgumentConfig{Type: gq.String},
+				"time_begin":     &gq.ArgumentConfig{Type: gq.String},
+				"is_ended":       &gq.ArgumentConfig{Type: gq.String},
+				"show_date":      &gq.ArgumentConfig{Type: gq.String},
+				"show_time":      &gq.ArgumentConfig{Type: gq.String},
+				"is_yandex":      &gq.ArgumentConfig{Type: gq.String},
+				"yandex_ids":     &gq.ArgumentConfig{Type: gq.String},
+				"show_main_page": &gq.ArgumentConfig{Type: gq.String},
+				"link_article":   &gq.ArgumentConfig{Type: gq.String},
+				"link_img":       &gq.ArgumentConfig{Type: gq.String},
+				"groups_create":  &gq.ArgumentConfig{Type: gq.String},
+				"is_diary":       &gq.ArgumentConfig{Type: gq.String},
+				"diary_author":   &gq.ArgumentConfig{Type: gq.String},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				var m = make(map[string]string)
@@ -141,18 +155,18 @@ var rootMutation1 = gq.NewObject(gq.ObjectConfig{
 	},
 })
 
-var schema1, _ = gq.NewSchema(gq.SchemaConfig{
-	Query:    rootQuery1,
-	Mutation: rootMutation1,
+var schema, _ = gq.NewSchema(gq.SchemaConfig{
+	Query:    rootQuery,
+	Mutation: rootMutation,
 })
 
 // *******************************************************************************8
 
 // GraphQL0 исполняет GraphQL запрос
-func (dummy) GraphQL1(w http.ResponseWriter, r *http.Request) {
+func (dummy) GraphQL(w http.ResponseWriter, r *http.Request) {
 	m := getPayload(r)
 	result := gq.Do(gq.Params{
-		Schema:        schema1,
+		Schema:        schema,
 		RequestString: m["query"].(string),
 	})
 	json.NewEncoder(w).Encode(result)
