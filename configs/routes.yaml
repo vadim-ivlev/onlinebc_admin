@@ -15,12 +15,9 @@
     value  : '{query}'
     test   : >- 
       {
-        broadcast (id: "354") {
-          id
-          title
-          time_created
-          link_article
-        }
+        broadcast (id: "354") { id  title  time_created link_article }
+        post(id:"23952"){id id_parent text author}
+        medium(id:"5330"){id uri thumb source}
       }
   - comment: переменные
     name   : variables

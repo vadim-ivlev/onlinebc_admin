@@ -47,7 +47,7 @@ var postType = gq.NewObject(gq.ObjectConfig{
 })
 
 var mediumType = gq.NewObject(gq.ObjectConfig{
-	Name: "medium",
+	Name: "Medium",
 	Fields: gq.Fields{
 		"id":      &gq.Field{Type: gq.String},
 		"post_id": &gq.Field{Type: gq.String},
@@ -74,7 +74,7 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 		},
 
 		"post": &gq.Field{
-			Type: broadcastType,
+			Type: postType,
 			Args: gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"post"}, params)
@@ -84,11 +84,11 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 		},
 
 		"medium": &gq.Field{
-			Type: broadcastType,
+			Type: mediumType,
 			Args: gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.String)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"medium"}, params)
-				m := db.QueryRowMap("SELECT "+strings.Join(fields, ", ")+" FROM medium WHERE id=$1;", params.Args["id"].(string))
+				m := db.QueryRowMap("SELECT "+strings.Join(fields, ", ")+" FROM media WHERE id=$1;", params.Args["id"].(string))
 				return m, nil
 			},
 		},
