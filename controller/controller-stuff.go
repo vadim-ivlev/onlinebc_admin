@@ -6,7 +6,9 @@ import (
 	"io/ioutil"
 	"net/http"
 	"reflect"
+	"strconv"
 
+	"github.com/gorilla/mux"
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/graphql/language/ast"
 	yaml "gopkg.in/yaml.v2"
@@ -41,6 +43,11 @@ var Routes []Route
 
 // FUNCTIONS *******************************************************
 
+func getIntID(r *http.Request) int {
+	id, _ := strconv.Atoi(mux.Vars(r)["id"])
+	return id
+}
+
 // GetFunctionByName возвращает функцию по имени
 func GetFunctionByName(funcName string) func(http.ResponseWriter, *http.Request) {
 	m := reflect.ValueOf(&dummy{}).MethodByName(funcName)
@@ -50,8 +57,8 @@ func GetFunctionByName(funcName string) func(http.ResponseWriter, *http.Request)
 
 // TODO: GET RID OF
 // getFormFields извлекает хэш имен-значений полей формы из запроса
-func getFormFields(r *http.Request) map[string]string {
-	m := make(map[string]string)
+func getFormFields(r *http.Request) map[string]interface{} {
+	m := make(map[string]interface{})
 	r.ParseForm()
 	for k := range r.Form {
 		m[k] = r.FormValue(k)

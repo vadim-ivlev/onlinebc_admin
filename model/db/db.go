@@ -26,7 +26,7 @@ func QueryRowResult(sqlText string, args ...interface{}) interface{} {
 
 // QueryRowMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
 // Применяется для исполнения запросов , INSERT, SELECT.
-// Возвращает единственное значение определенное в тексте запроса.
+// Возвращает map[string]interface{}.
 func QueryRowMap(sqlText string, args ...interface{}) map[string]interface{} {
 	conn, err := sqlx.Open("postgres", connectStr)
 	panicIf(err)
@@ -50,57 +50,52 @@ func GetExecResult(sqlText string, args ...interface{}) sql.Result {
 }
 
 // CreateRow Вставляет запись в таблицу tableName.
-// Хэш fieldValues задает имена и значения полей таблицы.
-// Возвращает идентификатор id вставленной записи.
-func CreateRow(tableName string, fieldValues map[string]string) interface{} {
+// fieldValues задает имена и значения полей таблицы.
+// Возвращает map[string]interface{} новой записи таблицы.
+func CreateRow(tableName string, fieldValues map[string]interface{}) map[string]interface{} {
 	keys, values, dollars := getKeysAndValues(fieldValues)
-	sqlText := fmt.Sprintf("INSERT INTO %s ( %s ) VALUES ( %s ) RETURNING id;",
-		tableName,
-		strings.Join(keys, ", "),
-		strings.Join(dollars, ", "))
-	res := QueryRowResult(sqlText, values...)
+	sqlText := fmt.Sprintf("INSERT INTO %s ( %s ) VALUES ( %s ) RETURNING * ;",
+		tableName, strings.Join(keys, ", "), strings.Join(dollars, ", "))
+	res := QueryRowMap(sqlText, values...)
 	return res
 }
 
 // UpdateRowByID обновляет запись в таблице tableName по ее id.
-// Хэш fieldValues задает имена и значения полей таблицы.
-// Возвращает количество записей затронутых запросом.
-func UpdateRowByID(tableName string, fieldValues map[string]string, id string) int64 {
+// map fieldValues задает имена и значения полей таблицы.
+// Возвращает map[string]interface{} обновленной записи таблицы.
+func UpdateRowByID(tableName string, id int, fieldValues map[string]interface{}) map[string]interface{} {
 	keys, values, dollars := getKeysAndValues(fieldValues)
-	sqlText := fmt.Sprintf("UPDATE %s SET ( %s ) = ( %s ) WHERE id = %v ;",
+	sqlText := fmt.Sprintf("UPDATE %s SET ( %s ) = ( %s ) WHERE id = %v RETURNING * ;",
 		tableName, strings.Join(keys, ", "), strings.Join(dollars, ", "), id)
-	res := GetExecResult(sqlText, values...)
-	num, err := res.RowsAffected()
-	printIf(err)
-	return num
+	res := QueryRowMap(sqlText, values...)
+	return res
 }
 
-// DeleteRowByID удаляет запись в таблице tableName по ее id
-func DeleteRowByID(tableName string, id string) int64 {
-	sqlText := fmt.Sprintf("DELETE FROM %s WHERE id = %v ;", tableName, id)
-	res := GetExecResult(sqlText)
-	num, err := res.RowsAffected()
-	printIf(err)
-	return num
+// DeleteRowByID удаляет запись в таблице tableName по ее id.
+// Возвращает map[string]interface{} удаленной записи таблицы.
+func DeleteRowByID(tableName string, id int) map[string]interface{} {
+	sqlText := fmt.Sprintf("DELETE FROM %s WHERE id = %v RETURNING * ;", tableName, id)
+	res := QueryRowMap(sqlText)
+	return res
 }
 
-// getKeysAndValues возвращает срезы ключей, значений
-func getKeysAndValues(vars map[string]string) ([]string, []interface{}, []string) {
+// getKeysAndValues возвращает срезы ключей, значений и символов доллара $n.
+func getKeysAndValues(vars map[string]interface{}) ([]string, []interface{}, []string) {
 	keys := []string{}
 	values := make([]interface{}, 0)
-	questionMarks := []string{}
+	dollars := []string{}
 	n := 1
 	for key, val := range vars {
-
+		// TODO: обработка пустых значений числовых полей. Сделать типы полей форм.
 		if val == "" {
 			values = append(values, nil)
 		} else {
 			values = append(values, val)
 		}
+		// values = append(values, val)
 		keys = append(keys, key)
-
-		questionMarks = append(questionMarks, fmt.Sprintf("$%v", n))
+		dollars = append(dollars, fmt.Sprintf("$%v", n))
 		n++
 	}
-	return keys, values, questionMarks
+	return keys, values, dollars
 }

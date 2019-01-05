@@ -2,7 +2,8 @@
 
 
 # GraphQL --------------------------------------------------
-- comment   : GraphQL1 запрос
+
+- comment   : GraphQL типы
   methods   :
   - POST
   - GET    
@@ -13,12 +14,39 @@
   - comment: запрос
     name   : query
     value  : '{query}'
-    test   : >- 
-      {
-        broadcast (id: "354") { id  title  time_created link_article }
-        post(id:"23952"){id id_parent text author}
-        medium(id:"5330"){id uri thumb source}
+    test   : |- 
+      query {
+        broadcast: __type(name: "Broadcast") {
+          name description
+          fields {
+            name description
+            type {
+              name 
+            }
+          }
+        }
+
+        post: __type(name: "Post") {
+          name description
+          fields {
+            name description
+            type {
+              name 
+            }
+          }
+        }
+
+        medium: __type(name: "Medium") {
+          name description
+          fields {
+            name description
+            type {
+              name 
+            }
+          }
+        }
       }
+
   - comment: переменные
     name   : variables
     value  : '{variables}'
@@ -29,41 +57,129 @@
 
 
 
-- comment   : GraphQL0 запрос
+
+
+- comment   : GraphQL запрос
   methods   :
   - POST
   - GET    
-  path      : /graphql0
-  example   : /graphql0
-  controller: GraphQL0
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
   params    :
   - comment: запрос
     name   : query
     value  : '{query}'
-    test   : >- 
-      {
-        album(id: "ts-fearless") {
-          id
-          title
-          artist
-        }
-        songs(album: "ts-fearless") {
-          title
-          id
-          album
+    test   : |- 
+      query {
+        broadcast (id: 354) { id  title  time_created link_article }
+        post(id:23952){id id_parent text author}
+        medium(id:5330){id uri thumb source}
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+- comment   : GraphQL create
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      mutation {
+        createBroadcast(
+          title:"new broadcast1", 
+          time_created: 123, 
+          link_article:"link2"
+        ) 
+        {
+          id title 
+          time_created 
+          time_begin 
+          link_article
         }
       }
   - comment: переменные
     name   : variables
     value  : '{variables}'
-    test   : >- 
-      { 
-      }
+    test   : '{}' 
+
+- comment   : GraphQL update
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      mutation {
+        updateBroadcast(
+          id: 1020,
+          title:"updated broadcast 22", 
+          time_created: 124, 
+          link_article:"updated link2"
+        ) 
+        {
+          id title 
+          time_created 
+          time_begin 
+          link_article
+        }
+      }  
+      
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+- comment   : GraphQL delete
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      mutation {
+        deleteBroadcast(
+          id: 1020
+        ) 
+        {
+          id title 
+          time_created 
+          time_begin 
+          link_article
+        }
+      }  
+      
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
 
 
 
 
 
+
+# REST ===================================================
 #  media ---------------------------------------------------
 
 
@@ -109,7 +225,7 @@
   example   : /update-medium/5330
   controller: UpdateMedium
   params    :
-  - comment: идентификатор поста
+  - comment: Идентификатор поста
     name   : post_id
     value  : '{post_id}'
     test   : 23932
@@ -381,7 +497,7 @@
     name    : is_diary
     value   : '{is_diary}'
     test    : 0
-  - comment : Автор Дневника
+  - comment : Автор дневника
     name    : diary_author
     value   : '{diary_author}'
     test    : Новиков 

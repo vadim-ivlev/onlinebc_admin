@@ -32,51 +32,51 @@ func (dummy) GetBroadcast(w http.ResponseWriter, r *http.Request) {
 
 // UpdateMedium обновляет медиа по id
 func (dummy) UpdateMedium(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.UpdateRowByID("media", getFormFields(r), mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.UpdateRowByID("media", getIntID(r), getFormFields(r)))
 }
 
 // UpdatePost обновляет пост по id
 func (dummy) UpdatePost(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.UpdateRowByID("post", getFormFields(r), mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.UpdateRowByID("post", getIntID(r), getFormFields(r)))
 }
 
 // UpdateBroadcast обновляет трансляцию по id
 func (dummy) UpdateBroadcast(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.UpdateRowByID("broadcast", getFormFields(r), mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.UpdateRowByID("broadcast", getIntID(r), getFormFields(r)))
 }
 
 // ************************************************************************
 
 // CreateMedium Создать медиа поста с идентификатором id
 func (dummy) CreateMedium(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, db.CreateRow("media", getFormFields(r)))
+	json.NewEncoder(w).Encode(db.CreateRow("media", getFormFields(r)))
 }
 
 // CreatePost Создать пост трансляции с идентификатором id
 func (dummy) CreatePost(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, db.CreateRow("post", getFormFields(r)))
+	json.NewEncoder(w).Encode(db.CreateRow("post", getFormFields(r)))
 }
 
 // CreateBroadcast Создать  трансляцию
 func (dummy) CreateBroadcast(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, db.CreateRow("broadcast", getFormFields(r)))
+	json.NewEncoder(w).Encode(db.CreateRow("broadcast", getFormFields(r)))
 }
 
 // ************************************************************************
 
 // DeleteMedium обновляет медиа по id
 func (dummy) DeleteMedium(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.DeleteRowByID("media", mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.DeleteRowByID("media", getIntID(r)))
 }
 
 // DeletePost обновляет пост по id
 func (dummy) DeletePost(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.DeleteRowByID("post", mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.DeleteRowByID("post", getIntID(r)))
 }
 
 // DeleteBroadcast обновляет трансляцию по id
 func (dummy) DeleteBroadcast(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%v", db.DeleteRowByID("broadcast", mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.DeleteRowByID("broadcast", getIntID(r)))
 }
 
 // ************************************************************************
