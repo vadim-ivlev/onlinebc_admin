@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 	"onlinebc_admin/model/db"
-	"strings"
 
 	gq "github.com/graphql-go/graphql"
 )
@@ -71,9 +70,8 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать трансляцию по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"broadcast"}, params)
-				m := db.QueryRowMap("SELECT "+strings.Join(fields, ", ")+" FROM broadcast WHERE id=$1;", params.Args["id"].(int))
-				return m, nil
+				// m := db.QueryRowMap("SELECT * FROM broadcast WHERE id=$1;", params.Args["id"].(int))
+				return db.GetRowByID("broadcast", params.Args["id"].(int)), nil
 			},
 		},
 
@@ -82,9 +80,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать пост по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"post"}, params)
-				m := db.QueryRowMap("SELECT "+strings.Join(fields, ", ")+" FROM post WHERE id=$1;", params.Args["id"].(int))
-				return m, nil
+				// fields := getSelectedFields([]string{"post"}, params)
+				// m := db.QueryRowMap("SELECT * FROM post WHERE id=$1;", params.Args["id"].(int))
+				return db.GetRowByID("post", params.Args["id"].(int)), nil
 			},
 		},
 
@@ -93,9 +91,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать медиа по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"medium"}, params)
-				m := db.QueryRowMap("SELECT "+strings.Join(fields, ", ")+" FROM media WHERE id=$1;", params.Args["id"].(int))
-				return m, nil
+				// fields := getSelectedFields([]string{"medium"}, params)
+				// m := db.QueryRowMap("SELECT * FROM medium WHERE id=$1;", params.Args["id"].(int))
+				return db.GetRowByID("medium", params.Args["id"].(int)), nil
 			},
 		},
 
@@ -250,7 +248,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				"source":  &gq.ArgumentConfig{Type: gq.String, Description: "Источник медиа"},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				newRow := db.CreateRow("media", params.Args)
+				newRow := db.CreateRow("medium", params.Args)
 				return newRow, nil
 			},
 		},
@@ -266,7 +264,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				"source":  &gq.ArgumentConfig{Type: gq.String, Description: "Источник медиа"},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				row := db.UpdateRowByID("media", params.Args["id"].(int), params.Args)
+				row := db.UpdateRowByID("medium", params.Args["id"].(int), params.Args)
 				return row, nil
 			},
 		},
@@ -278,7 +276,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				row := db.DeleteRowByID("media", params.Args["id"].(int))
+				row := db.DeleteRowByID("medium", params.Args["id"].(int))
 				return row, nil
 			},
 		},

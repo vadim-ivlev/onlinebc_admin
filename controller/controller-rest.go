@@ -15,24 +15,24 @@ import (
 
 // GetMedium возвращает медиа по id
 func (dummy) GetMedium(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_medium($1);", mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.GetRowByID("medium", getIntID(r)))
 }
 
 // GetPost возвращает пост по id
 func (dummy) GetPost(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_post($1);", mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.GetRowByID("post", getIntID(r)))
 }
 
 // GetBroadcast возвращает трансляцию по id
 func (dummy) GetBroadcast(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_broadcast($1);", mux.Vars(r)["id"]))
+	json.NewEncoder(w).Encode(db.GetRowByID("broadcast", getIntID(r)))
 }
 
 // ************************************************************************
 
 // UpdateMedium обновляет медиа по id
 func (dummy) UpdateMedium(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.UpdateRowByID("media", getIntID(r), getFormFields(r)))
+	json.NewEncoder(w).Encode(db.UpdateRowByID("medium", getIntID(r), getFormFields(r)))
 }
 
 // UpdatePost обновляет пост по id
@@ -49,7 +49,7 @@ func (dummy) UpdateBroadcast(w http.ResponseWriter, r *http.Request) {
 
 // CreateMedium Создать медиа поста с идентификатором id
 func (dummy) CreateMedium(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.CreateRow("media", getFormFields(r)))
+	json.NewEncoder(w).Encode(db.CreateRow("medium", getFormFields(r)))
 }
 
 // CreatePost Создать пост трансляции с идентификатором id
@@ -66,7 +66,7 @@ func (dummy) CreateBroadcast(w http.ResponseWriter, r *http.Request) {
 
 // DeleteMedium обновляет медиа по id
 func (dummy) DeleteMedium(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.DeleteRowByID("media", getIntID(r)))
+	json.NewEncoder(w).Encode(db.DeleteRowByID("medium", getIntID(r)))
 }
 
 // DeletePost обновляет пост по id

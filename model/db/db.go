@@ -60,6 +60,13 @@ func CreateRow(tableName string, fieldValues map[string]interface{}) map[string]
 	return res
 }
 
+// GetRowByID возвращает запись в таблице tableName по ее id.
+// Возвращает map[string]interface{} записи таблицы.
+func GetRowByID(tableName string, id int) map[string]interface{} {
+	sqlText := "SELECT * FROM " + tableName + " WHERE id = $1 ;"
+	return QueryRowMap(sqlText, id)
+}
+
 // UpdateRowByID обновляет запись в таблице tableName по ее id.
 // map fieldValues задает имена и значения полей таблицы.
 // Возвращает map[string]interface{} обновленной записи таблицы.
