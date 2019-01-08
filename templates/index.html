@@ -55,7 +55,7 @@
                         {{if or (eq .Name "query") (eq .Name "variables") }}
                         <textarea name="{{.Name}}">{{.Test}}</textarea>
                         {{else}}
-                        <input type="text" name="{{.Name}}" value="{{.Test}}">
+                        <input type="{{.Inptype}}" name="{{.Name}}" value="{{.Test}}">
                         {{end}}
 
 

@@ -32,34 +32,34 @@ func (dummy) GetBroadcast(w http.ResponseWriter, r *http.Request) {
 
 // UpdateMedium обновляет медиа по id
 func (dummy) UpdateMedium(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.UpdateRowByID("medium", getIntID(r), getFormFields(r)))
+	json.NewEncoder(w).Encode(db.UpdateRowByID("medium", getIntID(r), getPayload(r)))
 }
 
 // UpdatePost обновляет пост по id
 func (dummy) UpdatePost(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.UpdateRowByID("post", getIntID(r), getFormFields(r)))
+	json.NewEncoder(w).Encode(db.UpdateRowByID("post", getIntID(r), getPayload(r)))
 }
 
 // UpdateBroadcast обновляет трансляцию по id
 func (dummy) UpdateBroadcast(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.UpdateRowByID("broadcast", getIntID(r), getFormFields(r)))
+	json.NewEncoder(w).Encode(db.UpdateRowByID("broadcast", getIntID(r), getPayload(r)))
 }
 
 // ************************************************************************
 
 // CreateMedium Создать медиа поста с идентификатором id
 func (dummy) CreateMedium(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.CreateRow("medium", getFormFields(r)))
+	json.NewEncoder(w).Encode(db.CreateRow("medium", getPayload(r)))
 }
 
 // CreatePost Создать пост трансляции с идентификатором id
 func (dummy) CreatePost(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.CreateRow("post", getFormFields(r)))
+	json.NewEncoder(w).Encode(db.CreateRow("post", getPayload(r)))
 }
 
 // CreateBroadcast Создать  трансляцию
 func (dummy) CreateBroadcast(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(db.CreateRow("broadcast", getFormFields(r)))
+	json.NewEncoder(w).Encode(db.CreateRow("broadcast", getPayload(r)))
 }
 
 // ************************************************************************

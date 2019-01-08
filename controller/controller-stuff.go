@@ -16,6 +16,7 @@ import (
 type Param struct {
 	Comment string
 	Name    string
+	Inptype string
 	Value   string
 	Test    string
 }
@@ -53,18 +54,8 @@ func GetFunctionByName(funcName string) func(http.ResponseWriter, *http.Request)
 	return mCallable
 }
 
-// TODO: GET RID OF
 // getFormFields извлекает хэш имен-значений полей формы из запроса
-func getFormFields(r *http.Request) map[string]interface{} {
-	m := make(map[string]interface{})
-	r.ParseForm()
-	for k := range r.Form {
-		m[k] = r.FormValue(k)
-	}
-	return m
-}
-
-// getPayload builds a map with keys "query", "variables", "operationName".
+// or builds a map with keys "query", "variables", "operationName".
 // Decoded body has precedence over POST over GET.
 func getPayload(r *http.Request) map[string]interface{} {
 	m := make(map[string]interface{})

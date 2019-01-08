@@ -200,6 +200,7 @@
   params    :
   - comment: идентификатор поста
     name   : post_id
+    inptype: number
     value  : '{post_id}'
     test   : 23932
   - comment: URI изображения
@@ -227,6 +228,7 @@
   params    :
   - comment: Идентификатор поста
     name   : post_id
+    inptype: number
     value  : '{post_id}'
     test   : 23932
   - comment: URI изображения
@@ -274,10 +276,12 @@
   params    :
   - comment : Идентификатор поста если это ответ
     name    : id_parent
+    inptype : number
     value   : '{id_parent}'
     test    : 0
   - comment : Идентификатор трансляции
     name    : id_broadcast
+    inptype : number
     value   : '{id_broadcast}'
     test    : 354
   - comment : Текст поста
@@ -286,10 +290,12 @@
     test    : Текст поста
   - comment : Время поста в формате UNIX
     name    : post_time
+    inptype : number
     value   : '{post_time}'
     test    : 1528376820
   - comment : Тип поста 1,2,3,4...
     name    : post_type
+    inptype : number
     value   : '{post_type}'
     test    : 3
   - comment : Ссылка
@@ -298,6 +304,7 @@
     test    : http://google.com
   - comment : Есть ли большое изображение 0,1
     name    : has_big_img
+    inptype : number
     value   : '{has_big_img}'
     test    : 0
   - comment : ФИО автора поста
@@ -317,10 +324,12 @@
   params    :
   - comment : Идентификатор поста если это ответ
     name    : id_parent
+    inptype : number
     value   : '{id_parent}'
     test    : 
   - comment : Идентификатор трансляции
     name    : id_broadcast
+    inptype : number
     value   : '{id_broadcast}'
     test    : 354
   - comment : Текст поста
@@ -329,10 +338,12 @@
     test    : Текст поста
   - comment : Время поста в формате UNIX
     name    : post_time
+    inptype : number
     value   : '{post_time}'
     test    : 1528376820
   - comment : Тип поста 1,2,3,4...
     name    : post_type
+    inptype : number
     value   : '{post_type}'
     test    : 3
   - comment : Ссылка
@@ -341,6 +352,7 @@
     test    : http://google.com
   - comment : Есть ли большое изображение 0,1
     name    : has_big_img
+    inptype : number
     value   : '{has_big_img}'
     test    : 0
   - comment : ФИО автора поста
@@ -385,34 +397,41 @@
     test    : Новая трансляция
   - comment : Время создания
     name    : time_created
+    inptype : number
     value   : '{time_created}'
     test    : 1528376820
   - comment : Время начала
     name    : time_begin
+    inptype : number
     value   : '{time_begin}'
     test    : 1528376820
   - comment : Завершена 0 1
     name    : is_ended
+    inptype : number
     value   : '{is_ended}'
     test    : 1
   - comment : Показывать дату 0 1
     name    : show_date
+    inptype : number
     value   : '{show_date}'
     test    : 1
   - comment : Показывать время 0 1
     name    : show_time
+    inptype : number
     value   : '{show_time}'
     test    : 0
   - comment : Яндекс трансляция 0 1
     name    : is_yandex
+    inptype : number
     value   : '{is_yandex}'
-    test    : 
+    test    : 0
   - comment : Идентификаторы Яндекс трансляций
     name    : yandex_ids
     value   : '{yandex_ids}'
     test    : 2, 333, 555
   - comment : Показывать на главной странице 0 1
     name    : show_main_page
+    inptype : number
     value   : '{show_main_page}'
     test    : 0
   - comment : Ссылка
@@ -425,10 +444,12 @@
     test    : //cdnimg.rg.ru/pril/article/126/55/62/lukjanov-zavrazhin100.jpg
   - comment : groups_create
     name    : groups_create
+    inptype : number
     value   : '{groups_create}'
     test    : 0
   - comment : Дневник 0 1
     name    : is_diary
+    inptype : number
     value   : '{is_diary}'
     test    : 0
   - comment : Автор Дневника
@@ -451,34 +472,41 @@
     test    : Обновленная трансляция
   - comment : Время создания
     name    : time_created
+    inptype : number
     value   : '{time_created}'
     test    : 1528376820
   - comment : Время начала
     name    : time_begin
+    inptype : number
     value   : '{time_begin}'
     test    : 1528376820
   - comment : Завершена 0 1
     name    : is_ended
+    inptype : number
     value   : '{is_ended}'
     test    : 1
   - comment : Показывать дату 0 1
     name    : show_date
+    inptype : number
     value   : '{show_date}'
     test    : 1
   - comment : Показывать время 0 1
     name    : show_time
+    inptype : number
     value   : '{show_time}'
     test    : 0
   - comment : Яндекс трансляция 0 1
     name    : is_yandex
+    inptype : number
     value   : '{is_yandex}'
-    test    : 
+    test    : 0
   - comment : Идентификаторы Яндекс трансляций
     name    : yandex_ids
     value   : '{yandex_ids}'
     test    : 2, 333, 555
   - comment : Показывать на главной странице 0 1
     name    : show_main_page
+    inptype : number
     value   : '{show_main_page}'
     test    : 0
   - comment : Ссылка
@@ -491,10 +519,12 @@
     test    : //cdnimg.rg.ru/pril/article/126/55/62/lukjanov-zavrazhin100.jpg
   - comment : groups_create
     name    : groups_create
+    inptype : number
     value   : '{groups_create}'
     test    : 0
   - comment : Дневник 0 1
     name    : is_diary
+    inptype : number
     value   : '{is_diary}'
     test    : 0
   - comment : Автор дневника
@@ -568,6 +598,7 @@
   params:
   - comment: Идентификатор трансляции
     name: id
+    inptype : number
     value: '{id}'
     test: 354
 

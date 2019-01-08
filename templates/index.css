@@ -92,14 +92,24 @@ h5 {
     font-weight: bold;
 }
 
-input[type=text] {
+input[type] {
     width: 200px ;
     margin-bottom: 2px;
     height: 24px;
+    /* border-radius: 4px; */
+    /* border: 1px solid rgb(209,209,209); */
+
 }
+
+input[type=number] {
+   border-color: blueviolet;
+   /* background-color:violet; */
+}
+
 
 input[type=submit] {
     margin-top: 10px; 
+    height: 38px;
 }
 
 textarea {
