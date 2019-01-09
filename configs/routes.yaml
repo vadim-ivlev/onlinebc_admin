@@ -584,10 +584,10 @@
   example: /answers/23932
   controller: GetAnswers
 
-- comment: Медиа записи поста с идентификатором id
+- comment: Медиа  с идентификатором id
   methods: [GET, HEAD]
   path: /medium/{id}
-  example: /medium/23932
+  example: /medium/5332
   controller: GetMedia
 
 - comment: Трасляция с идентификатором id и ее постами. Legacy
@@ -610,11 +610,16 @@
   params:
   - comment: Основная {0|1}
     name: main
+    inptype : number
     value: '{main}'
-    
+    test: 0
   - comment: Активность {0|1}
     name: active
+    inptype : number
     value: '{active}'
+    test: 0
   - comment: Номер
     name: num
+    inptype : number
     value: '{num}'
+    test: 3

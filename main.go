@@ -23,6 +23,7 @@ func main() {
 	if serve {
 		printGreetings(port)
 		router.Serve(":" + strconv.Itoa(port))
+		// router.GinServe(":" + strconv.Itoa(port))
 	}
 }
 

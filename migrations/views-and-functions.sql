@@ -5,38 +5,6 @@
 -- Все функции возвращают JSON.
 
 
--- CREATE OR REPLACE FUNCTION public.get_medium(idd integer) RETURNS json LANGUAGE plpgsql
--- AS $$
--- BEGIN
---     RETURN  ( select row_to_json( t, false ) from  ( SELECT * FROM medium WHERE id = idd ) t );
--- END; 
--- $$
--- ;
-
-
--- CREATE OR REPLACE FUNCTION public.get_post(idd integer) RETURNS json LANGUAGE plpgsql
--- AS $$
--- BEGIN
---     RETURN  ( select row_to_json( t, false ) from  ( SELECT * FROM post WHERE id = idd ) t  );
--- END; 
--- $$
--- ;
-
-
--- CREATE OR REPLACE FUNCTION public.get_broadcast(idd integer) RETURNS json LANGUAGE plpgsql
--- AS $$
--- BEGIN
---     RETURN ( select row_to_json( t, false ) from ( SELECT * FROM broadcast WHERE id = idd ) t );
--- END; 
--- $$
--- ;
-
-
-
-
-
-
-
 
 -- ************************************************************************
 
@@ -131,16 +99,6 @@ END;
 $function$
 ;
 
-
--- CREATE OR REPLACE FUNCTION public.js(t anyelement)
---  RETURNS json
---  LANGUAGE plpgsql
--- AS $function$
--- BEGIN
---     RETURN array_to_json(array_agg(to_json( t )),true);
--- END;
--- $function$
--- ;
 
 
 

@@ -7,8 +7,6 @@ import (
 	"html/template"
 	"net/http"
 	"onlinebc_admin/model/db"
-
-	"github.com/gorilla/mux"
 )
 
 // ************************************************************************
@@ -102,38 +100,37 @@ func (dummy) GetRoutes(w http.ResponseWriter, req *http.Request) {
 
 // GetMedia возвращает все медиа поста по его id
 func (dummy) GetMedia(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_media($1);", mux.Vars(r)["id"]))
-
+	fmt.Fprintf(w, "%s", db.QueryRowMap("SELECT get_media($1) AS res;", getIntID(r))["res"])
 }
 
 // GetAnswers возвращает ответы к посту по его id
 func (dummy) GetAnswers(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_answers($1);", mux.Vars(r)["id"]))
+	fmt.Fprintf(w, "%s", db.QueryRowMap("SELECT get_answers($1) AS res;", getIntID(r))["res"])
 }
 
 // GetPosts возвращает посты трансляции по её id
 func (dummy) GetPosts(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_posts($1);", mux.Vars(r)["id"]))
+	fmt.Fprintf(w, "%s", db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(r))["res"])
 }
 
 // GetFullBroadcast возвращает трасляцию с постами по её id
 func (dummy) GetFullBroadcast(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_full_broadcast($1);", mux.Vars(r)["id"]))
+	fmt.Fprintf(w, "%s", db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", getIntID(r))["res"])
 }
 
 // GetFullBroadcast возвращает трасляцию с постами по её id
 func (dummy) GetFullBroadcastLegacy(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	id := r.FormValue("id")
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_full_broadcast($1);", id))
+	fmt.Fprintf(w, "%s", db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", id)["res"])
 }
 
 // GetBroadcasts Получить список трансляций
 func (dummy) GetBroadcasts(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_broadcasts();"))
+	fmt.Fprintf(w, "%s", db.QueryRowMap("SELECT get_broadcasts() AS res;")["res"])
 }
 
 // GetBroadcastList Получить список трансляций. Legacy.
 func (dummy) GetBroadcastList(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "%s", db.QueryRowResult("SELECT get_broadcasts();"))
+	fmt.Fprintf(w, "%s", db.QueryRowMap("SELECT get_broadcasts() AS res;")["res"])
 }

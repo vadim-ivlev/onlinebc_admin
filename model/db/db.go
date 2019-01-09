@@ -11,19 +11,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// QueryRowResult возвращает результат запроса заданного sqlText, с возможными параметрами args.
-// Применяется для исполнения запросов , INSERT, SELECT.
-// Возвращает единственное значение определенное в тексте запроса.
-func QueryRowResult(sqlText string, args ...interface{}) interface{} {
-	conn, err := sql.Open("postgres", connectStr)
-	panicIf(err)
-	defer conn.Close()
-	var result interface{}
-	err = conn.QueryRow(sqlText, args...).Scan(&result)
-	printIf(err)
-	return result
-}
-
 // QueryRowMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
 // Применяется для исполнения запросов , INSERT, SELECT.
 // Возвращает map[string]interface{}.
