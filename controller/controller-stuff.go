@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"strconv"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -23,11 +23,10 @@ type Param struct {
 
 // Route - маршрут.
 type Route struct {
-	Comment string
-	Methods []string
-	Path    string
-	Example string
-	// Func       func(w http.ResponseWriter, r *http.Request) `json:"-" yaml:"-"`
+	Comment    string
+	Methods    []string
+	Path       string
+	Example    string
 	Controller string
 	Params     []Param `json:",omitempty" yaml:",omitempty"`
 }
@@ -42,19 +41,19 @@ var Routes []Route
 
 // FUNCTIONS *******************************************************
 
-func getIntID(r *http.Request) int {
-	id, _ := strconv.Atoi(mux.Vars(r)["id"])
+func getGinIntID(c *gin.Context) int {
+	id, _ := strconv.Atoi(c.Param("id"))
 	return id
 }
 
-// GetFunctionByName возвращает функцию по имени
-func GetFunctionByName(funcName string) func(http.ResponseWriter, *http.Request) {
+// GetGinFunctionByName возвращает функцию по имени
+func GetGinFunctionByName(funcName string) func(*gin.Context) {
 	m := reflect.ValueOf(&dummy{}).MethodByName(funcName)
-	mCallable := m.Interface().(func(http.ResponseWriter, *http.Request))
+	mCallable := m.Interface().(func(*gin.Context))
 	return mCallable
 }
 
-// getFormFields извлекает хэш имен-значений полей формы из запроса
+// getFormFields извлекает имена-значения полей формы из запроса
 // or builds a map with keys "query", "variables", "operationName".
 // Decoded body has precedence over POST over GET.
 func getPayload(r *http.Request) map[string]interface{} {

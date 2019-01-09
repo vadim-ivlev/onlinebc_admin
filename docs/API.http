@@ -74,3 +74,13 @@ post_id=23932
 
 DELETE http://localhost:7777/delete-medium/5412  HTTP/1.1
 
+
+
+### GraphQL
+
+POST http://localhost:7777/graphql HTTP/1.1
+content-type: application/json
+
+{
+    "query": "{ broadcast (id: 354) { id title  time_created link_article }  }"
+}

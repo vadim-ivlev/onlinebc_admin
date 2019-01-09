@@ -22,8 +22,7 @@ func main() {
 	// если есть параметр -serve, напечатать приветствие и запустить сервер
 	if serve {
 		printGreetings(port)
-		router.Serve(":" + strconv.Itoa(port))
-		// router.GinServe(":" + strconv.Itoa(port))
+		router.GinServe(":" + strconv.Itoa(port))
 	}
 }
 

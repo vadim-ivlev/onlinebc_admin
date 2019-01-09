@@ -1,10 +1,9 @@
 package controller
 
 import (
-	"encoding/json"
-	"net/http"
 	"onlinebc_admin/model/db"
 
+	"github.com/gin-gonic/gin"
 	gq "github.com/graphql-go/graphql"
 )
 
@@ -290,12 +289,12 @@ var schema, _ = gq.NewSchema(gq.SchemaConfig{
 
 // *******************************************************************************8
 
-// GraphQL0 исполняет GraphQL запрос
-func (dummy) GraphQL(w http.ResponseWriter, r *http.Request) {
-	m := getPayload(r)
+// GraphQL исполняет GraphQL запрос
+func (dummy) GraphQL(c *gin.Context) {
+	m := getPayload(c.Request)
 	result := gq.Do(gq.Params{
 		Schema:        schema,
 		RequestString: m["query"].(string),
 	})
-	json.NewEncoder(w).Encode(result)
+	c.JSON(200, result)
 }
