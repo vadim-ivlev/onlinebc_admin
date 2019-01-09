@@ -41,7 +41,9 @@ func readCommandLineParams() (bool, int) {
 
 	if *initdb {
 		fmt.Println("инициализация БД...")
-		db.GetExecResult(readTextFile("./migrations/onlinebc-dump.sql"))
+		// db.GetExecResult(readTextFile("./migrations/onlinebc-dump.sql"))
+		// db.GetExecResult(readTextFile("./migrations/onlinebc-tables.sql"))
+		db.GetExecResult(readTextFile("./migrations/onlinebc-data.sql"))
 		os.Exit(0)
 	}
 	if *createDbFunctions {
