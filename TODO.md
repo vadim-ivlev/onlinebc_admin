@@ -3,14 +3,6 @@ TODO
 ====
 
 
-
-
-
-
-- Caching App with guaranteed time of response
-
-
-
 - убрать проверку в getKeysAndValues
 - сделать сборочный скрипт
 - добавить исполняющий контейнер
@@ -18,7 +10,4 @@ TODO
 - сделать тесты
 - приделать редис?
 - написать ридми
-- разобраться с неисполнением порождающих скриптов
-- make create tables script
-- make fill tables with data script
 

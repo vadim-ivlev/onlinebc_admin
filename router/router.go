@@ -8,24 +8,27 @@ import (
 )
 
 // defineRoutes -  Сопоставляет маршруты функцмям контроллера
-func defineGinRoutes(router *gin.Engine) {
+func defineRoutes(router *gin.Engine) {
 	for _, route := range c.Routes {
-		controllerFunc := c.GetGinFunctionByName(route.Controller)
+		controllerFunc := c.GetFunctionByName(route.Controller)
 		for _, method := range route.Methods {
 			router.Handle(method, route.Path, controllerFunc)
 		}
 	}
 }
 
-// GinServe определяет пути, присоединяет функции middleware
+// Serve определяет пути, присоединяет функции middleware
 // и запускает сервер на заданном порту.
-func GinServe(port string) {
+func Serve(port string, debug bool) {
+	if !debug {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	router := gin.Default()
-	router.Use(middleware.GinHeadersMiddleware())
+	router.Use(middleware.HeadersMiddleware())
 
 	router.LoadHTMLGlob("templates/*.*")
 
-	defineGinRoutes(router)
+	defineRoutes(router)
 	// router.Static("/templates", "./templates")
 	router.Run(port)
 }

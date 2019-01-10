@@ -11,35 +11,35 @@ import (
 
 // GetMedium возвращает медиа по id
 func (dummy) GetMedium(c *gin.Context) {
-	// json.NewEncoder(c.Writer).Encode(db.GetRowByID("medium", getGinIntID(c)))
-	c.JSON(200, db.GetRowByID("medium", getGinIntID(c)))
+	// json.NewEncoder(c.Writer).Encode(db.GetRowByID("medium", getIntID(c)))
+	c.JSON(200, db.GetRowByID("medium", getIntID(c)))
 }
 
 // GetPost возвращает пост по id
 func (dummy) GetPost(c *gin.Context) {
-	c.JSON(200, db.GetRowByID("post", getGinIntID(c)))
+	c.JSON(200, db.GetRowByID("post", getIntID(c)))
 }
 
 // GetBroadcast возвращает трансляцию по id
 func (dummy) GetBroadcast(c *gin.Context) {
-	c.JSON(200, db.GetRowByID("broadcast", getGinIntID(c)))
+	c.JSON(200, db.GetRowByID("broadcast", getIntID(c)))
 }
 
 // ************************************************************************
 
 // UpdateMedium обновляет медиа по id
 func (dummy) UpdateMedium(c *gin.Context) {
-	c.JSON(200, db.UpdateRowByID("medium", getGinIntID(c), getPayload(c.Request)))
+	c.JSON(200, db.UpdateRowByID("medium", getIntID(c), getPayload(c.Request)))
 }
 
 // UpdatePost обновляет пост по id
 func (dummy) UpdatePost(c *gin.Context) {
-	c.JSON(200, db.UpdateRowByID("post", getGinIntID(c), getPayload(c.Request)))
+	c.JSON(200, db.UpdateRowByID("post", getIntID(c), getPayload(c.Request)))
 }
 
 // UpdateBroadcast обновляет трансляцию по id
 func (dummy) UpdateBroadcast(c *gin.Context) {
-	c.JSON(200, db.UpdateRowByID("broadcast", getGinIntID(c), getPayload(c.Request)))
+	c.JSON(200, db.UpdateRowByID("broadcast", getIntID(c), getPayload(c.Request)))
 }
 
 // ************************************************************************
@@ -63,17 +63,17 @@ func (dummy) CreateBroadcast(c *gin.Context) {
 
 // DeleteMedium обновляет медиа по id
 func (dummy) DeleteMedium(c *gin.Context) {
-	c.JSON(200, db.DeleteRowByID("medium", getGinIntID(c)))
+	c.JSON(200, db.DeleteRowByID("medium", getIntID(c)))
 }
 
 // DeletePost обновляет пост по id
 func (dummy) DeletePost(c *gin.Context) {
-	c.JSON(200, db.DeleteRowByID("post", getGinIntID(c)))
+	c.JSON(200, db.DeleteRowByID("post", getIntID(c)))
 }
 
 // DeleteBroadcast обновляет трансляцию по id
 func (dummy) DeleteBroadcast(c *gin.Context) {
-	c.JSON(200, db.DeleteRowByID("broadcast", getGinIntID(c)))
+	c.JSON(200, db.DeleteRowByID("broadcast", getIntID(c)))
 }
 
 // ************************************************************************
@@ -93,22 +93,22 @@ func (dummy) GetRoutes(c *gin.Context) {
 
 // GetMedia возвращает все медиа поста по его id
 func (dummy) GetMedia(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_media($1) AS res;", getGinIntID(c))["res"])
+	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_media($1) AS res;", getIntID(c))["res"])
 }
 
 // GetAnswers возвращает ответы к посту по его id
 func (dummy) GetAnswers(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_answers($1) AS res;", getGinIntID(c))["res"])
+	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_answers($1) AS res;", getIntID(c))["res"])
 }
 
 // GetPosts возвращает посты трансляции по её id
 func (dummy) GetPosts(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_posts($1) AS res;", getGinIntID(c))["res"])
+	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))["res"])
 }
 
 // GetFullBroadcast возвращает трасляцию с постами по её id
 func (dummy) GetFullBroadcast(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", getGinIntID(c))["res"])
+	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", getIntID(c))["res"])
 }
 
 // GetFullBroadcast возвращает трасляцию с постами по её id

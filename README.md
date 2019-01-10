@@ -20,7 +20,7 @@ REST и GraphQL API для редактирования БД onlinebc
     docker exec -it psql-com psql -U root -1 -d onlinebc -f /dumps/onlinebc-dump.sql
 
 
-Postgre доступен на localhost:5432.
+Postgres доступен на localhost:5432.
 
 Аdminer - в браузере http://localhost:8080. 
 
@@ -55,6 +55,8 @@ Postgre доступен на localhost:5432.
 ## Полезные команды
 
 
+
+
 Запуск docker-compose
 
     docker-compose up -d
@@ -64,6 +66,15 @@ Postgre доступен на localhost:5432.
 Останов docker-compose
 
     docker-compose down
+
+
+
+Удаление базы данных после останова docker-compose
+
+    sudo rm -rf  pgdata
+
+
+
 
 Восстановление БД из дампа. Находится в `migrations/`.
 
@@ -75,6 +86,7 @@ Postgre доступен на localhost:5432.
   
     docker exec -it psql-com pg_dump --file /dumps/onlinebc-dump.sql --host "localhost" --port "5432" --username "root"  --verbose --format=p --create --clean --if-exists --dbname "onlinebc"
 
+
 Дамп схемы БД
 
     docker exec -it psql-com pg_dump --file /dumps/onlinebc-schema.sql --host "localhost" --port "5432" --username "root" --schema-only  --verbose --format=p --create --clean --if-exists --dbname "onlinebc"
@@ -83,6 +95,7 @@ Postgre доступен на localhost:5432.
 Дамп только данных таблиц.
 
     docker exec -it psql-com pg_dump --file /dumps/onlinebc-data.sql --host "localhost" --port "5432" --username "root"  --verbose --format=p --dbname "onlinebc" --column-inserts --data-only --table=broadcast --table=post --table=medium
+
 
 Можно добавить  -$(date +"-%Y-%m-%d--%H-%M-%S") к имени файла для приклеивания штампа даты-времени.
 

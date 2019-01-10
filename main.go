@@ -12,54 +12,59 @@ import (
 )
 
 func main() {
-	// считать конфиги
+
+	// считать конфиг и породить БД. Следующий конфиг перегружает предыдущий
+	db.ReadConfig("./configs/db-dev.yaml")
+
+	if os.Getenv("RUNNING_IN_DOCKER") == "Y" {
+		db.ReadConfig("./configs/db-docker.yaml")
+	}
+
 	db.ReadConfig("./configs/db.yaml")
-	controller.ReadConfig("./configs/routes.yaml")
+	createDatabaseWithData()
 
 	// считать параметры командной строки
-	serve, port := readCommandLineParams()
+	servePort, front, debug := readCommandLineParams()
 
-	// если есть параметр -serve, напечатать приветствие и запустить сервер
-	if serve {
-		printGreetings(port)
-		router.GinServe(":" + strconv.Itoa(port))
+	fmt.Println("params", servePort, front, debug)
+
+	// если serve > 0, напечатать приветствие и запустить сервер
+	if servePort > 0 {
+		printGreetings(servePort)
+
+		if front {
+			controller.ReadConfig("./configs/routes-front.yaml")
+		} else {
+			controller.ReadConfig("./configs/routes.yaml")
+		}
+
+		router.Serve(":"+strconv.Itoa(servePort), debug)
 	}
 }
 
-func readCommandLineParams() (bool, int) {
-	port := 1234
-	serve := true
+func readCommandLineParams() (serverPort int, front bool, debug bool) {
+	// serverPort = 0
+	flag.IntVar(&serverPort, "serve", 0, "Запустить приложение на порту с номером > 0 ")
 
-	flag.IntVar(&port, "port", 7777, "Номер порта")
-	flag.BoolVar(&serve, "serve", false, "Запустить приложение")
+	// front = false
+	flag.BoolVar(&front, "front", false, "Запустить приложение в режиме Фронтэнд. Рауты только на чтение.")
 
-	initdb := flag.Bool("initdb", false, "Инициализировать БД c тестовыми данными.")
-	createDbFunctions := flag.Bool("create-db-functions", false, "Породить функции БД из файла migrations/views-and-functions.sql")
-	printParams := flag.Bool("print-params", false, "Показать параметры приложения.")
+	// debug = false
+	flag.BoolVar(&debug, "debug", false, "Режим Debug. С отображением запросов в консоль.")
+
+	printParams := flag.Bool("showparams", false, "Показать параметры соединения с БД.")
 
 	flag.Parse()
 
-	if *initdb {
-		fmt.Println("инициализация БД...")
-		// db.GetExecResult(readTextFile("./migrations/onlinebc-dump.sql"))
-		// db.GetExecResult(readTextFile("./migrations/onlinebc-tables.sql"))
-		db.GetExecResult(readTextFile("./migrations/onlinebc-data.sql"))
-		os.Exit(0)
-	}
-	if *createDbFunctions {
-		fmt.Println("Порождение функций БД...")
-		db.GetExecResult(readTextFile("./migrations/views-and-functions.sql"))
-		os.Exit(0)
-	}
 	if *printParams {
 		db.PrintConfig()
 		os.Exit(0)
 	}
 
-	fmt.Println("\nПараметры запуска приложения **************************\n")
+	fmt.Println("\nПример запуска: go run main.go -serve 7777 \n")
 	flag.Usage()
 
-	return serve, port
+	return
 }
 
 func printGreetings(port int) {
@@ -69,4 +74,13 @@ func printGreetings(port int) {
 func readTextFile(fileName string) string {
 	txt, _ := ioutil.ReadFile(fileName)
 	return string(txt)
+}
+
+func createDatabaseWithData() {
+	fmt.Println("Порождение таблиц ...")
+	db.GetExecResult(readTextFile("./migrations/create-tables.sql"))
+	fmt.Println("Порождение функций ...")
+	db.GetExecResult(readTextFile("./migrations/create-views-and-functions.sql"))
+	fmt.Println("Наполнение тестовыми данными...")
+	db.GetExecResult(readTextFile("./migrations/add-data.sql"))
 }

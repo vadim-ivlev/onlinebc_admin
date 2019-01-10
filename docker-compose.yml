@@ -42,3 +42,21 @@ services:
       - db
 
 
+  runner:
+    image: debian:7.11-slim
+    container_name: runner
+    network_mode: bridge
+    environment:
+      RUNNING_IN_DOCKER: Y
+    restart: always
+    command: "sleep 36000"
+    ports:
+      - 7700:7700
+    volumes:
+      - ".:/app"
+    depends_on:
+      - db
+    links:
+      - db
+
+

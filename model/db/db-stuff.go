@@ -12,6 +12,8 @@ import (
 // Вспомогательные функции /////////////////////////////////////////////////////
 
 type connectionParams struct {
+	Host     string
+	Port     string
 	User     string
 	Password string
 	Dbname   string
@@ -24,17 +26,21 @@ var connectStr string
 // ReadConfig reads YAML file
 func ReadConfig(fileName string) {
 	yamlFile, err := ioutil.ReadFile(fileName)
-	panicIf(err)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
 	err = yaml.Unmarshal(yamlFile, &params)
 	printIf(err)
-	connectStr = fmt.Sprintf("user=%s password=%s dbname=%s sslmode=%s", params.User, params.Password, params.Dbname, params.Sslmode)
+	connectStr = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", params.Host, params.Port, params.User, params.Password, params.Dbname, params.Sslmode)
 }
 
 // PrintConfig prints DB connection parameters.
 func PrintConfig() {
 	s, _ := yaml.Marshal(params)
 	fmt.Printf("\nDB connection parameters:\n%s\n", s)
-	fmt.Printf("\nDB connection string: %s\n", connectStr)
+	fmt.Printf("DB connection string: %s\n", connectStr)
 }
 
 func panicIf(err error) {

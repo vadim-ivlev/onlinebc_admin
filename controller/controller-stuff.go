@@ -41,13 +41,13 @@ var Routes []Route
 
 // FUNCTIONS *******************************************************
 
-func getGinIntID(c *gin.Context) int {
+func getIntID(c *gin.Context) int {
 	id, _ := strconv.Atoi(c.Param("id"))
 	return id
 }
 
-// GetGinFunctionByName возвращает функцию по имени
-func GetGinFunctionByName(funcName string) func(*gin.Context) {
+// GetFunctionByName возвращает функцию по имени
+func GetFunctionByName(funcName string) func(*gin.Context) {
 	m := reflect.ValueOf(&dummy{}).MethodByName(funcName)
 	mCallable := m.Interface().(func(*gin.Context))
 	return mCallable
