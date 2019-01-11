@@ -14,19 +14,7 @@ import (
 
 func main() {
 
-	// считать конфиги Postgres и Redis. Следующий конфиг перегружает предыдущий
-
-	if os.Getenv("RUNNING_IN_DOCKER") == "Y" {
-		db.ReadConfig("./configs/db-docker.yaml")
-		redis.ReadConfig("./configs/redis-docker.yaml")
-	} else {
-		db.ReadConfig("./configs/db-dev.yaml")
-		redis.ReadConfig("./configs/redis-dev.yaml")
-	}
-
-	db.ReadConfig("./configs/db.yaml")
-	redis.ReadConfig("./configs/redis.yaml")
-
+	readConfigs()
 	createDatabaseWithData()
 
 	// считать параметры командной строки
@@ -45,6 +33,21 @@ func main() {
 
 		router.Serve(":"+strconv.Itoa(servePort), debug)
 	}
+}
+
+// readConfigs считывает конфиги Postgres и Redis.
+// Следующий конфиг перегружает предыдущий.
+func readConfigs() {
+	if os.Getenv("RUNNING_IN_DOCKER") == "Y" {
+		db.ReadConfig("./configs/db-docker.yaml")
+		redis.ReadConfig("./configs/redis-docker.yaml")
+	} else {
+		db.ReadConfig("./configs/db-dev.yaml")
+		redis.ReadConfig("./configs/redis-dev.yaml")
+	}
+
+	db.ReadConfig("./configs/db.yaml")
+	redis.ReadConfig("./configs/redis.yaml")
 }
 
 func readCommandLineParams() (serverPort int, front bool, debug bool) {

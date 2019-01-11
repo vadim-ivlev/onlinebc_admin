@@ -9,76 +9,29 @@ import (
 
 // ************************************************************************
 
-// GetMedium возвращает медиа по id
-func (dummy) GetMedium(c *gin.Context) {
-	// json.NewEncoder(c.Writer).Encode(db.GetRowByID("medium", getIntID(c)))
-	c.JSON(200, db.GetRowByID("medium", getIntID(c)))
+// GetEntity возвращает сущность по id
+func (dummy) GetEntity(c *gin.Context) {
+	c.JSON(200, db.GetRowByID(c.Param("entity"), getIntID(c)))
 }
 
-// GetPost возвращает пост по id
-func (dummy) GetPost(c *gin.Context) {
-	c.JSON(200, db.GetRowByID("post", getIntID(c)))
+// UpdateEntity обновляет сущность по id
+func (dummy) UpdateEntity(c *gin.Context) {
+	c.JSON(200, db.UpdateRowByID(c.Param("entity"), getIntID(c), getPayload(c.Request)))
 }
 
-// GetBroadcast возвращает трансляцию по id
-func (dummy) GetBroadcast(c *gin.Context) {
-	c.JSON(200, db.GetRowByID("broadcast", getIntID(c)))
+// CreateEntity Создать сущность
+func (dummy) CreateEntity(c *gin.Context) {
+	c.JSON(200, db.CreateRow(c.Param("entity"), getPayload(c.Request)))
 }
 
-// ************************************************************************
-
-// UpdateMedium обновляет медиа по id
-func (dummy) UpdateMedium(c *gin.Context) {
-	c.JSON(200, db.UpdateRowByID("medium", getIntID(c), getPayload(c.Request)))
+// DeleteEntity обновляет сущность по id
+func (dummy) DeleteEntity(c *gin.Context) {
+	c.JSON(200, db.DeleteRowByID(c.Param("entity"), getIntID(c)))
 }
 
-// UpdatePost обновляет пост по id
-func (dummy) UpdatePost(c *gin.Context) {
-	c.JSON(200, db.UpdateRowByID("post", getIntID(c), getPayload(c.Request)))
-}
+// Общие методы************************************************************************
 
-// UpdateBroadcast обновляет трансляцию по id
-func (dummy) UpdateBroadcast(c *gin.Context) {
-	c.JSON(200, db.UpdateRowByID("broadcast", getIntID(c), getPayload(c.Request)))
-}
-
-// ************************************************************************
-
-// CreateMedium Создать медиа поста с идентификатором id
-func (dummy) CreateMedium(c *gin.Context) {
-	c.JSON(200, db.CreateRow("medium", getPayload(c.Request)))
-}
-
-// CreatePost Создать пост трансляции с идентификатором id
-func (dummy) CreatePost(c *gin.Context) {
-	c.JSON(200, db.CreateRow("post", getPayload(c.Request)))
-}
-
-// CreateBroadcast Создать  трансляцию
-func (dummy) CreateBroadcast(c *gin.Context) {
-	c.JSON(200, db.CreateRow("broadcast", getPayload(c.Request)))
-}
-
-// ************************************************************************
-
-// DeleteMedium обновляет медиа по id
-func (dummy) DeleteMedium(c *gin.Context) {
-	c.JSON(200, db.DeleteRowByID("medium", getIntID(c)))
-}
-
-// DeletePost обновляет пост по id
-func (dummy) DeletePost(c *gin.Context) {
-	c.JSON(200, db.DeleteRowByID("post", getIntID(c)))
-}
-
-// DeleteBroadcast обновляет трансляцию по id
-func (dummy) DeleteBroadcast(c *gin.Context) {
-	c.JSON(200, db.DeleteRowByID("broadcast", getIntID(c)))
-}
-
-// ************************************************************************
-
-// LandingPage : To test API in browser.
+// LandingPage тестовая страница API в браузере.
 func (dummy) LandingPage(c *gin.Context) {
 	c.Header("Content-Type", "text/html; charset=utf-8")
 	c.HTML(200, "index.html", Routes)

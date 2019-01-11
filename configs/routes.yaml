@@ -1,9 +1,8 @@
-# Бэкэнд ----------------------------------------------------
-
 
 # GraphQL --------------------------------------------------
 
-- comment   : GraphQL типы
+- comment   : |-
+    GraphQL. Получение информации о типах GraphQL.
   methods   :
   - POST
   - GET    
@@ -54,25 +53,146 @@
 
 
 
+- comment   : GraphQL. Получить записи по идентификаторам.
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+        broadcast (id: 354) { id  title  time_created link_article }
+        post(id:23952){id id_parent text author}
+        medium(id:5330){id uri thumb source}
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
 
-# REST ===================================================
+
+- comment   : GraphQL create
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      mutation {
+        createBroadcast(
+          title:"new broadcast1", 
+          time_created: 123, 
+          link_article:"link2"
+        ) 
+        {
+          id title 
+          time_created 
+          time_begin 
+          link_article
+        }
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+- comment   : GraphQL update
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      mutation {
+        updateBroadcast(
+          id: 1020,
+          title:"updated broadcast 22", 
+          time_created: 124, 
+          link_article:"updated link2"
+        ) 
+        {
+          id title 
+          time_created 
+          time_begin 
+          link_article
+        }
+      }  
+      
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+- comment   : GraphQL delete
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      mutation {
+        deleteBroadcast(
+          id: 1020
+        ) 
+        {
+          id title 
+          time_created 
+          time_begin 
+          link_article
+        }
+      }  
+      
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+
+# REST ====================================================================================================================
+# REST ====================================================================================================================
+# REST ====================================================================================================================
+# REST ====================================================================================================================
+
+
 #  medium ---------------------------------------------------
 
 
 - comment   : Получить Медиа с идентификатором id
   methods   :
   - GET
-  path      : /get/medium/:id
+  path      : /get/:entity/:id
   example   : /get/medium/5330
-  controller: GetMedium
+  controller: GetEntity
 
 - comment: Создать медиа поста с идентификатором post_id
   methods: 
-  # - GET
   - POST
-  path: /create/medium/
+  - GET
+  path: /create/:entity/
   example: /create/medium/
-  controller: CreateMedium
+  controller: CreateEntity
   params    :
   - comment: идентификатор поста
     name   : post_id
@@ -96,11 +216,11 @@
 
 - comment   : Редактировать Медиа с идентификатором id
   methods   : 
-  - GET
   - PUT
-  path      : /update/medium/:id
+  - GET
+  path      : /update/:entity/:id
   example   : /update/medium/5330
-  controller: UpdateMedium
+  controller: UpdateEntity
   params    :
   - comment: Идентификатор поста
     name   : post_id
@@ -123,11 +243,11 @@
 
 - comment   : Удалить Медиа с идентификатором id
   methods   : 
-  - GET
   - DELETE
-  path      : /delete/medium/:id
+  - GET
+  path      : /delete/:entity/:id
   example   : /delete/medium/5389
-  controller: DeleteMedium
+  controller: DeleteEntity
 
 
 
@@ -137,18 +257,18 @@
 - comment   : Получить пост с идентификатором id
   methods   : 
   - GET
-  path      : /get/post/:id
+  path      : /get/:entity/:id
   example   : /get/post/23932
-  controller: GetPost
+  controller: GetEntity
 
 
 - comment: Создать пост трансляции с идентификатором id
   methods:
-  - GET
   - POST
-  path: /create/post/
+  - GET
+  path: /create/:entity/
   example: /create/post/
-  controller: CreatePost
+  controller: CreateEntity
   params    :
   - comment : Идентификатор поста если это ответ
     name    : id_parent
@@ -192,11 +312,11 @@
 
 - comment   : Редактировать Пост с идентификатором id
   methods   : 
-  - GET
   - PUT
-  path      : /update/post/:id
+  - GET
+  path      : /update/:entity/:id
   example   : /update/post/30001
-  controller: UpdatePost
+  controller: UpdateEntity
   params    :
   - comment : Идентификатор поста если это ответ
     name    : id_parent
@@ -240,11 +360,11 @@
 
 - comment   : Удалить Пост с идентификаторомid
   methods   :
-  - GET
   - DELETE
-  path      : /delete/post/:id
+  - GET
+  path      : /delete/:entity/:id
   example   : /delete/post/30001
-  controller: DeletePost
+  controller: DeleteEntity
 
 
 
@@ -254,18 +374,18 @@
 - comment   : Получить трансляцию с идентификатором id
   methods   : 
   - GET
-  path      : /get/broadcast/:id
+  path      : /get/:entity/:id
   example   : /get/broadcast/354
-  controller: GetBroadcast
+  controller: GetEntity
 
 
 - comment: Создать трансляцию
   methods: 
-  - GET
   - POST
-  path: /create/broadcast/
+  - GET
+  path: /create/:entity/
   example: /create/broadcast/
-  controller: CreateBroadcast
+  controller: CreateEntity
   params    :
   - comment : Название трансляции
     name    : title
@@ -336,11 +456,11 @@
  
 - comment: Редактировать трансляцию с идентификатором id
   methods:
-  - GET
   - PUT
-  path: /update/broadcast/:id
+  - GET
+  path: /update/:entity/:id
   example: /update/broadcast/354
-  controller: UpdateBroadcast
+  controller: UpdateEntity
   params    :
   - comment : Название трансляции
     name    : title
@@ -412,25 +532,45 @@
  
 - comment: Удалить трансляцию с идентификатором id
   methods: 
-  - GET
   - DELETE
-  path: /delete/broadcast/:id
+  - GET
+  path: /delete/:entity/:id
   example: /delete/broadcast/777
-  controller: DeleteBroadcast
+  controller: DeleteEntity
+
+
+
+# COMMON ====================================================================================================================
+# COMMON ====================================================================================================================
+# COMMON ====================================================================================================================
+# COMMON ====================================================================================================================
+
+
+
 
 # Общие ---------------------------------------------------
 
 - comment: Стартовая страница
-  methods: [GET, HEAD]
+  methods: [GET]
   path: /
   example: /
   controller: LandingPage
 
 - comment: JSON  маршрутов.  Документация API.
-  methods: [GET, HEAD]
+  methods: [GET]
   path: /routes
   example: /routes
   controller: GetRoutes
+
+
+
+
+
+# FRONTEND ====================================================================================================================
+# FRONTEND ====================================================================================================================
+# FRONTEND ====================================================================================================================
+# FRONTEND ====================================================================================================================
+
 
 
 # Фронтэнд ---------------------------------------------------  

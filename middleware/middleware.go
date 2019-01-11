@@ -12,8 +12,6 @@ import (
 // HeadersMiddleware добавляет HTTP заголовки к ответу сервера
 func HeadersMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// fmt.Println("**************HEADER****************")
-		// c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Content-Type", "application/json; charset=utf-8")
 		c.Next()
 	}
@@ -29,6 +27,7 @@ func RedisMiddleware() gin.HandlerFunc {
 			if err == nil {
 				c.Header("Redis", "********** FROM REDIS CACHE ************")
 				c.String(200, value)
+				// break the chain
 				c.Abort()
 				return
 			}
@@ -52,6 +51,8 @@ func RedisMiddleware() gin.HandlerFunc {
 	}
 }
 
+// bufferedWriter используется вместо ResposeWriter чтобы
+// постфактум читать что было записано в поток. Переменная Buffer служит для этой цели.
 type bufferedWriter struct {
 	gin.ResponseWriter
 	out    *bufio.Writer
