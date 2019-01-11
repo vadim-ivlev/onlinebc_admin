@@ -55,130 +55,6 @@
 
 
 
-
-
-
-
-# - comment   : GraphQL запрос
-#   methods   :
-#   - POST
-#   - GET    
-#   path      : /graphql
-#   example   : /graphql
-#   controller: GraphQL
-#   params    :
-#   - comment: запрос
-#     name   : query
-#     value  : '{query}'
-#     test   : |- 
-#       query {
-#         broadcast (id: 354) { id  title  time_created link_article }
-#         post(id:23952){id id_parent text author}
-#         medium(id:5330){id uri thumb source}
-#       }
-#   - comment: переменные
-#     name   : variables
-#     value  : '{variables}'
-#     test   : '{}' 
-
-
-# - comment   : GraphQL create
-#   methods   :
-#   - POST
-#   - GET    
-#   path      : /graphql
-#   example   : /graphql
-#   controller: GraphQL
-#   params    :
-#   - comment: запрос
-#     name   : query
-#     value  : '{query}'
-#     test   : |- 
-#       mutation {
-#         createBroadcast(
-#           title:"new broadcast1", 
-#           time_created: 123, 
-#           link_article:"link2"
-#         ) 
-#         {
-#           id title 
-#           time_created 
-#           time_begin 
-#           link_article
-#         }
-#       }
-#   - comment: переменные
-#     name   : variables
-#     value  : '{variables}'
-#     test   : '{}' 
-
-# - comment   : GraphQL update
-#   methods   :
-#   - POST
-#   - GET    
-#   path      : /graphql
-#   example   : /graphql
-#   controller: GraphQL
-#   params    :
-#   - comment: запрос
-#     name   : query
-#     value  : '{query}'
-#     test   : |- 
-#       mutation {
-#         updateBroadcast(
-#           id: 1020,
-#           title:"updated broadcast 22", 
-#           time_created: 124, 
-#           link_article:"updated link2"
-#         ) 
-#         {
-#           id title 
-#           time_created 
-#           time_begin 
-#           link_article
-#         }
-#       }  
-      
-#   - comment: переменные
-#     name   : variables
-#     value  : '{variables}'
-#     test   : '{}' 
-
-
-# - comment   : GraphQL delete
-#   methods   :
-#   - POST
-#   - GET    
-#   path      : /graphql
-#   example   : /graphql
-#   controller: GraphQL
-#   params    :
-#   - comment: запрос
-#     name   : query
-#     value  : '{query}'
-#     test   : |- 
-#       mutation {
-#         deleteBroadcast(
-#           id: 1020
-#         ) 
-#         {
-#           id title 
-#           time_created 
-#           time_begin 
-#           link_article
-#         }
-#       }  
-      
-#   - comment: переменные
-#     name   : variables
-#     value  : '{variables}'
-#     test   : '{}' 
-
-
-
-
-
-
 # REST ===================================================
 #  medium ---------------------------------------------------
 
@@ -186,16 +62,16 @@
 - comment   : Получить Медиа с идентификатором id
   methods   :
   - GET
-  path      : /medium/:id
-  example   : /medium/5330
+  path      : /get/medium/:id
+  example   : /get/medium/5330
   controller: GetMedium
 
 - comment: Создать медиа поста с идентификатором post_id
   methods: 
   # - GET
   - POST
-  path: /create-medium/
-  example: /create-medium/
+  path: /create/medium/
+  example: /create/medium/
   controller: CreateMedium
   params    :
   - comment: идентификатор поста
@@ -222,8 +98,8 @@
   methods   : 
   - GET
   - PUT
-  path      : /update-medium/:id
-  example   : /update-medium/5330
+  path      : /update/medium/:id
+  example   : /update/medium/5330
   controller: UpdateMedium
   params    :
   - comment: Идентификатор поста
@@ -249,8 +125,8 @@
   methods   : 
   - GET
   - DELETE
-  path      : /delete-medium/:id
-  example   : /delete-medium/5389
+  path      : /delete/medium/:id
+  example   : /delete/medium/5389
   controller: DeleteMedium
 
 
@@ -261,8 +137,8 @@
 - comment   : Получить пост с идентификатором id
   methods   : 
   - GET
-  path      : /post/:id
-  example   : /post/23932
+  path      : /get/post/:id
+  example   : /get/post/23932
   controller: GetPost
 
 
@@ -270,8 +146,8 @@
   methods:
   - GET
   - POST
-  path: /create-post/
-  example: /create-post/
+  path: /create/post/
+  example: /create/post/
   controller: CreatePost
   params    :
   - comment : Идентификатор поста если это ответ
@@ -318,8 +194,8 @@
   methods   : 
   - GET
   - PUT
-  path      : /update-post/:id
-  example   : /update-post/30001
+  path      : /update/post/:id
+  example   : /update/post/30001
   controller: UpdatePost
   params    :
   - comment : Идентификатор поста если это ответ
@@ -366,8 +242,8 @@
   methods   :
   - GET
   - DELETE
-  path      : /delete-post/:id
-  example   : /delete-post/30001
+  path      : /delete/post/:id
+  example   : /delete/post/30001
   controller: DeletePost
 
 
@@ -378,8 +254,8 @@
 - comment   : Получить трансляцию с идентификатором id
   methods   : 
   - GET
-  path      : /broadcast/:id
-  example   : /broadcast/354
+  path      : /get/broadcast/:id
+  example   : /get/broadcast/354
   controller: GetBroadcast
 
 
@@ -387,8 +263,8 @@
   methods: 
   - GET
   - POST
-  path: /create-broadcast/
-  example: /create-broadcast/
+  path: /create/broadcast/
+  example: /create/broadcast/
   controller: CreateBroadcast
   params    :
   - comment : Название трансляции
@@ -462,8 +338,8 @@
   methods:
   - GET
   - PUT
-  path: /update-broadcast/:id
-  example: /update-broadcast/354
+  path: /update/broadcast/:id
+  example: /update/broadcast/354
   controller: UpdateBroadcast
   params    :
   - comment : Название трансляции
@@ -538,8 +414,8 @@
   methods: 
   - GET
   - DELETE
-  path: /delete-broadcast/:id
-  example: /delete-broadcast/777
+  path: /delete/broadcast/:id
+  example: /delete/broadcast/777
   controller: DeleteBroadcast
 
 # Общие ---------------------------------------------------
@@ -561,37 +437,37 @@
 
 
 - comment: Список трансляций
-  methods: [GET, HEAD]
-  path: /broadcasts
-  example: /broadcasts
+  methods: [GET]
+  path: /api/broadcasts
+  example: /api/broadcasts
   controller: GetBroadcasts
 
 - comment: Трасляция с идентификатором id и ее постами
-  methods: [GET, HEAD]
-  path: /full-broadcast/:id
-  example: /full-broadcast/354
+  methods: [GET]
+  path: /api/full-broadcast/:id
+  example: /api/full-broadcast/354
   controller: GetFullBroadcast
 
 - comment: Посты трансляции с идентификатором id
-  methods: [GET, HEAD]
-  path: /posts/:id
-  example: /posts/354
+  methods: [GET]
+  path: /api/posts/:id
+  example: /api/posts/354
   controller: GetPosts
 
 - comment: Ответы к посту с идентификатором id
-  methods: [GET, HEAD]
-  path: /answers/:id
-  example: /answers/23932
+  methods: [GET]
+  path: /api/answers/:id
+  example: /api/answers/23932
   controller: GetAnswers
 
 - comment: Медиа для поста с идентификатором id
-  methods: [GET, HEAD]
-  path: /media/:id
-  example: /media/23932
+  methods: [GET]
+  path: /api/media/:id
+  example: /api/media/23932
   controller: GetMedia
 
 - comment: Трасляция с идентификатором id и ее постами. Legacy
-  methods: [GET, HEAD]
+  methods: [GET]
   path: /api/online.php
   example: /api/online.php
   controller: GetFullBroadcastLegacy

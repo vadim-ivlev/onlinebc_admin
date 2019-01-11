@@ -24,11 +24,13 @@ func Serve(port string, debug bool) {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	router := gin.Default()
-	router.Use(middleware.HeadersMiddleware())
-
+	router.StaticFile("/favicon.ico", "./templates/favicon.ico")
 	router.LoadHTMLGlob("templates/*.*")
 
+	//Middleware
+	router.Use(middleware.HeadersMiddleware())
+	router.Use(middleware.RedisMiddleware())
+
 	defineRoutes(router)
-	// router.Static("/templates", "./templates")
 	router.Run(port)
 }

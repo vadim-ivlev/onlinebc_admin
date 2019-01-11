@@ -18,37 +18,37 @@
 
 
 - comment: Список трансляций
-  methods: [GET, HEAD]
-  path: /broadcasts
-  example: /broadcasts
+  methods: [GET]
+  path: /api/broadcasts
+  example: /api/broadcasts
   controller: GetBroadcasts
 
 - comment: Трасляция с идентификатором id и ее постами
-  methods: [GET, HEAD]
-  path: /full-broadcast/:id
-  example: /full-broadcast/354
+  methods: [GET]
+  path: /api/full-broadcast/:id
+  example: /api/full-broadcast/354
   controller: GetFullBroadcast
 
 - comment: Посты трансляции с идентификатором id
-  methods: [GET, HEAD]
-  path: /posts/:id
-  example: /posts/354
+  methods: [GET]
+  path: /api/posts/:id
+  example: /api/posts/354
   controller: GetPosts
 
 - comment: Ответы к посту с идентификатором id
-  methods: [GET, HEAD]
-  path: /answers/:id
-  example: /answers/23932
+  methods: [GET]
+  path: /api/answers/:id
+  example: /api/answers/23932
   controller: GetAnswers
 
 - comment: Медиа для поста с идентификатором id
-  methods: [GET, HEAD]
-  path: /media/:id
-  example: /media/23932
+  methods: [GET]
+  path: /api/media/:id
+  example: /api/media/23932
   controller: GetMedia
 
 - comment: Трасляция с идентификатором id и ее постами. Legacy
-  methods: [GET, HEAD]
+  methods: [GET]
   path: /api/online.php
   example: /api/online.php
   controller: GetFullBroadcastLegacy

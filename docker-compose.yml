@@ -43,7 +43,8 @@ services:
 
 
   runner:
-    image: debian:7.11-slim
+    # image: debian:7.11-slim
+    image: alpine
     container_name: runner
     network_mode: bridge
     environment:

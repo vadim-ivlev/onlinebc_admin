@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"onlinebc_admin/controller"
 	"onlinebc_admin/model/db"
+	"onlinebc_admin/model/redis"
 	"onlinebc_admin/router"
 	"os"
 	"strconv"
@@ -13,25 +14,29 @@ import (
 
 func main() {
 
-	// считать конфиг и породить БД. Следующий конфиг перегружает предыдущий
-	db.ReadConfig("./configs/db-dev.yaml")
+	// считать конфиги Postgres и Redis. Следующий конфиг перегружает предыдущий
 
 	if os.Getenv("RUNNING_IN_DOCKER") == "Y" {
 		db.ReadConfig("./configs/db-docker.yaml")
+		redis.ReadConfig("./configs/redis-docker.yaml")
+	} else {
+		db.ReadConfig("./configs/db-dev.yaml")
+		redis.ReadConfig("./configs/redis-dev.yaml")
 	}
 
 	db.ReadConfig("./configs/db.yaml")
+	redis.ReadConfig("./configs/redis.yaml")
+
 	createDatabaseWithData()
 
 	// считать параметры командной строки
 	servePort, front, debug := readCommandLineParams()
 
-	fmt.Println("params", servePort, front, debug)
-
 	// если serve > 0, напечатать приветствие и запустить сервер
 	if servePort > 0 {
 		printGreetings(servePort)
 
+		// Если запущен во Фронтэнд моде загрузить соответствующие руты.
 		if front {
 			controller.ReadConfig("./configs/routes-front.yaml")
 		} else {
