@@ -1,2 +1,2 @@
-connection string:      127.0.0.1:6389
+connection string:      redis:6379
 time to live:           30    

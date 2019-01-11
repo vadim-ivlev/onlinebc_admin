@@ -5,7 +5,7 @@ services:
   db:
     image: postgres
     container_name: psql-com
-    network_mode: bridge
+    # network_mode: bridge
     restart: always
     ports:
       - 5432:5432
@@ -23,7 +23,7 @@ services:
   redis:
       image: redis
       container_name: pg-redis-com
-      network_mode: bridge
+      # network_mode: bridge
       ports:
           - "6389:6379"
       restart: always
@@ -32,7 +32,7 @@ services:
   adminer:
     image: adminer
     container_name: adminer-com
-    network_mode: bridge
+    # network_mode: bridge
     restart: always
     ports:
       - 8080:8080
@@ -43,21 +43,22 @@ services:
 
 
   runner:
-    # image: debian:7.11-slim
-    image: alpine
+    image: debian:7.11-slim
     container_name: runner
-    network_mode: bridge
+    # network_mode: bridge
     environment:
       RUNNING_IN_DOCKER: Y
     restart: always
-    command: "sleep 36000"
+    command: bash -c "cd /app && ./onlinebc -serve 7700 -front"
     ports:
       - 7700:7700
     volumes:
       - ".:/app"
     depends_on:
       - db
+      - redis
     links:
       - db
+      - redis
 
 

@@ -11,7 +11,7 @@ import (
 func Get(key string) (string, error) {
 	conn, err := redis.Dial("tcp", params.ConnectStr)
 	if err != nil {
-		log.Print("Get No connection")
+		log.Print("Get No connection", params.ConnectStr)
 		return "", err
 	}
 	defer conn.Close()
@@ -28,7 +28,7 @@ func Get(key string) (string, error) {
 func Set(key string, value string) error {
 	conn, err := redis.Dial("tcp", params.ConnectStr)
 	if err != nil {
-		log.Print("Set No connection")
+		log.Print("Set No connection", params.ConnectStr)
 		return err
 	}
 	defer conn.Close()
