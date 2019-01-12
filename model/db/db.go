@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"os"
 	"strings"
 
 	//blank import
@@ -10,6 +11,22 @@ import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
+
+// ExitIfNoDB выходим из программы если нет соединения с БД.
+func ExitIfNoDB() {
+	conn, err := sql.Open("postgres", connectStr)
+	if err != nil {
+		fmt.Println("ExitIfNoDB open: ", err.Error())
+		os.Exit(7777)
+	}
+	defer conn.Close()
+	err1 := conn.Ping()
+	// _, err1 := conn.Exec("select 1;")
+	if err1 != nil {
+		fmt.Println("ExitIfNoDB exec: ", err1.Error())
+		os.Exit(7778)
+	}
+}
 
 // QueryRowMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
 // Применяется для исполнения запросов , INSERT, SELECT.

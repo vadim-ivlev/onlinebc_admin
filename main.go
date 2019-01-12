@@ -13,8 +13,8 @@ import (
 )
 
 func main() {
-
 	readConfigs()
+	db.ExitIfNoDB()
 	createDatabaseWithData()
 
 	// считать параметры командной строки

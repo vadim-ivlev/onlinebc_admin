@@ -3,7 +3,7 @@
 rm -rf build
 mkdir build
 
-go build -o ./build/onlinebc
+env GOOS=linux GOARCH=arm64 go build -o ./build/onlinebc main.go
 
 
 cp -rf configs ./build/
