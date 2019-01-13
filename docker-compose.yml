@@ -29,36 +29,36 @@ services:
       restart: always
 
 
-  adminer:
-    image: adminer
-    container_name: adminer-com
-    # network_mode: bridge
-    restart: always
-    ports:
-      - 8080:8080
-    depends_on:
-      - db
-    links:
-      - db
+  # adminer:
+  #   image: adminer
+  #   container_name: adminer-com
+  #   # network_mode: bridge
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - db
+  #   links:
+  #     - db
 
 
-  runner:
-    image: debian:7.11-slim
-    container_name: runner
-    # network_mode: bridge
-    environment:
-      RUNNING_IN_DOCKER: Y
-    restart: on-failure:10
-    command: bash -c "sleep 10 && cd /app && ./onlinebc -serve 7700 -front"
-    ports:
-      - 7700:7700
-    volumes:
-      - ".:/app"
-    depends_on:
-      - db
-      - redis
-    links:
-      - db
-      - redis
+  # runner:
+  #   image: debian:7.11-slim
+  #   container_name: runner
+  #   # network_mode: bridge
+  #   environment:
+  #     RUNNING_IN_DOCKER: Y
+  #   restart: on-failure:10
+  #   command: bash -c "sleep 10 && cd /app && ./onlinebc -serve 7700 -front"
+  #   ports:
+  #     - 7700:7700
+  #   volumes:
+  #     - ".:/app"
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   links:
+  #     - db
+  #     - redis
 
 
