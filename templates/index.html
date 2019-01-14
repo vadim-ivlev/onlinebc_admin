@@ -23,15 +23,15 @@
 
 <body>
     <h1><span class="rgru"><span>RG.</span><span class="or">RU</span></span></h1>
-    <h5>API Онлайн трансляций для бэкэнда</h4>
-        <h4>GraphQL</h4>
+    <h5>Внутренний API Онлайн трансляций </h4>
+        <h4>GraphQL API</h4>
         <ol>
             {{range $i, $r := .}}
 
 
-            {{if eq .Path "/medium/{id}"}}<h4>REST</h4>{{end}}
-            {{if eq .Path "/"}}<h4>Общие</h4>{{end}}
-            {{if eq .Path "/broadcasts"}}<h4>API для фронтэнда</h4>{{end}}
+            {{if eq .Example "/get/medium/5330"}}<h4>REST API</h4>{{end}}
+            {{if eq .Path "/"}}<h4>Общий API</h4>{{end}}
+            {{if eq .Path "/api/broadcasts"}}<h4>Публичный API </h4>{{end}}
 
 
             <li>
