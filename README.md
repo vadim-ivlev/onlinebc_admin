@@ -1,28 +1,59 @@
-# Онлайн трансляции - админка / onlinebc_admin
+# Онлайн трансляции  (onlinebc_admin)
 
-REST и GraphQL API для редактирования БД onlinebc
+ GraphQL и REST API онлайн трансляций.
 
 
-## Установка
 
-Клонировать проект в  `~/go/src` и перейти в `onlinebc_admin/`
+Требования к ПО
+--------------
 
-    git clone git@git.rgwork.ru:web/onlinebc_adin.git ~/go/src
+На компьютере разработчика должны быть установлены Docker, Docker-compose, Go.
+
+
+
+Загрузка файлов проекта
+----------------------
+    git clone git@git.rgwork.ru:web/onlinebc_admin.git ~/go/src
     cd ~/go/src/onlinebc_admin
 
-## Запуск БД 
-Запустить БД
-    
+
+
+Запуск Postgres и Redis
+-----------------------    
     docker-compose up -d    
 
-Восстановить тестовую БД из дампа
 
-    docker exec -it psql-com psql -U root -1 -d onlinebc -f /dumps/onlinebc-dump.sql
 
+Запуск приложения
+-----------------
+    go run main.go -serve 7777
+
+Для просморта списка возможных параметров запустите программу без параметров.
+
+
+
+Сборка для фронтэнд разработчиков и production
+----------------------------------------------
+
+    /build.sh
+
+Скрипт `build.sh` генерирует исполняемые файлы windows (`onlinebc.exe`) и Linux (`onlinebc`) в директорию `build/` вместе с настроечными файлами и `README.md` для фронтэнд разработчиков. 
+
+Из `build/`файлы копируются в директорию `../onlinebc/`, расположенную в том же каталоге что и `onlinebc_admin`, которая содержит клон репозитория <https://git.rgwork.ru/web/onlinebc>. Таким образом обновляются файлы проекта onlinebc для использования фронтэнд разработчиками и для размещения на продакшн сервере. 
+
+
+
+
+
+-------------------------------------------------------
+
+
+Просмотр состояния базы данных
+------------------------------
 
 Postgres доступен на localhost:5432.
 
-Аdminer - в браузере http://localhost:8080. 
+Если блок adminer разкомментирован в `docker-compose.yml`, то в браузере откройте <http://localhost:8080>. 
 
 Параметры доступа:
 - System: PostgreSQL,
@@ -35,56 +66,34 @@ Postgres доступен на localhost:5432.
 
 
 
-## Запуск приложения
-
-Если установлен go
-
-    go run main.go
-
-Если go не установлен, то под Linux
-
-    ./onlinebc
-
-Программа выдаст список возможных параметров запуска. Для запуска web приложения запустите с ключом `-serve`
-    
-    go run main.go -serve
 
 
+
+Другие команды
 --------------------
 
-## Полезные команды
 
-
-
-
-Запуск docker-compose
-
-    docker-compose up -d
-
-
-
-Останов docker-compose
-
+Останов базы данных
+    
     docker-compose down
 
 
 
-Удаление базы данных после останова docker-compose
+Удаление файлов базы данных после останова docker-compose
 
     sudo rm -rf  pgdata
 
 
 
+Дамп базы данных в файл в директорию `migrations/`.
+  
+    docker exec -it psql-com pg_dump --file /dumps/onlinebc-dump.sql --host "localhost" --port "5432" --username "root"  --verbose --format=p --create --clean --if-exists --dbname "onlinebc"
 
-Восстановление БД из дампа. Находится в `migrations/`.
+
+Восстановление БД из дампа в `migrations/`.
 
     docker exec -it psql-com psql -U root -1 -d onlinebc -f /dumps/onlinebc-dump.sql
 
-
-
-Дамп БД в файл в `migrations/`.
-  
-    docker exec -it psql-com pg_dump --file /dumps/onlinebc-dump.sql --host "localhost" --port "5432" --username "root"  --verbose --format=p --create --clean --if-exists --dbname "onlinebc"
 
 
 Дамп схемы БД
@@ -100,14 +109,32 @@ Postgres доступен на localhost:5432.
 Можно добавить  -$(date +"-%Y-%m-%d--%H-%M-%S") к имени файла для приклеивания штампа даты-времени.
 
 
+
 Показ структуры таблицы TABLE_NAME
 
-    docker exec -it psql-com pg_dump -U root -d onlinebc -t TABLE_NAME --schema-only
+    docker-compose exec db pg_dump -U root -d onlinebc -t TABLE_NAME --schema-only
 
 
 
 Командная строка Postgres
 
-	docker exec -it psql-com psql -U root onlinebc
+	docker-compose exec db psql -U root onlinebc
+
+
+
+Командная строка Redis
+
+    docker-compose exec redis redis-cli
+
+
+
+---------------------
+
+
+Замечания о программе
+=====================
+
+
+
 
 
