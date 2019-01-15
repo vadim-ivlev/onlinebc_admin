@@ -69,7 +69,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать трансляцию по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				// m := db.QueryRowMap("SELECT * FROM broadcast WHERE id=$1;", params.Args["id"].(int))
 				return db.GetRowByID("broadcast", params.Args["id"].(int)), nil
 			},
 		},
@@ -79,8 +78,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать пост по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				// fields := getSelectedFields([]string{"post"}, params)
-				// m := db.QueryRowMap("SELECT * FROM post WHERE id=$1;", params.Args["id"].(int))
 				return db.GetRowByID("post", params.Args["id"].(int)), nil
 			},
 		},
@@ -90,8 +87,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать медиа по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				// fields := getSelectedFields([]string{"medium"}, params)
-				// m := db.QueryRowMap("SELECT * FROM medium WHERE id=$1;", params.Args["id"].(int))
 				return db.GetRowByID("medium", params.Args["id"].(int)), nil
 			},
 		},
@@ -102,7 +97,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				"id_broadcast": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				// idBroadcast := params.Args["id_broadcast"].(string)
 				var posts interface{}
 				return posts, nil
 			},
