@@ -2,6 +2,6 @@
 .idea
 pgdata
 push.sh
-build
+#build
 
 

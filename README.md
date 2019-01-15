@@ -17,7 +17,7 @@ GraphQL и REST API онлайн трансляций.
 
 
 
-Загрузка файлов проекта
+Клонирование проекта на локальный компьютер
 ----------------------
     git clone git@git.rgwork.ru:web/onlinebc_admin.git ~/go/src
     cd ~/go/src/onlinebc_admin
@@ -52,11 +52,14 @@ GraphQL и REST API онлайн трансляций.
 
     /build.sh
 
-Скрипт `build.sh` генерирует исполняемые файлы windows (`onlinebc.exe`) и Linux (`onlinebc`) в директорию `build/` вместе с настроечными файлами и `README.md` для фронтэнд разработчиков. 
+Скрипт `build.sh` генерирует исполняемые файл Linux (`onlinebc`) в директории `build/` вместе с настроечными файлами. Эта директория должна копироваться на продакшн сервер. 
 
-Из `build/`файлы копируются в директорию `../onlinebc/`, расположенную в том же каталоге что и `onlinebc_admin`, которая содержит клон репозитория <https://git.rgwork.ru/web/onlinebc>. Таким образом обновляются файлы проекта onlinebc для использования фронтэнд разработчиками и для размещения на продакшн сервере. 
+Описание настроек в файле <readme-production.md>.
 
-Читай <README-FRONT.md>, <README-PRODUCTION.md>
+
+Из `build/`файлы копируются в директорию `../onlinebc/`, расположенную в том же каталоге что и `onlinebc_admin`, которая содержит клон репозитория <https://git.rgwork.ru/web/onlinebc>. Таким образом обновляются файлы проекта onlinebc для использования фронтэнд разработчиками.  
+
+Читай <readme-front.md>
 
 
 
@@ -85,8 +88,10 @@ GraphQL и REST API онлайн трансляций.
 Описание полей таблиц находятся в файле `controller/controller-graphql.go`. Во время исполнеия могут быть получены стандартными средствами GraphQL. 
 
 
+
+
 Файлы и директории
-------
+-------------------
 
 
 
@@ -170,12 +175,15 @@ Cопосталяет маршруты функциям-контроллерам
 
     docker-compose.yml     
     main.go
-    README-FRONT.md       # Для фронтэнд разработчиков
-    README-PRODUCTION.md  # Для админов
-    README.md             # Этот файл
-    build.sh*             # Скрипт сборки
-    run_tests.sh*         # Запуск тестов
-    TODO.md               # Недоделки
+    README-FRONT.md              # Для фронтэнд разработчиков
+    README-PRODUCTION.md         # Для админов
+    README.md                    # Этот файл
+    build.sh*                    # Скрипт сборки
+    run_tests.sh*                # Запуск тестов
+    Dockerfile-frontend          # Используется в build.sh
+    docker-compose-frontend.yml  # Файл запуска для фронтэнд разработчиков. 
+                                 # Копируется в onlinebc скриптом build.sh
+    TODO.md                      # Недоделки
 
 
 
