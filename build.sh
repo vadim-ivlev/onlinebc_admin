@@ -12,7 +12,7 @@ cp -rf migrations ./build/
 cp -rf templates ./build/
 cp docker-compose.yml ./build/
 cp .gitignore ./build/
-cp README-FRONT.md ./build/README.md
+cp readme-front.md ./build/README.md
 
 cp -rf build/* ../onlinebc
 cp build/.gitignore ../onlinebc
