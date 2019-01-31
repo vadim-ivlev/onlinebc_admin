@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// routeExists проверяет отсутствует ли в раутере пара метод+путь
-func routeAbsent(router *gin.Engine, method string, path string) bool {
-	routes := router.Routes()
+// routeAbsent проверяет отсутствует ли в раутере пара метод+путь
+func routeAbsent(r *gin.Engine, method string, path string) bool {
+	routes := r.Routes()
 	for _, r := range routes {
 		if r.Method == method && r.Path == path {
 			return false
@@ -19,32 +19,38 @@ func routeAbsent(router *gin.Engine, method string, path string) bool {
 }
 
 // defineRoutes -  Сопоставляет маршруты функцмям контроллера
-func defineRoutes(router *gin.Engine) {
+func defineRoutes(r *gin.Engine) {
 	for _, route := range c.Routes {
 		controllerFunc := c.GetFunctionByName(route.Controller)
 		for _, method := range route.Methods {
-			if routeAbsent(router, method, route.Path) {
-				router.Handle(method, route.Path, controllerFunc)
+			if routeAbsent(r, method, route.Path) {
+				r.Handle(method, route.Path, controllerFunc)
 			}
 
 		}
 	}
 }
 
-// Serve определяет пути, присоединяет функции middleware
-// и запускает сервер на заданном порту.
-func Serve(port string, debug bool) {
+// SetupRouter определяет пути и присоединяет функции middleware.
+// Если debug == true в консоль выдается больше информации.
+func SetupRouter(debug bool) *gin.Engine {
 	if !debug {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	router := gin.Default()
-	router.StaticFile("/favicon.ico", "./templates/favicon.ico")
-	router.LoadHTMLGlob("templates/*.*")
+	r := gin.Default()
+	r.StaticFile("/favicon.ico", "./templates/favicon.ico")
+	r.LoadHTMLGlob("templates/*.*")
 
-	//Middleware
-	router.Use(middleware.HeadersMiddleware())
-	router.Use(middleware.RedisMiddleware())
+	// подключаем Middleware
+	r.Use(middleware.HeadersMiddleware())
+	r.Use(middleware.RedisMiddleware())
 
-	defineRoutes(router)
-	router.Run(port)
+	defineRoutes(r)
+	return r
+}
+
+// Serve запускает сервер на заданном порту.
+func Serve(port string, debug bool) {
+	r := SetupRouter(debug)
+	r.Run(port)
 }
