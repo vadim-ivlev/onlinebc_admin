@@ -62,7 +62,9 @@ func getPayload(r *http.Request) map[string]interface{} {
 	for k := range r.Form {
 		m[k] = r.FormValue(k)
 	}
-	json.NewDecoder(r.Body).Decode(&m)
+	if r.ContentLength > 0 {
+		json.NewDecoder(r.Body).Decode(&m)
+	}
 	return m
 }
 

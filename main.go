@@ -12,7 +12,8 @@ func main() {
 	// читаем конфиги Postgres, Redis и роутера.
 	readConfigs(front)
 
-	db.ExitIfNoDB()
+	// Ждем готовноси базы данных
+	db.WaitForDbOrExit(10)
 	// порождаем базу данных если ее нет
 	createDatabaseIfNotExists()
 

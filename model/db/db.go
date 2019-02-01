@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	//blank import
 
@@ -12,20 +13,38 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// ExitIfNoDB выходим из программы если нет соединения с БД.
-func ExitIfNoDB() {
+// dbAvailable проверяет, доступна ли база данных
+func dbAvailable() bool {
 	conn, err := sql.Open("postgres", connectStr)
 	if err != nil {
-		fmt.Println("ExitIfNoDB open: ", err.Error())
-		os.Exit(7777)
+		fmt.Println(err.Error())
+		return false
 	}
 	defer conn.Close()
 	err1 := conn.Ping()
 	// _, err1 := conn.Exec("select 1;")
 	if err1 != nil {
-		fmt.Println("ExitIfNoDB exec: ", err1.Error())
-		os.Exit(7778)
+		fmt.Println(err1.Error())
+		return false
 	}
+	return true
+}
+
+// WaitForDbOrExit ожидает доступности базы данных
+// делая несколько попыток. Если все попытки неудачны
+// завершает программу. Нужна для запуска программы в докерах,
+// когда запуск базы данных может быть произойти позже.
+func WaitForDbOrExit(attempts int) {
+	for i := 0; i < attempts; i++ {
+		if dbAvailable() {
+			return
+		}
+		fmt.Println("\nОжидание готовности базы данных...")
+		fmt.Printf("Попытка %d/%d. CTRL-C для прерывания.\n", i+1, attempts)
+		time.Sleep(5 * time.Second)
+	}
+	fmt.Println("Не удалось подключиться к базе данных.")
+	os.Exit(7777)
 }
 
 // QueryRowMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
