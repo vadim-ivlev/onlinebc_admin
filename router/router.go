@@ -33,11 +33,18 @@ func defineRoutes(r *gin.Engine) {
 
 // SetupRouter определяет пути и присоединяет функции middleware.
 // Если debug == true в консоль выдается больше информации.
-func SetupRouter(debug bool) *gin.Engine {
+// Если outputToConsole == false вывод в консоль не производится
+func SetupRouter(debug bool, outputToConsole bool) *gin.Engine {
 	if !debug {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	r := gin.Default()
+	var r *gin.Engine
+	if outputToConsole {
+		r = gin.Default()
+	} else {
+		r = gin.New()
+	}
+
 	r.StaticFile("/favicon.ico", "./templates/favicon.ico")
 	r.LoadHTMLGlob("templates/*.*")
 
@@ -51,6 +58,6 @@ func SetupRouter(debug bool) *gin.Engine {
 
 // Serve запускает сервер на заданном порту.
 func Serve(port string, debug bool) {
-	r := SetupRouter(debug)
+	r := SetupRouter(debug, true)
 	r.Run(port)
 }

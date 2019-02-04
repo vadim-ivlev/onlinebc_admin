@@ -26,7 +26,7 @@ func main() {
 	if servePort > 0 {
 		printGreetings(servePort)
 		// router.Serve(":"+strconv.Itoa(servePort), debug)
-		r := router.SetupRouter(debug)
+		r := router.SetupRouter(debug, true)
 		r.Run(":" + strconv.Itoa(servePort))
 
 	}

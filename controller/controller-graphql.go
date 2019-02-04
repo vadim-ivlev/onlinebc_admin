@@ -177,7 +177,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 		// POST =====================================================
 
 		"createPost": &gq.Field{
-			Type:        broadcastType,
+			Type:        postType,
 			Description: "Создать пост к тансляции или ответ к посту",
 			Args: gq.FieldConfigArgument{
 				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор поста"}                              ,
@@ -197,7 +197,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 		},
 
 		"updatePost": &gq.Field{
-			Type:        broadcastType,
+			Type:        postType,
 			Description: "Обновить пост или ответ к посту",
 			Args: gq.FieldConfigArgument{
 				"id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор поста"},
@@ -217,7 +217,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 		},
 
 		"deletePost": &gq.Field{
-			Type:        broadcastType,
+			Type:        postType,
 			Description: "Удалить пост",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор поста"},
@@ -231,7 +231,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 		// MEDIA =====================================================
 
 		"createMedium": &gq.Field{
-			Type:        broadcastType,
+			Type:        mediumType,
 			Description: "Создать медиа",
 			Args: gq.FieldConfigArgument{
 				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
@@ -247,7 +247,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 		},
 
 		"updateMedium": &gq.Field{
-			Type:        broadcastType,
+			Type:        mediumType,
 			Description: "Обновить медиа по идентификатору",
 			Args: gq.FieldConfigArgument{
 				"id":      &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
@@ -263,7 +263,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 		},
 
 		"deleteMedium": &gq.Field{
-			Type:        broadcastType,
+			Type:        mediumType,
 			Description: "Удалить медиа по идентификатору",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},

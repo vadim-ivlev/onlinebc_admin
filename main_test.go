@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -22,7 +23,7 @@ func TestMain(m *testing.M) {
 	readConfigs(false)
 	db.WaitForDbOrExit(10)
 	createDatabaseIfNotExists()
-	r = router.SetupRouter(false)
+	r = router.SetupRouter(false, false)
 
 	flag.Parse()
 	exitCode := m.Run()
@@ -31,7 +32,7 @@ func TestMain(m *testing.M) {
 	os.Exit(exitCode)
 }
 
-func TestGetMedium(t *testing.T) {
+func Test_REST_GetMedium(t *testing.T) {
 	w := getRecorder("GET", "/get/medium/5330", nil)
 
 	assert.Equal(t, 200, w.Code)
@@ -44,6 +45,7 @@ func TestGetMedium(t *testing.T) {
 
 }
 
+// Test_GraphQL_GetEntityByID тестируем считывание существующих записей.
 func Test_GraphQL_GetEntityByID(t *testing.T) {
 	s := `
 	query { 
@@ -74,6 +76,282 @@ func Test_GraphQL_GetEntityByID(t *testing.T) {
 	assert.Equal(t, 354., broadcast["id"].(float64))
 	assert.Equal(t, 23952., post["id"].(float64))
 	assert.Equal(t, 5330., medium["id"].(float64))
+
+}
+
+// Test_GraphQL_CRUD_Broadcast тестируем создание, чтение, обновление удаление записей Broadcast.
+func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
+
+	// CREATE newID
+	s := `
+	mutation {
+		createBroadcast(
+		  title:"new broadcast", 
+		  time_created: 123, 
+		  link_article:"link"
+		) 
+		{
+		  id 
+		  title 
+		  time_created 
+		  link_article
+		}
+	  }	
+	`
+	w := getRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	assert.Equal(t, 200, w.Code)
+	m := jsonStringToMap(w.Body.String())
+	data := m["data"].(map[string]interface{})
+	createBroadcast := data["createBroadcast"].(map[string]interface{})
+	newID := int(createBroadcast["id"].(float64))
+	assert.True(t, newID > 0, "New ID greater than 0")
+
+	// UPDATE rec by newID
+	s = `
+	mutation {
+		updateBroadcast(
+		  id: %d,
+		  title:"updated broadcast", 
+		  time_created: 124, 
+		  link_article:"updated link2"
+		) 
+		{
+		  id 
+		  title 
+		  time_created 
+		  link_article
+		}
+	  } 
+	`
+	ss := fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	updateBroadcast := data["updateBroadcast"].(map[string]interface{})
+	updatedTitle := updateBroadcast["title"].(string)
+	assert.Equal(t, updatedTitle, "updated broadcast")
+
+	// READ rec by newID
+	s = `
+	query { 
+		broadcast (id: %d) { id  title  time_created link_article }
+	  }	
+	`
+	ss = fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	broadcast := data["broadcast"].(map[string]interface{})
+	readTitle := broadcast["title"].(string)
+	assert.Equal(t, readTitle, "updated broadcast")
+
+	// DELETE rec by newID
+	s = `
+	mutation {
+		deleteBroadcast(
+		  id: %d
+		) 
+		{
+		  id 
+		  title 
+		  time_created 
+		  link_article
+		}
+	  } 
+	`
+	ss = fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	deleteBroadcast := data["deleteBroadcast"].(map[string]interface{})
+	deletedID := int(deleteBroadcast["id"].(float64))
+	assert.Equal(t, deletedID, newID)
+
+	fmt.Printf("CRUD Broadcast: NewID=%d  updatedTitle ='%s' readTitle='%s' deletedID=%d \n", newID, updatedTitle, readTitle, deletedID)
+
+}
+
+// Test_GraphQL_CRUD_Post тестируем создание, чтение, обновление удаление записей Post.
+func Test_GraphQL_CRUD_Post(t *testing.T) {
+
+	// CREATE newID
+	s := `
+	mutation {
+		createPost(
+		  text:"new post", 
+		  author: "Петров" 
+		) 
+		{
+		  id 
+		  text 
+		  author 
+		}
+	  }	
+	`
+	w := getRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	assert.Equal(t, 200, w.Code)
+	m := jsonStringToMap(w.Body.String())
+	data := m["data"].(map[string]interface{})
+	createPost := data["createPost"].(map[string]interface{})
+	newID := int(createPost["id"].(float64))
+	assert.True(t, newID > 0, "New ID greater than 0")
+
+	// UPDATE rec by newID
+	s = `
+	mutation {
+		updatePost(
+		  id: %d,
+		  text:"updated post", 
+		  author: "Петровский" 
+		) 
+		{
+		  id 
+		  text 
+		  author 
+		}
+	  } 
+	`
+	ss := fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	updatePost := data["updatePost"].(map[string]interface{})
+	updatedText := updatePost["text"].(string)
+	assert.Equal(t, updatedText, "updated post")
+
+	// READ rec by newID
+	s = `
+	query { 
+		post (id: %d) { id  text  author }
+	  }	
+	`
+	ss = fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	post := data["post"].(map[string]interface{})
+	readText := post["text"].(string)
+	assert.Equal(t, readText, "updated post")
+
+	// DELETE rec by newID
+	s = `
+	mutation {
+		deletePost(
+		  id: %d
+		) 
+		{
+		  id 
+		  text 
+		  author 
+		}
+	  } 
+	`
+	ss = fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	deletePost := data["deletePost"].(map[string]interface{})
+	deletedID := int(deletePost["id"].(float64))
+	assert.Equal(t, deletedID, newID)
+
+	fmt.Printf("CRUD Post: NewID=%d  updatedText ='%s' readText='%s' deletedID=%d \n", newID, updatedText, readText, deletedID)
+
+}
+
+// Test_GraphQL_CRUD_Medium тестируем создание, чтение, обновление, удаление записей Medium.
+func Test_GraphQL_CRUD_Medium(t *testing.T) {
+
+	// CREATE newID
+	s := `
+	mutation {
+		createMedium(
+		  post_id: 24098,
+		  thumb:"new medium", 
+		  source: "Петров" 
+		) 
+		{
+		  id 
+		  thumb 
+		  source 
+		}
+	  }	
+	`
+	w := getRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	assert.Equal(t, 200, w.Code)
+	m := jsonStringToMap(w.Body.String())
+	data := m["data"].(map[string]interface{})
+	createMedium := data["createMedium"].(map[string]interface{})
+	newID := int(createMedium["id"].(float64))
+	assert.True(t, newID > 0, "New ID greater than 0")
+
+	// UPDATE rec by newID
+	s = `
+	mutation {
+		updateMedium(
+		  id: %d,
+		  thumb:"updated medium", 
+		  source: "Петровский" 
+		) 
+		{
+		  id 
+		  thumb 
+		  source 
+		}
+	  } 
+	`
+	ss := fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	updateMedium := data["updateMedium"].(map[string]interface{})
+	updatedThumb := updateMedium["thumb"].(string)
+	assert.Equal(t, updatedThumb, "updated medium")
+
+	// READ rec by newID
+	s = `
+	query { 
+		medium (id: %d) { id  thumb  source }
+	  }	
+	`
+	ss = fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	medium := data["medium"].(map[string]interface{})
+	readThumb := medium["thumb"].(string)
+	assert.Equal(t, readThumb, "updated medium")
+
+	// DELETE rec by newID
+	s = `
+	mutation {
+		deleteMedium(
+		  id: %d
+		) 
+		{
+		  id 
+		  thumb 
+		  source 
+		}
+	  } 
+	`
+	ss = fmt.Sprintf(s, newID)
+	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	assert.Equal(t, 200, w.Code)
+	m = jsonStringToMap(w.Body.String())
+	data = m["data"].(map[string]interface{})
+	deleteMedium := data["deleteMedium"].(map[string]interface{})
+	deletedID := int(deleteMedium["id"].(float64))
+	assert.Equal(t, deletedID, newID)
+
+	fmt.Printf("CRUD Medium: NewID=%d  updatedThumb ='%s' readThumb='%s' deletedID=%d \n", newID, updatedThumb, readThumb, deletedID)
 
 }
 
