@@ -32,17 +32,33 @@ func TestMain(m *testing.M) {
 	os.Exit(exitCode)
 }
 
-func Test_REST_GetMedium(t *testing.T) {
-	w := getRecorder("GET", "/get/medium/5330", nil)
-
+// Test_REST_GetFullBroadcast тестирование чтения Broadcast со всеми подчиненными по REST API.
+func Test_REST_GetFullBroadcast(t *testing.T) {
+	w := getNewRecorder("GET", "/api/full-broadcast/354", nil)
 	assert.Equal(t, 200, w.Code)
+	body := w.Body.String()
+	m := jsonStringToArrayOfMaps(body)
+	id := int(m[0]["id"].(float64))
+	assert.Equal(t, 354, id)
 
+	// // Тестируем Redis
+	// w = getNewRecorder("GET", "/api/full-broadcast/354", nil)
+	// assert.Equal(t, 200, w.Code)
+
+	// fmt.Println(w.HeaderMap)
+	// h := w.Header()
+	// fmt.Println(h)
+
+}
+
+// Test_REST_GetMedium тестирование чтения записи Medium по REST API.
+func Test_REST_GetMedium(t *testing.T) {
+	w := getNewRecorder("GET", "/get/medium/5330", nil)
+	assert.Equal(t, 200, w.Code)
 	body := w.Body.String()
 	m := jsonStringToMap(body)
 	id := m["id"].(float64)
-
 	assert.Equal(t, 5330., id)
-
 }
 
 // Test_GraphQL_GetEntityByID тестируем считывание существующих записей.
@@ -54,7 +70,7 @@ func Test_GraphQL_GetEntityByID(t *testing.T) {
 		medium(id:5330){id uri thumb source}
 	  }	
 	`
-	w := getRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	w := getNewRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
 
 	// uncomment for POST request
 	// load := url.Values{}
@@ -98,7 +114,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 		}
 	  }	
 	`
-	w := getRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	w := getNewRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
 	assert.Equal(t, 200, w.Code)
 	m := jsonStringToMap(w.Body.String())
 	data := m["data"].(map[string]interface{})
@@ -124,7 +140,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 	  } 
 	`
 	ss := fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -139,7 +155,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 	  }	
 	`
 	ss = fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -162,7 +178,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 	  } 
 	`
 	ss = fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -170,7 +186,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 	deletedID := int(deleteBroadcast["id"].(float64))
 	assert.Equal(t, deletedID, newID)
 
-	fmt.Printf("CRUD Broadcast: NewID=%d  updatedTitle ='%s' readTitle='%s' deletedID=%d \n", newID, updatedTitle, readTitle, deletedID)
+	// fmt.Printf("CRUD Broadcast: NewID=%d  updatedTitle ='%s' readTitle='%s' deletedID=%d \n", newID, updatedTitle, readTitle, deletedID)
 
 }
 
@@ -191,7 +207,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 		}
 	  }	
 	`
-	w := getRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	w := getNewRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
 	assert.Equal(t, 200, w.Code)
 	m := jsonStringToMap(w.Body.String())
 	data := m["data"].(map[string]interface{})
@@ -215,7 +231,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 	  } 
 	`
 	ss := fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -230,7 +246,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 	  }	
 	`
 	ss = fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -252,7 +268,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 	  } 
 	`
 	ss = fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -260,7 +276,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 	deletedID := int(deletePost["id"].(float64))
 	assert.Equal(t, deletedID, newID)
 
-	fmt.Printf("CRUD Post: NewID=%d  updatedText ='%s' readText='%s' deletedID=%d \n", newID, updatedText, readText, deletedID)
+	// fmt.Printf("CRUD Post: NewID=%d  updatedText ='%s' readText='%s' deletedID=%d \n", newID, updatedText, readText, deletedID)
 
 }
 
@@ -282,7 +298,7 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 		}
 	  }	
 	`
-	w := getRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	w := getNewRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
 	assert.Equal(t, 200, w.Code)
 	m := jsonStringToMap(w.Body.String())
 	data := m["data"].(map[string]interface{})
@@ -306,7 +322,7 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	  } 
 	`
 	ss := fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -321,7 +337,7 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	  }	
 	`
 	ss = fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -343,7 +359,7 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	  } 
 	`
 	ss = fmt.Sprintf(s, newID)
-	w = getRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
+	w = getNewRecorder("GET", "/graphql?query="+url.QueryEscape(ss), nil)
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
@@ -351,12 +367,13 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	deletedID := int(deleteMedium["id"].(float64))
 	assert.Equal(t, deletedID, newID)
 
-	fmt.Printf("CRUD Medium: NewID=%d  updatedThumb ='%s' readThumb='%s' deletedID=%d \n", newID, updatedThumb, readThumb, deletedID)
+	// fmt.Printf("CRUD Medium: NewID=%d  updatedThumb ='%s' readThumb='%s' deletedID=%d \n", newID, updatedThumb, readThumb, deletedID)
 
 }
 
 // ******************************************************************
 
+// jsonStringToMap преобразует строку JSON в map[string]interface{}
 func jsonStringToMap(s string) map[string]interface{} {
 	m := make(map[string]interface{})
 	err := json.Unmarshal([]byte(s), &m)
@@ -366,16 +383,17 @@ func jsonStringToMap(s string) map[string]interface{} {
 	return m
 }
 
-func jsonStringToArray(s string) []map[string]interface{} {
-	var a []map[string]interface{}
-	err := json.Unmarshal([]byte(s), &a)
+// jsonStringToArrayOfMaps преобразует строку JSON в массив []map[string]interface{}
+func jsonStringToArrayOfMaps(s string) []map[string]interface{} {
+	var m []map[string]interface{}
+	err := json.Unmarshal([]byte(s), &m)
 	if err != nil {
 		panic(err)
 	}
-	return a
+	return m
 }
 
-func getRecorder(method, url string, body io.Reader) *httptest.ResponseRecorder {
+func getNewRecorder(method, url string, body io.Reader) *httptest.ResponseRecorder {
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest(method, url, body)
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
