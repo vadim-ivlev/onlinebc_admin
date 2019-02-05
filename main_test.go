@@ -377,6 +377,37 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 
 }
 
+func Test_GraphQL_NONExistantID(t *testing.T) {
+
+	// UPDATE rec by newID
+	fmt.Println("Testing GraphQL mutation updateMedium NONEXISTANT")
+	s := `
+	mutation {
+		updateMedium(
+		  id: 777,
+		  thumb:"updated medium", 
+		  source: "Петровский" 
+		) 
+		{
+		  id 
+		  thumb 
+		  source 
+		}
+	  } 
+	`
+	// ss := fmt.Sprintf(s, newID)
+	w := getNewRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	assert.Equal(t, 200, w.Code)
+	body := w.Body.String()
+	fmt.Println(body)
+	m := jsonStringToMap(body)
+	data := m["data"].(map[string]interface{})
+	updateMedium := data["updateMedium"].(map[string]interface{})
+	updatedThumb := updateMedium["thumb"].(string)
+	assert.Equal(t, updatedThumb, "updated medium")
+
+}
+
 // ******************************************************************
 
 // jsonStringToMap преобразует строку JSON в map[string]interface{}
