@@ -12,21 +12,66 @@ var broadcastType = gq.NewObject(gq.ObjectConfig{
 	Name:        "Broadcast",
 	Description: "Онлайн трансляция",
 	Fields: gq.Fields{
-		"id":             &gq.Field{Type: gq.Int, Description: "Идентификатор трансляции"},
-		"title":          &gq.Field{Type: gq.String, Description: "Название трансляции"},
-		"time_created":   &gq.Field{Type: gq.Int, Description: "Время создания"},
-		"time_begin":     &gq.Field{Type: gq.Int, Description: "Время начала"},
-		"is_ended":       &gq.Field{Type: gq.Int, Description: "Завершена 0 1"},
-		"show_date":      &gq.Field{Type: gq.Int, Description: "Показывать дату 0 1"},
-		"show_time":      &gq.Field{Type: gq.Int, Description: "Показывать время 0 1"},
-		"is_yandex":      &gq.Field{Type: gq.Int, Description: "Яндекс трансляция 0 1"},
-		"yandex_ids":     &gq.Field{Type: gq.String, Description: "Идентификаторы Яндекс трансляций"},
-		"show_main_page": &gq.Field{Type: gq.Int, Description: "Показывать на главной странице 01"},
-		"link_article":   &gq.Field{Type: gq.String, Description: "Ссылка на статью"},
-		"link_img":       &gq.Field{Type: gq.String, Description: "Ссылка на изображение"},
-		"groups_create":  &gq.Field{Type: gq.Int, Description: ""},
-		"is_diary":       &gq.Field{Type: gq.Int, Description: "Дневник 01"},
-		"diary_author":   &gq.Field{Type: gq.String, Description: "Автордневника"},
+		"id": &gq.Field{
+			Type:        gq.Int,
+			Description: "Идентификатор трансляции",
+		},
+		"title": &gq.Field{
+			Type:        gq.String,
+			Description: "Название трансляции",
+		},
+		"time_created": &gq.Field{
+			Type:        gq.Int,
+			Description: "Время создания",
+		},
+		"time_begin": &gq.Field{
+			Type:        gq.Int,
+			Description: "Время начала",
+		},
+		"is_ended": &gq.Field{
+			Type:        gq.Int,
+			Description: "Завершена 0 1",
+		},
+		"show_date": &gq.Field{
+			Type:        gq.Int,
+			Description: "Показывать дату 0 1",
+		},
+		"show_time": &gq.Field{
+			Type:        gq.Int,
+			Description: "Показывать время 0 1",
+		},
+		"is_yandex": &gq.Field{
+			Type:        gq.Int,
+			Description: "Яндекс трансляция 0 1",
+		},
+		"yandex_ids": &gq.Field{
+			Type:        gq.String,
+			Description: "Идентификаторы Яндекс трансляций",
+		},
+		"show_main_page": &gq.Field{
+			Type:        gq.Int,
+			Description: "Показывать на главной странице 01",
+		},
+		"link_article": &gq.Field{
+			Type:        gq.String,
+			Description: "Ссылка на статью",
+		},
+		"link_img": &gq.Field{
+			Type:        gq.String,
+			Description: "Ссылка на изображение",
+		},
+		"groups_create": &gq.Field{
+			Type:        gq.Int,
+			Description: "",
+		},
+		"is_diary": &gq.Field{
+			Type:        gq.Int,
+			Description: "Дневник 01",
+		},
+		"diary_author": &gq.Field{
+			Type:        gq.String,
+			Description: "Автордневника",
+		},
 	},
 })
 
@@ -34,15 +79,26 @@ var postType = gq.NewObject(gq.ObjectConfig{
 	Name:        "Post",
 	Description: "Пост трансляции",
 	Fields: gq.Fields{
-		"id":           &gq.Field{Type: gq.Int, Description: "Идентификатор поста"},
-		"id_parent":    &gq.Field{Type: gq.Int, Description: "Идентификатор поста если это ответ на другой пост"},
-		"id_broadcast": &gq.Field{Type: gq.Int, Description: "Идентификатор трансляции"},
-		"text":         &gq.Field{Type: gq.String, Description: "Текст поста"},
-		"post_time":    &gq.Field{Type: gq.Int, Description: "Текст поста"},
-		"post_type":    &gq.Field{Type: gq.Int, Description: "Тип поста 1,2,3,4..."},
-		"link":         &gq.Field{Type: gq.String, Description: "Ссылка"},
-		"has_big_img":  &gq.Field{Type: gq.Int, Description: "Есть ли большое изображение 0,1"},
-		"author":       &gq.Field{Type: gq.String, Description: "ФИО автора поста"},
+		"id": &gq.Field{
+			Type:        gq.Int,
+			Description: "Идентификатор поста",
+		},
+		"id_parent": &gq.Field{Type: gq.Int,
+			Description: "Идентификатор поста если это ответ на другой пост"},
+		"id_broadcast": &gq.Field{Type: gq.Int,
+			Description: "Идентификатор трансляции"},
+		"text": &gq.Field{Type: gq.String,
+			Description: "Текст поста"},
+		"post_time": &gq.Field{Type: gq.Int,
+			Description: "Текст поста"},
+		"post_type": &gq.Field{Type: gq.Int,
+			Description: "Тип поста 1,2,3,4..."},
+		"link": &gq.Field{Type: gq.String,
+			Description: "Ссылка"},
+		"has_big_img": &gq.Field{Type: gq.Int,
+			Description: "Есть ли большое изображение 0,1"},
+		"author": &gq.Field{Type: gq.String,
+			Description: "ФИО автора поста"},
 	},
 })
 
@@ -50,11 +106,26 @@ var mediumType = gq.NewObject(gq.ObjectConfig{
 	Name:        "Medium",
 	Description: "Медиа поста трансляции",
 	Fields: gq.Fields{
-		"id":      &gq.Field{Type: gq.Int, Description: "Идентификатор медиа"},
-		"post_id": &gq.Field{Type: gq.Int, Description: "Идентификатор поста"},
-		"uri":     &gq.Field{Type: gq.String, Description: "URI изображения"},
-		"thumb":   &gq.Field{Type: gq.String, Description: "Уменьшенное изображение"},
-		"source":  &gq.Field{Type: gq.String, Description: "Источник медиа"},
+		"id": &gq.Field{
+			Type:        gq.Int,
+			Description: "Идентификатор медиа",
+		},
+		"post_id": &gq.Field{
+			Type:        gq.Int,
+			Description: "Идентификатор поста",
+		},
+		"uri": &gq.Field{
+			Type:        gq.String,
+			Description: "URI изображения",
+		},
+		"thumb": &gq.Field{
+			Type:        gq.String,
+			Description: "Уменьшенное изображение",
+		},
+		"source": &gq.Field{
+			Type:        gq.String,
+			Description: "Источник медиа",
+		},
 	},
 })
 
@@ -115,20 +186,62 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Description: "Создать трансляцию",
 			Args: gq.FieldConfigArgument{
 				// "id":             &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор трансляции"},
-				"title":          &gq.ArgumentConfig{Type: gq.String, Description: "Название трансляции"},
-				"time_created":   &gq.ArgumentConfig{Type: gq.Int, Description: "Время создания"},
-				"time_begin":     &gq.ArgumentConfig{Type: gq.Int, Description: "Время начала"},
-				"is_ended":       &gq.ArgumentConfig{Type: gq.Int, Description: "Завершена 0 1"},
-				"show_date":      &gq.ArgumentConfig{Type: gq.Int, Description: "Показывать дату 0 1"},
-				"show_time":      &gq.ArgumentConfig{Type: gq.Int, Description: "Показывать время 0 1"},
-				"is_yandex":      &gq.ArgumentConfig{Type: gq.Int, Description: "Яндекс трансляция 0 1"},
-				"yandex_ids":     &gq.ArgumentConfig{Type: gq.String, Description: "Идентификаторы Яндекс трансляций"},
-				"show_main_page": &gq.ArgumentConfig{Type: gq.Int, Description: "Показывать на главной странице 0 1"},
-				"link_article":   &gq.ArgumentConfig{Type: gq.String, Description: "Ссылка на статью"},
-				"link_img":       &gq.ArgumentConfig{Type: gq.String, Description: "Ссылка на изображение"},
-				"groups_create":  &gq.ArgumentConfig{Type: gq.Int, Description: ""},
-				"is_diary":       &gq.ArgumentConfig{Type: gq.Int, Description: "Дневник 0 1"},
-				"diary_author":   &gq.ArgumentConfig{Type: gq.String, Description: "Автор дневника"},
+				"title": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Название трансляции",
+				},
+				"time_created": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Время создания",
+				},
+				"time_begin": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Время начала",
+				},
+				"is_ended": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Завершена 0 1",
+				},
+				"show_date": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать дату 0 1",
+				},
+				"show_time": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать время 0 1",
+				},
+				"is_yandex": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Яндекс трансляция 0 1",
+				},
+				"yandex_ids": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Идентификаторы Яндекс трансляций",
+				},
+				"show_main_page": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать на главной странице 0 1",
+				},
+				"link_article": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Ссылка на статью",
+				},
+				"link_img": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Ссылка на изображение",
+				},
+				"groups_create": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "",
+				},
+				"is_diary": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Дневник 0 1",
+				},
+				"diary_author": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Автор дневника",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				newRow := db.CreateRow("broadcast", params.Args)
@@ -140,21 +253,66 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Type:        broadcastType,
 			Description: "Обновить трансляцию",
 			Args: gq.FieldConfigArgument{
-				"id":             &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор трансляции"},
-				"title":          &gq.ArgumentConfig{Type: gq.String, Description: "Название трансляции"},
-				"time_created":   &gq.ArgumentConfig{Type: gq.Int, Description: "Время создания"},
-				"time_begin":     &gq.ArgumentConfig{Type: gq.Int, Description: "Время начала"},
-				"is_ended":       &gq.ArgumentConfig{Type: gq.Int, Description: "Завершена 0 1"},
-				"show_date":      &gq.ArgumentConfig{Type: gq.Int, Description: "Показывать дату 0 1"},
-				"show_time":      &gq.ArgumentConfig{Type: gq.Int, Description: "Показывать время 0 1"},
-				"is_yandex":      &gq.ArgumentConfig{Type: gq.Int, Description: "Яндекс трансляция 0 1"},
-				"yandex_ids":     &gq.ArgumentConfig{Type: gq.String, Description: "Идентификаторы Яндекс трансляций"},
-				"show_main_page": &gq.ArgumentConfig{Type: gq.Int, Description: "Показывать на главной странице 0 1"},
-				"link_article":   &gq.ArgumentConfig{Type: gq.String, Description: "Ссылка на статью"},
-				"link_img":       &gq.ArgumentConfig{Type: gq.String, Description: "Ссылка на изображение"},
-				"groups_create":  &gq.ArgumentConfig{Type: gq.Int, Description: ""},
-				"is_diary":       &gq.ArgumentConfig{Type: gq.Int, Description: "Дневник 0 1"},
-				"diary_author":   &gq.ArgumentConfig{Type: gq.String, Description: "Автор дневника"},
+				"id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор трансляции",
+				},
+				"title": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Название трансляции",
+				},
+				"time_created": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Время создания",
+				},
+				"time_begin": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Время начала",
+				},
+				"is_ended": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Завершена 0 1",
+				},
+				"show_date": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать дату 0 1",
+				},
+				"show_time": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать время 0 1",
+				},
+				"is_yandex": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Яндекс трансляция 0 1",
+				},
+				"yandex_ids": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Идентификаторы Яндекс трансляций",
+				},
+				"show_main_page": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать на главной странице 0 1",
+				},
+				"link_article": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Ссылка на статью",
+				},
+				"link_img": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Ссылка на изображение",
+				},
+				"groups_create": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "",
+				},
+				"is_diary": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Дневник 0 1",
+				},
+				"diary_author": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Автор дневника",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.UpdateRowByID("broadcast", params.Args["id"].(int), params.Args)
@@ -166,7 +324,10 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Type:        broadcastType,
 			Description: "Удалить трасляцию",
 			Args: gq.FieldConfigArgument{
-				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор трансляции"},
+				"id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор трансляции",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.DeleteRowByID("broadcast", params.Args["id"].(int))
@@ -181,14 +342,38 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Description: "Создать пост к тансляции или ответ к посту",
 			Args: gq.FieldConfigArgument{
 				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор поста"}                              ,
-				"id_parent":    &gq.ArgumentConfig{Type: gq.Int, Description: "Идентификатор поста если это ответ на другой пост"},
-				"id_broadcast": &gq.ArgumentConfig{Type: gq.Int, Description: "Идентификатор трансляции"},
-				"text":         &gq.ArgumentConfig{Type: gq.String, Description: "Текст поста"},
-				"post_time":    &gq.ArgumentConfig{Type: gq.Int, Description: "Текст поста"},
-				"post_type":    &gq.ArgumentConfig{Type: gq.Int, Description: "Тип поста 1,2,3,4..."},
-				"link":         &gq.ArgumentConfig{Type: gq.String, Description: "Ссылка"},
-				"has_big_img":  &gq.ArgumentConfig{Type: gq.Int, Description: "Есть ли большое изображение 0,1"},
-				"author":       &gq.ArgumentConfig{Type: gq.String, Description: "ФИО автора поста"},
+				"id_parent": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Идентификатор поста если это ответ на другой пост",
+				},
+				"id_broadcast": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Идентификатор трансляции",
+				},
+				"text": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Текст поста",
+				},
+				"post_time": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Текст поста",
+				},
+				"post_type": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Тип поста 1,2,3,4...",
+				},
+				"link": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Ссылка",
+				},
+				"has_big_img": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Есть ли большое изображение 0,1",
+				},
+				"author": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "ФИО автора поста",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				newRow := db.CreateRow("post", params.Args)
@@ -200,15 +385,42 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Type:        postType,
 			Description: "Обновить пост или ответ к посту",
 			Args: gq.FieldConfigArgument{
-				"id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор поста"},
-				"id_parent":    &gq.ArgumentConfig{Type: gq.Int, Description: "Идентификатор поста если это ответ на другой пост"},
-				"id_broadcast": &gq.ArgumentConfig{Type: gq.Int, Description: "Идентификатор трансляции"},
-				"text":         &gq.ArgumentConfig{Type: gq.String, Description: "Текст поста"},
-				"post_time":    &gq.ArgumentConfig{Type: gq.Int, Description: "Текст поста"},
-				"post_type":    &gq.ArgumentConfig{Type: gq.Int, Description: "Тип поста 1,2 ,3,4..."},
-				"link":         &gq.ArgumentConfig{Type: gq.String, Description: "Ссылка"},
-				"has_big_img":  &gq.ArgumentConfig{Type: gq.Int, Description: "Есть ли большое изображение 0,1"},
-				"author":       &gq.ArgumentConfig{Type: gq.String, Description: "ФИО автора поста"},
+				"id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор поста",
+				},
+				"id_parent": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Идентификатор поста если это ответ на другой пост",
+				},
+				"id_broadcast": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Идентификатор трансляции",
+				},
+				"text": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Текст поста",
+				},
+				"post_time": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Текст поста",
+				},
+				"post_type": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Тип поста 1,2 ,3,4...",
+				},
+				"link": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Ссылка",
+				},
+				"has_big_img": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Есть ли большое изображение 0,1",
+				},
+				"author": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "ФИО автора поста",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.UpdateRowByID("post", params.Args["id"].(int), params.Args)
@@ -220,7 +432,9 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Type:        postType,
 			Description: "Удалить пост",
 			Args: gq.FieldConfigArgument{
-				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор поста"},
+				"id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор поста"},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.DeleteRowByID("post", params.Args["id"].(int))
@@ -235,10 +449,25 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Description: "Создать медиа",
 			Args: gq.FieldConfigArgument{
 				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
-				"post_id": &gq.ArgumentConfig{Type: gq.Int, Description: "Идентификатор поста"},
-				"uri":     &gq.ArgumentConfig{Type: gq.String, Description: "URI изображения"},
-				"thumb":   &gq.ArgumentConfig{Type: gq.String, Description: "Уменьшенное изображение"},
-				"source":  &gq.ArgumentConfig{Type: gq.String, Description: "Источник медиа"},
+				"post_id": &gq.ArgumentConfig{
+					Type: gq.Int,
+
+					Description: "Идентификатор поста",
+				},
+				"uri": &gq.ArgumentConfig{
+					Type: gq.String,
+
+					Description: "URI изображения",
+				},
+				"thumb": &gq.ArgumentConfig{
+					Type: gq.String,
+
+					Description: "Уменьшенное изображение",
+				},
+				"source": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Источник медиа",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				newRow := db.CreateRow("medium", params.Args)
@@ -250,11 +479,21 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Type:        mediumType,
 			Description: "Обновить медиа по идентификатору",
 			Args: gq.FieldConfigArgument{
-				"id":      &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
-				"post_id": &gq.ArgumentConfig{Type: gq.Int, Description: "Идентификатор поста"},
-				"uri":     &gq.ArgumentConfig{Type: gq.String, Description: "URI изображения"},
-				"thumb":   &gq.ArgumentConfig{Type: gq.String, Description: "Уменьшенное изображение"},
-				"source":  &gq.ArgumentConfig{Type: gq.String, Description: "Источник медиа"},
+				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int),
+					Description: "Идентификатор медиа",
+				},
+				"post_id": &gq.ArgumentConfig{Type: gq.Int,
+					Description: "Идентификатор поста",
+				},
+				"uri": &gq.ArgumentConfig{Type: gq.String,
+					Description: "URI изображения",
+				},
+				"thumb": &gq.ArgumentConfig{Type: gq.String,
+					Description: "Уменьшенное изображение",
+				},
+				"source": &gq.ArgumentConfig{Type: gq.String,
+					Description: "Источник медиа",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.UpdateRowByID("medium", params.Args["id"].(int), params.Args)
@@ -266,7 +505,10 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Type:        mediumType,
 			Description: "Удалить медиа по идентификатору",
 			Args: gq.FieldConfigArgument{
-				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
+				"id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор медиа",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.DeleteRowByID("medium", params.Args["id"].(int))
