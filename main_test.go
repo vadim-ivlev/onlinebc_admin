@@ -20,6 +20,7 @@ import (
 var r *gin.Engine
 
 func TestMain(m *testing.M) {
+	fmt.Println("Функциональные тесты (End to End) ******************************************************")
 	readConfigs(false)
 	db.WaitForDbOrExit(10)
 	createDatabaseIfNotExists()
@@ -34,25 +35,18 @@ func TestMain(m *testing.M) {
 
 // Test_REST_GetFullBroadcast тестирование чтения Broadcast со всеми подчиненными по REST API.
 func Test_REST_GetFullBroadcast(t *testing.T) {
+	fmt.Println("Testing REST /api/full-broadcast/354")
 	w := getNewRecorder("GET", "/api/full-broadcast/354", nil)
 	assert.Equal(t, 200, w.Code)
 	body := w.Body.String()
 	m := jsonStringToArrayOfMaps(body)
 	id := int(m[0]["id"].(float64))
 	assert.Equal(t, 354, id)
-
-	// // Тестируем Redis
-	// w = getNewRecorder("GET", "/api/full-broadcast/354", nil)
-	// assert.Equal(t, 200, w.Code)
-
-	// fmt.Println(w.HeaderMap)
-	// h := w.Header()
-	// fmt.Println(h)
-
 }
 
 // Test_REST_GetMedium тестирование чтения записи Medium по REST API.
 func Test_REST_GetMedium(t *testing.T) {
+	fmt.Println("Testing REST /get/medium/5330")
 	w := getNewRecorder("GET", "/get/medium/5330", nil)
 	assert.Equal(t, 200, w.Code)
 	body := w.Body.String()
@@ -63,6 +57,7 @@ func Test_REST_GetMedium(t *testing.T) {
 
 // Test_GraphQL_GetEntityByID тестируем считывание существующих записей.
 func Test_GraphQL_GetEntityByID(t *testing.T) {
+	fmt.Println("Testing GraphQL query broadcast, post, medium")
 	s := `
 	query { 
 		broadcast (id: 354) { id  title  time_created link_article }
@@ -97,8 +92,8 @@ func Test_GraphQL_GetEntityByID(t *testing.T) {
 
 // Test_GraphQL_CRUD_Broadcast тестируем создание, чтение, обновление удаление записей Broadcast.
 func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
-
 	// CREATE newID
+	fmt.Println("Testing GraphQL mutation createBroadcast")
 	s := `
 	mutation {
 		createBroadcast(
@@ -123,6 +118,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 	assert.True(t, newID > 0, "New ID greater than 0")
 
 	// UPDATE rec by newID
+	fmt.Println("Testing GraphQL mutation updateBroadcast")
 	s = `
 	mutation {
 		updateBroadcast(
@@ -149,6 +145,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 	assert.Equal(t, updatedTitle, "updated broadcast")
 
 	// READ rec by newID
+	fmt.Println("Testing GraphQL query broadcast")
 	s = `
 	query { 
 		broadcast (id: %d) { id  title  time_created link_article }
@@ -164,6 +161,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 	assert.Equal(t, readTitle, "updated broadcast")
 
 	// DELETE rec by newID
+	fmt.Println("Testing GraphQL mutation deleteBroadcast")
 	s = `
 	mutation {
 		deleteBroadcast(
@@ -194,6 +192,7 @@ func Test_GraphQL_CRUD_Broadcast(t *testing.T) {
 func Test_GraphQL_CRUD_Post(t *testing.T) {
 
 	// CREATE newID
+	fmt.Println("Testing GraphQL mutation createPost")
 	s := `
 	mutation {
 		createPost(
@@ -216,6 +215,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 	assert.True(t, newID > 0, "New ID greater than 0")
 
 	// UPDATE rec by newID
+	fmt.Println("Testing GraphQL mutation updatePost")
 	s = `
 	mutation {
 		updatePost(
@@ -240,6 +240,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 	assert.Equal(t, updatedText, "updated post")
 
 	// READ rec by newID
+	fmt.Println("Testing GraphQL query post")
 	s = `
 	query { 
 		post (id: %d) { id  text  author }
@@ -255,6 +256,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 	assert.Equal(t, readText, "updated post")
 
 	// DELETE rec by newID
+	fmt.Println("Testing GraphQL mutation deletePost")
 	s = `
 	mutation {
 		deletePost(
@@ -284,6 +286,7 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 func Test_GraphQL_CRUD_Medium(t *testing.T) {
 
 	// CREATE newID
+	fmt.Println("Testing GraphQL mutation createMedium")
 	s := `
 	mutation {
 		createMedium(
@@ -307,6 +310,7 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	assert.True(t, newID > 0, "New ID greater than 0")
 
 	// UPDATE rec by newID
+	fmt.Println("Testing GraphQL mutation updateMedium")
 	s = `
 	mutation {
 		updateMedium(
@@ -331,6 +335,7 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	assert.Equal(t, updatedThumb, "updated medium")
 
 	// READ rec by newID
+	fmt.Println("Testing GraphQL query medium")
 	s = `
 	query { 
 		medium (id: %d) { id  thumb  source }
@@ -346,6 +351,7 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	assert.Equal(t, readThumb, "updated medium")
 
 	// DELETE rec by newID
+	fmt.Println("Testing GraphQL mutation deleteMedium")
 	s = `
 	mutation {
 		deleteMedium(

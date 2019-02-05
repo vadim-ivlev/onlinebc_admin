@@ -43,7 +43,7 @@ func RedisMiddleware() gin.HandlerFunc {
 				s := newWriter.Buffer.String()
 				redis.Set(key, s)
 			}
-			// You have to manually flush the buffer at the end
+			// manually flush the buffer at the end
 			w.Flush()
 
 		}

@@ -48,14 +48,22 @@ GraphQL и REST API онлайн трансляций.
 
 Тесты
 ------
+Запуск всех тестов
 
-    go test
+    go test -v ./...
 
-или
+Юнит тесты
+
+    go test -v ./model/redis 
+    go test -v ./model/db
+
+
+Функциональные тесты (End to End). CRUD для таблиц Broadcast, Post, Medium сквозь GraphQL API 
+и чтение  трансляций через REST API.
 
     go test -v
 
-
+Параметр -v можно убрать если не нужен подробный вывод.
 
 
 

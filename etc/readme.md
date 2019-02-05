@@ -1,1 +1,4 @@
-files used in docker-compose.yml
+`.pgpass` используется в docker-compose.yml.
+Файл нужен чтобы не вводить пароли при дампе/восстановлении базы данных.
+
+
