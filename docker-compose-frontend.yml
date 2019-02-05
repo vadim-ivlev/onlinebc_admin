@@ -24,11 +24,11 @@ services:
       restart: always
 
   runner:
-    image: vadimivlev/onlinebc
+    image: rgru/onlinebc_admin
     container_name: onlinebc-runner
     restart: always
     # расскомментируйте следующую строку если хотите доступ только к публичному REST API 
-    # command: bash -c "sleep 10 && cd /app && ./onlinebc -serve 7700 -front"
+    # command: bash -c "cd /app && ./onlinebc -serve 7700 -front"
     ports:
       - 7700:7700
     depends_on:

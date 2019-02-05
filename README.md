@@ -33,7 +33,7 @@ GraphQL и REST API онлайн трансляций.
 
 
 
-Запуск приложения
+Запуск приложения (для разработчиков onlinebc_admin)
 -----------------
     go build && ./onlinebc_admin -serve 7777
 
@@ -67,19 +67,26 @@ GraphQL и REST API онлайн трансляций.
 
 
 
-Сборка для фронтэнд разработчиков и production
+Сборка для фронтэнд разработчиков
 ----------------------------------------------
 
-    /build.sh
+    ./build-frontend-container.sh
 
-Скрипт `build.sh` генерирует исполняемые файл Linux (`onlinebc`) в директории `build/` вместе с настроечными файлами. Эта директория должна копироваться на продакшн сервер. 
+Скрипт `build-frontend-container.sh` генерирует образ приложения согласно `Dockerfile-frontend` 
+и выгружает его в <https://hub.docker.com/>. Файл `docker-compose-frontend.yml` ссылается на этот образ 
+и служит для запуска приложения фронтэнд разработчиками на локальных компьютерах. 
 
-Описание настроек в файле <readme-production.md>.
+Порядок запуска приложения фронтэнд разаработчиками описан в файле <readme-frontend.md>.
 
 
-Из `build/`файлы копируются в директорию `../onlinebc/`, расположенную в том же каталоге что и `onlinebc_admin`, которая содержит клон репозитория <https://git.rgwork.ru/web/onlinebc>. Таким образом обновляются файлы проекта onlinebc для использования фронтэнд разработчиками.  
 
-Читай <readme-front.md>
+Деплой
+-------
+
+Описание настроек для размещения программы на боевых серверах находится в файле <readme-production.md>.
+
+
+
 
 
 
@@ -195,14 +202,12 @@ Cопосталяет маршруты функциям-контроллерам
 
     docker-compose.yml     
     main.go
-    README-FRONT.md              # Для фронтэнд разработчиков
-    README-PRODUCTION.md         # Для админов
+    readme-frontend.md           # Для фронтэнд разработчиков
+    readme-production.md         # Для админов
     README.md                    # Этот файл
-    build.sh*                    # Скрипт сборки
-    run_tests.sh*                # Запуск тестов
-    Dockerfile-frontend          # Используется в build.sh
+    build-frontend-container.sh* # Скрипт сборки докер контейнера для фронтэнд разработчиков
+    Dockerfile-frontend          # Используется в build-frontend-container.sh
     docker-compose-frontend.yml  # Файл запуска для фронтэнд разработчиков. 
-                                 # Копируется в onlinebc скриптом build.sh
     TODO.md                      # Недоделки
 
 

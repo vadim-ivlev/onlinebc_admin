@@ -11,7 +11,7 @@ ENV RUNNING_IN_DOCKER="Y"
 
 EXPOSE 7700
 
-CMD bash -c "sleep 10 && cd /app && ./onlinebc -serve 7700"
+CMD bash -c "cd /app && ./onlinebc -serve 7700"
 
 
 
