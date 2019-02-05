@@ -403,6 +403,7 @@ func Test_GraphQL_NONExistantID(t *testing.T) {
 	m := jsonStringToMap(body)
 	data := m["data"].(map[string]interface{})
 	updateMedium := data["updateMedium"].(map[string]interface{})
+	// TODO: assert here
 	updatedThumb := updateMedium["thumb"].(string)
 	assert.Equal(t, updatedThumb, "updated medium")
 
