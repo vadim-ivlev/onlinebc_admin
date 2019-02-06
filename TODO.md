@@ -16,5 +16,8 @@ TODO
 9. Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
 10. Прикрутить линтование https://github.com/golangci/golangci-lint
 11. Актуализировать Readme
+12. Заменить редис https://github.com/go-redis/redis
+14. upload images base64
+
 
 
