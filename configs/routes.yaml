@@ -1,5 +1,40 @@
 
 # GraphQL --------------------------------------------------
+- comment   : |-
+    GraphQL. Загрузка изображения. Сначала заполните форму выше.
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      mutation {
+        createMedium(
+            post_id: 24098,
+            thumb:"new medium", 
+            source: "Петров" 
+          ) 
+          {
+            id 
+            thumb 
+            source 
+          }
+        }	
+
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{ "base64":"base64string"}' 
+
+
+
+
+
 
 - comment   : |-
     GraphQL. Получение информации о типах GraphQL.
