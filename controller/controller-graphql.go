@@ -450,27 +450,36 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Args: gq.FieldConfigArgument{
 				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
 				"post_id": &gq.ArgumentConfig{
-					Type: gq.Int,
-
+					Type:        gq.Int,
 					Description: "Идентификатор поста",
 				},
 				"uri": &gq.ArgumentConfig{
-					Type: gq.String,
-
+					Type:        gq.String,
 					Description: "URI изображения",
 				},
 				"thumb": &gq.ArgumentConfig{
-					Type: gq.String,
-
+					Type:        gq.String,
 					Description: "Уменьшенное изображение",
 				},
 				"source": &gq.ArgumentConfig{
 					Type:        gq.String,
 					Description: "Источник медиа",
 				},
+				"base64": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Сериализованное в base64 изображение",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				newRow := db.CreateRow("medium", params.Args)
+				args := params.Args
+				var path string
+				if b64, ok := args["base64"]; ok {
+					s := b64.(string)
+					path = saveImage(s)
+					delete(args, "base64")
+				}
+				args["uri"] = path
+				newRow := db.CreateRow("medium", args)
 				return newRow, nil
 			},
 		},

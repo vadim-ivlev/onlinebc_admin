@@ -145,6 +145,24 @@
                     var fileName, fileSize, fileType;
                     
                     function createGQQuery(b64string){
+                        q = `
+mutation {
+    createMedium(
+    post_id: 24098,
+    thumb:"new medium", 
+    source: "Петров" 
+    base64: "${b64string}"
+    ) 
+    {
+        id 
+        thumb 
+        source 
+        uri
+    }
+}	
+`;
+                        
+
                         p = {
                             base64 : b64string,
                             src: fileName
@@ -153,7 +171,8 @@
                         ps = JSON.stringify(p, null, 2)
 
                         console.log(ps)
-                        document.querySelector('#form0 textarea[name="variables"]').value = ps
+                        document.querySelector('#form0 textarea[name="query"]').value = q
+                        // document.querySelector('#form0 textarea[name="variables"]').value = ps
 
                     }
 

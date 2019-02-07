@@ -122,6 +122,8 @@ textarea {
     /* font-size: 80%; */
     color: darkmagenta;
     font-family: monospace;
+    white-space: nowrap;  
+    overflow: auto;
 }
 
 
