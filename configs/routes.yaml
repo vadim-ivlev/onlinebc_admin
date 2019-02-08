@@ -15,23 +15,15 @@
     test   : |- 
       mutation {
         createMedium(
-            post_id: 24098,
-            thumb:"new medium", 
-            source: "Петров" 
+
+
           ) 
           {
-            id 
-            thumb 
-            source 
+
+
+
           }
         }	
-
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{ "base64":"base64string"}' 
-
-
 
 
 

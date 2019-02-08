@@ -469,14 +469,21 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.String,
 					Description: "Сериализованное в base64 изображение",
 				},
+				"filename": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Имя загружаемого файла",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				args := params.Args
 				var path string
 				if b64, ok := args["base64"]; ok {
 					s := b64.(string)
-					path = saveImage(s)
+					postID := args["post_id"].(int)
+					filename := args["filename"].(string)
+					path = saveImage(postID, filename, s)
 					delete(args, "base64")
+					delete(args, "filename")
 				}
 				args["uri"] = path
 				newRow := db.CreateRow("medium", args)

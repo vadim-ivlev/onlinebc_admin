@@ -112,6 +112,14 @@ input[type=submit] {
     height: 38px;
 }
 
+input[type=button] {
+    margin-top: 10px; 
+    height: 38px;
+    background-color: white;
+    color: darkmagenta;
+}
+
+
 textarea {
     width: 530px ;
     height: 10px; 

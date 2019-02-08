@@ -25,28 +25,26 @@
     <h1><span class="rgru"><span>RG.</span><span class="or">RU</span></span></h1>
     <h4>Тестовая форма для загрузки изображений в Medium</h4>
 
-    <form id="formA" onsubmit="createGraphQLQuery(event)">
+    <form id="formA">
         <div>
             <span class="form-param-name">post_id</span>
-            <input type="number" name="post_id" value="23932">
+            <input type="number" name="post_id" value="24098">
             &nbsp;&nbsp;<span class="param-comment">идентификатор поста</span>
         </div>
         <div>
             <span class="form-param-name">source</span>
-            <input type="" name="source" value="BBC">
+            <input type="" name="source" value="RT">
             &nbsp;&nbsp;<span class="param-comment">Источник</span>
         </div>
         <div>
                 <span class="form-param-name">Изображение</span>
-                <input id="inputFile" type="file" onchange="previewFile()">
-            </div>
-            <div>
-                <span class="form-param-name"></span>
-                <img id="imgToLoad" style="max-width: 400px;">
+                <input id="inputFile" type="file" multiple  onchange="inputFileChangeHandler(event)"> 
+        </div>
+        <div id="img_container">
         </div>
         <div>
             <span class="param-name"></span>
-            <input type="submit" value="Создать GraphQL">
+            <input type="button" value="Создать GraphQL" onclick="createQueries(b64array)">
         </div>
     </form>
     <br>
@@ -124,77 +122,7 @@
         </div>
 
         <script>
-            // подравниваем высоты textarea
-            $("textarea").each(function (textarea) {
-                $(this).height($(this)[0].scrollHeight);
-            });
-
-            function createGraphQLQuery(event) {
-                    event.preventDefault()
-                    // var id = $('#formA input[name="post_id"]').val()
-                    var id = document.querySelector('#formA input[name="post_id"]').getAttribute('value')
-
-                    console.log(id)
-                    
-                }
-
-            function previewFile() {
-                    var img = document.querySelector('#imgToLoad');
-                    var file = document.querySelector('#inputFile').files[0];
-                    var reader = new FileReader();
-                    var fileName, fileSize, fileType;
-                    
-                    function createGQQuery(b64string){
-                        q = `
-mutation {
-    createMedium(
-    post_id: 24098,
-    thumb:"new medium", 
-    source: "Петров" 
-    base64: "${b64string}"
-    ) 
-    {
-        id 
-        thumb 
-        source 
-        uri
-    }
-}	
-`;
-                        
-
-                        p = {
-                            base64 : b64string,
-                            src: fileName
-                        }
-
-                        ps = JSON.stringify(p, null, 2)
-
-                        console.log(ps)
-                        document.querySelector('#form0 textarea[name="query"]').value = q
-                        // document.querySelector('#form0 textarea[name="variables"]').value = ps
-
-                    }
-
-
-                    reader.addEventListener("load", function () {
-                        var r = reader.result;
-                        console.log(r.substr(0,50))
-                        s= r.substr(r.search("base64,") + "base64,".length)
-                        console.log(s.substr(0,50))
-                        img.src = r;
-                        createGQQuery(s)
-                    }, false);
-
-                    if (file) {
-                        fileType = file.type
-                        fileName = file.name
-                        fileSize = file.size
-                        console.log(`${fileName} ${fileType} ${fileSize}`)
-                        reader.readAsDataURL(file);
-                    }
-                }
-
+        {{template "index.js"}}
         </script>
 </body>
 

@@ -46,6 +46,7 @@ func SetupRouter(debug bool, outputToConsole bool) *gin.Engine {
 	}
 
 	r.StaticFile("/favicon.ico", "./templates/favicon.ico")
+	r.Static("/uploaded_images", "./uploaded_images")
 	r.LoadHTMLGlob("templates/*.*")
 
 	// подключаем Middleware
