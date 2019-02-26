@@ -58,7 +58,13 @@ func GetFunctionByName(funcName string) func(*gin.Context) {
 // Decoded body has precedence over POST over GET.
 func getPayload(r *http.Request) map[string]interface{} {
 	m := make(map[string]interface{})
-	r.ParseForm()
+	// TODO: increase max size of POST
+	err := r.ParseForm()
+	// err := r.ParseMultipartForm(128 << 20)
+	if err != nil {
+		fmt.Println("ACHTUNG!!!!!!!!!!!!!!!!!!!!!11")
+		fmt.Println(err)
+	}
 	for k := range r.Form {
 		m[k] = r.FormValue(k)
 	}

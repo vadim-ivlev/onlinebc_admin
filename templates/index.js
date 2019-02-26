@@ -24,13 +24,38 @@ function inputFileChangeHandler(event) {
     }
 }
 
+function toggleTextarea0() {
+    $('#form0 textarea[name="query"]').toggle()
+}
+
+var data = {
+    query : '',
+    variables: '{}'
+}
 
 function createQueries(b64array) {
+    // скрыть текст запроса для ускорения рендеринга
+    $('#form0 textarea[name="query"]').hide()
+    // показать кнопку показа/скрытия текста запроса
+    $('#showHideButton').show()
+
+
     var query = ""
     b64array.forEach(function (f, i) {
         query += createOneQuery(i, f.fileName, f.base64)
     });
-    document.querySelector('#form0 textarea[name="query"]').value = "mutation {\n"+query+"\n}\n"
+    data.query = "mutation {\n"+query+"\n}\n"
+    
+    document.querySelector('#form0 textarea[name="query"]').value = data.query
+    document.querySelector('#form0').onsubmit = sendImages
+    console.log("query encoded")
+}
+
+function sendImages(event){
+    event.preventDefault()
+    console.log('sendImage begin')
+    $.post('/graphql', data, function(response) {$('#result0').text(JSON.stringify(response, null,'  '));}, 'json'  )
+    console.log('sendImage end')
 }
 
 
