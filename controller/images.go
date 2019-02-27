@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// saveImage сохраняет изображение и возвращает его URI
 func saveImage(parentID int, fileName string, base64string string) (path string) {
 	decoded, err := base64.StdEncoding.DecodeString(base64string)
 	if err != nil {
