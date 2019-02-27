@@ -44,8 +44,6 @@ func SetupRouter(debug bool, outputToConsole bool) *gin.Engine {
 	} else {
 		r = gin.New()
 	}
-	// TODO: increase max size of POST
-	r.MaxMultipartMemory = 100 << 20 // 100 * 1024 * 1024 // 100 MiB
 
 	r.StaticFile("/favicon.ico", "./templates/favicon.ico")
 	r.Static("/uploaded_images", "./uploaded_images")

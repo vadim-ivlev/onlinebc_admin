@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"net/http"
 	"onlinebc_admin/model/db"
 
 	"github.com/gin-gonic/gin"
@@ -543,10 +544,18 @@ var schema, _ = gq.NewSchema(gq.SchemaConfig{
 
 // GraphQL исполняет GraphQL запрос
 func (dummy) GraphQL(c *gin.Context) {
+	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
 	m := getPayload(c.Request)
+	// req, ok := c.GetPostForm("query")
+	// if !ok {
+	// 	fmt.Println("GetPostForm ERROR!!!!!")
+	// }
+
 	result := gq.Do(gq.Params{
 		Schema:        schema,
 		RequestString: m["query"].(string),
+		// RequestString: req,
 	})
+
 	c.JSON(200, result)
 }
