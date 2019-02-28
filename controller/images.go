@@ -3,29 +3,40 @@ package controller
 import (
 	"encoding/base64"
 	"fmt"
-	"io/ioutil"
-	"os"
+	"onlinebc_admin/model/ftp"
+	"path/filepath"
+	"strings"
 )
 
-// saveImage сохраняет изображение и возвращает его URI
-func saveImage(parentID int, fileName string, base64string string) (path string) {
-	decoded, err := base64.StdEncoding.DecodeString(base64string)
+// saveImage сохраняет изображение и возвращает URI изображения и его иконки
+func saveImage(parentID int, fileName string, base64string string) (imageURI string, thumbURI string) {
+	imageBytes, err := base64.StdEncoding.DecodeString(base64string)
 	if err != nil {
 		fmt.Println("decode error:", err)
-		return ""
-	}
-	dirname := fmt.Sprintf("uploaded_images/%08d", parentID)
-	// newpath := filepath.Join(".", "public")
-	err2 := os.MkdirAll(dirname, os.ModePerm)
-	if err2 != nil {
-		panic(err2)
+		return
 	}
 
-	path = fmt.Sprintf("%s/%s", dirname, fileName)
-	fmt.Println(path)
-	err1 := ioutil.WriteFile(path, decoded, 0644)
-	if err1 != nil {
-		panic(err1)
-	}
+	resizedImage := resizeImage(imageBytes)
+	thumb := makeThumb(imageBytes)
+	dir := getDirName(parentID)
+	ext := filepath.Ext(fileName)
+	thumbName := strings.TrimSuffix(fileName, ext) + "_thumb" + ext
+
+	imageURI = ftp.Save(dir, fileName, resizedImage)
+	thumbURI = ftp.Save(dir, thumbName, thumb)
+
 	return
+}
+
+func getDirName(parentID int) (dirname string) {
+	dirname = fmt.Sprintf("uploaded_images/%08d", parentID)
+	return
+}
+
+func resizeImage(imageBytes []byte) []byte {
+	return imageBytes
+}
+
+func makeThumb(imageBytes []byte) []byte {
+	return imageBytes
 }

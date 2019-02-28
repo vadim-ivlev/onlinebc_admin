@@ -482,12 +482,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					s := b64.(string)
 					postID := args["post_id"].(int)
 					filename := args["filename"].(string)
-					imageURI = saveImage(postID, filename, s)
+					imageURI, thumbURI = saveImage(postID, filename, s)
 				}
 				delete(args, "base64")
 				delete(args, "filename")
 				args["uri"] = imageURI
-				args["thumb"] = thumbURI + "."
+				args["thumb"] = thumbURI
 				newRow := db.CreateRow("medium", args)
 				return newRow, nil
 			},
@@ -542,19 +542,6 @@ var schema, _ = gq.NewSchema(gq.SchemaConfig{
 })
 
 // *******************************************************************************8
-
-// func getPathOfSavedImage() string {
-// 	var path string
-// 	if b64, ok := args["base64"]; ok {
-// 		s := b64.(string)
-// 		postID := args["post_id"].(int)
-// 		filename := args["filename"].(string)
-// 		path = saveImage(postID, filename, s)
-// 		delete(args, "base64")
-// 		delete(args, "filename")
-// 	}
-// 	return path
-// }
 
 // GraphQL исполняет GraphQL запрос
 func (dummy) GraphQL(c *gin.Context) {

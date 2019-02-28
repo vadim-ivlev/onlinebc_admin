@@ -1,4 +1,4 @@
-package redis
+package ftp
 
 import (
 	"fmt"
@@ -31,8 +31,8 @@ func ReadConfig(fileName string) {
 	}
 }
 
-// PrintConfig shows Redis connection parameters.
+// PrintConfig shows FTP connection parameters.
 func PrintConfig() {
 	s, _ := yaml.Marshal(params)
-	fmt.Printf("\nRedis parameters:\n%s\n", s)
+	fmt.Printf("\nFTP parameters:\n%s\n", s)
 }

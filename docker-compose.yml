@@ -29,6 +29,18 @@ services:
       restart: always
 
 
+  imgserver:
+    image: sickp/alpine-sshd
+    container_name: imgserver-com
+    network_mode: bridge
+    volumes:
+     - ./uploads:/var/www/onlinebc/uploads
+    ports:
+     - "222:22"
+    restart: always
+
+
+
   # runner:
   #   image: debian:7.11-slim
   #   container_name: runner
