@@ -3,6 +3,8 @@ package controller
 import (
 	"net/http"
 	"onlinebc_admin/model/db"
+	"onlinebc_admin/model/img"
+	"onlinebc_admin/model/imgserver"
 
 	"github.com/gin-gonic/gin"
 	gq "github.com/graphql-go/graphql"
@@ -478,11 +480,14 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				args := params.Args
 				var imageURI, thumbURI string
+				var imageURITemp, thumbURITemp string
 				if b64, ok := args["base64"]; ok {
 					s := b64.(string)
 					postID := args["post_id"].(int)
 					filename := args["filename"].(string)
-					imageURI, thumbURI = saveImage(postID, filename, s)
+					imageURITemp, thumbURITemp = img.SaveImage(postID, filename, s)
+					imageURI = imgserver.MoveFile(imageURITemp)
+					thumbURI = imgserver.MoveFile(thumbURITemp)
 				}
 				delete(args, "base64")
 				delete(args, "filename")

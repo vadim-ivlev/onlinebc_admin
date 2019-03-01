@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"onlinebc_admin/controller"
 	"onlinebc_admin/model/db"
+	"onlinebc_admin/model/imgserver"
 	"onlinebc_admin/model/redis"
 
 	"os"
@@ -20,13 +21,16 @@ func readConfigs(frontEndMode bool) {
 	if os.Getenv("RUNNING_IN_DOCKER") == "Y" {
 		db.ReadConfig("./configs/db-docker.yaml")
 		redis.ReadConfig("./configs/redis-docker.yaml")
+		imgserver.ReadConfig("./configs/imgserver-docker.yaml")
 	} else {
 		db.ReadConfig("./configs/db-dev.yaml")
 		redis.ReadConfig("./configs/redis-dev.yaml")
+		imgserver.ReadConfig("./configs/imgserver-dev.yaml")
 	}
 
 	db.ReadConfig("./configs/db.yaml")
 	redis.ReadConfig("./configs/redis.yaml")
+	imgserver.ReadConfig("./configs/imgserver.yaml")
 
 	// Если запущен во Фронтэнд моде загрузить соответствующие руты.
 	if frontEndMode {

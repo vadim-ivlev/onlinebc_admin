@@ -4,5 +4,5 @@ pgdata
 push.sh
 #build
 onlinebc*
-blabla*
-uploaded_images
+uploads
+uploads*

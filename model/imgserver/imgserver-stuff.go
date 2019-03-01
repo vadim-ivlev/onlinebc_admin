@@ -1,4 +1,4 @@
-package ftp
+package imgserver
 
 import (
 	"fmt"
@@ -10,8 +10,10 @@ import (
 // Вспомогательные функции /////////////////////////////////////////////////////
 
 type connectionParams struct {
-	ConnectStr string `yaml:"connection string"`
-	TTL        int    `yaml:"time to live"`
+	Host     string `yaml:"host"`
+	User     string `yaml:"user"`
+	Password string `yaml:"password"`
+	Port     string `yaml:"port"`
 }
 
 // Conf Common config params
@@ -31,8 +33,8 @@ func ReadConfig(fileName string) {
 	}
 }
 
-// PrintConfig shows FTP connection parameters.
+// PrintConfig shows ssh connection parameters.
 func PrintConfig() {
 	s, _ := yaml.Marshal(params)
-	fmt.Printf("\nFTP parameters:\n%s\n", s)
+	fmt.Printf("\nSSH parameters:\n%s\n", s)
 }

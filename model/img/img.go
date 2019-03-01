@@ -3,10 +3,16 @@ package img
 import (
 	"bytes"
 	"crypto/sha256"
+	"encoding/base64"
 	"encoding/hex"
+	"fmt"
 	"image"
+	"io/ioutil"
 	"os"
-	"sportbc_admin/config"
+	"path/filepath"
+
+	// "sportbc_admin/config"
+
 	"strconv"
 	"strings"
 	"time"
@@ -125,10 +131,16 @@ func CheckExt(ext string) bool {
 
 // GenPhotoPath генерация пути до фотографии
 func GenPhotoPath(name string) string {
-	path := frontPathUpload + "/" + time.Now().Format("2006/01/02") + "/" + name
+	// path := frontPathUpload + "/" + time.Now().Format("2006/01/02") + "/" + name
 	// Если директории не существует - создаем ее во временной
-	MkdirPath(config.APP.TempPATH + path)
-	return path
+	// MkdirPath(config.APP.TempPATH + path)
+	// return path
+	return GenPhotoDir() + "/" + name
+}
+
+// GenPhotoDir генерация директории для сохранения фотографии
+func GenPhotoDir() string {
+	return frontPathUpload + "/" + time.Now().Format("2006/01/02")
 }
 
 // MkdirPath создание директории хранения фото, если ее не существует
@@ -146,4 +158,61 @@ func GenFileName(fileName string) string {
 	name := hex.EncodeToString(h.Sum(nil))
 	name = name[0:LenPhotoName]
 	return name
+}
+
+// VADIM **********************************************************************
+
+// SaveImage сохраняет изображение и возвращает URI изображения и его иконки
+func SaveImage(parentID int, fileName string, base64string string) (imageURI string, thumbURI string) {
+	imageBytes, err := base64.StdEncoding.DecodeString(base64string)
+	if err != nil {
+		fmt.Println("decode error:", err)
+		return
+	}
+
+	resizedImage := resizeImage(imageBytes)
+	thumb := makeThumb(imageBytes)
+	dir := getTempDirName(parentID)
+	ext := filepath.Ext(fileName)
+	thumbName := strings.TrimSuffix(fileName, ext) + "_thumb" + ext
+
+	imageURI = Save(dir, fileName, resizedImage)
+	thumbURI = Save(dir, thumbName, thumb)
+
+	return
+}
+
+func getTempDirName(parentID int) (dirname string) {
+	dirname = fmt.Sprintf("uploads_temp/%08d", parentID)
+	return
+}
+
+func getDestDirName(parentID int) (dirname string) {
+	dirname = fmt.Sprintf("uploads_temp/%08d", parentID)
+	return
+}
+
+func resizeImage(imageBytes []byte) []byte {
+	return imageBytes
+}
+
+func makeThumb(imageBytes []byte) []byte {
+	return imageBytes
+}
+
+// Save сохраняет байты bytes в  файл filename в директории dirname.
+// Возвращает URI сохраненного файла или пустую строку в случае неудачи.
+func Save(dirname string, filename string, bytes []byte) (uri string) {
+	err := os.MkdirAll(dirname, os.ModePerm)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	path := dirname + "/" + filename
+	err = ioutil.WriteFile(path, bytes, 0644)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	return dirname + "/" + filename
 }
