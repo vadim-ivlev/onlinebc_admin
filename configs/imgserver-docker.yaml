@@ -1,5 +1,6 @@
 host:        imgserver
 user:        root
 password:    root
-port:        :22
+port:        22
+uploaddir:   /var/www/onlinebc
 

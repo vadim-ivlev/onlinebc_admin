@@ -10,10 +10,11 @@ import (
 // Вспомогательные функции /////////////////////////////////////////////////////
 
 type connectionParams struct {
-	Host     string `yaml:"host"`
-	User     string `yaml:"user"`
-	Password string `yaml:"password"`
-	Port     string `yaml:"port"`
+	Host      string `yaml:"host"`
+	User      string `yaml:"user"`
+	Password  string `yaml:"password"`
+	Port      string `yaml:"port"`
+	Uploaddir string `yaml:"uploaddir"`
 }
 
 // Conf Common config params

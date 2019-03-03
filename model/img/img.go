@@ -183,13 +183,8 @@ func SaveImage(parentID int, fileName string, base64string string) (imageURI str
 }
 
 func getTempDirName(parentID int) (dirname string) {
-	dirname = fmt.Sprintf("uploads_temp/%08d", parentID)
-	return
-}
-
-func getDestDirName(parentID int) (dirname string) {
-	dirname = fmt.Sprintf("uploads_temp/%08d", parentID)
-	return
+	// dirname = fmt.Sprintf("uploads_temp/%08d", parentID)
+	return "uploads_temp"
 }
 
 func resizeImage(imageBytes []byte) []byte {

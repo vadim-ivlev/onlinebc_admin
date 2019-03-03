@@ -486,8 +486,8 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					postID := args["post_id"].(int)
 					filename := args["filename"].(string)
 					imageURITemp, thumbURITemp = img.SaveImage(postID, filename, s)
-					imageURI = imgserver.MoveFile(imageURITemp)
-					thumbURI = imgserver.MoveFile(thumbURITemp)
+					imageURI = imgserver.MoveFileToImageServer(imageURITemp)
+					thumbURI = imgserver.MoveFileToImageServer(thumbURITemp)
 				}
 				delete(args, "base64")
 				delete(args, "filename")

@@ -2,62 +2,45 @@ package imgserver
 
 import (
 	"fmt"
+	"io/ioutil"
 	"onlinebc_admin/model/img"
-	"os"
 	"os/exec"
 	"path/filepath"
 )
 
-// sshpass -p root scp -P 222 TODO.md  root@localhost:/var/www/onlinebc/uploads/TODO.md
-// rsync -r local-dir remote-machine:path
-// ssh remote-host 'mkdir -p foo/bar/qux'
-// ssh user@host "mkdir -p /target/path/" && scp /path/to/source user@host:/target/path/
-// if err := exec.Command("go", "doc", "flag", "Flag.Name").Run(); err == nil {
+// bash("sshpass -p root ssh -p 222 root@localhost mkdir -p /var/www/onlinebc/uploads/foo; exit")
+// bash("sshpass -p root scp -P 222 f.txt root@localhost:/var/www/onlinebc/uploads/foo/")
 
-///usr/bin/rsync -ratlz --rsh="/usr/bin/sshpass -p password ssh -o StrictHostKeyChecking=no -l username" src_path  dest_path
-
-/// sshpass -p "password" rsync root@1.2.3.4:/abc /def
-// Note the space at the start of the command, in the bash shell
-// this will stop the command (and the password) from being stored in the history.
-
-// rsync -rvz -e 'ssh -p 2222' --progress --remove-sent-files ./dir user@host:/path
-// - just note the SSH command itself is enclosed in quotes.
-
-// MoveFile перемещает файл  на удаленный сервер
-func MoveFile(filePath string) string {
+// MoveFileToImageServer перемещает файл  на удаленный сервер
+func MoveFileToImageServer(filePath string) string {
 	fileName := filepath.Base(filePath)
-	userhost := params.User + "@" + params.Host
-	destDir := img.GenPhotoDir()
-	destPath := img.GenPhotoPath(fileName)
-	destination := params.User + "@" + params.Host + ":" + destPath
+	destDir := params.Uploaddir + img.GenPhotoDir()
 
-	println(fileName)
-	println(userhost)
-	println(destDir)
-	println(destPath)
-	println(destination)
+	cmdMkdir := fmt.Sprintf("sshpass -p %s ssh -q -o StrictHostKeyChecking=no -p %s %s@%s mkdir -p %s; exit", params.Password, params.Port, params.User, params.Host, destDir)
+	cmdCopy := fmt.Sprintf("sshpass -p %s scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P %s %s %s@%s:%s/", params.Password, params.Port, filePath, params.User, params.Host, destDir)
+	cmdRemove := fmt.Sprintf("rm %s", filePath)
 
-	if err := createRemoteDir(userhost, destDir); err != nil {
-		fmt.Println(err.Error())
-		return ""
-	}
+	bash(cmdMkdir)
+	bash(cmdCopy)
+	bash(cmdRemove)
 
-	if err := copyFileToRemoteServer(filePath, destination); err != nil {
-		fmt.Println(err.Error())
-		return ""
-	}
-
-	if err := os.Remove(filePath); err != nil {
-		fmt.Println(err.Error())
-	}
-
-	return destPath
+	return img.GenPhotoDir() + "/" + fileName
 }
 
-func createRemoteDir(userhost string, dir string) error {
-	return exec.Command("sshpass", "-p", params.Password, "ssh", "-p", params.Port, userhost, "'mkdir -p foo/bar/qux'").Run()
-}
-
-func copyFileToRemoteServer(filePath string, destination string) error {
-	return exec.Command("sshpass", "-p", params.Password, "scp", "-P", params.Port, filePath, destination).Run()
+func bash(cmdString string) (errMessage string) {
+	cmd := exec.Command("bash")
+	// cmd.Stdout = os.Stdout
+	// cmd.Stderr = os.Stderr
+	cmdWriter, _ := cmd.StdinPipe()
+	errReader, _ := cmd.StderrPipe()
+	cmd.Start()
+	cmdWriter.Write([]byte(cmdString + "\n"))
+	cmdWriter.Write([]byte("exit" + "\n"))
+	errBytes, _ := ioutil.ReadAll(errReader)
+	cmd.Wait()
+	errMessage = string(errBytes)
+	if errMessage != "" {
+		fmt.Println(cmdString, "ERR:", errMessage)
+	}
+	return
 }

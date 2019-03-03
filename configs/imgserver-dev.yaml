@@ -1,5 +1,6 @@
 host:        localhost
 user:        root
 password:    root
-port:        :222
+port:        222
+uploaddir:   /var/www/onlinebc
 
