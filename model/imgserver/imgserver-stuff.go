@@ -33,9 +33,3 @@ func ReadConfig(fileName string) {
 		fmt.Println(err.Error())
 	}
 }
-
-// PrintConfig shows ssh connection parameters.
-func PrintConfig() {
-	s, _ := yaml.Marshal(params)
-	fmt.Printf("\nSSH parameters:\n%s\n", s)
-}

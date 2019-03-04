@@ -1,36 +1,46 @@
+// Package imgserver содержит функции для перемещения файлов изображений
+// из временной директории на удаленный сервер по ssh.
+// Используются команды ssh и scp, предположительно доступные
+// в операционной системе.
 package imgserver
 
 import (
 	"fmt"
 	"io/ioutil"
-	"onlinebc_admin/model/img"
 	"os/exec"
 	"path/filepath"
+	"time"
 )
 
-// bash("sshpass -p root ssh -p 222 root@localhost mkdir -p /var/www/onlinebc/uploads/foo; exit")
-// bash("sshpass -p root scp -P 222 f.txt root@localhost:/var/www/onlinebc/uploads/foo/")
+const (
+	// директория для временного хранения загруженных фото
+	tempUploadPath = "/uploads"
+)
+
+// GenPhotoDir генерация директории для сохранения фотографии
+func GenPhotoDir() string {
+	return tempUploadPath + "/" + time.Now().Format("2006/01/02")
+}
 
 // MoveFileToImageServer перемещает файл  на удаленный сервер
 func MoveFileToImageServer(filePath string) string {
 	fileName := filepath.Base(filePath)
-	destDir := params.Uploaddir + img.GenPhotoDir()
+	photoDir := GenPhotoDir()
+	destDir := params.Uploaddir + photoDir
 
 	cmdMkdir := fmt.Sprintf("sshpass -p %s ssh -q -o StrictHostKeyChecking=no -p %s %s@%s mkdir -p %s; exit", params.Password, params.Port, params.User, params.Host, destDir)
-	cmdCopy := fmt.Sprintf("sshpass -p %s scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P %s %s %s@%s:%s/", params.Password, params.Port, filePath, params.User, params.Host, destDir)
-	cmdRemove := fmt.Sprintf("rm %s", filePath)
+	cmdCopyFile := fmt.Sprintf("sshpass -p %s scp -o StrictHostKeyChecking=no -P %s %s %s@%s:%s/", params.Password, params.Port, filePath, params.User, params.Host, destDir)
+	cmdRemoveFile := fmt.Sprintf("rm %s", filePath)
 
 	bash(cmdMkdir)
-	bash(cmdCopy)
-	bash(cmdRemove)
+	bash(cmdCopyFile)
+	bash(cmdRemoveFile)
 
-	return img.GenPhotoDir() + "/" + fileName
+	return photoDir + "/" + fileName
 }
 
 func bash(cmdString string) (errMessage string) {
 	cmd := exec.Command("bash")
-	// cmd.Stdout = os.Stdout
-	// cmd.Stderr = os.Stderr
 	cmdWriter, _ := cmd.StdinPipe()
 	errReader, _ := cmd.StderrPipe()
 	cmd.Start()
