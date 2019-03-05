@@ -286,6 +286,53 @@ func Test_GraphQL_CRUD_Post(t *testing.T) {
 
 }
 
+// Test_GraphQL_Upload_Images тестируем загрузку изображений.
+func Test_GraphQL_Upload_Images(t *testing.T) {
+
+	// CREATE newID
+	fmt.Println("Testing GraphQL upload images")
+	s := `
+	mutation {
+
+		new0: createMedium( 
+			post_id: 24098, 
+			source: "RT", 
+			filename: "_small.gif",
+			base64: "R0lGODdhBgAHAIABAAAAAP///ywAAAAABgAHAAACCoxvALfRn2JqyBQAOw=="
+		) 
+		{   
+			id 
+			post_id  
+			source 
+			thumb  
+			uri  
+		}
+		
+		new1: createMedium( 
+			post_id: 24098, 
+			source: "RT", 
+			filename: "_small.png",
+			base64: "iVBORw0KGgoAAAANSUhEUgAAAAYAAAAHCAIAAACk8qu6AAAALklEQVQI122NQQoAMAzCmv7/z9nBMhidFyWIotarjgHAsLTUG7qWPoj0MzR5Px5x5hf78pZ5DQAAAABJRU5ErkJggg=="
+		) 
+		{   
+			id 
+			post_id  
+			source 
+			thumb  
+			uri  
+		}
+		
+	}
+	`
+	w := getNewRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
+	assert.Equal(t, 200, w.Code)
+	m := jsonStringToMap(w.Body.String())
+	data := m["data"].(map[string]interface{})
+	createMedium := data["createMedium"].(map[string]interface{})
+	newID := int(createMedium["id"].(float64))
+	assert.True(t, newID > 0, "New ID must be greater than 0")
+}
+
 // Test_GraphQL_CRUD_Medium тестируем создание, чтение, обновление, удаление записей Medium.
 func Test_GraphQL_CRUD_Medium(t *testing.T) {
 

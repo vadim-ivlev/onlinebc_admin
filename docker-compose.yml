@@ -5,7 +5,6 @@ services:
   db:
     image: postgres
     container_name: psql-com
-    # network_mode: bridge
     restart: always
     ports:
       - 5432:5432
@@ -23,7 +22,6 @@ services:
   redis:
       image: redis
       container_name: pg-redis-com
-      # network_mode: bridge
       ports:
           - "6389:6379"
       restart: always
@@ -32,34 +30,12 @@ services:
   imgserver:
     image: sickp/alpine-sshd
     container_name: imgserver-com
-    network_mode: bridge
     volumes:
      - ./uploads:/var/www/onlinebc/uploads
     ports:
      - "222:22"
     restart: always
 
-
-
-  # runner:
-  #   image: debian:7.11-slim
-  #   container_name: runner
-  #   # network_mode: bridge
-  #   environment:
-  #     RUNNING_IN_DOCKER: Y
-  #   restart: on-failure:10
-  #   command: bash -c "sleep 10 && cd /app && ./onlinebc -serve 7700 -front"
-  #   ports:
-  #     - 7700:7700
-  #   volumes:
-  #     - "./build:/app"
-  #   depends_on:
-  #     - db
-  #     - redis
-  #   links:
-  #     - db
-  #     - redis
-  #     - imgserver
 
 
 

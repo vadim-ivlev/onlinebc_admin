@@ -28,8 +28,8 @@ func MoveFileToImageServer(filePath string) string {
 	photoDir := GenPhotoDir()
 	destDir := params.Uploaddir + photoDir
 
-	cmdMkdir := fmt.Sprintf("sshpass -p %s ssh -q -o StrictHostKeyChecking=no -p %s %s@%s mkdir -p %s; exit", params.Password, params.Port, params.User, params.Host, destDir)
-	cmdCopyFile := fmt.Sprintf("sshpass -p %s scp -o StrictHostKeyChecking=no -P %s %s %s@%s:%s/", params.Password, params.Port, filePath, params.User, params.Host, destDir)
+	cmdMkdir := fmt.Sprintf("sshpass -p %s ssh -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p %s %s@%s mkdir -p %s; exit", params.Password, params.Port, params.User, params.Host, destDir)
+	cmdCopyFile := fmt.Sprintf("sshpass -p %s scp -q -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P %s %s %s@%s:%s/", params.Password, params.Port, filePath, params.User, params.Host, destDir)
 	cmdRemoveFile := fmt.Sprintf("rm %s", filePath)
 
 	bash(cmdMkdir)
@@ -50,7 +50,7 @@ func bash(cmdString string) (errMessage string) {
 	cmd.Wait()
 	errMessage = string(errBytes)
 	if errMessage != "" {
-		fmt.Println(cmdString, "ERR:", errMessage)
+		fmt.Println(cmdString, "\nBASH MESSAGE:\n", errMessage)
 	}
 	return
 }

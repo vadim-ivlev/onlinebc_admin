@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"image"
+	"os"
 	"path/filepath"
 
 	"strings"
@@ -33,8 +34,12 @@ func SaveImage(parentID int, fileName string, base64string string) (imageURI str
 		return
 	}
 	thumbName := strings.TrimSuffix(fileName, ext) + "_thumb" + ext
-	im, _ := imageFromString(base64string)
+	im, _, _ := imageFromString(base64string)
 	if im != nil {
+		err := os.MkdirAll(uploadsTempDir, 0777)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 		imageURI = resizeAndSave(im, uploadsTempDir+fileName)
 		thumbURI = thumbAndSave(im, uploadsTempDir+thumbName)
 	}
@@ -70,6 +75,7 @@ func thumbAndSave(im image.Image, filePath string) string {
 func saveImageToFile(dst image.Image, filePath string) string {
 	err := imaging.Save(dst, filePath)
 	if err != nil {
+		fmt.Println("ERROR saveImageToFile ****************************************")
 		fmt.Println(err.Error())
 		return ""
 	}
@@ -77,13 +83,12 @@ func saveImageToFile(dst image.Image, filePath string) string {
 }
 
 // imageFromString декодирует строку base64 в структуру image.Image
-func imageFromString(imageString string) (image.Image, error) {
+func imageFromString(imageString string) (image.Image, string, error) {
 	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(imageString))
 	im, format, err := image.Decode(reader)
 	if err != nil {
 		fmt.Println("ERR:", err.Error())
-		return nil, err
+		return nil, "", err
 	}
-	fmt.Println("Format:", format)
-	return im, nil
+	return im, format, nil
 }

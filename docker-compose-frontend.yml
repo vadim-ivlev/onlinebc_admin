@@ -27,15 +27,11 @@ services:
   imgserver:
     image: sickp/alpine-sshd
     container_name: onlinebc-imgserver
-    network_mode: bridge
     volumes:
      - ./uploads:/var/www/onlinebc/uploads
-    ports:
-     - "222:22"
+    # ports:
+    #  - "222:22"
     restart: always
-
-
-
 
   runner:
     image: rgru/onlinebc_admin
@@ -48,6 +44,7 @@ services:
     depends_on:
       - db
       - redis
+      - imgserver
     links:
       - db
       - redis
