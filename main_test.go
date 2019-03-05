@@ -11,6 +11,7 @@ import (
 	"onlinebc_admin/model/db"
 	"onlinebc_admin/router"
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -321,16 +322,41 @@ func Test_GraphQL_Upload_Images(t *testing.T) {
 			thumb  
 			uri  
 		}
-		
+
 	}
 	`
+	// response should be
+	// {
+	// 	"data": {
+	// 	  "new0": {
+	// 		"id": 6029,
+	// 		"post_id": 24098,
+	// 		"source": "RT",
+	// 		"thumb": "/uploads/2019/03/05/_small_thumb.gif",
+	// 		"uri": "/uploads/2019/03/05/_small.gif"
+	// 	  },
+	// 	  "new1": {
+	// 		"id": 6030,
+	// 		"post_id": 24098,
+	// 		"source": "RT",
+	// 		"thumb": "/uploads/2019/03/05/_small_thumb.png",
+	// 		"uri": "/uploads/2019/03/05/_small.png"
+	// 	  }
+	// 	}
+	//   }
+
 	w := getNewRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
 	assert.Equal(t, 200, w.Code)
 	m := jsonStringToMap(w.Body.String())
 	data := m["data"].(map[string]interface{})
-	createMedium := data["createMedium"].(map[string]interface{})
-	newID := int(createMedium["id"].(float64))
+	new0 := data["new0"].(map[string]interface{})
+	newID := int(new0["id"].(float64))
 	assert.True(t, newID > 0, "New ID must be greater than 0")
+	newURI := new0["uri"].(string)
+	assert.Equal(t, filepath.Base(newURI), "_small.gif")
+	newThumb := new0["thumb"].(string)
+	assert.Equal(t, filepath.Base(newThumb), "_small_thumb.gif")
+
 }
 
 // Test_GraphQL_CRUD_Medium тестируем создание, чтение, обновление, удаление записей Medium.
