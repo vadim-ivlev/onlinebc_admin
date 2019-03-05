@@ -15,10 +15,11 @@ TODO
 8. (done) Написать тесты (хотя бы для самой ответственной части)
 9. Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
 10. Прикрутить линтование https://github.com/golangci/golangci-lint
-11. Актуализировать Readme
+11. (done) Актуализировать Readme
 12. Заменить редис https://github.com/go-redis/redis
 14. (done) upload images base64
-15. Построить докер имидж.
+15. (done) Построить докер имидж.
+16. Naming
 
 
 
