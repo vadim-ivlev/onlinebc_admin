@@ -552,6 +552,8 @@ var schema, _ = gq.NewSchema(gq.SchemaConfig{
 func (dummy) GraphQL(c *gin.Context) {
 	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
 	m := getPayload(c.Request)
+
+	// Альтернативный способ. Оставлено на всякий случай
 	// req, ok := c.GetPostForm("query")
 	// if !ok {
 	// 	fmt.Println("GetPostForm ERROR!!!!!")

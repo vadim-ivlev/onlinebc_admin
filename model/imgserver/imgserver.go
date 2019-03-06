@@ -24,6 +24,9 @@ func GenPhotoDir() string {
 
 // MoveFileToImageServer перемещает файл  на удаленный сервер
 func MoveFileToImageServer(filePath string) string {
+	// профилирование
+	// start := time.Now()
+
 	fileName := filepath.Base(filePath)
 	photoDir := GenPhotoDir()
 	destDir := params.Uploaddir + photoDir
@@ -35,6 +38,10 @@ func MoveFileToImageServer(filePath string) string {
 	bash(cmdMkdir)
 	bash(cmdCopyFile)
 	bash(cmdRemoveFile)
+
+	// профилирование
+	// elapsed := time.Since(start)
+	// fmt.Printf("MoveFileToImageServer took %s\n", elapsed)
 
 	return photoDir + "/" + fileName
 }

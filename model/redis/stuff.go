@@ -14,10 +14,10 @@ type connectionParams struct {
 	TTL        int    `yaml:"time to live"`
 }
 
-// Conf Common config params
+// Conf общие конфигурационные параметры
 var params connectionParams
 
-// ReadConfig reads YAML file
+// ReadConfig читает файл YAML
 func ReadConfig(fileName string) {
 	yamlFile, err := ioutil.ReadFile(fileName)
 	if err != nil {
