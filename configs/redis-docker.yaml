@@ -1,0 +1,2 @@
+connection string:      redis:6379
+time to live:           30    

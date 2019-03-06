@@ -1,0 +1,21 @@
+FROM debian:7.11-slim
+
+LABEL maintainer="RGRU <ivlev@rg.ru>"
+
+COPY configs  /app/configs
+COPY migrations  /app/migrations
+COPY templates  /app/templates
+COPY onlinebc_admin  /app/onlinebc
+
+RUN apt-get -y update && apt-get -y install sshpass 
+
+
+ENV RUNNING_IN_DOCKER="Y"
+
+EXPOSE 7700
+
+CMD bash -c "cd /app && ./onlinebc -serve 7700"
+
+
+
+

@@ -1,2 +1,10 @@
-push.sh
+.vscode
+.idea
 pgdata
+push.sh
+#build
+onlinebc*
+uploads
+uploads*
+moon.py
+
