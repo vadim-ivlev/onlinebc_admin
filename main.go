@@ -2,6 +2,7 @@ package main
 
 import (
 	"onlinebc_admin/model/db"
+	"onlinebc_admin/model/redis"
 	"onlinebc_admin/router"
 	"strconv"
 )
@@ -12,8 +13,12 @@ func main() {
 	// читаем конфиги Postgres, Redis и роутера.
 	readConfigs(front)
 
-	// Ждем готовноси базы данных
+	// Инициализируем Redis
+	redis.Init()
+
+	// Ждем готовности базы данных
 	db.WaitForDbOrExit(10)
+
 	// порождаем базу данных если ее нет
 	createDatabaseIfNotExists()
 
@@ -25,9 +30,7 @@ func main() {
 	// если servePort > 0, печатаем приветствие и зпускаем сервер
 	if servePort > 0 {
 		printGreetings(servePort)
-		// router.Serve(":"+strconv.Itoa(servePort), debug)
-		r := router.SetupRouter(debug, true)
+		r := router.Setup(debug, true)
 		r.Run(":" + strconv.Itoa(servePort))
-
 	}
 }

@@ -25,7 +25,7 @@ func TestMain(m *testing.M) {
 	readConfigs(false)
 	db.WaitForDbOrExit(10)
 	createDatabaseIfNotExists()
-	r = router.SetupRouter(false, false)
+	r = router.Setup(false, false)
 
 	flag.Parse()
 	exitCode := m.Run()

@@ -15,7 +15,7 @@ func TestMain(m *testing.M) {
 		ReadConfig("../../configs/redis-dev.yaml")
 	}
 	ReadConfig("../../configs/redis.yaml")
-
+	Init()
 	// call flag.Parse() here if TestMain uses flags
 	os.Exit(m.Run())
 }

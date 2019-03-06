@@ -1,82 +1,33 @@
 package redis
 
 import (
-	"log"
+	"fmt"
+	"time"
 
-	// "github.com/go-redis/redis"
-	redis0 "github.com/mediocregopher/radix.v2/redis"
+	"github.com/go-redis/redis"
 )
 
-// Get returns value by key.
-// If key is absent returns an empty string and an error.
+// пул соединений
+var redisdb *redis.Client
+
+// Init создает пул соединений и проверяет Redis
+func Init() {
+	redisdb = redis.NewClient(&redis.Options{Addr: params.ConnectStr})
+	pong, err := redisdb.Ping().Result()
+	fmt.Println("REDIS INIT:", pong, err)
+}
+
+// Get возвращает значение по ключу
 func Get(key string) (string, error) {
-	conn, err := redis0.Dial("tcp", params.ConnectStr)
-	if err != nil {
-		log.Print("Get No connection", params.ConnectStr)
-		return "", err
-	}
-	defer conn.Close()
-
-	str, err := conn.Cmd("GET", "onlinebc:"+key).Str()
-	if err != nil {
-		return "", err
-	}
-
-	return str, nil
+	return redisdb.Get("onlinebc:" + key).Result()
 }
 
-// Set sets value by key.
+// Set сохраняет значение ключа в Redis на установленное время.
 func Set(key string, value string) error {
-	conn, err := redis0.Dial("tcp", params.ConnectStr)
-	if err != nil {
-		log.Print("Set No connection", params.ConnectStr)
-		return err
-	}
-	defer conn.Close()
-
-	resp := conn.Cmd("SETEX", "onlinebc:"+key, params.TTL, value)
-	if resp.Err != nil {
-		return resp.Err
-	}
-
-	return nil
+	return redisdb.Set("onlinebc:"+key, value, time.Second*time.Duration(params.TTL)).Err()
 }
 
-// Del deletes the key from the redis0.
+// Del удаляет запись по ключу
 func Del(key string) error {
-	conn, err := redis0.Dial("tcp", params.ConnectStr)
-	if err != nil {
-		log.Print("DEL No connection")
-		return err
-	}
-	defer conn.Close()
-
-	resp := conn.Cmd("DEL", "onlinebc:"+key)
-	if resp.Err != nil {
-		return resp.Err
-	}
-
-	return nil
+	return redisdb.Del("onlinebc:" + key).Err()
 }
-
-// Get1 returns value by key.
-// If key is absent returns an empty string and an error.
-// func Get1(key string) (string, error) {
-
-// 	client := redis.NewClient(&redis.Options{
-// 		Addr: params.ConnectStr,
-// 	})
-
-// 	if err != nil {
-// 		log.Print("Get No connection", params.ConnectStr)
-// 		return "", err
-// 	}
-// 	defer conn.Close()
-
-// 	str, err := conn.Cmd("GET", "onlinebc:"+key).Str()
-// 	if err != nil {
-// 		return "", err
-// 	}
-
-// 	return str, nil
-// }

@@ -30,9 +30,3 @@ func ReadConfig(fileName string) {
 		fmt.Println(err.Error())
 	}
 }
-
-// PrintConfig shows Redis connection parameters.
-func PrintConfig() {
-	s, _ := yaml.Marshal(params)
-	fmt.Printf("\nRedis parameters:\n%s\n", s)
-}

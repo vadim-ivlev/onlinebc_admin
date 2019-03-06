@@ -13,13 +13,13 @@ TODO
 6. (done) За что отвечает директория etc? Можно ли ее удалить?
 7. (done) Привести форматирование контроллера GQ (https://yadi.sk/i/AppkKkDqv9EeyA) к общим правилам, переносы и т.д За общие правила считаем пример из исходников библиотеки https://yadi.sk/i/3Mvf2fkAxpBRlw
 8. (done) Написать тесты (хотя бы для самой ответственной части)
-9. Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
-10. Прикрутить линтование https://github.com/golangci/golangci-lint
 11. (done) Актуализировать Readme
-12. Заменить редис https://github.com/go-redis/redis
+12. (done) Заменить редис https://github.com/go-redis/redis
 14. (done) upload images base64
 15. (done) Построить докер имидж.
+
+
 16. Naming
-
-
+9. Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
+10. Прикрутить линтование https://github.com/golangci/golangci-lint
 
