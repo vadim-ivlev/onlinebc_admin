@@ -1,4 +1,4 @@
-.vscode
+#.vscode
 .idea
 pgdata
 push.sh

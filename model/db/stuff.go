@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"io/ioutil"
+	"onlinebc_admin0/model/db"
 
 	//blank import
 	_ "github.com/lib/pq"
@@ -53,4 +54,21 @@ func printIf(err error) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
+}
+
+// CreateDatabaseIfNotExists порождает таблицы, функции, представления базы данных.
+// Наполняет базу тестовыми данными
+func CreateDatabaseIfNotExists() {
+	fmt.Println("Порождение таблиц ...")
+	db.GetExecResult(getTextFromFile("./migrations/create-tables.sql"))
+	fmt.Println("Порождение функций ...")
+	db.GetExecResult(getTextFromFile("./migrations/create-views-and-functions.sql"))
+	fmt.Println("Наполнение тестовыми данными...")
+	db.GetExecResult(getTextFromFile("./migrations/add-data.sql"))
+}
+
+// getTextFromFile возвращает текст файла
+func getTextFromFile(fileName string) string {
+	txt, _ := ioutil.ReadFile(fileName)
+	return string(txt)
 }

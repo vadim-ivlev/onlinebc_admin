@@ -24,7 +24,7 @@ func TestMain(m *testing.M) {
 	fmt.Println("Функциональные тесты (End to End) ******************************************************")
 	readConfigs(false)
 	db.WaitForDbOrExit(10)
-	createDatabaseIfNotExists()
+	db.CreateDatabaseIfNotExists()
 	r = router.Setup(false, false)
 
 	flag.Parse()
