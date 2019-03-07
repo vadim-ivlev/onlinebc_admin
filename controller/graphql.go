@@ -44,14 +44,14 @@ var broadcastType = gq.NewObject(gq.ObjectConfig{
 			Type:        gq.Int,
 			Description: "Показывать время 0 1",
 		},
-		"is_yandex": &gq.Field{
-			Type:        gq.Int,
-			Description: "Яндекс трансляция 0 1",
-		},
-		"yandex_ids": &gq.Field{
-			Type:        gq.String,
-			Description: "Идентификаторы Яндекс трансляций",
-		},
+		// "is_yandex": &gq.Field{
+		// 	Type:        gq.Int,
+		// 	Description: "Яндекс трансляция 0 1",
+		// },
+		// "yandex_ids": &gq.Field{
+		// 	Type:        gq.String,
+		// 	Description: "Идентификаторы Яндекс трансляций",
+		// },
 		"show_main_page": &gq.Field{
 			Type:        gq.Int,
 			Description: "Показывать на главной странице 01",
@@ -214,14 +214,14 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.Int,
 					Description: "Показывать время 0 1",
 				},
-				"is_yandex": &gq.ArgumentConfig{
-					Type:        gq.Int,
-					Description: "Яндекс трансляция 0 1",
-				},
-				"yandex_ids": &gq.ArgumentConfig{
-					Type:        gq.String,
-					Description: "Идентификаторы Яндекс трансляций",
-				},
+				// "is_yandex": &gq.ArgumentConfig{
+				// 	Type:        gq.Int,
+				// 	Description: "Яндекс трансляция 0 1",
+				// },
+				// "yandex_ids": &gq.ArgumentConfig{
+				// 	Type:        gq.String,
+				// 	Description: "Идентификаторы Яндекс трансляций",
+				// },
 				"show_main_page": &gq.ArgumentConfig{
 					Type:        gq.Int,
 					Description: "Показывать на главной странице 0 1",
@@ -285,14 +285,14 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.Int,
 					Description: "Показывать время 0 1",
 				},
-				"is_yandex": &gq.ArgumentConfig{
-					Type:        gq.Int,
-					Description: "Яндекс трансляция 0 1",
-				},
-				"yandex_ids": &gq.ArgumentConfig{
-					Type:        gq.String,
-					Description: "Идентификаторы Яндекс трансляций",
-				},
+				// "is_yandex": &gq.ArgumentConfig{
+				// 	Type:        gq.Int,
+				// 	Description: "Яндекс трансляция 0 1",
+				// },
+				// "yandex_ids": &gq.ArgumentConfig{
+				// 	Type:        gq.String,
+				// 	Description: "Идентификаторы Яндекс трансляций",
+				// },
 				"show_main_page": &gq.ArgumentConfig{
 					Type:        gq.Int,
 					Description: "Показывать на главной странице 0 1",
@@ -326,7 +326,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 
 		"deleteBroadcast": &gq.Field{
 			Type:        broadcastType,
-			Description: "Удалить трасляцию",
+			Description: "Удалить трансляцию",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{
 					Type:        gq.NewNonNull(gq.Int),
@@ -343,7 +343,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 
 		"createPost": &gq.Field{
 			Type:        postType,
-			Description: "Создать пост к тансляции или ответ к посту",
+			Description: "Создать пост к трансляции или ответ к посту",
 			Args: gq.FieldConfigArgument{
 				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор поста"}                              ,
 				"id_parent": &gq.ArgumentConfig{
@@ -569,7 +569,7 @@ func (dummy) GraphQL(c *gin.Context) {
 	c.JSON(200, result)
 }
 
-// valueAndError возвращает входное значение m вместе в ошибкой если переданное значение пусто.
+// valueAndError возвращает входное значение вместе в ошибкой если переданное значение пусто.
 func valueAndError(m map[string]interface{}) (map[string]interface{}, error) {
 	if len(m) == 0 {
 		return m, errors.New("Record not found")
