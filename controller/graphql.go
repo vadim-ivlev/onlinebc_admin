@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"errors"
 	"net/http"
 	"onlinebc_admin/model/db"
 	"onlinebc_admin/model/img"
@@ -143,7 +144,7 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать трансляцию по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.GetRowByID("broadcast", params.Args["id"].(int)), nil
+				return valueAndError(db.GetRowByID("broadcast", params.Args["id"].(int)))
 			},
 		},
 
@@ -152,7 +153,7 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать пост по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.GetRowByID("post", params.Args["id"].(int)), nil
+				return valueAndError(db.GetRowByID("post", params.Args["id"].(int)))
 			},
 		},
 
@@ -161,7 +162,7 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать медиа по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.GetRowByID("medium", params.Args["id"].(int)), nil
+				return valueAndError(db.GetRowByID("medium", params.Args["id"].(int)))
 			},
 		},
 
@@ -566,4 +567,12 @@ func (dummy) GraphQL(c *gin.Context) {
 	})
 
 	c.JSON(200, result)
+}
+
+// valueAndError возвращает входное значение m вместе в ошибкой если переданное значение пусто.
+func valueAndError(m map[string]interface{}) (map[string]interface{}, error) {
+	if len(m) == 0 {
+		return m, errors.New("Record not found")
+	}
+	return m, nil
 }
