@@ -84,6 +84,27 @@
 
 
 
+- comment   : GraphQL. Получить посты трансляции по ее идентификатору.
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+        posts(id_broadcast: 354) { id id_parent text author}
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
 - comment   : GraphQL. Получить записи по идентификаторам.
   methods   :
   - POST

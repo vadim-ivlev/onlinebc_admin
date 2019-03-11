@@ -159,11 +159,30 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 		},
 
 		"posts": &gq.Field{
-			Type: gq.NewList(postType),
+			Type:        gq.NewList(postType),
+			Description: "Получить посты трансляции по ее идентификатору.",
+			Args: gq.FieldConfigArgument{
+				"id_broadcast": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор трансляции",
+				},
+			},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				res := db.QueryMap("SELECT * FROM post WHERE id_broadcast = $1 ;", params.Args["id_broadcast"].(int))
+				return res, nil
+				// var posts interface{}
+				// db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))["res"]
+				// return posts, nil
+			},
+		},
+		"broadcasts": &gq.Field{
+			Type:        gq.NewList(broadcastType),
+			Description: "Получить список трансляций.",
 			Args: gq.FieldConfigArgument{
 				"id_broadcast": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				// WHERE to_tsvector('russian', title) @@ plainto_tsquery('russian','жеребьевка  европа')
 				var posts interface{}
 				return posts, nil
 			},

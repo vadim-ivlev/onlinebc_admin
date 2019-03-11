@@ -52,5 +52,5 @@ CREATE TABLE IF NOT EXISTS public.medium (
 CREATE INDEX IF NOT EXISTS medium_post_id_idx ON public.medium USING btree (post_id);
 CREATE INDEX IF NOT EXISTS post_id_broadcast_idx ON public.post USING btree (id_broadcast);
 CREATE INDEX IF NOT EXISTS post_id_parent_idx ON public.post USING btree (id_parent);
-
+CREATE INDEX IF NOT EXISTS broadcast_title_textsearch_idx ON public.broadcast USING gin (to_tsvector('russian', title));
 
