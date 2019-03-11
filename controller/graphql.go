@@ -44,14 +44,6 @@ var broadcastType = gq.NewObject(gq.ObjectConfig{
 			Type:        gq.Int,
 			Description: "Показывать время 0 1",
 		},
-		// "is_yandex": &gq.Field{
-		// 	Type:        gq.Int,
-		// 	Description: "Яндекс трансляция 0 1",
-		// },
-		// "yandex_ids": &gq.Field{
-		// 	Type:        gq.String,
-		// 	Description: "Идентификаторы Яндекс трансляций",
-		// },
 		"show_main_page": &gq.Field{
 			Type:        gq.Int,
 			Description: "Показывать на главной странице 01",
@@ -214,14 +206,6 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.Int,
 					Description: "Показывать время 0 1",
 				},
-				// "is_yandex": &gq.ArgumentConfig{
-				// 	Type:        gq.Int,
-				// 	Description: "Яндекс трансляция 0 1",
-				// },
-				// "yandex_ids": &gq.ArgumentConfig{
-				// 	Type:        gq.String,
-				// 	Description: "Идентификаторы Яндекс трансляций",
-				// },
 				"show_main_page": &gq.ArgumentConfig{
 					Type:        gq.Int,
 					Description: "Показывать на главной странице 0 1",
@@ -249,7 +233,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				newRow := db.CreateRow("broadcast", params.Args)
-				return newRow, nil
+				return valueAndError(newRow)
 			},
 		},
 
@@ -285,14 +269,6 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.Int,
 					Description: "Показывать время 0 1",
 				},
-				// "is_yandex": &gq.ArgumentConfig{
-				// 	Type:        gq.Int,
-				// 	Description: "Яндекс трансляция 0 1",
-				// },
-				// "yandex_ids": &gq.ArgumentConfig{
-				// 	Type:        gq.String,
-				// 	Description: "Идентификаторы Яндекс трансляций",
-				// },
 				"show_main_page": &gq.ArgumentConfig{
 					Type:        gq.Int,
 					Description: "Показывать на главной странице 0 1",
@@ -320,7 +296,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.UpdateRowByID("broadcast", params.Args["id"].(int), params.Args)
-				return row, nil
+				return valueAndError(row)
 			},
 		},
 
@@ -335,7 +311,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.DeleteRowByID("broadcast", params.Args["id"].(int))
-				return row, nil
+				return valueAndError(row)
 			},
 		},
 
@@ -381,7 +357,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				newRow := db.CreateRow("post", params.Args)
-				return newRow, nil
+				return valueAndError(newRow)
 			},
 		},
 
@@ -428,7 +404,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.UpdateRowByID("post", params.Args["id"].(int), params.Args)
-				return row, nil
+				return valueAndError(row)
 			},
 		},
 
@@ -442,7 +418,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.DeleteRowByID("post", params.Args["id"].(int))
-				return row, nil
+				return valueAndError(row)
 			},
 		},
 
@@ -495,7 +471,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				args["uri"] = imageURI
 				args["thumb"] = thumbURI
 				newRow := db.CreateRow("medium", args)
-				return newRow, nil
+				return valueAndError(newRow)
 			},
 		},
 
@@ -521,7 +497,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.UpdateRowByID("medium", params.Args["id"].(int), params.Args)
-				return row, nil
+				return valueAndError(row)
 			},
 		},
 
@@ -536,7 +512,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				row := db.DeleteRowByID("medium", params.Args["id"].(int))
-				return row, nil
+				return valueAndError(row)
 			},
 		},
 	},

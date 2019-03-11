@@ -7,8 +7,6 @@ CREATE TABLE IF NOT EXISTS public.broadcast (
     is_ended integer,
     show_date integer,
     show_time integer,
-    is_yandex integer,
-    yandex_ids character varying(255),
     show_main_page integer,
     link_article character varying(256),
     link_img character varying(255),

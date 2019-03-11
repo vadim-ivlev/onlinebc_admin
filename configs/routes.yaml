@@ -151,7 +151,7 @@
     test   : |- 
       mutation {
         updateBroadcast(
-          id: 1020,
+          id: 1000,
           title:"updated broadcast 22", 
           time_created: 124, 
           link_article:"updated link2"
@@ -184,7 +184,7 @@
     test   : |- 
       mutation {
         deleteBroadcast(
-          id: 1020
+          id: 1000
         ) 
         {
           id title 
