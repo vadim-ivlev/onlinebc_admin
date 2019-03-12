@@ -47,8 +47,8 @@ func WaitForDbOrExit(attempts int) {
 	os.Exit(7777)
 }
 
-// QuerySliceMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
-// Применяется для исполнения запросов SELECT возвращающего множество записей.
+// QuerySliceMap возвращает результат запроса заданного sqlText, как срез хэшей.
+// Применяется для запросов SELECT возвращающих набор записей.
 func QuerySliceMap(sqlText string, args ...interface{}) ([]map[string]interface{}, error) {
 	conn, err := sqlx.Open("postgres", connectStr)
 	panicIf(err)

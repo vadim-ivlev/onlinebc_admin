@@ -61,11 +61,11 @@ func printIf(err error) {
 // Наполняет базу тестовыми данными
 func CreateDatabaseIfNotExists() {
 	fmt.Println("Порождение таблиц ...")
-	GetExecResult(getTextFromFile("./migrations/create-tables.sql"))
+	GetExecResult(getTextFromFile("./migrations/01_create_tables.up.sql"))
 	fmt.Println("Порождение функций ...")
-	GetExecResult(getTextFromFile("./migrations/create-views-and-functions.sql"))
+	GetExecResult(getTextFromFile("./migrations/02_create_views_and_functions.up.sql"))
 	fmt.Println("Наполнение тестовыми данными...")
-	GetExecResult(getTextFromFile("./migrations/add-data.sql"))
+	GetExecResult(getTextFromFile("./migrations/03_add_data.up.sql"))
 }
 
 // getTextFromFile возвращает текст файла

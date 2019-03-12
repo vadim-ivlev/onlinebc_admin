@@ -10,3 +10,7 @@ TODO
 5. migrations
 
 
+
+migrate create -ext sql -seq -digits 2 -dir migrations create_tables
+migrate create -ext sql -seq -digits 2 -dir migrations create_views_and_functions
+
