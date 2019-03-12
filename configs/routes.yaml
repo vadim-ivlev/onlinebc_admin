@@ -83,6 +83,29 @@
     test   : '{}' 
 
 
+- comment   : GraphQL. Получить список трансляций.
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+          broadcasts(search:"красный") { id  title link_article is_ended }  
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+
+
 
 - comment   : GraphQL. Получить посты трансляции по ее идентификатору.
   methods   :
@@ -97,7 +120,28 @@
     value  : '{query}'
     test   : |- 
       query {
-        posts(id_broadcast: 354) { id id_parent text author}
+        posts(id_broadcast: 354) { id id_broadcast text author}
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+- comment   : GraphQL. Получить медиа поста по его идентификатору.
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+        media(post_id: 23932) { id uri source}
       }
   - comment: переменные
     name   : variables

@@ -2,6 +2,7 @@ package controller
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"onlinebc_admin/model/db"
 	"onlinebc_admin/model/img"
@@ -168,23 +169,68 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				res := db.QueryMap("SELECT * FROM post WHERE id_broadcast = $1 ;", params.Args["id_broadcast"].(int))
-				return res, nil
-				// var posts interface{}
-				// db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))["res"]
-				// return posts, nil
+				return db.QuerySliceMap("SELECT * FROM post WHERE id_broadcast = $1 ;", params.Args["id_broadcast"].(int))
 			},
 		},
+
+		"media": &gq.Field{
+			Type:        gq.NewList(mediumType),
+			Description: "Получить фотографии поста по его идентификатору.",
+			Args: gq.FieldConfigArgument{
+				"post_id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор поста",
+				},
+			},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				return db.QuerySliceMap("SELECT * FROM medium WHERE post_id = $1 ;", params.Args["post_id"].(int))
+			},
+		},
+
 		"broadcasts": &gq.Field{
 			Type:        gq.NewList(broadcastType),
 			Description: "Получить список трансляций.",
 			Args: gq.FieldConfigArgument{
-				"id_broadcast": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)},
+				"search": &gq.ArgumentConfig{
+					Type:         gq.String,
+					Description:  "Строка полнотекстового поиска. По умолчанию ''.",
+					DefaultValue: "",
+				},
+				"is_ended": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "1 если трансляция закончена, 0 - если нет. По умолчанию 1.",
+					DefaultValue: 1,
+				},
+				"order": &gq.ArgumentConfig{
+					Type:         gq.String,
+					Description:  "сортировка строк в определённом порядке. По умолчанию 'id DESC'",
+					DefaultValue: "id DESC",
+				},
+				"limit": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "возвратить не больше заданного числа строк. По умолчанию 100.",
+					DefaultValue: 100,
+				},
+				"offset": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "пропустить указанное число строк, прежде чем начать выдавать строки. По умолчанию 0.",
+					DefaultValue: 0,
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				// WHERE to_tsvector('russian', title) @@ plainto_tsquery('russian','жеребьевка  европа')
-				var posts interface{}
-				return posts, nil
+				s := params.Args["search"].(string)
+				textSearchCondition := ""
+				if len(s) > 0 {
+					textSearchCondition = fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') AND", s)
+				}
+
+				return db.QuerySliceMap("SELECT * FROM broadcast WHERE "+textSearchCondition+
+					" is_ended = $1 ORDER BY $2 LIMIT $3 OFFSET $4 ;",
+					params.Args["is_ended"].(int),
+					params.Args["order"].(string),
+					params.Args["limit"].(int),
+					params.Args["offset"].(int),
+				)
 			},
 		},
 	},

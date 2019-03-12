@@ -47,16 +47,28 @@ func WaitForDbOrExit(attempts int) {
 	os.Exit(7777)
 }
 
-// QueryMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
+// QuerySliceMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
 // Применяется для исполнения запросов SELECT возвращающего множество записей.
-func QueryMap(sqlText string, args ...interface{}) *sqlx.Rows {
+func QuerySliceMap(sqlText string, args ...interface{}) ([]map[string]interface{}, error) {
 	conn, err := sqlx.Open("postgres", connectStr)
 	panicIf(err)
 	defer conn.Close()
-	// result := make(map[string]interface{})
+
 	rows, err := conn.Queryx(sqlText, args...) //.MapScan(result)
-	printIf(err)
-	return rows
+	if err != nil {
+		fmt.Println(err.Error())
+		return nil, err
+	}
+
+	results := []map[string]interface{}{}
+
+	for rows.Next() {
+		row := make(map[string]interface{})
+		err = rows.MapScan(row)
+		results = append(results, row)
+	}
+
+	return results, nil
 }
 
 // QueryRowMap возвращает результат запроса заданного sqlText, с возможными параметрами args.
