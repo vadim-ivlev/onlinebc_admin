@@ -3,6 +3,9 @@
 GraphQL и REST API онлайн трансляций.
 
 - Тестовая страница API: <http://localhost:7777/> `GET`.
+    * неформальная документация API 
+    * демонстрирует использование API web приложениями
+
 
 - JSON описание конечных точек GraphQL и REST API с параметрами запросов: <http://localhost:7777/routes> `GET`.
 
@@ -50,6 +53,8 @@ GraphQL и REST API онлайн трансляций.
 
 Для просморта списка возможных параметров запустите программу без параметров.
 
+    go run main.go
+
 
 Контроль запуска и доступности API 
 -----------------------------------
@@ -63,6 +68,24 @@ API
 Информацию по типам данных, доступных функций и их параметрах можно
 получить стандартными средствами GraphQL
 - Конечная точка GraphQL <http://localhost:7777/graphql> `POST`.
+
+
+## Миграции
+
+**Важно!** При запуске программы запускаются миграции => вся работа с базой данных должна проходить с помощью [миграций](https://github.com/golang-migrate/migrate). Файлы находятся в директории `migrations/`.
+
+**Create**  
+
+    migrate create -ext sql -seq -digits 2 -dir migrations name
+
+
+**Up, Down, Version, Goto...**  
+
+    migrate -source=file://migrations/ -database postgres://root:root@localhost:5432/onlinebc?sslmode=disable up 
+    migrate -source=file://migrations/ -database postgres://root:root@localhost:5432/onlinebc?sslmode=disable down
+    migrate -source=file://migrations/ -database postgres://root:root@localhost:5432/onlinebc?sslmode=disable version
+    migrate -source=file://migrations/ -database postgres://root:root@localhost:5432/onlinebc?sslmode=disable goto 2
+
 
 
 Загрузка изображений
@@ -134,7 +157,8 @@ API
 
 
 Тесты
-------
+--------
+
 Запуск всех тестов
 
     go test -v ./...
@@ -260,11 +284,9 @@ Cопосталяет маршруты функциям-контроллерам
 
 
     migrations/
-        create-tables.sql
-        create-views-and-functions.sql
-        add-data.sql
+        
 
-Директория содержит SQL скрипты для порождения таблиц базы данных если таковые отсутствуют, а так же представлений и функций. Скрипт `add-data.sql` наполняет базу данных тестовыми данными с идентификаторами трансляций между `321` и `354`. Все три скрипта выполняются при каждом запуске программы, так что программа будет корректно работать даже при изначально пустой базе данных.
+SQL скрипты для порождения объектов базы данных. Миграции исполняются  при каждом запуске программы, поэтому программа будет корректно работать даже при изначально пустой базе данных.
 
 
 

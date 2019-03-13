@@ -7,9 +7,8 @@ import (
 	"strings"
 	"time"
 
-	//blank import
-
 	"github.com/jmoiron/sqlx"
+	//blank import
 	_ "github.com/lib/pq"
 )
 

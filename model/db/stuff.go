@@ -6,6 +6,12 @@ import (
 
 	// "onlinebc_admin/model/db"
 
+	"github.com/golang-migrate/migrate"
+	//blank import
+	_ "github.com/golang-migrate/migrate/database/postgres"
+	//blank import
+	_ "github.com/golang-migrate/migrate/source/file"
+
 	//blank import
 	_ "github.com/lib/pq"
 	yaml "gopkg.in/yaml.v2"
@@ -24,6 +30,7 @@ type connectionParams struct {
 
 var params connectionParams
 var connectStr string
+var connectURL string
 
 // ReadConfig reads YAML file
 func ReadConfig(fileName string) {
@@ -36,6 +43,8 @@ func ReadConfig(fileName string) {
 	err = yaml.Unmarshal(yamlFile, &params)
 	printIf(err)
 	connectStr = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", params.Host, params.Port, params.User, params.Password, params.Dbname, params.Sslmode)
+	connectURL = fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s", params.User, params.Password, params.Host, params.Port, params.Dbname, params.Sslmode)
+
 }
 
 // PrintConfig prints DB connection parameters.
@@ -57,15 +66,12 @@ func printIf(err error) {
 	}
 }
 
-// CreateDatabaseIfNotExists порождает таблицы, функции, представления базы данных.
-// Наполняет базу тестовыми данными
+// CreateDatabaseIfNotExists порождает объекты базы данных и наполняет базу тестовыми данными
 func CreateDatabaseIfNotExists() {
-	fmt.Println("Порождение таблиц ...")
-	GetExecResult(getTextFromFile("./migrations/01_create_tables.up.sql"))
-	fmt.Println("Порождение функций ...")
-	GetExecResult(getTextFromFile("./migrations/02_create_views_and_functions.up.sql"))
-	fmt.Println("Наполнение тестовыми данными...")
-	GetExecResult(getTextFromFile("./migrations/03_add_data.up.sql"))
+	fmt.Println("Миграция ...")
+	m, err := migrate.New("file://migrations/", connectURL)
+	panicIf(err)
+	printIf(m.Up())
 }
 
 // getTextFromFile возвращает текст файла
