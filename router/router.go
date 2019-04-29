@@ -1,6 +1,7 @@
 package router
 
 import (
+	"net/http"
 	c "onlinebc_admin/controller"
 	"onlinebc_admin/middleware"
 
@@ -20,6 +21,8 @@ func routeAbsent(r *gin.Engine, method string, path string) bool {
 
 // defineRoutes -  Сопоставляет маршруты функцмям контроллера
 func defineRoutes(r *gin.Engine) {
+	r.Handle("OPTIONS", "/graphql", PingHandler)
+
 	for _, route := range c.Routes {
 		controllerFunc := c.GetFunctionByName(route.Controller)
 		for _, method := range route.Methods {
@@ -29,6 +32,11 @@ func defineRoutes(r *gin.Engine) {
 
 		}
 	}
+}
+
+// PingHandler нужен для фронта, так как сначала отправляется метод с OPTIONS
+func PingHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, "pong")
 }
 
 // Setup определяет пути и присоединяет функции middleware.

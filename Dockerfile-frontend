@@ -1,13 +1,15 @@
-FROM debian:7.11-slim
+FROM ubuntu:18.04
+#FROM debian:stable-slim
+#FROM debian:7.11-slim
 
 LABEL maintainer="RGRU <ivlev@rg.ru>"
+
+RUN apt-get -y update && apt-get -y install sshpass 
 
 COPY configs  /app/configs
 COPY migrations  /app/migrations
 COPY templates  /app/templates
 COPY onlinebc_admin  /app/onlinebc
-
-RUN apt-get -y update && apt-get -y install sshpass 
 
 
 ENV RUNNING_IN_DOCKER="Y"
