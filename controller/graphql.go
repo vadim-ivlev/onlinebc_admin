@@ -605,6 +605,7 @@ func (dummy) GraphQL(c *gin.Context) {
 		Schema:        schema,
 		RequestString: m["query"].(string),
 		// RequestString: req,
+		VariableValues: m["variables"].(map[string]interface{}),
 	})
 
 	c.JSON(200, result)
