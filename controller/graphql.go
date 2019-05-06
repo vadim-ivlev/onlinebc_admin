@@ -169,7 +169,7 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.QuerySliceMap("SELECT * FROM post WHERE id_broadcast = $1 ;", params.Args["id_broadcast"].(int))
+				return db.QuerySliceMap("SELECT * FROM post WHERE id_broadcast = $1 ORDER BY post_time DESC ;", params.Args["id_broadcast"].(int))
 			},
 		},
 
@@ -218,19 +218,36 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				// s := params.Args["search"].(string)
+				// textSearchCondition := ""
+				// if len(s) > 0 {
+				// 	textSearchCondition = fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') AND", s)
+				// }
+
+				// return db.QuerySliceMap("SELECT * FROM broadcast WHERE "+textSearchCondition+
+				// 	" is_ended = $1 ORDER BY $2 LIMIT $3 OFFSET $4 ;",
+				// 	params.Args["is_ended"].(int),
+				// 	params.Args["order"].(string),
+				// 	params.Args["limit"].(int),
+				// 	params.Args["offset"].(int),
+				// )
+
 				s := params.Args["search"].(string)
 				textSearchCondition := ""
 				if len(s) > 0 {
 					textSearchCondition = fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') AND", s)
 				}
 
-				return db.QuerySliceMap("SELECT * FROM broadcast WHERE "+textSearchCondition+
-					" is_ended = $1 ORDER BY $2 LIMIT $3 OFFSET $4 ;",
+				query := fmt.Sprintf("SELECT * FROM broadcast WHERE %s is_ended = %d ORDER BY %s LIMIT %d OFFSET %d ;",
+					textSearchCondition,
 					params.Args["is_ended"].(int),
 					params.Args["order"].(string),
 					params.Args["limit"].(int),
 					params.Args["offset"].(int),
 				)
+
+				return db.QuerySliceMap(query)
+
 			},
 		},
 	},
@@ -593,19 +610,20 @@ var schema, _ = gq.NewSchema(gq.SchemaConfig{
 // GraphQL исполняет GraphQL запрос
 func (dummy) GraphQL(c *gin.Context) {
 	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
+
 	m := getPayload(c.Request)
 
 	// Альтернативный способ. Оставлено на всякий случай
-	// req, ok := c.GetPostForm("query")
-	// if !ok {
-	// 	fmt.Println("GetPostForm ERROR!!!!!")
-	// }
+	// query, _ := c.GetPostForm("query")
+	// variables, _ := c.GetPostForm("variables")
+
+	query, _ := m["query"].(string)
+	variables, _ := m["variables"].(map[string]interface{})
 
 	result := gq.Do(gq.Params{
-		Schema:        schema,
-		RequestString: m["query"].(string),
-		// RequestString: req,
-		VariableValues: m["variables"].(map[string]interface{}),
+		Schema:         schema,
+		RequestString:  query,
+		VariableValues: variables,
 	})
 
 	c.JSON(200, result)

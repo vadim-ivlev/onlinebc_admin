@@ -6,8 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>onlinebc_admin API RG.RU</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
+    <script src="templates/jquery.json-viewer.js"></script>
+
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"> -->
     <!-- <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css"> -->
@@ -16,8 +23,13 @@
     <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
 
+
+
     <!-- <link rel="stylesheet" type="text/css" href="templates/index.css" /> -->
-    <style>{{template "index.css"}}</style>
+    <!-- <style>{{template "index.css"}}</style> -->
+    <link rel="stylesheet" type="text/css" href="templates/index.css" />
+    <style>{{template "jquery.json-viewer.css"}}</style>
+
 
 </head>
 
@@ -74,7 +86,8 @@
                 $(this).ajaxSubmit({
                     url: $('#example{{$i}}').val(), 
                     type: '{{index .Methods 0}}',
-                    success: function(response) {$('#result{{$i}}').text(JSON.stringify(response, null,'  '));}
+                    // success: function(response) {$('#result{{$i}}').text(JSON.stringify(response, null,'  '));}
+                    success: function(response) {$('#result{{$i}}').jsonViewer(response, {collapsed: true, rootCollapsable: false});}
                 });">
                     {{if .Params}}
                     <!-- <div>Параметры запроса:</div> -->

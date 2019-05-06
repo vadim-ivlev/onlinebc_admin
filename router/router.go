@@ -1,6 +1,7 @@
 package router
 
 import (
+	"html/template"
 	"net/http"
 	c "onlinebc_admin/controller"
 	"onlinebc_admin/middleware"
@@ -19,7 +20,7 @@ func routeAbsent(r *gin.Engine, method string, path string) bool {
 	return true
 }
 
-// defineRoutes -  Сопоставляет маршруты функцмям контроллера
+// defineRoutes -  Сопоставляет маршруты функциям контроллера
 func defineRoutes(r *gin.Engine) {
 	r.Handle("OPTIONS", "/graphql", PingHandler)
 
@@ -54,7 +55,14 @@ func Setup(debug bool, outputToConsole bool) *gin.Engine {
 	}
 
 	r.StaticFile("/favicon.ico", "./templates/favicon.ico")
+	r.Static("/docs", "./docs/doc")
+	r.Static("/templates", "./templates")
 	// r.Static("/uploads_temp", "./uploads_temp")
+
+	// r.SetFuncMap(template.FuncMap{"noescape": noescape})
+	r.SetFuncMap(template.FuncMap{"noescape": func(s string) template.HTML { return template.HTML(s) }})
+
+	// preload templates
 	r.LoadHTMLGlob("templates/*.*")
 
 	// подключаем Middleware

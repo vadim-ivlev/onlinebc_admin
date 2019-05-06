@@ -364,7 +364,7 @@
   example: /api/broadcasts
   controller: GetBroadcasts
 
-- comment: Трасляция с идентификатором id и ее постами
+- comment: Трансляция с идентификатором id и ее постами
   methods: [GET]
   path: /api/full-broadcast/:id
   example: /api/full-broadcast/354
@@ -388,7 +388,7 @@
   example: /api/media/23932
   controller: GetMedia
 
-- comment: Трасляция с идентификатором id и ее постами. Legacy
+- comment: Трансляция с идентификатором id и ее постами. Legacy
   methods: [GET]
   path: /api/online.php
   example: /api/online.php

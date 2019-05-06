@@ -59,14 +59,14 @@ func (dummy) GetPosts(c *gin.Context) {
 	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))["res"])
 }
 
-// GetFullBroadcast возвращает трасляцию с постами по её id
+// GetFullBroadcast возвращает трансляцию с постами по её id
 func (dummy) GetFullBroadcast(c *gin.Context) {
 	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", getIntID(c))["res"])
 }
 
-// GetFullBroadcast возвращает трасляцию с постами по её id
+// GetFullBroadcast возвращает трансляцию с постами по её id
 func (dummy) GetFullBroadcastLegacy(c *gin.Context) {
-	c.Request.ParseForm()
+	_ = c.Request.ParseForm()
 	id := c.Request.FormValue("id")
 	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", id)["res"])
 }
