@@ -5,11 +5,12 @@ TODO
 
 1. Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
 
-change naming
-change list_broadcast -> {
+2. change naming
+3. change list_broadcast -> {
     list:[broadcast],
     length: int
-}
+    }
+4. replace db.go with videos db.go
 
 
 

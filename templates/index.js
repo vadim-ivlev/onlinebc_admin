@@ -1,12 +1,3 @@
-// подравниваем высоты textarea
-$("textarea").each(function (textarea) {
-    $(this).height($(this)[0].scrollHeight);
-});
-
-// скрываем тест запроса перовй формы для скорости отображения
-$('#showHideButton').on('click', () => $('#form0 textarea[name="query"]').toggle() ) 
-$('#form0 textarea[name="query"]').hide() ;
-
 
 
 var b64array =[]
@@ -90,39 +81,3 @@ function clear(){
 
 
 
-
-
-
-/**** OLD */
-// var data = {
-//     query : '',
-//     variables: '{}'
-// }
-
-// function createQueries(b64array) {
-//     // скрыть текст запроса для ускорения рендеринга
-//     $('#form0 textarea[name="query"]').hide()
-//     // показать кнопку показа/скрытия текста запроса
-//     $('#showHideButton').show()
-
-
-//     var query = ""
-//     b64array.forEach(function (f, i) {
-//         query += createOneQuery(i, f.fileName, f.base64)
-//     });
-//     data.query = "mutation {\n"+query+"\n}\n"
-    
-//     document.querySelector('#form0 textarea[name="query"]').value = data.query
-//     document.querySelector('#form0').onsubmit = sendImages
-
-//     console.log("query encoded")
-// }
-
-
-// function sendImages(event){
-//     event.preventDefault()
-//     $.post('/graphql', data, function(response) {$('#result0').text(JSON.stringify(response, null,'  '));}, 'json'  )
-//     console.log('sendImage end')
-// }
-
-/**** OLD */

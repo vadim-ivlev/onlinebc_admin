@@ -126,6 +126,21 @@ var mediumType = gq.NewObject(gq.ObjectConfig{
 	},
 })
 
+var listBroadcastType = gq.NewObject(gq.ObjectConfig{
+	Name:        "ListBroadcast",
+	Description: "Список трансляций и количество элементов в списке",
+	Fields: gq.Fields{
+		"length": &gq.Field{
+			Type:        gq.Int,
+			Description: "Количество элементов в списке",
+		},
+		"list": &gq.Field{
+			Type:        gq.NewList(broadcastType),
+			Description: "Список трансляций",
+		},
+	},
+})
+
 // ************************************************************************
 
 var rootQuery = gq.NewObject(gq.ObjectConfig{
@@ -232,26 +247,89 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				// 	params.Args["offset"].(int),
 				// )
 
-				s := params.Args["search"].(string)
-				textSearchCondition := ""
-				if len(s) > 0 {
-					textSearchCondition = fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') AND", s)
+				wherePart, orderAndLimits := queryEnd(params)
+				return db.QuerySliceMap("SELECT * FROM broadcast" + wherePart + orderAndLimits)
+
+			},
+		},
+
+		"list_broadcast": &gq.Field{
+			Type:        listBroadcastType,
+			Description: "Получить список трансляций и их количество.",
+			Args: gq.FieldConfigArgument{
+				"search": &gq.ArgumentConfig{
+					Type:         gq.String,
+					Description:  "Строка полнотекстового поиска. По умолчанию ''.",
+					DefaultValue: "",
+				},
+				"is_ended": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "1 если трансляция закончена, 0 - если нет. По умолчанию 1.",
+					DefaultValue: 1,
+				},
+				"order": &gq.ArgumentConfig{
+					Type:         gq.String,
+					Description:  "сортировка строк в определённом порядке. По умолчанию 'id DESC'",
+					DefaultValue: "id DESC",
+				},
+				"limit": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "возвратить не больше заданного числа строк. По умолчанию 100.",
+					DefaultValue: 100,
+				},
+				"offset": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "пропустить указанное число строк, прежде чем начать выдавать строки. По умолчанию 0.",
+					DefaultValue: 0,
+				},
+			},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				wherePart, orderAndLimits := queryEnd(params)
+
+				list, err := db.QuerySliceMap("SELECT * FROM broadcast" + wherePart + orderAndLimits)
+				if err != nil {
+					return nil, err
+				}
+				count := db.QueryRowMap("SELECT count(*) AS count FROM broadcast" + wherePart)
+				// if err != nil {
+				// 	return nil, err
+				// }
+
+				length := count["count"]
+
+				m := map[string]interface{}{
+					"length": length,
+					"list":   list,
 				}
 
-				query := fmt.Sprintf("SELECT * FROM broadcast WHERE %s is_ended = %d ORDER BY %s LIMIT %d OFFSET %d ;",
-					textSearchCondition,
-					params.Args["is_ended"].(int),
-					params.Args["order"].(string),
-					params.Args["limit"].(int),
-					params.Args["offset"].(int),
-				)
-
-				return db.QuerySliceMap(query)
+				return m, nil
 
 			},
 		},
 	},
 })
+
+// queryEnd возвращает вторую часть запроса на поиск трансляций
+func queryEnd(params gq.ResolveParams) (wherePart string, orderAndLimits string) {
+	s := params.Args["search"].(string)
+	textSearchCondition := ""
+	if len(s) > 0 {
+		textSearchCondition = fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') AND", s)
+	}
+
+	wherePart = fmt.Sprintf(" WHERE %s is_ended = %d ",
+		textSearchCondition,
+		params.Args["is_ended"].(int),
+	)
+	orderAndLimits = fmt.Sprintf(" ORDER BY %s LIMIT %d OFFSET %d ;",
+		params.Args["order"].(string),
+		params.Args["limit"].(int),
+		params.Args["offset"].(int),
+	)
+
+	return wherePart, orderAndLimits
+
+}
 
 var rootMutation = gq.NewObject(gq.ObjectConfig{
 	Name: "Mutation",

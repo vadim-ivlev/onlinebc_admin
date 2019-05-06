@@ -10,9 +10,9 @@
 
 # GraphQL --------------------------------------------------
 - comment   : |-
-    GraphQL. Загрузка изображения. 
-    Сначала заполните форму выше.
-    Поле запроса скрыто по умолчанию из за медленного рендеринга длинных текстов.
+    <b>Загрузка</b> 
+    Заполните форму выше.
+    Поле запроса скрыто по умолчанию из за медленного рендеринга.
 
 
   methods   :
@@ -42,59 +42,59 @@
 
 
 
-- comment   : |-
-    GraphQL. Получение информации о типах GraphQL.
-  methods   :
-  - POST
-  - GET    
+# - comment   : |-
+#     <b>GraphQL.</b> Получение информации о типах GraphQL.
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        broadcast: __type(name: "Broadcast") {
-          name description
-          fields {
-            name description
-            type {
-              name 
-            }
-          }
-        }
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query {
+#         broadcast: __type(name: "Broadcast") {
+#           name description
+#           fields {
+#             name description
+#             type {
+#               name 
+#             }
+#           }
+#         }
 
-        post: __type(name: "Post") {
-          name description
-          fields {
-            name description
-            type {
-              name 
-            }
-          }
-        }
+#         post: __type(name: "Post") {
+#           name description
+#           fields {
+#             name description
+#             type {
+#               name 
+#             }
+#           }
+#         }
 
-        medium: __type(name: "Medium") {
-          name description
-          fields {
-            name description
-            type {
-              name 
-            }
-          }
-        }
-      }
+#         medium: __type(name: "Medium") {
+#           name description
+#           fields {
+#             name description
+#             type {
+#               name 
+#             }
+#           }
+#         }
+#       }
 
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
-- comment   : GraphQL. Получить список трансляций.
+- comment   : <b>broadcasts(...)</b> Получить список трансляций.
   methods   :
   - POST
   - GET    
@@ -109,6 +109,36 @@
     test   : |- 
       query {
           broadcasts(search:"красный") { id  title link_article is_ended }  
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+
+
+- comment   : <b>get_broadcast(...)</b> Получить список трансляций и их количество.
+  methods   :
+  - POST
+  - GET    
+   
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query{
+        list_broadcast(search: "жеребьевка" ){
+          length
+          list {
+            id
+            title
+          } 
+        }
       }
   - comment: переменные
     name   : variables
@@ -338,11 +368,11 @@
   example: /
   controller: LandingPage
 
-- comment: JSON  маршрутов.  Документация API.
-  methods: [GET]
-  path: /routes
-  example: /routes
-  controller: GetRoutes
+# - comment: JSON  маршрутов.  Документация API.
+#   methods: [GET]
+#   path: /routes
+#   example: /routes
+#   controller: GetRoutes
 
 
 
