@@ -3,10 +3,15 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
+
+	// "go/ast"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/graphql-go/graphql"
 	gq "github.com/graphql-go/graphql"
+	"github.com/graphql-go/graphql/language/ast"
 )
 
 // getFormFields извлекает имена-значения полей формы из запроса
@@ -52,4 +57,55 @@ func (dummy) GraphQL(c *gin.Context) {
 	})
 
 	c.JSON(200, result)
+}
+
+// getSelectedFields - returns list of selected fields defined in GraphQL query.
+//
+// Invoke it like this:
+//
+// getSelectedFields([]string{"companies"}, resolveParams)
+// // this will return []string{"id", "name"}
+// In case you have a "path" you want to select from, e.g.
+//
+// query {
+//   a {
+//     b {
+//       x,
+//       y,
+//       z
+//     }
+//   }
+// }
+// Then you'd call it like this:
+//
+// getSelectedFields([]string{"a", "b"}, resolveParams)
+// // Returns []string{"x", "y", "z"}
+//
+// import "github.com/graphql-go/graphql/language/ast" is added by hands.
+// source: https://github.com/graphql-go/graphql/issues/125
+func getSelectedFields(selectionPath []string, resolveParams graphql.ResolveParams) string {
+	fields := resolveParams.Info.FieldASTs
+	for _, propName := range selectionPath {
+		found := false
+		for _, field := range fields {
+			if field.Name.Value == propName {
+				selections := field.SelectionSet.Selections
+				fields = make([]*ast.Field, 0)
+				for _, selection := range selections {
+					fields = append(fields, selection.(*ast.Field))
+				}
+				found = true
+				break
+			}
+		}
+		if !found {
+			return ""
+		}
+	}
+	var collect []string
+	for _, field := range fields {
+		collect = append(collect, field.Name.Value)
+	}
+	s := strings.Join(collect, ", ")
+	return s
 }
