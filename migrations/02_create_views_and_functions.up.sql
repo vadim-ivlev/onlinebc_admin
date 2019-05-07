@@ -143,3 +143,91 @@ AS SELECT post.id,
     get_answers(post.id) AS posts__answers
    FROM post;
 
+
+
+
+-- G R A P H Q L 
+
+-- G R A P H Q L functions  ************************************************************************
+
+CREATE OR REPLACE FUNCTION public.get_full_post_media(idd integer)
+    RETURNS json
+    LANGUAGE plpgsql
+    AS $function$
+    BEGIN
+        RETURN
+        (
+            select array_to_json(array_agg(row_to_json( t, false )),true) from
+            (
+                SELECT * FROM medium
+                WHERE post_id = idd
+            ) t
+        );
+
+    END;
+    $function$
+;
+
+CREATE OR REPLACE FUNCTION public.get_full_post_answers(idd integer)
+    RETURNS json
+    LANGUAGE plpgsql
+    AS $function$
+    BEGIN
+        RETURN
+        (
+            select array_to_json(array_agg(row_to_json( t, false )),true) from
+            (
+                SELECT * FROM full_answer
+                WHERE id_parent = idd
+            ) t
+        );
+
+    END;
+    $function$
+;
+
+CREATE OR REPLACE FUNCTION public.get_full_broadcast_posts(idd integer)
+    RETURNS json
+    LANGUAGE plpgsql
+    AS $function$
+    BEGIN   
+        RETURN  
+        (
+            select array_to_json(array_agg(row_to_json( t, false )),true) from
+            ( 
+                SELECT * FROM full_post
+                WHERE 
+                        id_broadcast = idd 
+                    AND id_parent IS NULL 
+                ORDER BY id DESC 
+            ) t 
+        );
+        
+    END;
+    $function$
+;
+
+
+
+
+-- G R A P H Q L  V I E W S   *****************************************************************************888
+
+CREATE OR REPLACE VIEW public.full_answer AS
+    SELECT  * 
+            , get_full_post_media(post.id) AS media 
+    FROM post 
+;
+
+CREATE OR REPLACE VIEW public.full_post AS 
+    SELECT  *
+            , get_full_post_media(post.id) AS media
+            , get_full_post_answers(post.id) AS answers
+    FROM post
+;
+
+CREATE OR REPLACE VIEW public.full_broadcast AS 
+    SELECT  *
+            , get_full_broadcast_posts(broadcast.id) AS posts
+    FROM broadcast
+;
+

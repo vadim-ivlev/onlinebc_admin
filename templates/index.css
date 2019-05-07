@@ -57,6 +57,7 @@ h5 {
     min-width: 200px;
     display: inline-block;
     padding-right: 10px;
+    /* display: block; */
 }
 
 .param-name {

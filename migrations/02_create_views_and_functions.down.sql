@@ -1,3 +1,15 @@
+-- GRAPHQL ---------------------------------
+DROP VIEW IF EXISTS public.full_broadcast;
+DROP VIEW IF EXISTS public.full_post;
+DROP VIEW IF EXISTS public.full_answer;
+
+DROP FUNCTION IF EXISTS public.get_full_broadcast_posts(idd integer);
+DROP FUNCTION IF EXISTS public.get_full_post_answers(idd integer);
+DROP FUNCTION IF EXISTS public.get_full_post_media(idd integer);
+
+
+
+
 -- REST ------------------------------------
 DROP VIEW IF EXISTS public.post_view;
 DROP VIEW IF EXISTS public.answer_view;
