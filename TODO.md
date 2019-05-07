@@ -2,18 +2,18 @@
 TODO
 ====
 
-
-1. Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
-
-2. change naming
-3. change list_broadcast -> {
-    list:[broadcast],
-    length: int
-    }
-4. replace db.go with videos db.go
+- Заменить загрузку с 
+-  Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
 
 
 
+
+
+
+
+
+----------------
+```sql
 
 DROP FUNCTION list_broadcast(anyelement);
 
@@ -51,3 +51,5 @@ $function$
 
 
 SELECT public.list_broadcast(354);
+
+```

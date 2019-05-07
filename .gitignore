@@ -1,10 +1,12 @@
-#.vscode
 .idea
 pgdata
 push.sh
-#build
 onlinebc*
 uploads
 uploads*
 moon.py
+node_modules
+docs/doc
+
+!videos.agc
 

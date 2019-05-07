@@ -9,6 +9,8 @@ RUN apt-get -y update && apt-get -y install sshpass
 COPY configs  /app/configs
 COPY migrations  /app/migrations
 COPY templates  /app/templates
+COPY docs  /app/docs
+
 COPY onlinebc_admin  /app/onlinebc
 
 

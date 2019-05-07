@@ -11,22 +11,26 @@ import (
 
 // GetEntity возвращает сущность по id
 func (dummy) GetEntity(c *gin.Context) {
-	c.JSON(200, db.GetRowByID(c.Param("entity"), getIntID(c)))
+	row, _ := db.GetRowByID(c.Param("entity"), getIntID(c))
+	c.JSON(200, row)
 }
 
 // UpdateEntity обновляет сущность по id
 func (dummy) UpdateEntity(c *gin.Context) {
-	c.JSON(200, db.UpdateRowByID(c.Param("entity"), getIntID(c), getPayload(c.Request)))
+	row, _ := db.UpdateRowByID(c.Param("entity"), getIntID(c), getPayload(c.Request))
+	c.JSON(200, row)
 }
 
 // CreateEntity Создать сущность
 func (dummy) CreateEntity(c *gin.Context) {
-	c.JSON(200, db.CreateRow(c.Param("entity"), getPayload(c.Request)))
+	row, _ := db.CreateRow(c.Param("entity"), getPayload(c.Request))
+	c.JSON(200, row)
 }
 
 // DeleteEntity обновляет сущность по id
 func (dummy) DeleteEntity(c *gin.Context) {
-	c.JSON(200, db.DeleteRowByID(c.Param("entity"), getIntID(c)))
+	row, _ := db.DeleteRowByID(c.Param("entity"), getIntID(c))
+	c.JSON(200, row)
 }
 
 // Общие методы************************************************************************
@@ -46,37 +50,44 @@ func (dummy) GetRoutes(c *gin.Context) {
 
 // GetMedia возвращает все медиа поста по его id
 func (dummy) GetMedia(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_media($1) AS res;", getIntID(c))["res"])
+	row, _ := db.QueryRowMap("SELECT get_media($1) AS res;", getIntID(c))
+	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 
 // GetAnswers возвращает ответы к посту по его id
 func (dummy) GetAnswers(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_answers($1) AS res;", getIntID(c))["res"])
+	row, _ := db.QueryRowMap("SELECT get_answers($1) AS res;", getIntID(c))
+	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 
 // GetPosts возвращает посты трансляции по её id
 func (dummy) GetPosts(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))["res"])
+	row, _ := db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))
+	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 
 // GetFullBroadcast возвращает трансляцию с постами по её id
 func (dummy) GetFullBroadcast(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", getIntID(c))["res"])
+	row, _ := db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", getIntID(c))
+	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 
 // GetFullBroadcast возвращает трансляцию с постами по её id
 func (dummy) GetFullBroadcastLegacy(c *gin.Context) {
 	_ = c.Request.ParseForm()
 	id := c.Request.FormValue("id")
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", id)["res"])
+	row, _ := db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", id)
+	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 
 // GetBroadcasts Получить список трансляций
 func (dummy) GetBroadcasts(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_broadcasts() AS res;")["res"])
+	row, _ := db.QueryRowMap("SELECT get_broadcasts() AS res;")
+	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 
 // GetBroadcastList Получить список трансляций. Legacy.
 func (dummy) GetBroadcastList(c *gin.Context) {
-	fmt.Fprintf(c.Writer, "%s", db.QueryRowMap("SELECT get_broadcasts() AS res;")["res"])
+	row, _ := db.QueryRowMap("SELECT get_broadcasts() AS res;")
+	fmt.Fprintf(c.Writer, "%s", row["res"])
 }

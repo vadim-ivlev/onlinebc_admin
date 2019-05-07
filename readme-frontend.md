@@ -43,14 +43,14 @@
 Загрузка изображений
 ---------------------
 
-Осуществляется путем вызова функции createMedium(...). 
+Осуществляется путем вызова функции create_medium(...). 
 В приведенном ниже примере, на сервер отправляются два файла _small.gif и _small.png. Байты изображений закодированы в виде строк base64 и передаются как значения параметра base64.
 
 
 
 	mutation {
 
-		new0: createMedium( 
+		new0: create_medium( 
 			post_id: 24098, 
 			source: "RT", 
 			filename: "_small.gif",
@@ -64,7 +64,7 @@
 			uri  
 		}
 		
-		new1: createMedium( 
+		new1: create_medium( 
 			post_id: 24098, 
 			source: "RT", 
 			filename: "_small.png",

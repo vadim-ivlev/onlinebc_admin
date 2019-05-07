@@ -22,6 +22,8 @@ func routeAbsent(r *gin.Engine, method string, path string) bool {
 
 // defineRoutes -  Сопоставляет маршруты функциям контроллера
 func defineRoutes(r *gin.Engine) {
+
+	r.Handle("GET", "/", c.GetFunctionByName("LandingPage"))
 	r.Handle("OPTIONS", "/graphql", PingHandler)
 
 	for _, route := range c.Routes {

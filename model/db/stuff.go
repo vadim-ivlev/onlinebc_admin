@@ -3,17 +3,17 @@ package db
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 
-	// "onlinebc_admin/model/db"
+	// "videos/model/db"
 
 	"github.com/golang-migrate/migrate"
+
 	//blank import
 	_ "github.com/golang-migrate/migrate/database/postgres"
 	//blank import
 	_ "github.com/golang-migrate/migrate/source/file"
 
-	//blank import
-	_ "github.com/lib/pq"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -41,7 +41,7 @@ func ReadConfig(fileName string) {
 	}
 
 	err = yaml.Unmarshal(yamlFile, &params)
-	printIf(err)
+	printIf("ReadConfig()", err)
 	connectStr = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", params.Host, params.Port, params.User, params.Password, params.Dbname, params.Sslmode)
 	connectURL = fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s", params.User, params.Password, params.Host, params.Port, params.Dbname, params.Sslmode)
 
@@ -60,9 +60,9 @@ func panicIf(err error) {
 	}
 }
 
-func printIf(err error) {
+func printIf(msg string, err error) {
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Println(msg, err.Error())
 	}
 }
 
@@ -71,11 +71,5 @@ func CreateDatabaseIfNotExists() {
 	fmt.Println("Миграция ...")
 	m, err := migrate.New("file://migrations/", connectURL)
 	panicIf(err)
-	printIf(m.Up())
-}
-
-// getTextFromFile возвращает текст файла
-func getTextFromFile(fileName string) string {
-	txt, _ := ioutil.ReadFile(fileName)
-	return string(txt)
+	printIf("CreateDatabaseIfNotExists()", m.Up())
 }

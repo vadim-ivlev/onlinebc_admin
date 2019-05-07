@@ -1,0 +1,26 @@
+{
+    "name": "onlinebc_admin",
+    "version": "1.0.0",
+    "description": "docs generator",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "doc": "graphqldoc -v -f"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@git.rgwork.ru:masterback/videos.git"
+    },
+    "author": "ivlev",
+    "license": "ISC",
+    "dependencies": {
+        "graphqldoc": "^2.5.2",
+        "jquery.json-viewer": "^1.2.0"
+    },
+    "graphqldoc": {
+        "endpoint": "http://localhost:7777/graphql",
+        "output": "./docs/doc"
+    }
+}

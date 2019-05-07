@@ -28,7 +28,7 @@
     value  : '{query}'
     test   : |- 
       mutation {
-        createMedium(
+        create_medium(
 
 
           ) 
@@ -94,31 +94,29 @@
 #     test   : '{}' 
 
 
-- comment   : <b>broadcasts(...)</b> Получить список трансляций.
-  methods   :
-  - POST
-  - GET    
+# - comment   : <b>broadcasts(...)</b> Получить список трансляций.
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-          broadcasts(search:"красный") { id  title link_article is_ended }  
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query {
+#           broadcasts(search:"красный") { id  title link_article is_ended }  
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
-
-
-- comment   : <b>get_broadcast(...)</b> Получить список трансляций и их количество.
+- comment   : <b>list_broadcast(...)</b> Получить список трансляций и их количество.
   methods   :
   - POST
   - GET    
@@ -146,10 +144,7 @@
     test   : '{}' 
 
 
-
-
-
-- comment   : GraphQL. Получить посты трансляции по ее идентификатору.
+- comment   : <b>get_broadcast(id)</b>. Получить трансляцию по идентификатору
   methods   :
   - POST
   - GET    
@@ -163,7 +158,7 @@
     value  : '{query}'
     test   : |- 
       query {
-        posts(id_broadcast: 354) { id id_broadcast text author}
+        get_broadcast (id: 354) { id  title  time_created link_article }
       }
   - comment: переменные
     name   : variables
@@ -171,7 +166,8 @@
     test   : '{}' 
 
 
-- comment   : GraphQL. Получить медиа поста по его идентификатору.
+
+- comment   : <b>get_broadcast_posts(id_broadcast)</b> Получить посты трансляции по ее идентификатору.
   methods   :
   - POST
   - GET    
@@ -185,7 +181,7 @@
     value  : '{query}'
     test   : |- 
       query {
-        media(post_id: 23932) { id uri source}
+        get_broadcast_posts(id_broadcast: 354) { id id_broadcast text author}
       }
   - comment: переменные
     name   : variables
@@ -193,7 +189,8 @@
     test   : '{}' 
 
 
-- comment   : GraphQL. Получить записи по идентификаторам.
+
+- comment   : <b>get_post_media(post_id)</b> Получить медиа поста по его идентификатору.
   methods   :
   - POST
   - GET    
@@ -207,9 +204,7 @@
     value  : '{query}'
     test   : |- 
       query {
-        broadcast (id: 354) { id  title  time_created link_article }
-        post(id:23952){id id_parent text author}
-        medium(id:5330){id uri thumb source}
+        get_post_media(post_id: 23932) { id uri source}
       }
   - comment: переменные
     name   : variables
@@ -217,7 +212,52 @@
     test   : '{}' 
 
 
-- comment   : GraphQL create
+
+- comment   : <b>get_post(id)</b> Получить пост по идентификатору
+  methods   :
+  - POST
+  - GET   
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+        get_post(id:23952){id id_parent text author}
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+- comment   : <b>get_medium(id)</b> Получить медиа по идентификатору
+  methods   :
+  - POST
+  - GET    
+   
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+        get_medium(id:5330){id uri thumb source}
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+
+- comment   : <b>create_broadcast(...)</b> Породить трансляцию
   methods   :
   - POST
   - GET    
@@ -231,7 +271,7 @@
     value  : '{query}'
     test   : |- 
       mutation {
-        createBroadcast(
+        create_broadcast(
           title:"new broadcast1", 
           time_created: 123, 
           link_article:"link2"
@@ -248,7 +288,9 @@
     value  : '{variables}'
     test   : '{}' 
 
-- comment   : GraphQL update
+
+
+- comment   : <b>update_broadcast(...)</b> Обновить трансляцию
   methods   :
   - POST
   - GET    
@@ -262,7 +304,7 @@
     value  : '{query}'
     test   : |- 
       mutation {
-        updateBroadcast(
+        update_broadcast(
           id: 1000,
           title:"updated broadcast 22", 
           time_created: 124, 
@@ -282,7 +324,7 @@
     test   : '{}' 
 
 
-- comment   : GraphQL delete
+- comment   : <b>delete_broadcast(id)</b> Удалить трансляцию
   methods   :
   - POST
   - GET    
@@ -296,7 +338,7 @@
     value  : '{query}'
     test   : |- 
       mutation {
-        deleteBroadcast(
+        delete_broadcast(
           id: 1000
         ) 
         {
@@ -320,33 +362,33 @@
 # REST ====================================================================================================================
 
 
-#  medium ---------------------------------------------------
+# #  medium ---------------------------------------------------
 
-- comment   : Получить Медиа с идентификатором id
-  methods   :
-  - GET
-  path      : /get/:entity/:id
-  example   : /get/medium/5330
-  controller: GetEntity
+# - comment   : Получить Медиа с идентификатором id
+#   methods   :
+#   - GET
+#   path      : /get/:entity/:id
+#   example   : /get/medium/5330
+#   controller: GetEntity
 
-# post ------------------------------------------------------------
+# # post ------------------------------------------------------------
 
-- comment   : Получить пост с идентификатором id
-  methods   : 
-  - GET
-  path      : /get/:entity/:id
-  example   : /get/post/23932
-  controller: GetEntity
+# - comment   : Получить пост с идентификатором id
+#   methods   : 
+#   - GET
+#   path      : /get/:entity/:id
+#   example   : /get/post/23932
+#   controller: GetEntity
 
 
-#  broadcast ---------------------------------------------------
+# #  broadcast ---------------------------------------------------
 
-- comment   : Получить трансляцию с идентификатором id
-  methods   : 
-  - GET
-  path      : /get/:entity/:id
-  example   : /get/broadcast/354
-  controller: GetEntity
+# - comment   : Получить трансляцию с идентификатором id
+#   methods   : 
+#   - GET
+#   path      : /get/:entity/:id
+#   example   : /get/broadcast/354
+#   controller: GetEntity
 
 
 
@@ -362,11 +404,11 @@
 
 # Общие ---------------------------------------------------
 
-- comment: Стартовая страница
-  methods: [GET]
-  path: /
-  example: /
-  controller: LandingPage
+# - comment: Стартовая страница
+#   methods: [GET]
+#   path: /
+#   example: /
+#   controller: LandingPage
 
 # - comment: JSON  маршрутов.  Документация API.
 #   methods: [GET]

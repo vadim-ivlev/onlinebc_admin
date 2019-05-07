@@ -1,10 +1,8 @@
 package controller
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"net/http"
 	"reflect"
 	"strconv"
 
@@ -51,24 +49,6 @@ func GetFunctionByName(funcName string) func(*gin.Context) {
 	m := reflect.ValueOf(&dummy{}).MethodByName(funcName)
 	mCallable := m.Interface().(func(*gin.Context))
 	return mCallable
-}
-
-// getFormFields извлекает имена-значения полей формы из запроса
-// or builds a map with keys "query", "variables", "operationName".
-// Decoded body has precedence over POST over GET.
-func getPayload(r *http.Request) map[string]interface{} {
-	m := make(map[string]interface{})
-	err := r.ParseForm()
-	if err != nil {
-		fmt.Println(err)
-	}
-	for k := range r.Form {
-		m[k] = r.FormValue(k)
-	}
-	if r.ContentLength > 0 {
-		_ = json.NewDecoder(r.Body).Decode(&m)
-	}
-	return m
 }
 
 // ReadConfig reads YAML file
