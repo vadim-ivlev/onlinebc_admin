@@ -212,6 +212,33 @@
     test   : '{}' 
 
 
+- comment   : <b>get_post_answers(id_parent)</b> Получить ответы к посту по его идентификатору.
+  methods   :
+  - POST
+  - GET    
+   
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+        get_post_answers(id_parent: 23932) { 
+          id 
+          id_broadcast 
+          text 
+          author
+          }
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
 
 - comment   : <b>get_post(id)</b> Получить пост по идентификатору
   methods   :

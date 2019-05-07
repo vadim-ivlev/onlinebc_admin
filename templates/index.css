@@ -56,6 +56,7 @@ h5 {
     font-size: 120%;
     min-width: 200px;
     display: inline-block;
+    padding-right: 10px;
 }
 
 .param-name {

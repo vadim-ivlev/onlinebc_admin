@@ -68,6 +68,20 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			},
 		},
 
+		"get_post_answers": &gq.Field{
+			Type:        gq.NewList(postType),
+			Description: "Получить ответы к посту по идентификатору поста.",
+			Args: gq.FieldConfigArgument{
+				"id_parent": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор поста",
+				},
+			},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				return db.QuerySliceMap("SELECT * FROM post WHERE id_parent = $1 ;", params.Args["id_parent"].(int))
+			},
+		},
+
 		// "broadcasts": &gq.Field{
 		// 	Type:        gq.NewList(broadcastType),
 		// 	Description: "Получить список трансляций.",
