@@ -37,52 +37,32 @@ var schema, _ = gq.NewSchema(gq.SchemaConfig{
 	Mutation: rootMutation,
 })
 
-// GraphQL исполняет GraphQL запрос
-func (dummy) GraphQL(c *gin.Context) {
-	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
-
-	m := getPayload(c.Request)
-
-	// Альтернативный способ. Оставлено на всякий случай
-	// query, _ := c.GetPostForm("query")
-	// variables, _ := c.GetPostForm("variables")
-
-	query, _ := m["query"].(string)
-	variables, _ := m["variables"].(map[string]interface{})
-
-	result := gq.Do(gq.Params{
-		Schema:         schema,
-		RequestString:  query,
-		VariableValues: variables,
-	})
-
-	c.JSON(200, result)
-}
-
 // getSelectedFields - returns list of selected fields defined in GraphQL query.
-//
-// Invoke it like this:
-//
-// getSelectedFields([]string{"companies"}, resolveParams)
-// // this will return []string{"id", "name"}
-// In case you have a "path" you want to select from, e.g.
-//
-// query {
-//   a {
-//     b {
-//       x,
-//       y,
-//       z
-//     }
-//   }
-// }
-// Then you'd call it like this:
-//
-// getSelectedFields([]string{"a", "b"}, resolveParams)
-// // Returns []string{"x", "y", "z"}
-//
-// import "github.com/graphql-go/graphql/language/ast" is added by hands.
-// source: https://github.com/graphql-go/graphql/issues/125
+/*
+
+	Invoke it like this:
+
+	getSelectedFields([]string{"companies"}, resolveParams)
+	// this will return []string{"id", "name"}
+	In case you have a "path" you want to select from, e.g.
+
+	query {
+	a {
+		b {
+		x,
+		y,
+		z
+		}
+	}
+	}
+	Then you'd call it like this:
+
+	getSelectedFields([]string{"a", "b"}, resolveParams)
+	// Returns []string{"x", "y", "z"}
+
+	import "github.com/graphql-go/graphql/language/ast" is added by hands.
+	source: https://github.com/graphql-go/graphql/issues/125
+*/
 func getSelectedFields(selectionPath []string, resolveParams graphql.ResolveParams) string {
 	fields := resolveParams.Info.FieldASTs
 	for _, propName := range selectionPath {
@@ -108,4 +88,32 @@ func getSelectedFields(selectionPath []string, resolveParams graphql.ResolvePara
 	}
 	s := strings.Join(collect, ", ")
 	return s
+}
+
+// *********************************************************************
+// *********************************************************************
+// *********************************************************************
+// *********************************************************************
+// *********************************************************************
+
+// GraphQL исполняет GraphQL запрос
+func (dummy) GraphQL(c *gin.Context) {
+	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
+
+	m := getPayload(c.Request)
+
+	// Альтернативный способ. Оставлено на всякий случай
+	// query, _ := c.GetPostForm("query")
+	// variables, _ := c.GetPostForm("variables")
+
+	query, _ := m["query"].(string)
+	variables, _ := m["variables"].(map[string]interface{})
+
+	result := gq.Do(gq.Params{
+		Schema:         schema,
+		RequestString:  query,
+		VariableValues: variables,
+	})
+
+	c.JSON(200, result)
 }

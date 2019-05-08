@@ -120,7 +120,6 @@
   methods   :
   - POST
   - GET    
-   
   path      : /graphql
   example   : /graphql
   controller: GraphQL
@@ -144,11 +143,45 @@
     test   : '{}' 
 
 
+- comment   : <b>list_full_broadcast(...)</b> Получить список трансляций c постами, ответами и их количество.
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query{
+        list_full_broadcast(search: "жеребьевка" ){
+          length
+          list {
+            id
+            title
+              posts {
+                id 
+                id_parent 
+                text 
+                author
+                media { id source thumb uri}
+                answers {id id_parent text author}
+              }
+          } 
+        }
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
 - comment   : <b>get_broadcast(id)</b>. Получить трансляцию по идентификатору
   methods   :
   - POST
   - GET    
-   
   path      : /graphql
   example   : /graphql
   controller: GraphQL
@@ -160,6 +193,41 @@
       query {
         get_broadcast (id: 354) { id  title  time_created link_article }
       }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
+- comment   : <b>get_full_broadcast(id)</b>. Получить трансляцию c постами, ответами и изображениями по идентификатору трансляции
+  methods   :
+  - POST
+  - GET    
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+        get_full_broadcast (id: 354) { 
+          id  
+          title  
+          time_created 
+          link_article 
+          posts {
+            id 
+            id_parent 
+            text 
+            author
+            media { id source thumb uri}
+            answers {id id_parent text author}
+          }
+        }
+      }
+
   - comment: переменные
     name   : variables
     value  : '{variables}'
@@ -181,7 +249,17 @@
     value  : '{query}'
     test   : |- 
       query {
-        get_broadcast_posts(id_broadcast: 354) { id id_broadcast text author}
+        get_broadcast_posts(
+          id_broadcast: 354,  
+          show_answers: false 
+        ) 
+        { 
+          id 
+          id_broadcast 
+          id_parent
+          text 
+          author
+        }
       }
   - comment: переменные
     name   : variables
@@ -261,6 +339,34 @@
     test   : '{}' 
 
 
+- comment   : <b>get_full_post(id)</b> Получить пост c ответами и изображениями по идентификатору
+  methods   :
+  - POST
+  - GET   
+  path      : /graphql
+  example   : /graphql
+  controller: GraphQL
+  params    :
+  - comment: запрос
+    name   : query
+    value  : '{query}'
+    test   : |- 
+      query {
+        get_full_post(id:23932){
+          id 
+          id_parent 
+          text 
+          author
+          media { id source thumb uri}
+          answers {id id_parent text author}
+        }
+      }
+  - comment: переменные
+    name   : variables
+    value  : '{variables}'
+    test   : '{}' 
+
+
 - comment   : <b>get_medium(id)</b> Получить медиа по идентификатору
   methods   :
   - POST
@@ -284,7 +390,7 @@
 
 
 
-- comment   : <b>create_broadcast(...)</b> Породить трансляцию
+- comment   : <b>create_broadcast(...)</b> Создать трансляцию
   methods   :
   - POST
   - GET    

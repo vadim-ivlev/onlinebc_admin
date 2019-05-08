@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:800|Roboto:400,900&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400');
 
 body {
     margin: 30px;
@@ -53,7 +54,7 @@ h5 {
 
 .comment > b {
     color: black;
-    font-size: 120%;
+    /* font-size: 120%; */
     min-width: 200px;
     display: inline-block;
     padding-right: 10px;
@@ -84,7 +85,7 @@ h5 {
     /* display: inline-block; */
     vertical-align: top;
     margin-bottom: 5px;
-    font-size: 80%;
+    /* font-size: 80%; */
 }
 
 
@@ -218,9 +219,10 @@ pre {
     resize: vertical;
     /* padding-left: 5px; */
     overflow: auto;
-    font-size: 80%;
+    font-size: 90%;
     border: 1px solid silver;
     border-radius: 8px;
+    font-family: "Roboto Mono";
 }
 
 
@@ -257,4 +259,9 @@ input.form-param-name {
     min-width: 150px;
     padding-right: 5px;
     display: inline-block;
+}
+
+.ui-widget {
+    font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    /* font-size: 1em; */
 }

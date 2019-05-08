@@ -22,12 +22,30 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			},
 		},
 
+		"get_full_broadcast": &gq.Field{
+			Type:        fullBroadcastType,
+			Description: "Показать трансляцию по идентификатору c постами, ответами и медиа",
+			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				return db.GetRowByID("full_broadcast", params.Args["id"].(int))
+			},
+		},
+
 		"get_post": &gq.Field{
 			Type:        postType,
 			Description: "Показать пост по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				return db.GetRowByID("post", params.Args["id"].(int))
+			},
+		},
+
+		"get_full_post": &gq.Field{
+			Type:        fullPostType,
+			Description: "Показать пост с ответами и изображениями по идентификатору поста",
+			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				return db.GetRowByID("full_post", params.Args["id"].(int))
 			},
 		},
 
@@ -48,9 +66,18 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.NewNonNull(gq.Int),
 					Description: "Идентификатор трансляции",
 				},
+				"show_answers": &gq.ArgumentConfig{
+					Type:         gq.Boolean,
+					DefaultValue: false,
+					Description:  "Идентификатор трансляции",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.QuerySliceMap("SELECT * FROM post WHERE id_broadcast = $1 ORDER BY post_time DESC ;", params.Args["id_broadcast"].(int))
+				showAnswersCondition := "AND id_parent IS NULL"
+				if params.Args["show_answers"].(bool) {
+					showAnswersCondition = ""
+				}
+				return db.QuerySliceMap("SELECT * FROM post WHERE id_broadcast = $1 "+showAnswersCondition+" ORDER BY post_time DESC ;", params.Args["id_broadcast"].(int))
 			},
 		},
 
@@ -171,6 +198,60 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 					return nil, err
 				}
 				count, err := db.QueryRowMap("SELECT count(*) AS count FROM broadcast" + wherePart)
+				if err != nil {
+					return nil, err
+				}
+
+				length := count["count"]
+
+				m := map[string]interface{}{
+					"length": length,
+					"list":   list,
+				}
+
+				return m, nil
+
+			},
+		},
+
+		"list_full_broadcast": &gq.Field{
+			Type:        fullListBroadcastType,
+			Description: "Получить список трансляций c постами, ответами и изображениями, и их количество.",
+			Args: gq.FieldConfigArgument{
+				"search": &gq.ArgumentConfig{
+					Type:         gq.String,
+					Description:  "Строка полнотекстового поиска. По умолчанию ''.",
+					DefaultValue: "",
+				},
+				"is_ended": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "1 если трансляция закончена, 0 - если нет. По умолчанию 1.",
+					DefaultValue: 1,
+				},
+				"order": &gq.ArgumentConfig{
+					Type:         gq.String,
+					Description:  "сортировка строк в определённом порядке. По умолчанию 'id DESC'",
+					DefaultValue: "id DESC",
+				},
+				"limit": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "возвратить не больше заданного числа строк. По умолчанию 100.",
+					DefaultValue: 100,
+				},
+				"offset": &gq.ArgumentConfig{
+					Type:         gq.Int,
+					Description:  "пропустить указанное число строк, прежде чем начать выдавать строки. По умолчанию 0.",
+					DefaultValue: 0,
+				},
+			},
+			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				wherePart, orderAndLimits := queryEnd(params)
+
+				list, err := db.QuerySliceMap("SELECT * FROM full_broadcast" + wherePart + orderAndLimits)
+				if err != nil {
+					return nil, err
+				}
+				count, err := db.QueryRowMap("SELECT count(*) AS count FROM full_broadcast" + wherePart)
 				if err != nil {
 					return nil, err
 				}
