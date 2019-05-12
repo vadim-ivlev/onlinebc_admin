@@ -2,6 +2,7 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 
 	gq "github.com/graphql-go/graphql"
 )
@@ -11,14 +12,23 @@ import (
 // JSONParamToMap - возвращает параметр paramName в map[string]interface{}.
 // Второй параметр возврата - ошибка.
 // Применяется для сериализации поля JSON таблицы postgres в map.
-func JSONParamToMap(params gq.ResolveParams, paramName string) (interface{}, error) {
+func JSONParamToMap(params gq.ResolveParams, paramName string) ([]map[string]interface{}, error) {
 	var paramMap []map[string]interface{}
 	source := params.Source.(map[string]interface{})
+	// // TODO: remove debug
+	// id, _ := source["id"].(float64)
 	paramBytes, ok := source[paramName].([]byte)
 	if !ok {
 		return paramMap, nil
 	}
 	err := json.Unmarshal(paramBytes, &paramMap)
+	// // TODO: remove debug
+	// if int(id) == 23932 {
+	// 	str := string(paramBytes)
+	// 	fmt.Println("ID=", id, str)
+	// 	post := paramMap[9]
+	// 	fmt.Println("MAP=", post)
+	// }
 	return paramMap, err
 }
 
@@ -226,7 +236,9 @@ var fullAnswerFields = gq.Fields{
 		Type:        gq.NewList(mediumType),
 		Description: "Медиа ответа",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			return JSONParamToMap(params, "media")
+			source := params.Source.(map[string]interface{})
+			return source["media"], nil
+			// return JSONParamToMap(params, "media")
 		},
 	},
 }
@@ -284,14 +296,29 @@ var fullPostFields = gq.Fields{
 		Type:        gq.NewList(mediumType),
 		Description: "Медиа поста",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			return JSONParamToMap(params, "media")
+			source := params.Source.(map[string]interface{})
+			return source["media"], nil
+
+			// id := int(source["id"].(float64))
+			// if id == 23932 {
+			// 	fmt.Println("id=", id)
+			// 	media := source["media"]
+			// 	fmt.Println(media)
+			// 	return media, nil
+			// 	ret, err := JSONParamToMap(params, "media")
+			// 	return ret, err
+			// }
+			// return JSONParamToMap(params, "media")
 		},
 	},
 	"answers": &gq.Field{
 		Type:        gq.NewList(fullAnswerType),
 		Description: "Ответы к посту",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			return JSONParamToMap(params, "answers")
+			source := params.Source.(map[string]interface{})
+			return source["answers"], nil
+
+			// return JSONParamToMap(params, "answers")
 		},
 	},
 }
@@ -361,12 +388,14 @@ var fullBroadcastFields = gq.Fields{
 		Type:        gq.NewList(fullPostType),
 		Description: "Посты бродкаста",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
+			source := params.Source.(map[string]interface{})
+			fmt.Println(source["posts"])
 			return JSONParamToMap(params, "posts")
 		},
 	},
 }
 
-var FullListBroadcastFields = gq.Fields{
+var fullListBroadcastFields = gq.Fields{
 	"length": &gq.Field{
 		Type:        gq.Int,
 		Description: "Количество элементов в списке",
@@ -426,5 +455,5 @@ var fullBroadcastType = gq.NewObject(gq.ObjectConfig{
 var fullListBroadcastType = gq.NewObject(gq.ObjectConfig{
 	Name:        "FullListBroadcast",
 	Description: "Список трансляций c постами, ответами и медиа,  и количество элементов в списке",
-	Fields:      FullListBroadcastFields,
+	Fields:      fullListBroadcastFields,
 })

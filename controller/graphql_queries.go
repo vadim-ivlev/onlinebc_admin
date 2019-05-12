@@ -18,7 +18,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать трансляцию по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.GetRowByID("broadcast", params.Args["id"].(int))
+				fields := getSelectedFields([]string{"get_broadcast"}, params)
+				return db.QueryRowMap("SELECT "+fields+" FROM broadcast WHERE id = $1 ;", params.Args["id"].(int))
+				// return db.GetRowByID("broadcast", params.Args["id"].(int))
 			},
 		},
 
@@ -27,7 +29,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать трансляцию по идентификатору c постами, ответами и медиа",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.GetRowByID("full_broadcast", params.Args["id"].(int))
+				fields := getSelectedFields([]string{"get_full_broadcast"}, params)
+				return db.QueryRowMap("SELECT "+fields+" FROM full_broadcast WHERE id = $1 ;", params.Args["id"].(int))
+				// return db.GetRowByID("full_broadcast", params.Args["id"].(int))
 			},
 		},
 
@@ -36,7 +40,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать пост по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.GetRowByID("post", params.Args["id"].(int))
+				fields := getSelectedFields([]string{"get_post"}, params)
+				return db.QueryRowMap("SELECT "+fields+" FROM post WHERE id = $1 ;", params.Args["id"].(int))
+				// return db.GetRowByID("post", params.Args["id"].(int))
 			},
 		},
 
@@ -45,7 +51,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать пост с ответами и изображениями по идентификатору поста",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.GetRowByID("full_post", params.Args["id"].(int))
+				fields := getSelectedFields([]string{"get_full_post"}, params)
+				return db.QueryRowMap("SELECT "+fields+" FROM full_post WHERE id = $1 ;", params.Args["id"].(int))
+				// return db.GetRowByID("full_post", params.Args["id"].(int))
 			},
 		},
 
@@ -54,7 +62,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Показать медиа по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.GetRowByID("medium", params.Args["id"].(int))
+				fields := getSelectedFields([]string{"get_medium"}, params)
+				return db.QueryRowMap("SELECT "+fields+" FROM medium WHERE id = $1 ;", params.Args["id"].(int))
+				// return db.GetRowByID("medium", params.Args["id"].(int))
 			},
 		},
 
@@ -77,7 +87,8 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				if params.Args["show_answers"].(bool) {
 					showAnswersCondition = ""
 				}
-				return db.QuerySliceMap("SELECT * FROM post WHERE id_broadcast = $1 "+showAnswersCondition+" ORDER BY post_time DESC ;", params.Args["id_broadcast"].(int))
+				fields := getSelectedFields([]string{"get_broadcast_posts"}, params)
+				return db.QuerySliceMap("SELECT "+fields+" FROM post WHERE id_broadcast = $1 "+showAnswersCondition+" ORDER BY post_time DESC ;", params.Args["id_broadcast"].(int))
 			},
 		},
 
@@ -91,7 +102,8 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.QuerySliceMap("SELECT * FROM medium WHERE post_id = $1 ;", params.Args["post_id"].(int))
+				fields := getSelectedFields([]string{"get_broadcast_posts"}, params)
+				return db.QuerySliceMap("SELECT "+fields+" FROM medium WHERE post_id = $1 ;", params.Args["post_id"].(int))
 			},
 		},
 
@@ -105,7 +117,8 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.QuerySliceMap("SELECT * FROM post WHERE id_parent = $1 ;", params.Args["id_parent"].(int))
+				fields := getSelectedFields([]string{"get_broadcast_posts"}, params)
+				return db.QuerySliceMap("SELECT "+fields+" FROM post WHERE id_parent = $1 ;", params.Args["id_parent"].(int))
 			},
 		},
 
@@ -192,8 +205,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				wherePart, orderAndLimits := queryEnd(params)
+				fields := getSelectedFields([]string{"list_broadcast", "list"}, params)
 
-				list, err := db.QuerySliceMap("SELECT * FROM broadcast" + wherePart + orderAndLimits)
+				list, err := db.QuerySliceMap("SELECT " + fields + " FROM broadcast" + wherePart + orderAndLimits)
 				if err != nil {
 					return nil, err
 				}
@@ -246,8 +260,9 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				wherePart, orderAndLimits := queryEnd(params)
+				fields := getSelectedFields([]string{"list_full_broadcast", "list"}, params)
 
-				list, err := db.QuerySliceMap("SELECT * FROM full_broadcast" + wherePart + orderAndLimits)
+				list, err := db.QuerySliceMap("SELECT " + fields + " FROM full_broadcast" + wherePart + orderAndLimits)
 				if err != nil {
 					return nil, err
 				}

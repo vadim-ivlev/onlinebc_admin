@@ -9,17 +9,17 @@
 
 # Общие ---------------------------------------------------
 
-- comment: Стартовая страница
-  methods: [GET]
-  path: /
-  example: /
-  controller: LandingPage
+# - comment: Стартовая страница
+#   methods: [GET]
+#   path: /
+#   example: /
+#   controller: LandingPage
 
-- comment: JSON  маршрутов.  Документация API.
-  methods: [GET]
-  path: /routes
-  example: /routes
-  controller: GetRoutes
+# - comment: JSON  маршрутов.  Документация API.
+#   methods: [GET]
+#   path: /routes
+#   example: /routes
+#   controller: GetRoutes
 
 
 
