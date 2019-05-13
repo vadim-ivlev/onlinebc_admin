@@ -223,11 +223,15 @@
             text 
             author
             media { id source thumb uri}
-            answers {id id_parent text author}
+            answers {
+              id 
+              id_parent 
+              text 
+              author 
+              media { id source thumb uri}}
           }
         }
       }
-
   - comment: переменные
     name   : variables
     value  : '{variables}'

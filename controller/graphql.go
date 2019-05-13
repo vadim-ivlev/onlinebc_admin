@@ -84,7 +84,10 @@ func getSelectedFields(selectionPath []string, resolveParams graphql.ResolvePara
 	}
 	var collect []string
 	for _, field := range fields {
-		collect = append(collect, field.Name.Value)
+		name := field.Name.Value
+		if name != "__typename" {
+			collect = append(collect, field.Name.Value)
+		}
 	}
 	s := strings.Join(collect, ", ")
 	return s

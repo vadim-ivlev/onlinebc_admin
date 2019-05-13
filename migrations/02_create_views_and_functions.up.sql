@@ -5,6 +5,12 @@
 -- Все функции возвращают JSON.
 
 
+-- NOTE: 
+-- Calls jsonb_agg(t) seem to produce the same results as   
+-- array_to_json(array_agg(row_to_json( t, false )),true),
+-- which were used in onlinebc_admin.
+
+
 
 -- R E S T functions  ************************************************************************
 
@@ -15,7 +21,7 @@ AS $function$
 BEGIN
     RETURN
     (
-        select array_to_json(array_agg(row_to_json( t, false )),true) from
+        select jsonb_agg(t) from
         (
             SELECT * FROM medium
             WHERE post_id = idd
@@ -34,7 +40,7 @@ AS $function$
 BEGIN
     RETURN
     (
-        select array_to_json(array_agg(row_to_json( t, false )),true) from
+        select jsonb_agg(t) from
         (
             SELECT * FROM answer_view
             WHERE id_parent = idd
@@ -52,7 +58,7 @@ AS $function$
 BEGIN   
     RETURN  
     (
-        select array_to_json(array_agg(row_to_json( t, false )),true) from
+        select jsonb_agg(t) from
         ( 
             SELECT * FROM post_view
             WHERE 
@@ -78,7 +84,7 @@ AS $function$
 BEGIN   
     RETURN
     (
-        select array_to_json(array_agg(row_to_json( t, false )),true) from
+        select jsonb_agg(t) from
         ( select *, get_posts(id) as posts  from broadcast where id = idd ) t
     );
 END;
@@ -92,7 +98,7 @@ AS $function$
 BEGIN   
     RETURN
     (
-       select array_to_json(array_agg(row_to_json( t, false )),true) from
+       select jsonb_agg(t) from
        ( select *  from broadcast ) t
     );
 END;
@@ -157,7 +163,7 @@ CREATE OR REPLACE FUNCTION public.get_full_post_media(idd integer)
     BEGIN
         RETURN
         (
-            select array_to_json(array_agg(row_to_json( t, false )),true) from
+            select jsonb_agg(t) from
             (
                 SELECT * FROM medium
                 WHERE post_id = idd
@@ -175,7 +181,7 @@ CREATE OR REPLACE FUNCTION public.get_full_post_answers(idd integer)
     BEGIN
         RETURN
         (
-            select array_to_json(array_agg(row_to_json( t, false )),true) from
+            select jsonb_agg(t) from
             (
                 SELECT * FROM full_answer
                 WHERE id_parent = idd
@@ -193,7 +199,7 @@ CREATE OR REPLACE FUNCTION public.get_full_broadcast_posts(idd integer)
     BEGIN   
         RETURN  
         (
-            select array_to_json(array_agg(row_to_json( t, false )),true) from
+            select jsonb_agg(t) from
             ( 
                 SELECT * FROM full_post
                 WHERE 

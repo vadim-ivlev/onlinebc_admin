@@ -20,7 +20,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_broadcast"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM broadcast WHERE id = $1 ;", params.Args["id"].(int))
-				// return db.GetRowByID("broadcast", params.Args["id"].(int))
 			},
 		},
 
@@ -31,7 +30,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_full_broadcast"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM full_broadcast WHERE id = $1 ;", params.Args["id"].(int))
-				// return db.GetRowByID("full_broadcast", params.Args["id"].(int))
 			},
 		},
 
@@ -42,7 +40,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_post"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM post WHERE id = $1 ;", params.Args["id"].(int))
-				// return db.GetRowByID("post", params.Args["id"].(int))
 			},
 		},
 
@@ -53,7 +50,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_full_post"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM full_post WHERE id = $1 ;", params.Args["id"].(int))
-				// return db.GetRowByID("full_post", params.Args["id"].(int))
 			},
 		},
 
@@ -64,7 +60,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_medium"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM medium WHERE id = $1 ;", params.Args["id"].(int))
-				// return db.GetRowByID("medium", params.Args["id"].(int))
 			},
 		},
 
@@ -102,7 +97,7 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"get_broadcast_posts"}, params)
+				fields := getSelectedFields([]string{"get_post_media"}, params)
 				return db.QuerySliceMap("SELECT "+fields+" FROM medium WHERE post_id = $1 ;", params.Args["post_id"].(int))
 			},
 		},
@@ -117,61 +112,11 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"get_broadcast_posts"}, params)
+				fields := getSelectedFields([]string{"get_post_answers"}, params)
 				return db.QuerySliceMap("SELECT "+fields+" FROM post WHERE id_parent = $1 ;", params.Args["id_parent"].(int))
 			},
 		},
 
-		// "broadcasts": &gq.Field{
-		// 	Type:        gq.NewList(broadcastType),
-		// 	Description: "Получить список трансляций.",
-		// 	Args: gq.FieldConfigArgument{
-		// 		"search": &gq.ArgumentConfig{
-		// 			Type:         gq.String,
-		// 			Description:  "Строка полнотекстового поиска. По умолчанию ''.",
-		// 			DefaultValue: "",
-		// 		},
-		// 		"is_ended": &gq.ArgumentConfig{
-		// 			Type:         gq.Int,
-		// 			Description:  "1 если трансляция закончена, 0 - если нет. По умолчанию 1.",
-		// 			DefaultValue: 1,
-		// 		},
-		// 		"order": &gq.ArgumentConfig{
-		// 			Type:         gq.String,
-		// 			Description:  "сортировка строк в определённом порядке. По умолчанию 'id DESC'",
-		// 			DefaultValue: "id DESC",
-		// 		},
-		// 		"limit": &gq.ArgumentConfig{
-		// 			Type:         gq.Int,
-		// 			Description:  "возвратить не больше заданного числа строк. По умолчанию 100.",
-		// 			DefaultValue: 100,
-		// 		},
-		// 		"offset": &gq.ArgumentConfig{
-		// 			Type:         gq.Int,
-		// 			Description:  "пропустить указанное число строк, прежде чем начать выдавать строки. По умолчанию 0.",
-		// 			DefaultValue: 0,
-		// 		},
-		// 	},
-		// 	Resolve: func(params gq.ResolveParams) (interface{}, error) {
-		// 		// s := params.Args["search"].(string)
-		// 		// textSearchCondition := ""
-		// 		// if len(s) > 0 {
-		// 		// 	textSearchCondition = fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') AND", s)
-		// 		// }
-
-		// 		// return db.QuerySliceMap("SELECT * FROM broadcast WHERE "+textSearchCondition+
-		// 		// 	" is_ended = $1 ORDER BY $2 LIMIT $3 OFFSET $4 ;",
-		// 		// 	params.Args["is_ended"].(int),
-		// 		// 	params.Args["order"].(string),
-		// 		// 	params.Args["limit"].(int),
-		// 		// 	params.Args["offset"].(int),
-		// 		// )
-
-		// 		wherePart, orderAndLimits := queryEnd(params)
-		// 		return db.QuerySliceMap("SELECT * FROM broadcast" + wherePart + orderAndLimits)
-
-		// 	},
-		// },
 
 		"list_broadcast": &gq.Field{
 			Type:        listBroadcastType,

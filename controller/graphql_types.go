@@ -2,7 +2,6 @@ package controller
 
 import (
 	"encoding/json"
-	"fmt"
 
 	gq "github.com/graphql-go/graphql"
 )
@@ -12,23 +11,18 @@ import (
 // JSONParamToMap - возвращает параметр paramName в map[string]interface{}.
 // Второй параметр возврата - ошибка.
 // Применяется для сериализации поля JSON таблицы postgres в map.
-func JSONParamToMap(params gq.ResolveParams, paramName string) ([]map[string]interface{}, error) {
-	var paramMap []map[string]interface{}
+func JSONParamToMap(params gq.ResolveParams, paramName string) (interface{}, error) {
+
 	source := params.Source.(map[string]interface{})
-	// // TODO: remove debug
-	// id, _ := source["id"].(float64)
-	paramBytes, ok := source[paramName].([]byte)
+	param := source[paramName]
+
+	// TODO: may be it's better to check if it can be converted to map[string]interface{}
+	paramBytes, ok := param.([]byte)
 	if !ok {
-		return paramMap, nil
+		return param, nil
 	}
+	var paramMap []map[string]interface{}
 	err := json.Unmarshal(paramBytes, &paramMap)
-	// // TODO: remove debug
-	// if int(id) == 23932 {
-	// 	str := string(paramBytes)
-	// 	fmt.Println("ID=", id, str)
-	// 	post := paramMap[9]
-	// 	fmt.Println("MAP=", post)
-	// }
 	return paramMap, err
 }
 
@@ -236,9 +230,7 @@ var fullAnswerFields = gq.Fields{
 		Type:        gq.NewList(mediumType),
 		Description: "Медиа ответа",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			source := params.Source.(map[string]interface{})
-			return source["media"], nil
-			// return JSONParamToMap(params, "media")
+			return JSONParamToMap(params, "media")
 		},
 	},
 }
@@ -296,29 +288,14 @@ var fullPostFields = gq.Fields{
 		Type:        gq.NewList(mediumType),
 		Description: "Медиа поста",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			source := params.Source.(map[string]interface{})
-			return source["media"], nil
-
-			// id := int(source["id"].(float64))
-			// if id == 23932 {
-			// 	fmt.Println("id=", id)
-			// 	media := source["media"]
-			// 	fmt.Println(media)
-			// 	return media, nil
-			// 	ret, err := JSONParamToMap(params, "media")
-			// 	return ret, err
-			// }
-			// return JSONParamToMap(params, "media")
+			return JSONParamToMap(params, "media")
 		},
 	},
 	"answers": &gq.Field{
 		Type:        gq.NewList(fullAnswerType),
 		Description: "Ответы к посту",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			source := params.Source.(map[string]interface{})
-			return source["answers"], nil
-
-			// return JSONParamToMap(params, "answers")
+			return JSONParamToMap(params, "media")
 		},
 	},
 }
@@ -388,8 +365,6 @@ var fullBroadcastFields = gq.Fields{
 		Type:        gq.NewList(fullPostType),
 		Description: "Посты бродкаста",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			source := params.Source.(map[string]interface{})
-			fmt.Println(source["posts"])
 			return JSONParamToMap(params, "posts")
 		},
 	},
