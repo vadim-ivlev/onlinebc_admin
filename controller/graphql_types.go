@@ -358,7 +358,7 @@ var fullBroadcastFields = gq.Fields{
 	},
 	"diary_author": &gq.Field{
 		Type:        gq.String,
-		Description: "Автордневника",
+		Description: "Автор дневника",
 	},
 	// ------------------------------------
 	"posts": &gq.Field{
