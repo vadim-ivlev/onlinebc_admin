@@ -295,7 +295,7 @@ var fullPostFields = gq.Fields{
 		Type:        gq.NewList(fullAnswerType),
 		Description: "Ответы к посту",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			return JSONParamToMap(params, "media")
+			return JSONParamToMap(params, "answers")
 		},
 	},
 }

@@ -14,41 +14,21 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 	Fields: gq.Fields{
 
 		"get_broadcast": &gq.Field{
-			Type:        broadcastType,
-			Description: "Показать трансляцию по идентификатору",
-			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
-			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"get_broadcast"}, params)
-				return db.QueryRowMap("SELECT "+fields+" FROM broadcast WHERE id = $1 ;", params.Args["id"].(int))
-			},
-		},
-
-		"get_full_broadcast": &gq.Field{
 			Type:        fullBroadcastType,
 			Description: "Показать трансляцию по идентификатору c постами, ответами и медиа",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"get_full_broadcast"}, params)
+				fields := getSelectedFields([]string{"get_broadcast"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM full_broadcast WHERE id = $1 ;", params.Args["id"].(int))
 			},
 		},
 
 		"get_post": &gq.Field{
-			Type:        postType,
-			Description: "Показать пост по идентификатору",
-			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
-			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"get_post"}, params)
-				return db.QueryRowMap("SELECT "+fields+" FROM post WHERE id = $1 ;", params.Args["id"].(int))
-			},
-		},
-
-		"get_full_post": &gq.Field{
 			Type:        fullPostType,
 			Description: "Показать пост с ответами и изображениями по идентификатору поста",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"get_full_post"}, params)
+				fields := getSelectedFields([]string{"get_post"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM full_post WHERE id = $1 ;", params.Args["id"].(int))
 			},
 		},
@@ -116,7 +96,6 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				return db.QuerySliceMap("SELECT "+fields+" FROM post WHERE id_parent = $1 ;", params.Args["id_parent"].(int))
 			},
 		},
-
 
 		"list_broadcast": &gq.Field{
 			Type:        listBroadcastType,

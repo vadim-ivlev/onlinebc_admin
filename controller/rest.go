@@ -7,32 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// ************************************************************************
-
-// // GetEntity возвращает сущность по id
-// func (dummy) GetEntity(c *gin.Context) {
-// 	row, _ := db.GetRowByID(c.Param("entity"), getIntID(c))
-// 	c.JSON(200, row)
-// }
-
-// // UpdateEntity обновляет сущность по id
-// func (dummy) UpdateEntity(c *gin.Context) {
-// 	row, _ := db.UpdateRowByID(c.Param("entity"), getIntID(c), getPayload(c.Request))
-// 	c.JSON(200, row)
-// }
-
-// // CreateEntity Создать сущность
-// func (dummy) CreateEntity(c *gin.Context) {
-// 	row, _ := db.CreateRow(c.Param("entity"), getPayload(c.Request))
-// 	c.JSON(200, row)
-// }
-
-// // DeleteEntity обновляет сущность по id
-// func (dummy) DeleteEntity(c *gin.Context) {
-// 	row, _ := db.DeleteRowByID(c.Param("entity"), getIntID(c))
-// 	c.JSON(200, row)
-// }
-
 // Общие методы************************************************************************
 
 // LandingPage тестовая страница API в браузере.
@@ -40,11 +14,6 @@ func (dummy) LandingPage(c *gin.Context) {
 	c.Header("Content-Type", "text/html; charset=utf-8")
 	c.HTML(200, "index.html", Routes)
 }
-
-// GetRoutes : Перечисляет доступные маршруты.  Документация API.
-// func (dummy) GetRoutes(c *gin.Context) {
-// 	c.JSON(200, Routes)
-// }
 
 // ************************************************************************
 

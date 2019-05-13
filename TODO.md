@@ -3,9 +3,7 @@ TODO
 ====
 
 - доделать выборку GetBroadcastList
-- разобраться с непоказом 2-го уровня иерархий. get_full_broadcast (id: 354) 10-th post. (Why in some cases I have to use JSONParamToMap and params.Source in others?)
 - построить полнотекстовые индексы на full_broadcast
-- 
 
 - Заменить загрузку изображений не через base64.
 

@@ -1,11 +1,3 @@
-# - comment   : |-
-#     GraphQL. Префлайт запрос. 
-#   methods   :
-#   - OPTIONS  
-#   path      : /graphql
-#   example   : /graphql
-#   controller: PingHandler
-
 
 
 # GraphQL --------------------------------------------------
@@ -40,80 +32,6 @@
         }	
 
 
-
-
-# - comment   : |-
-#     <b>GraphQL.</b> Получение информации о типах GraphQL.
-#   methods   :
-#   - POST
-#   - GET    
-   
-#   path      : /graphql
-#   example   : /graphql
-#   controller: GraphQL
-#   params    :
-#   - comment: запрос
-#     name   : query
-#     value  : '{query}'
-#     test   : |- 
-#       query {
-#         broadcast: __type(name: "Broadcast") {
-#           name description
-#           fields {
-#             name description
-#             type {
-#               name 
-#             }
-#           }
-#         }
-
-#         post: __type(name: "Post") {
-#           name description
-#           fields {
-#             name description
-#             type {
-#               name 
-#             }
-#           }
-#         }
-
-#         medium: __type(name: "Medium") {
-#           name description
-#           fields {
-#             name description
-#             type {
-#               name 
-#             }
-#           }
-#         }
-#       }
-
-#   - comment: переменные
-#     name   : variables
-#     value  : '{variables}'
-#     test   : '{}' 
-
-
-# - comment   : <b>broadcasts(...)</b> Получить список трансляций.
-#   methods   :
-#   - POST
-#   - GET    
-   
-#   path      : /graphql
-#   example   : /graphql
-#   controller: GraphQL
-#   params    :
-#   - comment: запрос
-#     name   : query
-#     value  : '{query}'
-#     test   : |- 
-#       query {
-#           broadcasts(search:"красный") { id  title link_article is_ended }  
-#       }
-#   - comment: переменные
-#     name   : variables
-#     value  : '{variables}'
-#     test   : '{}' 
 
 
 - comment   : <b>list_broadcast(...)</b> Получить список трансляций и их количество.
@@ -178,7 +96,9 @@
     test   : '{}' 
 
 
-- comment   : <b>get_broadcast(id)</b>. Получить трансляцию по идентификатору
+
+
+- comment   : <b>get_broadcast(id)</b>. Получить трансляцию c постами, ответами и изображениями по идентификатору трансляции
   methods   :
   - POST
   - GET    
@@ -191,28 +111,7 @@
     value  : '{query}'
     test   : |- 
       query {
-        get_broadcast (id: 354) { id  title  time_created link_article }
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
-
-
-- comment   : <b>get_full_broadcast(id)</b>. Получить трансляцию c постами, ответами и изображениями по идентификатору трансляции
-  methods   :
-  - POST
-  - GET    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        get_full_broadcast (id: 354) { 
+        get_broadcast (id: 354) { 
           id  
           title  
           time_created 
@@ -322,7 +221,9 @@
 
 
 
-- comment   : <b>get_post(id)</b> Получить пост по идентификатору
+
+
+- comment   : <b>get_post(id)</b> Получить пост c ответами и изображениями по идентификатору
   methods   :
   - POST
   - GET   
@@ -335,29 +236,8 @@
     value  : '{query}'
     test   : |- 
       query {
-        get_post(id:23952){id id_parent text author}
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
-
-
-- comment   : <b>get_full_post(id)</b> Получить пост c ответами и изображениями по идентификатору
-  methods   :
-  - POST
-  - GET   
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        #get_full_post(id:23932){
-        get_full_post(id:21202){
+        #get_post(id:23932){
+        get_post(id:21202){
           id 
           id_parent 
           text 
