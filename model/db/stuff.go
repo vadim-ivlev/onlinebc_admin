@@ -5,15 +5,12 @@ import (
 	"io/ioutil"
 	"log"
 
-	// "videos/model/db"
-
 	"github.com/golang-migrate/migrate"
 
 	//blank import
 	_ "github.com/golang-migrate/migrate/database/postgres"
 	//blank import
 	_ "github.com/golang-migrate/migrate/source/file"
-
 	yaml "gopkg.in/yaml.v2"
 )
 
