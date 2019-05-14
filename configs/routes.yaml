@@ -1,36 +1,6 @@
 
 
 # GraphQL --------------------------------------------------
-- comment   : |-
-    <b>Загрузка</b> 
-    Заполните форму выше.
-    Поле запроса скрыто по умолчанию из за медленного рендеринга.
-
-
-  methods   :
-  - POST
-  - GET    
-   
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      mutation {
-        create_image(
-
-
-          ) 
-          {
-
-
-
-          }
-        }	
-
 
 
 

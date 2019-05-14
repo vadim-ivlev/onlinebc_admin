@@ -1,8 +1,8 @@
 package redis
 
 import (
-	"fmt"
 	"io/ioutil"
+	"log"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -21,12 +21,12 @@ var params connectionParams
 func ReadConfig(fileName string) {
 	yamlFile, err := ioutil.ReadFile(fileName)
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 		return
 	}
 
 	err = yaml.Unmarshal(yamlFile, &params)
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 	}
 }

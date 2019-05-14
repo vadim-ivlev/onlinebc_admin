@@ -358,8 +358,8 @@ func Test_GraphQL_Upload_Images(t *testing.T) {
 
 }
 
-// Test_GraphQL_CRUD_Medium тестируем создание, чтение, обновление, удаление записей Medium.
-func Test_GraphQL_CRUD_Medium(t *testing.T) {
+// Test_GraphQL_CRUD_Image тестируем создание, чтение, обновление, удаление записей Image.
+func Test_GraphQL_CRUD_Image(t *testing.T) {
 
 	// CREATE newID
 	fmt.Println("Testing GraphQL mutation create_image")
@@ -464,7 +464,7 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	deletedID := getID(t, delete_image, true)
 	assert.Equal(t, newID, deletedID)
 
-	// fmt.Printf("CRUD Medium: NewID=%d  updatedThumb ='%s' readThumb='%s' deletedID=%d \n", newID, updatedThumb, readThumb, deletedID)
+	// fmt.Printf("CRUD Image: NewID=%d  updatedThumb ='%s' readThumb='%s' deletedID=%d \n", newID, updatedThumb, readThumb, deletedID)
 
 }
 

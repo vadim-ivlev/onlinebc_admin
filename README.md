@@ -107,7 +107,7 @@ API
     go test -v ./model/db
 
 
-Функциональные тесты (End to End). CRUD для таблиц Broadcast, Post, Medium сквозь GraphQL API 
+Функциональные тесты (End to End). CRUD для таблиц Broadcast, Post, Image сквозь GraphQL API 
 и чтение  трансляций через REST API.
 
     go test -v

@@ -59,7 +59,8 @@ func Setup(debug bool, outputToConsole bool) *gin.Engine {
 	r.StaticFile("/favicon.ico", "./templates/favicon.ico")
 	r.Static("/docs", "./docs/doc")
 	r.Static("/templates", "./templates")
-	// r.Static("/uploads_temp", "./uploads_temp")
+	r.Static("/uploads_temp", "./uploads_temp")
+	r.Static("/uploads", "./uploads")
 
 	// r.SetFuncMap(template.FuncMap{"noescape": noescape})
 	r.SetFuncMap(template.FuncMap{"noescape": func(s string) template.HTML { return template.HTML(s) }})

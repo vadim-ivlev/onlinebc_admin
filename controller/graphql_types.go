@@ -397,7 +397,7 @@ var postType = gq.NewObject(gq.ObjectConfig{
 })
 
 var imageType = gq.NewObject(gq.ObjectConfig{
-	Name:        "Medium",
+	Name:        "Image",
 	Description: "Медиа поста трансляции",
 	Fields:      imageFields,
 })

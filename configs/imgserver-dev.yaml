@@ -2,5 +2,7 @@ host:        localhost
 user:        root
 password:    root
 port:        222
-uploaddir:   /var/www/onlinebc
+remotedir:   /var/www/onlinebc/uploads
+localdir:    uploads_temp
+
 

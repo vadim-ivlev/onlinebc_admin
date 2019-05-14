@@ -14,4 +14,3 @@ sleep 1
 go run main.go -serve 7777
 
 
-#go build && ./videos -serve 7777

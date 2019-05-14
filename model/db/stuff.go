@@ -33,7 +33,7 @@ var connectURL string
 func ReadConfig(fileName string) {
 	yamlFile, err := ioutil.ReadFile(fileName)
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 		return
 	}
 

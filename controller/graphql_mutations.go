@@ -1,9 +1,8 @@
 package controller
 
 import (
+	"log"
 	"onlinebc_admin/model/db"
-	"onlinebc_admin/model/img"
-	"onlinebc_admin/model/imgserver"
 
 	gq "github.com/graphql-go/graphql"
 )
@@ -259,7 +258,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Type:        imageType,
 			Description: "Создать медиа",
 			Args: gq.FieldConfigArgument{
-				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
+				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор изображения"},
 				"post_id": &gq.ArgumentConfig{
 					Type:        gq.Int,
 					Description: "Идентификатор поста",
@@ -268,40 +267,29 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.String,
 					Description: "URI изображения",
 				},
-				// "thumb": &gq.ArgumentConfig{
-				// 	Type:        gq.String,
-				// 	Description: "Уменьшенное изображение",
-				// },
 				"source": &gq.ArgumentConfig{
 					Type:        gq.String,
 					Description: "Источник медиа",
 				},
-				"base64": &gq.ArgumentConfig{
+				"file_field_name": &gq.ArgumentConfig{
 					Type:        gq.String,
-					Description: "Сериализованное в base64 изображение",
-				},
-				"filename": &gq.ArgumentConfig{
-					Type:        gq.String,
-					Description: "Имя загружаемого файла",
+					Description: "Имя (name) поля формы для загрузки файла. <input name='fname' type='file' ...>",
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				args := params.Args
-				var imageURI, thumbURI string
-				var imageURITemp, thumbURITemp string
-				if b64, ok := args["base64"]; ok {
-					s := b64.(string)
-					postID := args["post_id"].(int)
-					filename := args["filename"].(string)
-					imageURITemp, thumbURITemp = img.SaveImage(postID, filename, s)
-					imageURI = imgserver.MoveFileToImageServer(imageURITemp)
-					thumbURI = imgserver.MoveFileToImageServer(thumbURITemp)
+
+				path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
+				if errMsg == "" {
+					params.Args["filepath"] = path
+					// params.Args["width"] = width
+					// params.Args["height"] = height
+					params.Args["thumbs"] = thumbs
+				} else {
+					log.Println("create_image: Resolve(): " + errMsg)
 				}
-				delete(args, "base64")
-				delete(args, "filename")
-				args["filepath"] = imageURI
-				args["thumb"] = thumbURI
-				return db.CreateRow("image", args)
+				delete(params.Args, "file_field_name")
+				return db.CreateRow("image", params.Args)
+
 			},
 		},
 
@@ -318,14 +306,26 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				"filepath": &gq.ArgumentConfig{Type: gq.String,
 					Description: "URI изображения",
 				},
-				// "thumb": &gq.ArgumentConfig{Type: gq.String,
-				// 	Description: "Уменьшенное изображение",
-				// },
 				"source": &gq.ArgumentConfig{Type: gq.String,
 					Description: "Источник медиа",
 				},
+				"file_field_name": &gq.ArgumentConfig{
+					Type:        gq.String,
+					Description: "Имя (name) поля формы для загрузки файла. <input name='fname' type='file' ...>",
+				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+
+				path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
+				if errMsg == "" {
+					params.Args["filepath"] = path
+					// params.Args["width"] = width
+					// params.Args["height"] = height
+					params.Args["thumbs"] = thumbs
+				} else {
+					log.Println("create_image: Resolve(): " + errMsg)
+				}
+				delete(params.Args, "file_field_name")
 				return db.UpdateRowByID("image", params.Args["id"].(int), params.Args)
 			},
 		},
