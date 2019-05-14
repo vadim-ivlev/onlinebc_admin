@@ -45,25 +45,14 @@ func Test_REST_GetFullBroadcast(t *testing.T) {
 	assert.Equal(t, 354, id)
 }
 
-// Test_REST_GetMedium тестирование чтения записи Medium по REST API.
-func Test_REST_GetMedium(t *testing.T) {
-	fmt.Println("Testing REST /get/medium/5330")
-	w := getNewRecorder("GET", "/get/medium/5330", nil)
-	assert.Equal(t, 200, w.Code)
-	body := w.Body.String()
-	m := jsonStringToMap(body)
-	id := m["id"].(float64)
-	assert.Equal(t, 5330., id)
-}
-
 // Test_GraphQL_GetEntityByID тестируем считывание существующих записей.
 func Test_GraphQL_GetEntityByID(t *testing.T) {
-	fmt.Println("Testing GraphQL query get_broadcast, post, medium")
+	fmt.Println("Testing GraphQL query get_broadcast, post, image")
 	s := `
 	query { 
 		get_broadcast (id: 354) { id  title  time_created link_article }
 		get_post(id:23952){id id_parent text author}
-		get_medium(id:5330){id uri thumb source}
+		get_image(id:5330){id filepath source}
 	  }	
 	`
 	w := getNewRecorder("GET", "/graphql?query="+url.QueryEscape(s), nil)
@@ -83,11 +72,11 @@ func Test_GraphQL_GetEntityByID(t *testing.T) {
 	data := m["data"].(map[string]interface{})
 	get_broadcast := data["get_broadcast"].(map[string]interface{})
 	get_post := data["get_post"].(map[string]interface{})
-	get_medium := data["get_medium"].(map[string]interface{})
+	get_image := data["get_image"].(map[string]interface{})
 
 	assert.Equal(t, 354., get_broadcast["id"].(float64))
 	assert.Equal(t, 23952., get_post["id"].(float64))
-	assert.Equal(t, 5330., get_medium["id"].(float64))
+	assert.Equal(t, 5330., get_image["id"].(float64))
 
 }
 
@@ -295,7 +284,7 @@ func Test_GraphQL_Upload_Images(t *testing.T) {
 	s := `
 	mutation {
 
-		new0: create_medium( 
+		new0: create_image( 
 			post_id: 24098, 
 			source: "RT", 
 			filename: "_small.gif",
@@ -305,11 +294,16 @@ func Test_GraphQL_Upload_Images(t *testing.T) {
 			id 
 			post_id  
 			source 
-			thumb  
-			uri  
+			thumbs {
+				type
+				filepath
+				height
+				width
+			}
+			filepath  
 		}
 		
-		new1: create_medium( 
+		new1: create_image( 
 			post_id: 24098, 
 			source: "RT", 
 			filename: "_small.png",
@@ -319,8 +313,13 @@ func Test_GraphQL_Upload_Images(t *testing.T) {
 			id 
 			post_id  
 			source 
-			thumb  
-			uri  
+			thumbs {
+				type
+				filepath
+				height
+				width
+			}
+			filepath  
 		}
 
 	}
@@ -333,14 +332,14 @@ func Test_GraphQL_Upload_Images(t *testing.T) {
 	// 		"post_id": 24098,
 	// 		"source": "RT",
 	// 		"thumb": "/uploads/2019/03/05/_small_thumb.gif",
-	// 		"uri": "/uploads/2019/03/05/_small.gif"
+	// 		"filepath": "/uploads/2019/03/05/_small.gif"
 	// 	  },
 	// 	  "new1": {
 	// 		"id": 6030,
 	// 		"post_id": 24098,
 	// 		"source": "RT",
 	// 		"thumb": "/uploads/2019/03/05/_small_thumb.png",
-	// 		"uri": "/uploads/2019/03/05/_small.png"
+	// 		"filepath": "/uploads/2019/03/05/_small.png"
 	// 	  }
 	// 	}
 	//   }
@@ -352,10 +351,10 @@ func Test_GraphQL_Upload_Images(t *testing.T) {
 	new0 := data["new0"].(map[string]interface{})
 	newID := int(new0["id"].(float64))
 	assert.True(t, newID > 0, "New ID must be greater than 0")
-	newURI := new0["uri"].(string)
+	newURI := new0["filepath"].(string)
 	assert.Equal(t, filepath.Base(newURI), "_small.gif")
-	newThumb := new0["thumb"].(string)
-	assert.Equal(t, filepath.Base(newThumb), "_small_thumb.gif")
+	// newThumb := new0["thumb"].(string)
+	// assert.Equal(t, filepath.Base(newThumb), "_small_thumb.gif")
 
 }
 
@@ -363,18 +362,22 @@ func Test_GraphQL_Upload_Images(t *testing.T) {
 func Test_GraphQL_CRUD_Medium(t *testing.T) {
 
 	// CREATE newID
-	fmt.Println("Testing GraphQL mutation create_medium")
+	fmt.Println("Testing GraphQL mutation create_image")
 	s := `
 	mutation {
-		create_medium(
+		create_image(
 		  post_id: 24098,
-		  thumb:"new medium", 
 		  source: "Петров" 
 		) 
 		{
 		  id 
-		  thumb 
-		  source 
+		  thumbs {
+			type
+			filepath
+			height
+			width
+			}
+	  	  source 
 		}
 	  }	
 	`
@@ -382,23 +385,27 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 	m := jsonStringToMap(w.Body.String())
 	data := m["data"].(map[string]interface{})
-	create_medium := data["create_medium"].(map[string]interface{})
-	newID := int(create_medium["id"].(float64))
+	create_image := data["create_image"].(map[string]interface{})
+	newID := int(create_image["id"].(float64))
 	assert.True(t, newID > 0, "New ID must be greater than 0")
 
 	// UPDATE rec by newID
-	fmt.Println("Testing GraphQL mutation update_medium")
+	fmt.Println("Testing GraphQL mutation update_image")
 	s = `
 	mutation {
-		update_medium(
+		update_image(
 		  id: %d,
-		  thumb:"updated medium", 
 		  source: "Петровский" 
 		) 
 		{
 		  id 
-		  thumb 
-		  source 
+		  thumbs {
+			type
+			filepath
+			height
+			width
+		}
+	  source 
 		}
 	  } 
 	`
@@ -407,16 +414,16 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
-	update_medium := data["update_medium"].(map[string]interface{})
-	updatedThumb, ok := update_medium["thumb"].(string)
-	assert.Equal(t, true, ok, "Сервер вернул нулевое значение поля thumb")
-	assert.Equal(t, "updated get_medium", updatedThumb)
+	// update_image := data["update_image"].(map[string]interface{})
+	// updatedThumb, ok := update_image["thumb"].(string)
+	// assert.Equal(t, true, ok, "Сервер вернул нулевое значение поля thumb")
+	// assert.Equal(t, "updated get_image", updatedThumb)
 
 	// READ rec by newID
-	fmt.Println("Testing GraphQL query medium")
+	fmt.Println("Testing GraphQL query image")
 	s = `
 	query { 
-		get_medium (id: %d) { id  thumb  source }
+		get_image (id: %d) { id  thumb  source }
 	  }	
 	`
 	ss = fmt.Sprintf(s, newID)
@@ -424,21 +431,26 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
-	get_medium := data["get_medium"].(map[string]interface{})
-	readThumb, ok := get_medium["thumb"].(string)
-	assert.Equal(t, true, ok, "Сервер вернул нулевое значение поля thumb")
-	assert.Equal(t, "updated medium", readThumb)
+	// get_image := data["get_image"].(map[string]interface{})
+	// readThumb, ok := get_image["thumb"].(string)
+	// assert.Equal(t, true, ok, "Сервер вернул нулевое значение поля thumb")
+	// assert.Equal(t, "updated image", readThumb)
 
 	// DELETE rec by newID
-	fmt.Println("Testing GraphQL mutation delete_medium")
+	fmt.Println("Testing GraphQL mutation delete_image")
 	s = `
 	mutation {
-		delete_medium(
+		delete_image(
 		  id: %d
 		) 
 		{
 		  id 
-		  thumb 
+		  thumbs {
+				type
+				filepath
+				height
+				width
+			}
 		  source 
 		}
 	  } 
@@ -448,8 +460,8 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 	m = jsonStringToMap(w.Body.String())
 	data = m["data"].(map[string]interface{})
-	delete_medium := data["delete_medium"].(map[string]interface{})
-	deletedID := getID(t, delete_medium, true)
+	delete_image := data["delete_image"].(map[string]interface{})
+	deletedID := getID(t, delete_image, true)
 	assert.Equal(t, newID, deletedID)
 
 	// fmt.Printf("CRUD Medium: NewID=%d  updatedThumb ='%s' readThumb='%s' deletedID=%d \n", newID, updatedThumb, readThumb, deletedID)
@@ -459,17 +471,21 @@ func Test_GraphQL_CRUD_Medium(t *testing.T) {
 func Test_GraphQL_UpdateNONExistantID(t *testing.T) {
 
 	// UPDATE rec by newID
-	fmt.Println("Testing GraphQL mutation update_medium NONEXISTANT")
+	fmt.Println("Testing GraphQL mutation update_image NONEXISTANT")
 	s := `
 	mutation {
-		update_medium(
+		update_image(
 		  id: 777,
-		  thumb:"updated medium", 
 		  source: "Петровский" 
 		) 
 		{
 		  id 
-		  thumb 
+		  thumbs {
+				type
+				filepath
+				height
+				width
+			}
 		  source 
 		}
 	  } 
@@ -481,23 +497,28 @@ func Test_GraphQL_UpdateNONExistantID(t *testing.T) {
 	fmt.Println(body)
 	m := jsonStringToMap(body)
 	data := m["data"].(map[string]interface{})
-	update_medium := data["update_medium"].(map[string]interface{})
-	updatedThumb, ok := update_medium["thumb"].(string)
+	update_image := data["update_image"].(map[string]interface{})
+	updatedThumb, ok := update_image["thumb"].(string)
 	assert.Equal(t, false, ok, "Сервер вернул нулевое значение поля Thumb")
 	assert.Equal(t, "", updatedThumb)
 
 }
 
 func Test_GraphQL_DeleteNONExistantID(t *testing.T) {
-	fmt.Println("Testing GraphQL mutation delete_medium")
+	fmt.Println("Testing GraphQL mutation delete_image")
 	s := `
 	mutation {
-		delete_medium(
+		delete_image(
 		  id: 777
 		) 
 		{
 		  id 
-		  thumb 
+	      thumbs {
+				type
+				filepath
+				height
+				width
+			}
 		  source 
 		}
 	  } 
@@ -506,8 +527,8 @@ func Test_GraphQL_DeleteNONExistantID(t *testing.T) {
 	assert.Equal(t, 200, w.Code)
 	m := jsonStringToMap(w.Body.String())
 	data := m["data"].(map[string]interface{})
-	delete_medium := data["delete_medium"].(map[string]interface{})
-	getID(t, delete_medium, false)
+	delete_image := data["delete_image"].(map[string]interface{})
+	getID(t, delete_image, false)
 }
 
 // ******************************************************************

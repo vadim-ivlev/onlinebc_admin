@@ -33,13 +33,13 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			},
 		},
 
-		"get_medium": &gq.Field{
-			Type:        mediumType,
+		"get_image": &gq.Field{
+			Type:        imageType,
 			Description: "Показать медиа по идентификатору",
 			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"get_medium"}, params)
-				return db.QueryRowMap("SELECT "+fields+" FROM medium WHERE id = $1 ;", params.Args["id"].(int))
+				fields := getSelectedFields([]string{"get_image"}, params)
+				return db.QueryRowMap("SELECT "+fields+" FROM image WHERE id = $1 ;", params.Args["id"].(int))
 			},
 		},
 
@@ -67,8 +67,8 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			},
 		},
 
-		"get_post_media": &gq.Field{
-			Type:        gq.NewList(mediumType),
+		"get_post_images": &gq.Field{
+			Type:        gq.NewList(imageType),
 			Description: "Получить фотографии поста по его идентификатору.",
 			Args: gq.FieldConfigArgument{
 				"post_id": &gq.ArgumentConfig{
@@ -77,8 +77,8 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				fields := getSelectedFields([]string{"get_post_media"}, params)
-				return db.QuerySliceMap("SELECT "+fields+" FROM medium WHERE post_id = $1 ;", params.Args["post_id"].(int))
+				fields := getSelectedFields([]string{"get_post_images"}, params)
+				return db.QuerySliceMap("SELECT "+fields+" FROM image WHERE post_id = $1 ;", params.Args["post_id"].(int))
 			},
 		},
 

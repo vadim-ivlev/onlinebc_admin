@@ -59,7 +59,7 @@ function addImage(src) {
 
 function createOneQuery(i, fileName, b64string) {
     return `
-    new${i}: create_medium( post_id: ${ document.querySelector('#formA input[name="post_id"]').getAttribute('value') }, 
+    new${i}: create_image( post_id: ${ document.querySelector('#formA input[name="post_id"]').getAttribute('value') }, 
         source: "${ document.querySelector('#formA input[name="source"]').getAttribute('value') }", 
         filename: "${fileName}",
         base64: "${b64string}"
@@ -68,8 +68,13 @@ function createOneQuery(i, fileName, b64string) {
         id 
         post_id  
         source 
-        thumb  
-        uri  
+		thumbs {
+				type
+				filepath
+				height
+				width
+			}
+        filepath  
     }
     `
 }

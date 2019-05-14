@@ -14,7 +14,7 @@
 
 -- R E S T functions  ************************************************************************
 
-CREATE OR REPLACE FUNCTION public.get_media(idd integer)
+CREATE OR REPLACE FUNCTION public.get_images(idd integer)
  RETURNS json
  LANGUAGE plpgsql
 AS $function$
@@ -23,7 +23,7 @@ BEGIN
     (
         select jsonb_agg(t) from
         (
-            SELECT * FROM medium
+            SELECT * FROM image
             WHERE post_id = idd
         ) t
     );
@@ -127,7 +127,7 @@ AS SELECT post.id,
     to_char(to_timestamp(post.post_time::double precision), 'DD.MM.YYYY'::text) AS posts__answer__date,
     to_char(to_timestamp(post.post_time::double precision), 'HH24:MI'::text)    AS posts__answer__time,
     
-    get_media(post.id)      AS posts__answer__media,
+    get_images(post.id)      AS posts__answer__images,
     get_answers(post.id)    AS posts__answer__answers
    FROM post;
 
@@ -145,7 +145,7 @@ AS SELECT post.id,
     to_char(to_timestamp(post.post_time::double precision), 'DD.MM.YYYY'::text) AS posts__date,
     to_char(to_timestamp(post.post_time::double precision), 'HH24:MI'::text) AS posts__time,
     
-    get_media(post.id) AS posts__media,
+    get_images(post.id) AS posts__images,
     get_answers(post.id) AS posts__answers
    FROM post;
 
@@ -156,7 +156,7 @@ AS SELECT post.id,
 
 -- G R A P H Q L functions  ************************************************************************
 
-CREATE OR REPLACE FUNCTION public.get_full_post_media(idd integer)
+CREATE OR REPLACE FUNCTION public.get_full_post_images(idd integer)
     RETURNS json
     LANGUAGE plpgsql
     AS $function$
@@ -165,7 +165,7 @@ CREATE OR REPLACE FUNCTION public.get_full_post_media(idd integer)
         (
             select jsonb_agg(t) from
             (
-                SELECT * FROM medium
+                SELECT * FROM image
                 WHERE post_id = idd
             ) t
         );
@@ -220,13 +220,13 @@ CREATE OR REPLACE FUNCTION public.get_full_broadcast_posts(idd integer)
 
 CREATE OR REPLACE VIEW public.full_answer AS
     SELECT  * 
-            , get_full_post_media(post.id) AS media 
+            , get_full_post_images(post.id) AS images 
     FROM post 
 ;
 
 CREATE OR REPLACE VIEW public.full_post AS 
     SELECT  *
-            , get_full_post_media(post.id) AS media
+            , get_full_post_images(post.id) AS images
             , get_full_post_answers(post.id) AS answers
     FROM post
 ;

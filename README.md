@@ -91,69 +91,7 @@ API
 Загрузка изображений
 ---------------------
 
-Осуществляется путем вызова функции create_medium(...). 
-В приведенном ниже примере, на сервер отправляются два файла _small.gif и _small.png. Байты изображений закодированы в виде строк base64 и передаются как значения параметра base64.
-
-
-
-	mutation {
-
-		new0: create_medium( 
-			post_id: 24098, 
-			source: "RT", 
-			filename: "_small.gif",
-			base64: "R0lGODdhBgAHAIABAAAAAP///ywAAAAABgAHAAACCoxvALfRn2JqyBQAOw=="
-		) 
-		{   
-			id 
-			post_id  
-			source 
-			thumb  
-			uri  
-		}
-		
-		new1: create_medium( 
-			post_id: 24098, 
-			source: "RT", 
-			filename: "_small.png",
-			base64: "iVBORw0KGgoAAAANSUhEUgAAAAYAAAAHCAIAAACk8qu6AAAALklEQVQI122NQQoAMAzCmv7/z9nBMhidFyWIotarjgHAsLTUG7qWPoj0MzR5Px5x5hf78pZ5DQAAAABJRU5ErkJggg=="
-		) 
-		{   
-			id 
-			post_id  
-			source 
-			thumb  
-			uri  
-		}
-		
-	}
-
-Ответ сервера:
-
-    {
-        "data": {
-            "new0": {
-            "id": 6002,
-            "post_id": 24098,
-            "source": "RT",
-            "thumb": "/uploads/2019/03/05/_small_thumb.gif",
-            "uri": "/uploads/2019/03/05/_small.gif"
-            },
-            "new1": {
-            "id": 6003,
-            "post_id": 24098,
-            "source": "RT",
-            "thumb": "/uploads/2019/03/05/_small_thumb.png",
-            "uri": "/uploads/2019/03/05/_small.png"
-            }
-        }
-    }
-
-Поля `uri` и `thumb` показывают путь по которому изображения сохранены на сервере.
-
-Пример того, как в браузере средствами javascript выбрать несколько 
-изображений, преобразовать их в base64, сформировать запрос и отправить 
-на сервер можно найти в файле `./templates/index.js`.
+Осуществляется путем вызова функции create_image(...). 
 
 
 Тесты
@@ -235,9 +173,9 @@ API
 Таблицы БД восстанавливаются и наполняются тестовыми данными при каждом запуске приложения.
 - broadcast  - трансляции
 - post  - посты к трансляциям. Таблица рекурсивно ссылается на саму себя для организации ответов к посту.
-- medium - изображения к постам
+- image - изображения к постам
 
-Для обеспечения ссылочной целостности БД на таблицы `post` и `medium` наложены ограничения внешних ключей с каскадным удалением из подчиненных таблиц. Первичные ключи `id` автогенерируются. На все ключи построены индексы.
+Для обеспечения ссылочной целостности БД на таблицы `post` и `image` наложены ограничения внешних ключей с каскадным удалением из подчиненных таблиц. Первичные ключи `id` автогенерируются. На все ключи построены индексы.
 
 
 Описание полей таблиц находятся в файле `controller/controller-graphql.go`. Во время исполнения могут быть получены стандартными средствами GraphQL. 
@@ -407,7 +345,7 @@ Postgres доступен на localhost:5432.
 
 Дамп только данных таблиц.
 
-    docker exec -it psql-com pg_dump --file /dumps/onlinebc-data.sql --host "localhost" --port "5432" --username "root"  --verbose --format=p --dbname "onlinebc" --column-inserts --data-only --table=broadcast --table=post --table=medium
+    docker exec -it psql-com pg_dump --file /dumps/onlinebc-data.sql --host "localhost" --port "5432" --username "root"  --verbose --format=p --dbname "onlinebc" --column-inserts --data-only --table=broadcast --table=post --table=image
 
 
 Можно добавить  -$(date +"-%Y-%m-%d--%H-%M-%S") к имени файла для приклеивания штампа даты-времени.

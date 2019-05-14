@@ -145,7 +145,7 @@ var postFields = gq.Fields{
 	},
 }
 
-var mediumFields = gq.Fields{
+var imageFields = gq.Fields{
 	"id": &gq.Field{
 		Type:        gq.Int,
 		Description: "Идентификатор медиа",
@@ -154,13 +154,20 @@ var mediumFields = gq.Fields{
 		Type:        gq.Int,
 		Description: "Идентификатор поста",
 	},
-	"uri": &gq.Field{
+	"filepath": &gq.Field{
 		Type:        gq.String,
 		Description: "URI изображения",
 	},
-	"thumb": &gq.Field{
-		Type:        gq.String,
-		Description: "Уменьшенное изображение",
+	// "thumbs": &gq.Field{
+	// 	Type:        gq.String,
+	// 	Description: "Уменьшенное изображение",
+	// },
+	"thumbs": &gq.Field{
+		Type:        gq.NewList(thumbType),
+		Description: "Превью и изображение для видео - jsonb ",
+		Resolve: func(params gq.ResolveParams) (interface{}, error) {
+			return JSONParamToMap(params, "thumbs")
+		},
 	},
 	"source": &gq.Field{
 		Type:        gq.String,
@@ -182,8 +189,8 @@ var listBroadcastFields = gq.Fields{
 // FULL FIELDS поля с древовидной структурой  ****************************************************
 
 // var fullAnswerFields = addFields(postFields, gq.Fields{
-// 	"media": &gq.Field{
-// 		Type:        gq.NewList(mediumType),
+// 	"images": &gq.Field{
+// 		Type:        gq.NewList(imageType),
 // 		Description: "Медиа ответа",
 // 	},
 // })
@@ -226,18 +233,18 @@ var fullAnswerFields = gq.Fields{
 		Description: "ФИО автора поста",
 	},
 	// ---------------------------------
-	"media": &gq.Field{
-		Type:        gq.NewList(mediumType),
+	"images": &gq.Field{
+		Type:        gq.NewList(imageType),
 		Description: "Медиа ответа",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			return JSONParamToMap(params, "media")
+			return JSONParamToMap(params, "images")
 		},
 	},
 }
 
 // var fullPostFields = addFields(postFields, gq.Fields{
-// 	"media": &gq.Field{
-// 		Type:        gq.NewList(mediumType),
+// 	"images": &gq.Field{
+// 		Type:        gq.NewList(imageType),
 // 		Description: "Медиа поста",
 // 	},
 // 	"answers": &gq.Field{
@@ -284,11 +291,11 @@ var fullPostFields = gq.Fields{
 		Description: "ФИО автора поста",
 	},
 	// --------------------------------------------
-	"media": &gq.Field{
-		Type:        gq.NewList(mediumType),
+	"images": &gq.Field{
+		Type:        gq.NewList(imageType),
 		Description: "Медиа поста",
 		Resolve: func(params gq.ResolveParams) (interface{}, error) {
-			return JSONParamToMap(params, "media")
+			return JSONParamToMap(params, "images")
 		},
 	},
 	"answers": &gq.Field{
@@ -389,10 +396,10 @@ var postType = gq.NewObject(gq.ObjectConfig{
 	Fields:      postFields,
 })
 
-var mediumType = gq.NewObject(gq.ObjectConfig{
+var imageType = gq.NewObject(gq.ObjectConfig{
 	Name:        "Medium",
 	Description: "Медиа поста трансляции",
-	Fields:      mediumFields,
+	Fields:      imageFields,
 })
 
 var broadcastType = gq.NewObject(gq.ObjectConfig{
@@ -431,4 +438,27 @@ var fullListBroadcastType = gq.NewObject(gq.ObjectConfig{
 	Name:        "FullListBroadcast",
 	Description: "Список трансляций c постами, ответами и медиа,  и количество элементов в списке",
 	Fields:      fullListBroadcastFields,
+})
+
+var thumbType = gq.NewObject(gq.ObjectConfig{
+	Name:        "Thumb",
+	Description: "Уменьшенное изображение для видео",
+	Fields: gq.Fields{
+		"type": &gq.Field{
+			Type:        gq.String,
+			Description: "Тип (small, middle, large)",
+		},
+		"filepath": &gq.Field{
+			Type:        gq.String,
+			Description: "Ссылка на файл на сервере",
+		},
+		"width": &gq.Field{
+			Type:        gq.Int,
+			Description: "Ширина изображения в пикселях.",
+		},
+		"height": &gq.Field{
+			Type:        gq.Int,
+			Description: "Высота изображения в пикселях.",
+		},
+	},
 })

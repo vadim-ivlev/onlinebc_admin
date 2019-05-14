@@ -20,7 +20,7 @@
     value  : '{query}'
     test   : |- 
       mutation {
-        create_medium(
+        create_image(
 
 
           ) 
@@ -74,7 +74,7 @@
     value  : '{query}'
     test   : |- 
       query{
-        list_full_broadcast(search: "жеребьевка" ){
+        list_full_broadcast(search: "трансляция" ){
           length
           list {
             id
@@ -84,7 +84,17 @@
                 id_parent 
                 text 
                 author
-                media { id source thumb uri}
+                images { 
+                  id 
+                  source 
+                  thumbs {
+                    type
+                    filepath
+                    height
+                    width
+                  }
+                  filepath
+                }
                 answers {id id_parent text author}
               }
           } 
@@ -121,13 +131,34 @@
             id_parent 
             text 
             author
-            media { id source thumb uri}
+            images { 
+              id 
+              source 
+              thumbs {
+                type
+                filepath
+                height
+                width
+              }
+              filepath
+            }
             answers {
               id 
               id_parent 
               text 
               author 
-              media { id source thumb uri}}
+              images { 
+                id 
+                source 
+                thumbs {
+                  type
+                  filepath
+                  height
+                  width
+                }
+                filepath
+              }
+            }
           }
         }
       }
@@ -171,7 +202,7 @@
 
 
 
-- comment   : <b>get_post_media(post_id)</b> Получить медиа поста по его идентификатору.
+- comment   : <b>get_post_images(post_id)</b> Получить медиа поста по его идентификатору.
   methods   :
   - POST
   - GET    
@@ -185,7 +216,7 @@
     value  : '{query}'
     test   : |- 
       query {
-        get_post_media(post_id: 23932) { id uri source}
+        get_post_images(post_id: 23932) { id filepath source}
       }
   - comment: переменные
     name   : variables
@@ -242,13 +273,33 @@
           id_parent 
           text 
           author
-          media { id source thumb uri}
+          images { 
+            id 
+            source 
+            thumbs {
+              type
+              filepath
+              height
+              width
+            }
+            filepath
+          }
           answers {
             id 
             id_parent 
             text 
             author 
-            media{ id source thumb uri}
+            images{ 
+              id 
+              source 
+              thumbs {
+                type
+                filepath
+                height
+                width
+              }
+              filepath
+            }
           }
         }
       }
@@ -259,7 +310,7 @@
     test   : '{}' 
 
 
-- comment   : <b>get_medium(id)</b> Получить медиа по идентификатору
+- comment   : <b>get_image(id)</b> Получить медиа по идентификатору
   methods   :
   - POST
   - GET    
@@ -273,7 +324,17 @@
     value  : '{query}'
     test   : |- 
       query {
-        get_medium(id:5330){id uri thumb source}
+        get_image(id:5330){
+          id 
+          filepath 
+          thumbs {
+            type
+            filepath
+            height
+            width
+          }
+          source
+        }
       }
   - comment: переменные
     name   : variables
@@ -387,13 +448,13 @@
 # REST ====================================================================================================================
 
 
-# #  medium ---------------------------------------------------
+# #  image ---------------------------------------------------
 
 # - comment   : Получить Медиа с идентификатором id
 #   methods   :
 #   - GET
 #   path      : /get/:entity/:id
-#   example   : /get/medium/5330
+#   example   : /get/image/5330
 #   controller: GetEntity
 
 # # post ------------------------------------------------------------
@@ -481,8 +542,8 @@
 
 - comment: Медиа для поста с идентификатором id
   methods: [GET]
-  path: /api/media/:id
-  example: /api/media/23932
+  path: /api/images/:id
+  example: /api/images/23932
   controller: GetMedia
 
 - comment: Трансляция с идентификатором id и ее постами. Legacy

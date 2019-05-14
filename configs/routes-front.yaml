@@ -61,8 +61,8 @@
 
 - comment: Медиа для поста с идентификатором id
   methods: [GET]
-  path: /api/media/:id
-  example: /api/media/23932
+  path: /api/images/:id
+  example: /api/images/23932
   controller: GetMedia
 
 - comment: Трасляция с идентификатором id и ее постами. Legacy

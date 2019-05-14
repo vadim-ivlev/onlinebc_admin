@@ -19,7 +19,7 @@ func (dummy) LandingPage(c *gin.Context) {
 
 // GetMedia возвращает все медиа поста по его id
 func (dummy) GetMedia(c *gin.Context) {
-	row, _ := db.QueryRowMap("SELECT get_media($1) AS res;", getIntID(c))
+	row, _ := db.QueryRowMap("SELECT get_images($1) AS res;", getIntID(c))
 	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 

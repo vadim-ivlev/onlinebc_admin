@@ -5,7 +5,7 @@ DROP VIEW IF EXISTS public.full_answer;
 
 -- DROP FUNCTION IF EXISTS public.get_full_broadcast_posts(idd integer);
 DROP FUNCTION IF EXISTS public.get_full_post_answers(idd integer);
-DROP FUNCTION IF EXISTS public.get_full_post_media(idd integer);
+DROP FUNCTION IF EXISTS public.get_full_post_images(idd integer);
 
 
 
@@ -18,5 +18,5 @@ DROP FUNCTION IF EXISTS public.get_broadcasts();
 DROP FUNCTION IF EXISTS public.get_full_broadcast(idd integer);
 DROP FUNCTION IF EXISTS public.get_posts(idd integer);
 DROP FUNCTION IF EXISTS public.get_answers(idd integer);
-DROP FUNCTION IF EXISTS public.get_media(idd integer);
+DROP FUNCTION IF EXISTS public.get_images(idd integer);
 

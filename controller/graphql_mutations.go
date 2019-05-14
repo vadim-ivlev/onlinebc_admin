@@ -255,8 +255,8 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 
 		// MEDIA =====================================================
 
-		"create_medium": &gq.Field{
-			Type:        mediumType,
+		"create_image": &gq.Field{
+			Type:        imageType,
 			Description: "Создать медиа",
 			Args: gq.FieldConfigArgument{
 				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор медиа"},
@@ -264,14 +264,14 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.Int,
 					Description: "Идентификатор поста",
 				},
-				"uri": &gq.ArgumentConfig{
+				"filepath": &gq.ArgumentConfig{
 					Type:        gq.String,
 					Description: "URI изображения",
 				},
-				"thumb": &gq.ArgumentConfig{
-					Type:        gq.String,
-					Description: "Уменьшенное изображение",
-				},
+				// "thumb": &gq.ArgumentConfig{
+				// 	Type:        gq.String,
+				// 	Description: "Уменьшенное изображение",
+				// },
 				"source": &gq.ArgumentConfig{
 					Type:        gq.String,
 					Description: "Источник медиа",
@@ -299,14 +299,14 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				}
 				delete(args, "base64")
 				delete(args, "filename")
-				args["uri"] = imageURI
+				args["filepath"] = imageURI
 				args["thumb"] = thumbURI
-				return db.CreateRow("medium", args)
+				return db.CreateRow("image", args)
 			},
 		},
 
-		"update_medium": &gq.Field{
-			Type:        mediumType,
+		"update_image": &gq.Field{
+			Type:        imageType,
 			Description: "Обновить медиа по идентификатору",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int),
@@ -315,23 +315,23 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				"post_id": &gq.ArgumentConfig{Type: gq.Int,
 					Description: "Идентификатор поста",
 				},
-				"uri": &gq.ArgumentConfig{Type: gq.String,
+				"filepath": &gq.ArgumentConfig{Type: gq.String,
 					Description: "URI изображения",
 				},
-				"thumb": &gq.ArgumentConfig{Type: gq.String,
-					Description: "Уменьшенное изображение",
-				},
+				// "thumb": &gq.ArgumentConfig{Type: gq.String,
+				// 	Description: "Уменьшенное изображение",
+				// },
 				"source": &gq.ArgumentConfig{Type: gq.String,
 					Description: "Источник медиа",
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.UpdateRowByID("medium", params.Args["id"].(int), params.Args)
+				return db.UpdateRowByID("image", params.Args["id"].(int), params.Args)
 			},
 		},
 
-		"delete_medium": &gq.Field{
-			Type:        mediumType,
+		"delete_image": &gq.Field{
+			Type:        imageType,
 			Description: "Удалить медиа по идентификатору",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{
@@ -340,7 +340,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.DeleteRowByID("medium", params.Args["id"].(int))
+				return db.DeleteRowByID("image", params.Args["id"].(int))
 			},
 		},
 	},
