@@ -44,28 +44,14 @@
             
             
             <div style="display: flex;">
-                <form id="form12" onsubmit="
-                event.preventDefault();
-                $(this).ajaxSubmit({
-                    url: $('#example12').val(), 
-                    type: 'POST',
-                    // contentType:'application/x-www-form-urlencoded; charset=UTF-8',
-                    headers: {
-                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
-                    },
-                    //success: function(response) {$('#result').text(JSON.stringify(response, null,'  '));}
-                    success: function(response) {$('#result12').jsonViewer(response, {collapsed: true, rootCollapsable: false});}
-                });">
-                    
-                        
-                            
+                <form id="form12">
                             <div style="display: flex;">
                                 <div>
                                     <span class="form-param-name">query</span><br>
                                 </div>
                                 <div>
                                 
-                                    <textarea name="query" style="height: 400px;">
+                                    <textarea name="query" style="height: 4px;">
 mutation 
 {
     create_image( 
@@ -100,7 +86,7 @@ mutation
                                 </div>
                                 <div>
                                 
-                                    <textarea name="variables" style="height: 40px;">{}</textarea>
+                                    <textarea name="variables" style="height: 4px;">{}</textarea>
                                 
                                     <div class="param-comment">переменные</div>
                                 </div>
@@ -131,41 +117,29 @@ mutation
 
 </ol>
 
-    
+<p>
+    Загруженные изображения видны по пути: /uploads
+</p>    
 
-    <!-- <script src="basereader.js"></script> -->
-    <!-- <script src="upload.js"></script> -->
     <script>
+        
+        function sendForm(){
+           $('#form12').ajaxSubmit({
+               url: $('#example12').val(), 
+               type: 'POST',
+               //success: function(response) {$('#result').text(JSON.stringify(response, null,'  '));}
+               success: function(response) {$('#result12').jsonViewer(response, {collapsed: true, rootCollapsable: false});}
+           })
+          return false
+        }
+
         // подравниваем высоты textarea
-        function adjustTextareas() {
-            $("textarea").each(function (textarea) {
-                $(this).height($(this)[0].scrollHeight);
-            });
-        }
+        [...document.getElementsByTagName("textarea")].forEach( (t) =>  t.style.height = (2 + t.scrollHeight)+"px" )
+        
+        // обработчик посылки формы
+        $('#form12').submit(sendForm)
 
-        // Accordion
-        function accordionize(){
-            $( "ol" ).accordion({
-                header: "li > div.comment",
-                active: 0,
-                heightStyle: "content",
-                collapsible: true,
-                animate: 50,
-                classes: {
-                    "ui-accordion-header": "header",
-                    "ui-accordion-header-collapsed": "header-collapsed",
-                    "ui-accordion-content": "content"
-                }
-            })
-
-            
-        }
-
-        adjustTextareas()
-        accordionize()
-
-        // setTimeout('accordionize()',200)
-        </script>
+    </script>
 
 </body>
 

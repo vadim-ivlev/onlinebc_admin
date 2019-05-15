@@ -19,15 +19,3 @@ thumbs_template:
   height: 206
   path:
 
-- type: large
-  width: 650
-  height: 433
-  path:
-
-- type: default
-  width: 850
-  height: 478
-  path:
-
-
-

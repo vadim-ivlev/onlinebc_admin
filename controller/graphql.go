@@ -3,8 +3,8 @@ package controller
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"log"
 	"os"
 	"path"
 	"path/filepath"
@@ -22,22 +22,67 @@ import (
 	"github.com/graphql-go/graphql/language/ast"
 )
 
-// getFormFields извлекает имена-значения полей формы из запроса
-// or builds a map with keys "query", "variables", "operationName".
-// Decoded body has precedence over POST over GET.
-func getPayload(r *http.Request) map[string]interface{} {
+// jsonStringToMap преобразует строку JSON в map[string]interface{}
+func jsonStringToMap(s string) map[string]interface{} {
+	m := make(map[string]interface{})
+	_ = json.Unmarshal([]byte(s), &m)
+	return m
+}
+
+// getParamsFromBody извлекает параметры запроса из тела запроса
+func getParamsFromBody(c *gin.Context) (map[string]interface{}, error) {
+	r := c.Request
+	mb := make(map[string]interface{})
+	if r.ContentLength > 0 {
+		errBodyDecode := json.NewDecoder(r.Body).Decode(&mb)
+		return mb, errBodyDecode
+	}
+	return mb, errors.New("No body")
+}
+
+// getParamsFromRequest извлекает параметры запроса из *http.Request
+func getParamsFromRequest(c *gin.Context) map[string]interface{} {
+	r := c.Request
 	m := make(map[string]interface{})
 	err := r.ParseForm()
 	if err != nil {
-		fmt.Println(err)
+		return m
 	}
 	for k := range r.Form {
 		m[k] = r.FormValue(k)
 	}
-	if r.ContentLength > 0 {
-		_ = json.NewDecoder(r.Body).Decode(&m)
-	}
 	return m
+}
+
+// getPayload3 извлекает "query", "variables", "operationName".
+// Decoded body has precedence over POST over GET.
+func getPayload3(c *gin.Context) (query string, variables map[string]interface{}) {
+
+	// Проверяем на существование данных из Form Data
+	query = c.PostForm("query")
+	variables = jsonStringToMap(c.PostForm("variables"))
+
+	// r := c.Request
+	// // если есть тело запроса то берем из Request Payload (для Altair)
+	// mb := make(map[string]interface{})
+	// if r.ContentLength > 0 {
+	// 	errBodyDecode := json.NewDecoder(r.Body).Decode(&mb)
+	// 	if errBodyDecode == nil {
+	// 		query, _ = mb["query"].(string)
+	// 		variables, _ = mb["variables"].(map[string]interface{})
+	// 	} else {
+	// 		log.Println(errBodyDecode)
+	// 	}
+	// }
+
+	// если есть тело запроса то берем из Request Payload (для Altair)
+	params, errBody := getParamsFromBody(c)
+	if errBody == nil {
+		query, _ = params["query"].(string)
+		variables, _ = params["variables"].(map[string]interface{})
+	}
+
+	return
 }
 
 var schema, _ = gq.NewSchema(gq.SchemaConfig{
@@ -109,43 +154,9 @@ func getSelectedFields(selectionPath []string, resolveParams graphql.ResolvePara
 
 // GraphQL исполняет GraphQL запрос
 func (dummy) GraphQL(c *gin.Context) {
-	// c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
-	// m := getPayload(c.Request)
+	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
 
-	// // Альтернативный способ. Оставлено на всякий случай
-	// // query, _ := c.GetPostForm("query")
-	// // variables, _ := c.GetPostForm("variables")
-
-	// query, _ := m["query"].(string)
-	// variables, _ := m["variables"].(map[string]interface{})
-
-	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 1000*1024*1024)
-
-	query, ok := c.GetPostForm("query")
-	if !ok {
-		log.Println("VideoGraphQL(): GetPostForm('query') ERROR!!!!!")
-		m := getPayload(c.Request)
-		query, ok = m["query"].(string)
-		if !ok {
-			log.Println("VideoGraphQL(): no 'query' field in payload")
-		}
-	}
-
-	var vi interface{}
-	vars, ok := c.GetPostForm("variables")
-	if ok {
-		err := json.Unmarshal([]byte(vars), &vi)
-		if err != nil {
-			log.Println("VideoGraphQL(): no 'variables' field in payload")
-		}
-
-	} else {
-		log.Println("VideoGraphQL(): GetPostForm('variables') ERROR!!!!!")
-		m := getPayload(c.Request)
-		vi = m["variables"]
-	}
-
-	variables := vi.(map[string]interface{})
+	query, variables := getPayload3(c)
 
 	result := gq.Do(gq.Params{
 		Schema:         schema,

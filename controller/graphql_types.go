@@ -28,27 +28,27 @@ func JSONParamToMap(params gq.ResolveParams, paramName string) (interface{}, err
 
 type fields map[string]*gq.Field
 
-func (sumFields fields) addFields(fields1 fields) {
-	for key, field := range fields1 {
-		sumFields[key] = field
-	}
-}
+// func (sumFields fields) addFields(fields1 fields) {
+// 	for key, field := range fields1 {
+// 		sumFields[key] = field
+// 	}
+// }
 
-func addFields(fields1 map[string]*gq.Field, fields2 map[string]*gq.Field) map[string]*gq.Field {
-	sumFields := make(map[string]*gq.Field)
+// func addFields(fields1 map[string]*gq.Field, fields2 map[string]*gq.Field) map[string]*gq.Field {
+// 	sumFields := make(map[string]*gq.Field)
 
-	// for key, field := range fields1 {
-	// 	sumFields[key] = field
-	// }
-	// for key, field := range fields2 {
-	// 	sumFields[key] = field
-	// }
+// 	// for key, field := range fields1 {
+// 	// 	sumFields[key] = field
+// 	// }
+// 	// for key, field := range fields2 {
+// 	// 	sumFields[key] = field
+// 	// }
 
-	fields(sumFields).addFields(fields(fields1))
-	fields(sumFields).addFields(fields(fields2))
+// 	fields(sumFields).addFields(fields(fields1))
+// 	fields(sumFields).addFields(fields(fields2))
 
-	return sumFields
-}
+// 	return sumFields
+// }
 
 // FIELDS **************************************************
 var broadcastFields = gq.Fields{
