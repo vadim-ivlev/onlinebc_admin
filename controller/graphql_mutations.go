@@ -31,8 +31,9 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Description: "Время начала",
 				},
 				"is_ended": &gq.ArgumentConfig{
-					Type:        gq.Int,
-					Description: "Завершена 0 1",
+					Type:         gq.Int,
+					Description:  "Завершена 0 1. По умолчанию 0",
+					DefaultValue: 0,
 				},
 				"show_date": &gq.ArgumentConfig{
 					Type:        gq.Int,

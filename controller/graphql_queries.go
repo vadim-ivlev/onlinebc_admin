@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"onlinebc_admin/model/db"
+	"strings"
 
 	gq "github.com/graphql-go/graphql"
 )
@@ -102,14 +103,14 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Получить список трансляций и их количество.",
 			Args: gq.FieldConfigArgument{
 				"search": &gq.ArgumentConfig{
-					Type:         gq.String,
-					Description:  "Строка полнотекстового поиска. По умолчанию ''.",
-					DefaultValue: "",
+					Type:        gq.String,
+					Description: "Строка полнотекстового поиска.",
+					// DefaultValue: "",
 				},
 				"is_ended": &gq.ArgumentConfig{
-					Type:         gq.Int,
-					Description:  "1 если трансляция закончена, 0 - если нет. По умолчанию 1.",
-					DefaultValue: 1,
+					Type:        gq.Int,
+					Description: "1 если трансляция закончена, 0 - если нет.",
+					// DefaultValue: 1,
 				},
 				"order": &gq.ArgumentConfig{
 					Type:         gq.String,
@@ -157,14 +158,14 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			Description: "Получить список трансляций c постами, ответами и изображениями, и их количество.",
 			Args: gq.FieldConfigArgument{
 				"search": &gq.ArgumentConfig{
-					Type:         gq.String,
-					Description:  "Строка полнотекстового поиска. По умолчанию ''.",
-					DefaultValue: "",
+					Type:        gq.String,
+					Description: "Строка полнотекстового поиска.",
+					// DefaultValue: "",
 				},
 				"is_ended": &gq.ArgumentConfig{
-					Type:         gq.Int,
-					Description:  "1 если трансляция закончена, 0 - если нет. По умолчанию 1.",
-					DefaultValue: 1,
+					Type:        gq.Int,
+					Description: "1 если трансляция закончена, 0 - если нет.",
+					// DefaultValue: 1,
 				},
 				"order": &gq.ArgumentConfig{
 					Type:         gq.String,
@@ -211,16 +212,25 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 
 // queryEnd возвращает вторую часть запроса на поиск трансляций
 func queryEnd(params gq.ResolveParams) (wherePart string, orderAndLimits string) {
-	s := params.Args["search"].(string)
-	textSearchCondition := ""
-	if len(s) > 0 {
-		textSearchCondition = fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') AND", s)
+
+	var searchConditions []string
+
+	search, ok := params.Args["search"].(string)
+	if ok && len(search) > 0 {
+		searchConditions = append(searchConditions,
+			fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') ", search))
 	}
 
-	wherePart = fmt.Sprintf(" WHERE %s is_ended = %d ",
-		textSearchCondition,
-		params.Args["is_ended"].(int),
-	)
+	is_ended, ok := params.Args["is_ended"].(int)
+	if ok {
+		searchConditions = append(searchConditions,
+			fmt.Sprintf("is_ended = %d ", is_ended))
+	}
+
+	if len(searchConditions) > 0 {
+		wherePart = " WHERE " + strings.Join(searchConditions, " AND ")
+	}
+
 	orderAndLimits = fmt.Sprintf(" ORDER BY %s LIMIT %d OFFSET %d ;",
 		params.Args["order"].(string),
 		params.Args["limit"].(int),
