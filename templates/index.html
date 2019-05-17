@@ -101,48 +101,6 @@
             </li>
             {{end}}
         </ol>
-        <script>
-            // подравниваем высоты textarea
-            function adjustTextarea() {
-                $("textarea").each(function (textarea) {
-                    $(this).height($(this)[0].scrollHeight);
-                });
-            }
-    
-            // Accordion
-            function accordionize(){
-                $( "ol" ).accordion({
-                    header: "li > div.comment",
-                    active: false,
-                    heightStyle: "content",
-                    collapsible: true,
-                    animate: 50,
-                    classes: {
-                        "ui-accordion-header": "header",
-                        "ui-accordion-header-collapsed": "header-collapsed",
-                        "ui-accordion-content": "content"
-                    }
-                })
-    
-                
-            }
-    
-            adjustTextarea()
-            accordionize()
-            // setTimeout('accordionize()',3000)
-
-
-            // подравниваем высоты textarea
-            // $("textarea").each(function (textarea) {
-            //     $(this).height($(this)[0].scrollHeight);
-            // });
-
-            // скрываем тест запроса перовой формы для скорости отображения
-            $('#showHideButton').on('click', () => $('#form0 textarea[name="query"]').toggle() ) 
-            $('#form0 textarea[name="query"]').hide() ;
-
-
-            </script>
     
         <script>
         {{template "index.js"}}
