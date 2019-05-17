@@ -41,18 +41,18 @@ func getParamsFromBody(c *gin.Context) (map[string]interface{}, error) {
 }
 
 // getParamsFromRequest извлекает параметры запроса из *http.Request
-func getParamsFromRequest(c *gin.Context) map[string]interface{} {
-	r := c.Request
-	m := make(map[string]interface{})
-	err := r.ParseForm()
-	if err != nil {
-		return m
-	}
-	for k := range r.Form {
-		m[k] = r.FormValue(k)
-	}
-	return m
-}
+// func getParamsFromRequest(c *gin.Context) map[string]interface{} {
+// 	r := c.Request
+// 	m := make(map[string]interface{})
+// 	err := r.ParseForm()
+// 	if err != nil {
+// 		return m
+// 	}
+// 	for k := range r.Form {
+// 		m[k] = r.FormValue(k)
+// 	}
+// 	return m
+// }
 
 // getPayload3 извлекает "query", "variables", "operationName".
 // Decoded body has precedence over POST over GET.

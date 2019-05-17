@@ -26,29 +26,18 @@ func JSONParamToMap(params gq.ResolveParams, paramName string) (interface{}, err
 	return paramMap, err
 }
 
-type fields map[string]*gq.Field
+// addFields возвращает новую структуру graphql.Fields с суммой полей входных структур.
+func addFields(fields1 gq.Fields, fields2 gq.Fields) gq.Fields {
+	sumFields := gq.Fields{}
 
-// func (sumFields fields) addFields(fields1 fields) {
-// 	for key, field := range fields1 {
-// 		sumFields[key] = field
-// 	}
-// }
-
-// func addFields(fields1 map[string]*gq.Field, fields2 map[string]*gq.Field) map[string]*gq.Field {
-// 	sumFields := make(map[string]*gq.Field)
-
-// 	// for key, field := range fields1 {
-// 	// 	sumFields[key] = field
-// 	// }
-// 	// for key, field := range fields2 {
-// 	// 	sumFields[key] = field
-// 	// }
-
-// 	fields(sumFields).addFields(fields(fields1))
-// 	fields(sumFields).addFields(fields(fields2))
-
-// 	return sumFields
-// }
+	for key, field := range fields1 {
+		sumFields[key] = field
+	}
+	for key, field := range fields2 {
+		sumFields[key] = field
+	}
+	return sumFields
+}
 
 // FIELDS **************************************************
 var broadcastFields = gq.Fields{
@@ -158,10 +147,6 @@ var imageFields = gq.Fields{
 		Type:        gq.String,
 		Description: "URI изображения",
 	},
-	// "thumbs": &gq.Field{
-	// 	Type:        gq.String,
-	// 	Description: "Уменьшенное изображение",
-	// },
 	"thumbs": &gq.Field{
 		Type:        gq.NewList(thumbType),
 		Description: "Превью и изображение для видео - jsonb ",
@@ -188,51 +173,8 @@ var listBroadcastFields = gq.Fields{
 
 // FULL FIELDS поля с древовидной структурой  ****************************************************
 
-// var fullAnswerFields = addFields(postFields, gq.Fields{
-// 	"images": &gq.Field{
-// 		Type:        gq.NewList(imageType),
-// 		Description: "Медиа ответа",
-// 	},
-// })
+var fullAnswerFields = addFields(postFields, gq.Fields{
 
-var fullAnswerFields = gq.Fields{
-	"id": &gq.Field{
-		Type:        gq.Int,
-		Description: "Идентификатор ответа",
-	},
-	"id_parent": &gq.Field{
-		Type:        gq.Int,
-		Description: "Идентификатор родительского поста если это ответ на другой пост",
-	},
-	"id_broadcast": &gq.Field{
-		Type:        gq.Int,
-		Description: "Идентификатор трансляции",
-	},
-	"text": &gq.Field{
-		Type:        gq.String,
-		Description: "Текст поста",
-	},
-	"post_time": &gq.Field{
-		Type:        gq.Int,
-		Description: "Текст поста",
-	},
-	"post_type": &gq.Field{
-		Type:        gq.Int,
-		Description: "Тип поста 1,2,3,4...",
-	},
-	"link": &gq.Field{
-		Type:        gq.String,
-		Description: "Ссылка",
-	},
-	"has_big_img": &gq.Field{
-		Type:        gq.Int,
-		Description: "Есть ли большое изображение 0,1",
-	},
-	"author": &gq.Field{
-		Type:        gq.String,
-		Description: "ФИО автора поста",
-	},
-	// ---------------------------------
 	"images": &gq.Field{
 		Type:        gq.NewList(imageType),
 		Description: "Медиа ответа",
@@ -240,57 +182,9 @@ var fullAnswerFields = gq.Fields{
 			return JSONParamToMap(params, "images")
 		},
 	},
-}
+})
 
-// var fullPostFields = addFields(postFields, gq.Fields{
-// 	"images": &gq.Field{
-// 		Type:        gq.NewList(imageType),
-// 		Description: "Медиа поста",
-// 	},
-// 	"answers": &gq.Field{
-// 		Type:        gq.NewList(fullAnswerType),
-// 		Description: "Ответы к посту",
-// 	},
-// })
-
-var fullPostFields = gq.Fields{
-	"id": &gq.Field{
-		Type:        gq.Int,
-		Description: "Идентификатор поста",
-	},
-	"id_parent": &gq.Field{
-		Type:        gq.Int,
-		Description: "Идентификатор поста если это ответ на другой пост",
-	},
-	"id_broadcast": &gq.Field{
-		Type:        gq.Int,
-		Description: "Идентификатор трансляции",
-	},
-	"text": &gq.Field{
-		Type:        gq.String,
-		Description: "Текст поста",
-	},
-	"post_time": &gq.Field{
-		Type:        gq.Int,
-		Description: "Текст поста",
-	},
-	"post_type": &gq.Field{
-		Type:        gq.Int,
-		Description: "Тип поста 1,2,3,4...",
-	},
-	"link": &gq.Field{
-		Type:        gq.String,
-		Description: "Ссылка",
-	},
-	"has_big_img": &gq.Field{
-		Type:        gq.Int,
-		Description: "Есть ли большое изображение 0,1",
-	},
-	"author": &gq.Field{
-		Type:        gq.String,
-		Description: "ФИО автора поста",
-	},
-	// --------------------------------------------
+var fullPostFields = addFields(postFields, gq.Fields{
 	"images": &gq.Field{
 		Type:        gq.NewList(imageType),
 		Description: "Медиа поста",
@@ -305,69 +199,9 @@ var fullPostFields = gq.Fields{
 			return JSONParamToMap(params, "answers")
 		},
 	},
-}
+})
 
-// var fullBroadcastFields = addFields(broadcastFields, gq.Fields{
-// 	"posts": &gq.Field{
-// 		Type:        gq.NewList(fullPostType),
-// 		Description: "Посты бродкаста",
-// 	},
-// })
-
-var fullBroadcastFields = gq.Fields{
-	"id": &gq.Field{
-		Type:        gq.Int,
-		Description: "Идентификатор трансляции",
-	},
-	"title": &gq.Field{
-		Type:        gq.String,
-		Description: "Название трансляции",
-	},
-	"time_created": &gq.Field{
-		Type:        gq.Int,
-		Description: "Время создания",
-	},
-	"time_begin": &gq.Field{
-		Type:        gq.Int,
-		Description: "Время начала",
-	},
-	"is_ended": &gq.Field{
-		Type:        gq.Int,
-		Description: "Завершена 0 1",
-	},
-	"show_date": &gq.Field{
-		Type:        gq.Int,
-		Description: "Показывать дату 0 1",
-	},
-	"show_time": &gq.Field{
-		Type:        gq.Int,
-		Description: "Показывать время 0 1",
-	},
-	"show_main_page": &gq.Field{
-		Type:        gq.Int,
-		Description: "Показывать на главной странице 01",
-	},
-	"link_article": &gq.Field{
-		Type:        gq.String,
-		Description: "Ссылка на статью",
-	},
-	"link_img": &gq.Field{
-		Type:        gq.String,
-		Description: "Ссылка на изображение",
-	},
-	"groups_create": &gq.Field{
-		Type:        gq.Int,
-		Description: "",
-	},
-	"is_diary": &gq.Field{
-		Type:        gq.Int,
-		Description: "Дневник 01",
-	},
-	"diary_author": &gq.Field{
-		Type:        gq.String,
-		Description: "Автор дневника",
-	},
-	// ------------------------------------
+var fullBroadcastFields = addFields(broadcastFields, gq.Fields{
 	"posts": &gq.Field{
 		Type:        gq.NewList(fullPostType),
 		Description: "Посты бродкаста",
@@ -375,7 +209,7 @@ var fullBroadcastFields = gq.Fields{
 			return JSONParamToMap(params, "posts")
 		},
 	},
-}
+})
 
 var fullListBroadcastFields = gq.Fields{
 	"length": &gq.Field{
