@@ -2,6 +2,8 @@ version: '3.1'
 
 services:
 
+
+  # база данных
   db:
     image: postgres
     container_name: onlinebc-db
@@ -15,7 +17,9 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: onlinebc 
       PGDATA: /var/lib/postgresql/data/pgdata
+  
 
+  # кэширует данные для фронтэнда
   redis:
       image: redis
       container_name: onlinebc-redis
@@ -23,21 +27,27 @@ services:
       #     - "6389:6379"
       restart: always
 
+
   # сервер для загрузки изображений по ssh
   imgserver:
     image: sickp/alpine-sshd
     container_name: onlinebc-imgserver
-    volumes:
-     - ./uploads:/var/www/onlinebc/uploads
+    entrypoint: sh -c "mkdir -p /var/www/onlinebc/uploads &&  echo uploads created; ssh-keygen -A; exec /usr/sbin/sshd -D "
+    # Раскомментируйте volumes: чтобы видеть загруженные файлы в локальной директории.
+    # Если volumes: раскомментирована, entrypoint: не нужна. 
+    # volumes: ["./uploads:/var/www/onlinebc/uploads"]
+
     # ports:
     #  - "222:22"
     restart: always
 
+
+  # сервер, где запущено приложение
   runner:
     image: rgru/onlinebc_admin
     container_name: onlinebc-runner
     restart: always
-    # расскомментируйте следующую строку если хотите доступ только к публичному REST API 
+    # раскомментируйте следующую строку если хотите доступ только к публичному REST API 
     # command: bash -c "cd /app && ./onlinebc -serve 7700 -front"
     ports:
       - 7700:7700
@@ -52,8 +62,7 @@ services:
 
 
 
-# Расскомментируйте если хотите просматривать базу данных в браузере http://localhost:8080
-
+  # Раскомментируйте если хотите просматривать базу данных в браузере http://localhost:8080
   # adminer:
   #   image: adminer
   #   container_name: adminer-com
