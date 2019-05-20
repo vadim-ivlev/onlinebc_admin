@@ -106,6 +106,23 @@ $function$
 ;
 
 
+CREATE OR REPLACE FUNCTION public.get_broadcast_list(where_part text default '')
+ RETURNS json
+ LANGUAGE plpgsql
+AS $function$
+DECLARE
+    j json;
+BEGIN   
+    EXECUTE '( 
+                select jsonb_agg(t) FROM 
+                ( SELECT * FROM broadcast '|| where_part ||' ) t 
+             )' INTO j;
+    RETURN j;
+END;
+$function$
+;
+
+
 
 
 -- R E S T ПРЕДСТАВЛЕНИЯ *****************************************************************************888

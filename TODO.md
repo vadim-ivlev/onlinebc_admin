@@ -3,9 +3,6 @@ TODO:
 ====
 
 - доделать выборку GetBroadcastList
-- построить полнотекстовые индексы на full_broadcast
-
-- Заменить загрузку изображений не через base64.
 
 - Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
 

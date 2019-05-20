@@ -531,7 +531,7 @@
 - comment: Список трансляций.Legacy
   methods: [GET, HEAD]
   path: /api/
-  example: /api/?main=0&active=0&num=3
+  example: /api/
   controller: GetBroadcastList
   params:
   - comment: Основная {0|1}
