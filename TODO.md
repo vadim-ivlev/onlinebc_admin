@@ -2,7 +2,6 @@
 TODO:
 ====
 
-- доделать выборку GetBroadcastList
 
 - Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
 
