@@ -195,7 +195,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 		},
 
 		"update_post": &gq.Field{
-			Type:        postType,
+			Type:        fullPostType,
 			Description: "Обновить пост или ответ к посту",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{
@@ -236,7 +236,17 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.UpdateRowByID("post", params.Args["id"].(int), params.Args)
+				// worked when return type was postType
+				// return db.UpdateRowByID("post", params.Args["id"].(int), params.Args)
+
+				id := params.Args["id"].(int)
+				fieldValues, err := db.UpdateRowByID("post", id, params.Args)
+				if err != nil {
+					return fieldValues, err
+				} else {
+					fields := getSelectedFields([]string{"update_post"}, params)
+					return db.QueryRowMap("SELECT "+fields+" FROM full_post WHERE id = $1 ;", id)
+				}
 			},
 		},
 
