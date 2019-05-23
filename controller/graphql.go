@@ -8,6 +8,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"strconv"
 
 	// "go/ast"
 	"net/http"
@@ -22,6 +23,13 @@ import (
 	gq "github.com/graphql-go/graphql"
 	"github.com/graphql-go/graphql/language/ast"
 )
+
+// FUNCTIONS *******************************************************
+
+func getIntID(c *gin.Context) int {
+	id, _ := strconv.Atoi(c.Param("id"))
+	return id
+}
 
 // jsonStringToMap преобразует строку JSON в map[string]interface{}
 func jsonStringToMap(s string) map[string]interface{} {
@@ -40,20 +48,6 @@ func getParamsFromBody(c *gin.Context) (map[string]interface{}, error) {
 	}
 	return mb, errors.New("No body")
 }
-
-// getParamsFromRequest извлекает параметры запроса из *http.Request
-// func getParamsFromRequest(c *gin.Context) map[string]interface{} {
-// 	r := c.Request
-// 	m := make(map[string]interface{})
-// 	err := r.ParseForm()
-// 	if err != nil {
-// 		return m
-// 	}
-// 	for k := range r.Form {
-// 		m[k] = r.FormValue(k)
-// 	}
-// 	return m
-// }
 
 // getPayload3 извлекает "query", "variables", "operationName".
 // Decoded body has precedence over POST over GET.
@@ -132,13 +126,6 @@ func deleteRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFr
 	return fieldValues, nil
 }
 
-// ********************************************************************************
-
-var schema, _ = gq.NewSchema(gq.SchemaConfig{
-	Query:    rootQuery,
-	Mutation: rootMutation,
-})
-
 // getSelectedFields - returns list of selected fields defined in GraphQL query.
 /*
 
@@ -193,28 +180,6 @@ func getSelectedFields(selectionPath []string, resolveParams graphql.ResolvePara
 	}
 	s := strings.Join(collect, ", ")
 	return s
-}
-
-// *********************************************************************
-// *********************************************************************
-// *********************************************************************
-// *********************************************************************
-// *********************************************************************
-
-// GraphQL исполняет GraphQL запрос
-func (dummy) GraphQL(c *gin.Context) {
-	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
-
-	query, variables := getPayload3(c)
-
-	result := gq.Do(gq.Params{
-		Schema:         schema,
-		RequestString:  query,
-		Context:        context.WithValue(context.Background(), "ginContext", c),
-		VariableValues: variables,
-	})
-
-	c.JSON(200, result)
 }
 
 // SaveUploadedFile - сохраняет первый присоединенный в поле fileFieldName файл во временную директорию,
@@ -297,4 +262,27 @@ func SaveUploadedImage(params gq.ResolveParams, fileFieldName string) (
 	}
 
 	return serverPath, width, height, thumbsJSONStr, errMsg
+}
+
+// G R A P H Q L ********************************************************************************
+
+var schema, _ = gq.NewSchema(gq.SchemaConfig{
+	Query:    rootQuery,
+	Mutation: rootMutation,
+})
+
+// GraphQL исполняет GraphQL запрос
+func (dummy) GraphQL(c *gin.Context) {
+	c.Request.Body = http.MaxBytesReader(c.Writer, c.Request.Body, 100*1024*1024)
+
+	query, variables := getPayload3(c)
+
+	result := gq.Do(gq.Params{
+		Schema:         schema,
+		RequestString:  query,
+		Context:        context.WithValue(context.Background(), "ginContext", c),
+		VariableValues: variables,
+	})
+
+	c.JSON(200, result)
 }

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"reflect"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	yaml "gopkg.in/yaml.v2"
@@ -36,13 +35,6 @@ type dummy struct {
 
 // Routes содержит информацию о маршрутах.  Документация API.
 var Routes []Route
-
-// FUNCTIONS *******************************************************
-
-func getIntID(c *gin.Context) int {
-	id, _ := strconv.Atoi(c.Param("id"))
-	return id
-}
 
 // GetFunctionByName возвращает функцию по имени
 func GetFunctionByName(funcName string) func(*gin.Context) {
