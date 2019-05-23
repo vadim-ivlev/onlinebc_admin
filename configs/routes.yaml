@@ -528,24 +528,24 @@
     value: ':id'
     test: 354
 
-- comment: Список трансляций.Legacy
-  methods: [GET, HEAD]
-  path: /api/
-  example: /api/
-  controller: GetBroadcastList
-  params:
-  - comment: Основная {0|1}
-    name: main
-    inptype : number
-    value: '{main}'
-    test: 0
-  - comment: Активность {0|1}
-    name: active
-    inptype : number
-    value: '{active}'
-    test: 0
-  - comment: Номер
-    name: num
-    inptype : number
-    value: '{num}'
-    test: 3
+# - comment: Список трансляций.Legacy
+#   methods: [GET, HEAD]
+#   path: /api/
+#   example: /api/
+#   controller: GetBroadcastList
+#   params:
+#   - comment: Основная {0|1}
+#     name: main
+#     inptype : number
+#     value: '{main}'
+#     test: 0
+#   - comment: Активность {0|1}
+#     name: active
+#     inptype : number
+#     value: '{active}'
+#     test: 0
+#   - comment: Номер
+#     name: num
+#     inptype : number
+#     value: '{num}'
+#     test: 3

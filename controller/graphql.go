@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"strings"
 
+	"onlinebc_admin/model/db"
 	"onlinebc_admin/model/img"
 	srv "onlinebc_admin/model/imgserver"
 
@@ -62,19 +63,6 @@ func getPayload3(c *gin.Context) (query string, variables map[string]interface{}
 	query = c.PostForm("query")
 	variables = jsonStringToMap(c.PostForm("variables"))
 
-	// r := c.Request
-	// // если есть тело запроса то берем из Request Payload (для Altair)
-	// mb := make(map[string]interface{})
-	// if r.ContentLength > 0 {
-	// 	errBodyDecode := json.NewDecoder(r.Body).Decode(&mb)
-	// 	if errBodyDecode == nil {
-	// 		query, _ = mb["query"].(string)
-	// 		variables, _ = mb["variables"].(map[string]interface{})
-	// 	} else {
-	// 		log.Println(errBodyDecode)
-	// 	}
-	// }
-
 	// если есть тело запроса то берем из Request Payload (для Altair)
 	params, errBody := getParamsFromBody(c)
 	if errBody == nil {
@@ -84,6 +72,67 @@ func getPayload3(c *gin.Context) (query string, variables map[string]interface{}
 
 	return
 }
+
+// createRecord вставляет запись в таблицу tableToUpdate,
+// и возвращает вставленную  запись из таблицы tableToSelectFrom,
+// которая является представлением с более богатым содержимым,
+// чем обновленная таблица.
+// Используется в запросах GraphQL на вставку записей.
+func createRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFrom string) (interface{}, error) {
+	// вставляем запись
+	fieldValues, err := db.CreateRow(tableToUpdate, params.Args)
+	if err != nil {
+		return fieldValues, err
+	}
+	// извлекаем id вставленной записи
+	id := fieldValues["id"].(int64)
+
+	// возвращаем ответ
+	path := params.Info.FieldName
+	fields := getSelectedFields([]string{path}, params)
+	return db.QueryRowMap("SELECT "+fields+" FROM "+tableToSelectFrom+" WHERE id = $1 ;", id)
+}
+
+// updateRecord обновляет запись в таблице tableToUpdate,
+// и возвращает обновленную запись из таблицы tableToSelectFrom,
+// которая является представлением с более богатым содержимым,
+// чем обновленная таблица.
+// Используется в запросах GraphQL на обновление записей.
+func updateRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFrom string) (interface{}, error) {
+	id := params.Args["id"].(int)
+	fieldValues, err := db.UpdateRowByID(tableToUpdate, id, params.Args)
+	if err != nil {
+		return fieldValues, err
+	}
+	path := params.Info.FieldName
+	fields := getSelectedFields([]string{path}, params)
+	return db.QueryRowMap("SELECT "+fields+" FROM "+tableToSelectFrom+" WHERE id = $1 ;", id)
+}
+
+// deleteRecord удаляет запись из таблицы tableToUpdate,
+// и возвращает удаленную запись из таблицы tableToSelectFrom,
+// которая является представлением с более богатым содержимым,
+// чем обновленная таблица.
+// Используется в запросах GraphQL на удаление записей.
+func deleteRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFrom string) (interface{}, error) {
+	// сохраняем запись, которую собираемся удалять
+	id := params.Args["id"].(int)
+	path := params.Info.FieldName
+	fields := getSelectedFields([]string{path}, params)
+	fieldValues, err := db.QueryRowMap("SELECT "+fields+" FROM "+tableToSelectFrom+" WHERE id = $1 ;", id)
+	if err != nil {
+		return nil, err
+	}
+	// удаляем запись
+	_, err = db.DeleteRowByID(tableToUpdate, id)
+	if err != nil {
+		return nil, err
+	}
+	// возвращаем только что удаленную запись
+	return fieldValues, nil
+}
+
+// ********************************************************************************
 
 var schema, _ = gq.NewSchema(gq.SchemaConfig{
 	Query:    rootQuery,

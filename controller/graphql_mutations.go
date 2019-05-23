@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"errors"
 	"log"
 	"onlinebc_admin/model/db"
 
@@ -14,7 +15,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 		// BROADCAST =====================================================
 
 		"create_broadcast": &gq.Field{
-			Type:        broadcastType,
+			Type:        fullBroadcastType,
 			Description: "Создать трансляцию",
 			Args: gq.FieldConfigArgument{
 				// "id":             &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор трансляции"},
@@ -57,7 +58,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 				"groups_create": &gq.ArgumentConfig{
 					Type:        gq.Int,
-					Description: "",
+					Description: "группа",
 				},
 				"is_diary": &gq.ArgumentConfig{
 					Type:        gq.Int,
@@ -69,12 +70,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.CreateRow("broadcast", params.Args)
+				return createRecord(params, "broadcast", "full_broadcast")
 			},
 		},
 
 		"update_broadcast": &gq.Field{
-			Type:        broadcastType,
+			Type:        fullBroadcastType,
 			Description: "Обновить трансляцию",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{
@@ -119,7 +120,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 				"groups_create": &gq.ArgumentConfig{
 					Type:        gq.Int,
-					Description: "",
+					Description: "группа",
 				},
 				"is_diary": &gq.ArgumentConfig{
 					Type:        gq.Int,
@@ -131,12 +132,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.UpdateRowByID("broadcast", params.Args["id"].(int), params.Args)
+				return updateRecord(params, "broadcast", "full_broadcast")
 			},
 		},
 
 		"delete_broadcast": &gq.Field{
-			Type:        broadcastType,
+			Type:        fullBroadcastType,
 			Description: "Удалить трансляцию",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{
@@ -145,14 +146,14 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.DeleteRowByID("broadcast", params.Args["id"].(int))
+				return deleteRecord(params, "broadcast", "full_broadcast")
 			},
 		},
 
 		// POST =====================================================
 
 		"create_post": &gq.Field{
-			Type:        postType,
+			Type:        fullPostType,
 			Description: "Создать пост к трансляции или ответ к посту",
 			Args: gq.FieldConfigArgument{
 				// "id":           &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int), Description: "Идентификатор поста"}                              ,
@@ -190,7 +191,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.CreateRow("post", params.Args)
+				return createRecord(params, "post", "full_post")
 			},
 		},
 
@@ -236,22 +237,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				// worked when return type was postType
-				// return db.UpdateRowByID("post", params.Args["id"].(int), params.Args)
-
-				id := params.Args["id"].(int)
-				fieldValues, err := db.UpdateRowByID("post", id, params.Args)
-				if err != nil {
-					return fieldValues, err
-				} else {
-					fields := getSelectedFields([]string{"update_post"}, params)
-					return db.QueryRowMap("SELECT "+fields+" FROM full_post WHERE id = $1 ;", id)
-				}
+				return updateRecord(params, "post", "full_post")
 			},
 		},
 
 		"delete_post": &gq.Field{
-			Type:        postType,
+			Type:        fullPostType,
 			Description: "Удалить пост",
 			Args: gq.FieldConfigArgument{
 				"id": &gq.ArgumentConfig{
@@ -259,7 +250,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Description: "Идентификатор поста"},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.DeleteRowByID("post", params.Args["id"].(int))
+				return deleteRecord(params, "post", "full_post")
 			},
 		},
 
@@ -292,11 +283,11 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
 				if errMsg == "" {
 					params.Args["filepath"] = path
-					// params.Args["width"] = width
-					// params.Args["height"] = height
 					params.Args["thumbs"] = thumbs
 				} else {
-					log.Println("create_image: Resolve(): " + errMsg)
+					msg := "create_image: Resolve(): " + errMsg
+					log.Println(msg)
+					return nil, errors.New(msg)
 				}
 				delete(params.Args, "file_field_name")
 				return db.CreateRow("image", params.Args)
@@ -330,11 +321,11 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
 				if errMsg == "" {
 					params.Args["filepath"] = path
-					// params.Args["width"] = width
-					// params.Args["height"] = height
 					params.Args["thumbs"] = thumbs
 				} else {
-					log.Println("create_image: Resolve(): " + errMsg)
+					msg := "update_image: Resolve(): " + errMsg
+					log.Println(msg)
+					return nil, errors.New(msg)
 				}
 				delete(params.Args, "file_field_name")
 				return db.UpdateRowByID("image", params.Args["id"].(int), params.Args)

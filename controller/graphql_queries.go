@@ -17,7 +17,12 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 		"get_broadcast": &gq.Field{
 			Type:        fullBroadcastType,
 			Description: "Показать трансляцию по идентификатору c постами, ответами и медиа",
-			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
+			Args: gq.FieldConfigArgument{
+				"id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор трансляции",
+				},
+			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_broadcast"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM full_broadcast WHERE id = $1 ;", params.Args["id"].(int))
@@ -27,7 +32,12 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 		"get_post": &gq.Field{
 			Type:        fullPostType,
 			Description: "Показать пост с ответами и изображениями по идентификатору поста",
-			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
+			Args: gq.FieldConfigArgument{
+				"id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор поста",
+				},
+			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_post"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM full_post WHERE id = $1 ;", params.Args["id"].(int))
@@ -36,8 +46,13 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 
 		"get_image": &gq.Field{
 			Type:        imageType,
-			Description: "Показать медиа по идентификатору",
-			Args:        gq.FieldConfigArgument{"id": &gq.ArgumentConfig{Type: gq.NewNonNull(gq.Int)}},
+			Description: "Показать изображение по идентификатору",
+			Args: gq.FieldConfigArgument{
+				"id": &gq.ArgumentConfig{
+					Type:        gq.NewNonNull(gq.Int),
+					Description: "Идентификатор изображения",
+				},
+			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_image"}, params)
 				return db.QueryRowMap("SELECT "+fields+" FROM image WHERE id = $1 ;", params.Args["id"].(int))
