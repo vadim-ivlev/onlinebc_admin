@@ -280,14 +280,17 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 
-				path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
-				if errMsg == "" {
-					params.Args["filepath"] = path
-					params.Args["thumbs"] = thumbs
-				} else {
-					msg := "create_image: Resolve(): " + errMsg
-					log.Println(msg)
-					return nil, errors.New(msg)
+				_, ok := params.Args["file_field_name"].(string)
+				if ok {
+					path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
+					if errMsg == "" {
+						params.Args["filepath"] = path
+						params.Args["thumbs"] = thumbs
+					} else {
+						msg := "create_image: Resolve(): " + errMsg
+						log.Println(msg)
+						return nil, errors.New(msg)
+					}
 				}
 				delete(params.Args, "file_field_name")
 				return db.CreateRow("image", params.Args)
@@ -318,16 +321,20 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 
-				path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
-				if errMsg == "" {
-					params.Args["filepath"] = path
-					params.Args["thumbs"] = thumbs
-				} else {
-					msg := "update_image: Resolve(): " + errMsg
-					log.Println(msg)
-					return nil, errors.New(msg)
+				_, ok := params.Args["file_field_name"].(string)
+				if ok {
+					path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
+					if errMsg == "" {
+						params.Args["filepath"] = path
+						params.Args["thumbs"] = thumbs
+					} else {
+						msg := "update_image: Resolve(): " + errMsg
+						log.Println(msg)
+						return nil, errors.New(msg)
+					}
 				}
 				delete(params.Args, "file_field_name")
+
 				return db.UpdateRowByID("image", params.Args["id"].(int), params.Args)
 			},
 		},
