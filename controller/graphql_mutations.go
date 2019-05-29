@@ -237,6 +237,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				// если id_parent отрицательный отвязываем запись
+				id_parent, ok := params.Args["id_parent"].(int)
+				if ok && id_parent < 0 {
+					params.Args["id_parent"] = nil
+				}
+
 				return updateRecord(params, "post", "full_post")
 			},
 		},
