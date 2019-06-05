@@ -4,411 +4,411 @@
 
 
 
-- comment   : <b>list_broadcast(...)</b> Получить список трансляций и их количество.
-  methods   :
-  - POST
-  - GET    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query{
-        list_broadcast(search: "жеребьевка" ){
-          length
-          list {
-            id
-            title
-          } 
-        }
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+# - comment   : <b>list_broadcast(...)</b> Получить список трансляций и их количество.
+#   methods   :
+#   - POST
+#   - GET    
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query{
+#         list_broadcast(search: "жеребьевка" ){
+#           length
+#           list {
+#             id
+#             title
+#           } 
+#         }
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
-- comment   : <b>list_full_broadcast(...)</b> Получить список трансляций c постами, ответами и их количество.
-  methods   :
-  - POST
-  - GET    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query{
-        list_full_broadcast(search: "трансляция" ){
-          length
-          list {
-            id
-            title
-              posts {
-                id 
-                id_parent 
-                text 
-                author
-                images { 
-                  id 
-                  source 
-                  thumbs {
-                    type
-                    filepath
-                    height
-                    width
-                  }
-                  filepath
-                }
-                answers {id id_parent text author}
-              }
-          } 
-        }
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
-
-
-
-
-- comment   : <b>get_broadcast(id)</b>. Получить трансляцию c постами, ответами и изображениями по идентификатору трансляции
-  methods   :
-  - POST
-  - GET    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        get_broadcast (id: 354) { 
-          id  
-          title  
-          time_created 
-          link_article 
-          posts {
-            id 
-            id_parent 
-            text 
-            author
-            images { 
-              id 
-              source 
-              thumbs {
-                type
-                filepath
-                height
-                width
-              }
-              filepath
-            }
-            answers {
-              id 
-              id_parent 
-              text 
-              author 
-              images { 
-                id 
-                source 
-                thumbs {
-                  type
-                  filepath
-                  height
-                  width
-                }
-                filepath
-              }
-            }
-          }
-        }
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+# - comment   : <b>list_full_broadcast(...)</b> Получить список трансляций c постами, ответами и их количество.
+#   methods   :
+#   - POST
+#   - GET    
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query{
+#         list_full_broadcast(search: "трансляция" ){
+#           length
+#           list {
+#             id
+#             title
+#               posts {
+#                 id 
+#                 id_parent 
+#                 text 
+#                 author
+#                 images { 
+#                   id 
+#                   source 
+#                   thumbs {
+#                     type
+#                     filepath
+#                     height
+#                     width
+#                   }
+#                   filepath
+#                 }
+#                 answers {id id_parent text author}
+#               }
+#           } 
+#         }
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
 
-- comment   : <b>get_broadcast_posts(id_broadcast)</b> Получить посты трансляции по ее идентификатору.
-  methods   :
-  - POST
-  - GET    
+
+# - comment   : <b>get_broadcast(id)</b>. Получить трансляцию c постами, ответами и изображениями по идентификатору трансляции
+#   methods   :
+#   - POST
+#   - GET    
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query {
+#         get_broadcast (id: 354) { 
+#           id  
+#           title  
+#           time_created 
+#           link_article 
+#           posts {
+#             id 
+#             id_parent 
+#             text 
+#             author
+#             images { 
+#               id 
+#               source 
+#               thumbs {
+#                 type
+#                 filepath
+#                 height
+#                 width
+#               }
+#               filepath
+#             }
+#             answers {
+#               id 
+#               id_parent 
+#               text 
+#               author 
+#               images { 
+#                 id 
+#                 source 
+#                 thumbs {
+#                   type
+#                   filepath
+#                   height
+#                   width
+#                 }
+#                 filepath
+#               }
+#             }
+#           }
+#         }
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
+
+
+
+# - comment   : <b>get_broadcast_posts(id_broadcast)</b> Получить посты трансляции по ее идентификатору.
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        get_broadcast_posts(
-          id_broadcast: 354,  
-          show_answers: false 
-        ) 
-        { 
-          id 
-          id_broadcast 
-          id_parent
-          text 
-          author
-        }
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query {
+#         get_broadcast_posts(
+#           id_broadcast: 354,  
+#           show_answers: false 
+#         ) 
+#         { 
+#           id 
+#           id_broadcast 
+#           id_parent
+#           text 
+#           author
+#         }
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
 
-- comment   : <b>get_post_images(post_id)</b> Получить медиа поста по его идентификатору.
-  methods   :
-  - POST
-  - GET    
+# - comment   : <b>get_post_images(post_id)</b> Получить медиа поста по его идентификатору.
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        get_post_images(post_id: 23932) { id filepath source}
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query {
+#         get_post_images(post_id: 23932) { id filepath source}
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
-- comment   : <b>get_post_answers(id_parent)</b> Получить ответы к посту по его идентификатору.
-  methods   :
-  - POST
-  - GET    
+# - comment   : <b>get_post_answers(id_parent)</b> Получить ответы к посту по его идентификатору.
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        get_post_answers(id_parent: 23932) { 
-          id 
-          id_broadcast 
-          text 
-          author
-          }
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query {
+#         get_post_answers(id_parent: 23932) { 
+#           id 
+#           id_broadcast 
+#           text 
+#           author
+#           }
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
 
 
 
-- comment   : <b>get_post(id)</b> Получить пост c ответами и изображениями по идентификатору
-  methods   :
-  - POST
-  - GET   
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        #get_post(id:23932){
-        get_post(id:21202){
-          id 
-          id_parent 
-          text 
-          author
-          images { 
-            id 
-            source 
-            thumbs {
-              type
-              filepath
-              height
-              width
-            }
-            filepath
-          }
-          answers {
-            id 
-            id_parent 
-            text 
-            author 
-            images{ 
-              id 
-              source 
-              thumbs {
-                type
-                filepath
-                height
-                width
-              }
-              filepath
-            }
-          }
-        }
-      }
+# - comment   : <b>get_post(id)</b> Получить пост c ответами и изображениями по идентификатору
+#   methods   :
+#   - POST
+#   - GET   
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query {
+#         #get_post(id:23932){
+#         get_post(id:21202){
+#           id 
+#           id_parent 
+#           text 
+#           author
+#           images { 
+#             id 
+#             source 
+#             thumbs {
+#               type
+#               filepath
+#               height
+#               width
+#             }
+#             filepath
+#           }
+#           answers {
+#             id 
+#             id_parent 
+#             text 
+#             author 
+#             images{ 
+#               id 
+#               source 
+#               thumbs {
+#                 type
+#                 filepath
+#                 height
+#                 width
+#               }
+#               filepath
+#             }
+#           }
+#         }
+#       }
 
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
-- comment   : <b>get_image(id)</b> Получить медиа по идентификатору
-  methods   :
-  - POST
-  - GET    
+# - comment   : <b>get_image(id)</b> Получить медиа по идентификатору
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      query {
-        get_image(id:5330){
-          id 
-          filepath 
-          thumbs {
-            type
-            filepath
-            height
-            width
-          }
-          source
-        }
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       query {
+#         get_image(id:5330){
+#           id 
+#           filepath 
+#           thumbs {
+#             type
+#             filepath
+#             height
+#             width
+#           }
+#           source
+#         }
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
 
-- comment   : <b>create_broadcast(...)</b> Создать трансляцию
-  methods   :
-  - POST
-  - GET    
+# - comment   : <b>create_broadcast(...)</b> Создать трансляцию
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      mutation {
-        create_broadcast(
-          title:"new broadcast1", 
-          time_created: 123, 
-          link_article:"link2"
-        ) 
-        {
-          id title 
-          time_created 
-          time_begin 
-          link_article
-        }
-      }
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       mutation {
+#         create_broadcast(
+#           title:"new broadcast1", 
+#           time_created: 123, 
+#           link_article:"link2"
+#         ) 
+#         {
+#           id title 
+#           time_created 
+#           time_begin 
+#           link_article
+#         }
+#       }
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
 
-- comment   : <b>update_broadcast(...)</b> Обновить трансляцию
-  methods   :
-  - POST
-  - GET    
+# - comment   : <b>update_broadcast(...)</b> Обновить трансляцию
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      mutation {
-        update_broadcast(
-          id: 1000,
-          title:"updated broadcast 22", 
-          time_created: 124, 
-          link_article:"updated link2"
-        ) 
-        {
-          id title 
-          time_created 
-          time_begin 
-          link_article
-        }
-      }  
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       mutation {
+#         update_broadcast(
+#           id: 1000,
+#           title:"updated broadcast 22", 
+#           time_created: 124, 
+#           link_article:"updated link2"
+#         ) 
+#         {
+#           id title 
+#           time_created 
+#           time_begin 
+#           link_article
+#         }
+#       }  
       
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
-- comment   : <b>delete_broadcast(id)</b> Удалить трансляцию
-  methods   :
-  - POST
-  - GET    
+# - comment   : <b>delete_broadcast(id)</b> Удалить трансляцию
+#   methods   :
+#   - POST
+#   - GET    
    
-  path      : /graphql
-  example   : /graphql
-  controller: GraphQL
-  params    :
-  - comment: запрос
-    name   : query
-    value  : '{query}'
-    test   : |- 
-      mutation {
-        delete_broadcast(
-          id: 1000
-        ) 
-        {
-          id title 
-          time_created 
-          time_begin 
-          link_article
-        }
-      }  
+#   path      : /graphql
+#   example   : /graphql
+#   controller: GraphQL
+#   params    :
+#   - comment: запрос
+#     name   : query
+#     value  : '{query}'
+#     test   : |- 
+#       mutation {
+#         delete_broadcast(
+#           id: 1000
+#         ) 
+#         {
+#           id title 
+#           time_created 
+#           time_begin 
+#           link_article
+#         }
+#       }  
       
-  - comment: переменные
-    name   : variables
-    value  : '{variables}'
-    test   : '{}' 
+#   - comment: переменные
+#     name   : variables
+#     value  : '{variables}'
+#     test   : '{}' 
 
 
 

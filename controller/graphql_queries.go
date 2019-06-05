@@ -122,6 +122,20 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 					Description: "Строка полнотекстового поиска.",
 					// DefaultValue: "",
 				},
+
+				"id": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Идентификатор трансляции",
+				},
+				"time_created": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Время создания",
+				},
+				"time_begin": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Время начала",
+				},
+
 				"is_ended": &gq.ArgumentConfig{
 					Type:        gq.Int,
 					Description: "1 если трансляция закончена, 0 - если нет.",
@@ -177,6 +191,20 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 					Description: "Строка полнотекстового поиска.",
 					// DefaultValue: "",
 				},
+
+				"id": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Идентификатор трансляции",
+				},
+				"time_created": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Время создания",
+				},
+				"time_begin": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Время начала",
+				},
+
 				"is_ended": &gq.ArgumentConfig{
 					Type:        gq.Int,
 					Description: "1 если трансляция закончена, 0 - если нет.",

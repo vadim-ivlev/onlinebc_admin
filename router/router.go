@@ -25,6 +25,7 @@ func defineRoutes(r *gin.Engine) {
 
 	r.Handle("GET", "/", c.GetFunctionByName("LandingPage"))
 	r.Handle("OPTIONS", "/graphql", PingHandler)
+	r.Handle("POST", "/graphql", c.GetFunctionByName("GraphQL"))
 
 	for _, route := range c.Routes {
 		controllerFunc := c.GetFunctionByName(route.Controller)
