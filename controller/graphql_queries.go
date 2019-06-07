@@ -122,6 +122,11 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 					Description: "Строка полнотекстового поиска.",
 					// DefaultValue: "",
 				},
+				"is_ended": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "1 если трансляция закончена, 0 - если нет.",
+					// DefaultValue: 1,
+				},
 
 				"id": &gq.ArgumentConfig{
 					Type:        gq.Int,
@@ -135,12 +140,27 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.Int,
 					Description: "Время начала",
 				},
-
-				"is_ended": &gq.ArgumentConfig{
+				"show_date": &gq.ArgumentConfig{
 					Type:        gq.Int,
-					Description: "1 если трансляция закончена, 0 - если нет.",
-					// DefaultValue: 1,
+					Description: "Показывать дату 0 1",
 				},
+				"show_time": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать время 0 1",
+				},
+				"show_main_page": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать на главной странице 01",
+				},
+				"groups_create": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "",
+				},
+				"is_diary": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Дневник 01",
+				},
+
 				"order": &gq.ArgumentConfig{
 					Type:         gq.String,
 					Description:  "сортировка строк в определённом порядке. По умолчанию 'id DESC'",
@@ -191,6 +211,11 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 					Description: "Строка полнотекстового поиска.",
 					// DefaultValue: "",
 				},
+				"is_ended": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "1 если трансляция закончена, 0 - если нет.",
+					// DefaultValue: 1,
+				},
 
 				"id": &gq.ArgumentConfig{
 					Type:        gq.Int,
@@ -204,12 +229,27 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 					Type:        gq.Int,
 					Description: "Время начала",
 				},
-
-				"is_ended": &gq.ArgumentConfig{
+				"show_date": &gq.ArgumentConfig{
 					Type:        gq.Int,
-					Description: "1 если трансляция закончена, 0 - если нет.",
-					// DefaultValue: 1,
+					Description: "Показывать дату 0 1",
 				},
+				"show_time": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать время 0 1",
+				},
+				"show_main_page": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Показывать на главной странице 01",
+				},
+				"groups_create": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "",
+				},
+				"is_diary": &gq.ArgumentConfig{
+					Type:        gq.Int,
+					Description: "Дневник 01",
+				},
+
 				"order": &gq.ArgumentConfig{
 					Type:         gq.String,
 					Description:  "сортировка строк в определённом порядке. По умолчанию 'id DESC'",
@@ -264,11 +304,15 @@ func queryEnd(params gq.ResolveParams) (wherePart string, orderAndLimits string)
 			fmt.Sprintf("to_tsvector('russian', title) @@ plainto_tsquery('russian','%s') ", search))
 	}
 
-	is_ended, ok := params.Args["is_ended"].(int)
-	if ok {
-		searchConditions = append(searchConditions,
-			fmt.Sprintf("is_ended = %d ", is_ended))
-	}
+	addIntSearchConditionForField(&searchConditions, params, "is_ended")
+	addIntSearchConditionForField(&searchConditions, params, "id")
+	addIntSearchConditionForField(&searchConditions, params, "time_created")
+	addIntSearchConditionForField(&searchConditions, params, "time_begin")
+	addIntSearchConditionForField(&searchConditions, params, "show_date")
+	addIntSearchConditionForField(&searchConditions, params, "show_time")
+	addIntSearchConditionForField(&searchConditions, params, "show_main_page")
+	addIntSearchConditionForField(&searchConditions, params, "groups_create")
+	addIntSearchConditionForField(&searchConditions, params, "is_diary")
 
 	if len(searchConditions) > 0 {
 		wherePart = " WHERE " + strings.Join(searchConditions, " AND ")
@@ -282,4 +326,13 @@ func queryEnd(params gq.ResolveParams) (wherePart string, orderAndLimits string)
 
 	return wherePart, orderAndLimits
 
+}
+
+// addIntSearchConditionForField добавляет условие поиска для поля fieldName в массив searchConditions.
+func addIntSearchConditionForField(searchConditions *[]string, params gq.ResolveParams, fieldName string) {
+	value, ok := params.Args[fieldName].(int)
+	if ok {
+		*searchConditions = append(*searchConditions, fmt.Sprintf("%s = %d ", fieldName, value))
+	}
+	return
 }
