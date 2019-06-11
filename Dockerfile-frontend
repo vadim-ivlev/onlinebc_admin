@@ -1,25 +1,20 @@
-FROM ubuntu:18.04
-#FROM debian:stable-slim
-#FROM debian:7.11-slim
-
+FROM golang:1.12.5-stretch 
 LABEL maintainer="RGRU <ivlev@rg.ru>"
 
 RUN apt-get -y update && apt-get -y install sshpass 
 
-COPY configs  /app/configs
-COPY migrations  /app/migrations
-COPY templates  /app/templates
-COPY docs  /app/docs
 
-COPY onlinebc_admin  /app/onlinebc
+WORKDIR /go/src/onlinebc_admin
+COPY . .
 
+
+ENV GO111MODULE=on
+# RUN go get -v ./...
+RUN env CGO_ENABLED=0 go build
 
 ENV RUNNING_IN_DOCKER="Y"
-
 EXPOSE 7700
 
-CMD bash -c "cd /app && ./onlinebc -serve 7700"
 
-
-
+CMD ["./onlinebc_admin", "-serve", "7700"]
 
