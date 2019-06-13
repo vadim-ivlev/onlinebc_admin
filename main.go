@@ -73,7 +73,7 @@ func readCommandLineParams() (serverPort int, front bool, debug bool, printParam
 	flag.BoolVar(&printParams, "showparams", false, "Показать параметры соединения с БД.")
 	flag.StringVar(&env, "env", "prod", "Окружение. Возможные значения: dev - разработка, docker - в докере для фронтэнд разработчиков. prod - по умолчанию для продакшн.")
 	flag.Parse()
-	fmt.Println("\nПример запуска: go build && ./onlinebc_admin -serve 7777")
+	fmt.Println("\nПример запуска: ./onlinebc_admin -serve 7777 -env=dev")
 	flag.Usage()
 	return
 }
