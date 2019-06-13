@@ -18,15 +18,18 @@ type connectionParams struct {
 var params connectionParams
 
 // ReadConfig читает файл YAML
-func ReadConfig(fileName string) {
+func ReadConfig(fileName string, env string) {
 	yamlFile, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
 
-	err = yaml.Unmarshal(yamlFile, &params)
+	envParams := make(map[string]connectionParams)
+	err = yaml.Unmarshal(yamlFile, &envParams)
 	if err != nil {
 		log.Println(err.Error())
 	}
+	params = envParams[env]
+
 }

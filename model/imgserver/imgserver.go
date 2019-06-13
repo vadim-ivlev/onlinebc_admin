@@ -14,8 +14,8 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-// Params - общие параметры хранимые в YAML
-var Params struct {
+// общие параметры хранимые в YAML
+type connectionParams struct {
 	Host      string `yaml:"host"`
 	User      string `yaml:"user"`
 	Password  string `yaml:"password"`
@@ -24,16 +24,22 @@ var Params struct {
 	Localdir  string `yaml:"localdir"`
 }
 
+var Params connectionParams
+
 // ReadConfig читает YAML
-func ReadConfig(fileName string) {
+func ReadConfig(fileName string, env string) {
 	yamlFile, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
-	if err := yaml.Unmarshal(yamlFile, &Params); err != nil {
+
+	envParams := make(map[string]connectionParams)
+	err = yaml.Unmarshal(yamlFile, &envParams)
+	if err != nil {
 		log.Println(err.Error())
 	}
+	Params = envParams[env]
 }
 
 // Bash - исполняет команду bash, возвращает строку stderr.

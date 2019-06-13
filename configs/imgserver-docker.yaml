@@ -1,7 +1,0 @@
-host:        imgserver
-user:        root
-password:    root
-port:        22
-remotedir:   /var/www/onlinebc/uploads
-localdir:    uploads_temp
-

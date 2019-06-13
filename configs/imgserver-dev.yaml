@@ -1,8 +1,0 @@
-host:        localhost
-user:        root
-password:    root
-port:        222
-remotedir:   /var/www/onlinebc/uploads
-localdir:    uploads_temp
-
-

@@ -10,16 +10,15 @@ import (
 	"onlinebc_admin/model/imgserver"
 	"onlinebc_admin/model/redis"
 	"onlinebc_admin/router"
-	"os"
 	"strconv"
 )
 
 func main() {
 	// считать параметры командной строки
-	servePort, front, debug, printParams := readCommandLineParams()
+	servePort, front, debug, printParams, env := readCommandLineParams()
 
 	// читаем конфиги Postgres, Redis и роутера.
-	readConfigs(front)
+	readConfigs(front, env)
 
 	// Инициализируем Redis
 	redis.Init()
@@ -47,28 +46,16 @@ func main() {
 
 // Вспомогательные функции =========================================
 
-// readConfigs считывает конфиги Postgres и Redis.
-// Следующий конфиг перегружает предыдущий,
-// так что может присутствовать несколько конфигов для db и Redis.
-// Пути и соответственно доступный API зависят от моды,
+// readConfigs считывает конфиги Postgres, Redis, imgserver и img.
+// frontEndMode - Пути и соответственно доступный API зависят от моды,
 // в котрой запущено приложение: Фронтэнд или Бэкэнд.
-func readConfigs(frontEndMode bool) {
-	if os.Getenv("RUNNING_IN_DOCKER") == "Y" {
-		db.ReadConfig("./configs/db-docker.yaml")
-		redis.ReadConfig("./configs/redis-docker.yaml")
-		imgserver.ReadConfig("./configs/imgserver-docker.yaml")
-		img.ReadConfig("./configs/img-docker.yaml")
-	} else {
-		db.ReadConfig("./configs/db-dev.yaml")
-		redis.ReadConfig("./configs/redis-dev.yaml")
-		imgserver.ReadConfig("./configs/imgserver-dev.yaml")
-		img.ReadConfig("./configs/img-dev.yaml")
-	}
+// env - Окружение. Возможные значения: dev - разработка, docker - в докере для фронтэнд разработчиков. prod - по умолчанию для продакшн.
+func readConfigs(frontEndMode bool, env string) {
 
-	db.ReadConfig("./configs/db.yaml")
-	redis.ReadConfig("./configs/redis.yaml")
-	imgserver.ReadConfig("./configs/imgserver.yaml")
-	img.ReadConfig("./configs/img.yaml")
+	db.ReadConfig("./configs/db.yaml", env)
+	redis.ReadConfig("./configs/redis.yaml", env)
+	imgserver.ReadConfig("./configs/imgserver.yaml", env)
+	img.ReadConfig("./configs/img.yaml", env)
 
 	// Если запущен во Фронтэнд моде загрузить соответствующие руты.
 	if frontEndMode {
@@ -79,11 +66,12 @@ func readConfigs(frontEndMode bool) {
 }
 
 // readCommandLineParams читает параметры командной строки
-func readCommandLineParams() (serverPort int, front bool, debug bool, printParams bool) {
+func readCommandLineParams() (serverPort int, front bool, debug bool, printParams bool, env string) {
 	flag.IntVar(&serverPort, "serve", 0, "Запустить приложение на порту с номером > 0 ")
 	flag.BoolVar(&front, "front", false, "Запустить приложение в режиме Фронтэнд. Рауты только на чтение.")
 	flag.BoolVar(&debug, "debug", false, "Режим Debug. С отображением запросов в консоль.")
 	flag.BoolVar(&printParams, "showparams", false, "Показать параметры соединения с БД.")
+	flag.StringVar(&env, "env", "prod", "Окружение. Возможные значения: dev - разработка, docker - в докере для фронтэнд разработчиков. prod - по умолчанию для продакшн.")
 	flag.Parse()
 	fmt.Println("\nПример запуска: go build && ./onlinebc_admin -serve 7777")
 	flag.Usage()

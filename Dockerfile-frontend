@@ -3,18 +3,13 @@ LABEL maintainer="RGRU <ivlev@rg.ru>"
 
 RUN apt-get -y update && apt-get -y install sshpass 
 
-
 WORKDIR /go/src/onlinebc_admin
 COPY . .
 
-
 ENV GO111MODULE=on
-# RUN go get -v ./...
 RUN env CGO_ENABLED=0 go build
 
-ENV RUNNING_IN_DOCKER="Y"
 EXPOSE 7700
 
-
-CMD ["./onlinebc_admin", "-serve", "7700"]
+CMD ["./onlinebc_admin", "-serve", "7700", "-env=docker"]
 

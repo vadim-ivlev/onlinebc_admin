@@ -11,12 +11,9 @@ COPY docs  /app/docs
 
 COPY onlinebc_admin  /app/onlinebc
 
-
-ENV RUNNING_IN_DOCKER="Y"
-
 EXPOSE 7700
 
-CMD bash -c "cd /app && ./onlinebc -serve 7700"
+CMD bash -c "cd /app && ./onlinebc -serve 7700 -env=docker"
 
 
 

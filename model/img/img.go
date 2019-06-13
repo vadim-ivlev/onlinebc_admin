@@ -33,23 +33,29 @@ type Thumb struct {
 }
 
 // Params - общие параметры хранимые в YAML
-var Params struct {
+type connectionParams struct {
 	Localdir           string          `yaml:"localdir"`
 	ValidImgExtensions map[string]bool `yaml:"valid_img_extensions"`
 	MaxImageWidth      int             `yaml:"max_image_width"`
 	ThumbsTemplate     []Thumb         `yaml:"thumbs_template"`
 }
 
+var Params connectionParams
+
 // ReadConfig читает YAML
-func ReadConfig(fileName string) {
+func ReadConfig(fileName string, env string) {
 	yamlFile, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
-	if err := yaml.Unmarshal(yamlFile, &Params); err != nil {
+
+	envParams := make(map[string]connectionParams)
+	err = yaml.Unmarshal(yamlFile, &envParams)
+	if err != nil {
 		log.Println(err.Error())
 	}
+	Params = envParams[env]
 	return
 }
 

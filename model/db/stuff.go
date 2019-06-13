@@ -30,15 +30,18 @@ var connectStr string
 var connectURL string
 
 // ReadConfig reads YAML file
-func ReadConfig(fileName string) {
+func ReadConfig(fileName string, env string) {
 	yamlFile, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
 
-	err = yaml.Unmarshal(yamlFile, &params)
+	envParams := make(map[string]connectionParams)
+	err = yaml.Unmarshal(yamlFile, &envParams)
 	printIf("ReadConfig()", err)
+	params = envParams[env]
+
 	connectStr = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", params.Host, params.Port, params.User, params.Password, params.Dbname, params.Sslmode)
 	connectURL = fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s", params.User, params.Password, params.Host, params.Port, params.Dbname, params.Sslmode)
 

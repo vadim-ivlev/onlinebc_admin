@@ -1,0 +1,26 @@
+dev:
+  host:        localhost
+  user:        root
+  password:    root
+  port:        222
+  remotedir:   /var/www/onlinebc/uploads
+  localdir:    uploads_temp
+
+
+docker:
+  host:        imgserver
+  user:        root
+  password:    root
+  port:        22
+  remotedir:   /var/www/onlinebc/uploads
+  localdir:    uploads_temp
+
+
+prod:
+  host:        localhost
+  user:        root
+  password:    root
+  port:        222
+  remotedir:   /var/www/onlinebc/uploads
+  localdir:    uploads_temp
+

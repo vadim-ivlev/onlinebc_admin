@@ -8,13 +8,7 @@ import (
 
 func TestMain(m *testing.M) {
 	fmt.Println("Тесты Redis ******************************************************")
-
-	if os.Getenv("RUNNING_IN_DOCKER") == "Y" {
-		ReadConfig("../../configs/redis-docker.yaml")
-	} else {
-		ReadConfig("../../configs/redis-dev.yaml")
-	}
-	ReadConfig("../../configs/redis.yaml")
+	ReadConfig("../../configs/redis.yaml", "dev")
 	Init()
 	// call flag.Parse() here if TestMain uses flags
 	os.Exit(m.Run())
