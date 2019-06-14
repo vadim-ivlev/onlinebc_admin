@@ -107,8 +107,8 @@ func SaveFirstFile(c *gin.Context, fileFieldName string) (string, int64, error) 
 
 	file, header, err := c.Request.FormFile(fileFieldName)
 	if err != nil {
-		fmt.Println("SaveFirstFile:", err)
-		return "", 0, err
+		return "", 0, errors.New(fmt.Sprintln("SaveFirstFile 1:", err))
+
 	}
 	filename := header.Filename
 
@@ -116,23 +116,20 @@ func SaveFirstFile(c *gin.Context, fileFieldName string) (string, int64, error) 
 	saveDir := Params.Localdir + "/" + time.Now().Format("2006/01/02") + "/" + UlidNum(10000, 99999) + "/"
 	err = os.MkdirAll(saveDir, os.ModePerm)
 	if err != nil {
-		fmt.Println("SaveFirstFile:", err)
-		return "", 0, err
+		return "", 0, errors.New(fmt.Sprintln("SaveFirstFile 2:", err))
 	}
 
 	// filepath := saveDir + AppendToName(filename, "--"+GetULID())
 	filepath := saveDir + filename
 	out, err := os.Create(filepath)
 	if err != nil {
-		fmt.Println("SaveFirstFile:", err)
-		return "", 0, err
+		return "", 0, errors.New(fmt.Sprintln("SaveFirstFile 3:", err))
 	}
 	defer out.Close()
 
 	_, err = io.Copy(out, file)
 	if err != nil {
-		fmt.Println("SaveFirstFile:", err)
-		return "", 0, err
+		return "", 0, errors.New(fmt.Sprintln("SaveFirstFile 2:", err))
 	}
 	return filepath, header.Size, nil
 }
