@@ -19,7 +19,6 @@ import (
 	srv "onlinebc_admin/model/imgserver"
 
 	"github.com/gin-gonic/gin"
-	"github.com/graphql-go/graphql"
 	gq "github.com/graphql-go/graphql"
 	"github.com/graphql-go/graphql/language/ast"
 )
@@ -152,7 +151,7 @@ func deleteRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFr
 	import "github.com/graphql-go/graphql/language/ast" is added by hands.
 	source: https://github.com/graphql-go/graphql/issues/125
 */
-func getSelectedFields(selectionPath []string, resolveParams graphql.ResolveParams) string {
+func getSelectedFields(selectionPath []string, resolveParams gq.ResolveParams) string {
 	fields := resolveParams.Info.FieldASTs
 	for _, propName := range selectionPath {
 		found := false
