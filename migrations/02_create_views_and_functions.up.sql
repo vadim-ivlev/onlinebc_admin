@@ -160,7 +160,7 @@ AS SELECT post.id,
     post.text AS posts__text,
     post.post_type AS posts__type,
     post.link AS posts__uri,
-    post.post_time AS post__timestamp,
+    post.post_time AS posts__timestamp,
     to_char(to_timestamp(post.post_time::double precision), 'DD.MM.YYYY'::text) AS posts__date,
     to_char(to_timestamp(post.post_time::double precision), 'HH24:MI'::text) AS posts__time,
     
