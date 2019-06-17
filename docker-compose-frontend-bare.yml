@@ -53,7 +53,7 @@ services:
       - images:/app/uploads
 
     # раскомментируйте следующую строку если хотите доступ только к публичному REST API 
-    # command: bash -c "cd /app && ./onlinebc -serve 7700 -front"
+    # command: bash -c "cd /app && ./onlinebc -serve 7700 -env=docker -front"
     ports:
       - 7700:7700
     depends_on:

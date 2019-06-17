@@ -50,10 +50,10 @@ services:
     container_name: onlinebc-runner
     restart: always
     volumes:
-      - images:/app/uploads
+      - images:/go/src/onlinebc_admin/uploads
 
     # раскомментируйте следующую строку если хотите доступ только к публичному REST API 
-    # command: bash -c "cd /app && ./onlinebc -serve 7700 -front"
+    # command: bash -c "cd /go/src/onlinebc_admin && ./onlinebc_admin -serve 7700 -env=docker -front"
     ports:
       - 7700:7700
     depends_on:
