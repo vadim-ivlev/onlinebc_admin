@@ -288,10 +288,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 
 				_, ok := params.Args["file_field_name"].(string)
 				if ok {
-					path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
+					path, width, height, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
 					if errMsg == "" {
 						params.Args["filepath"] = path
 						params.Args["thumbs"] = thumbs
+						params.Args["width"] = width
+						params.Args["height"] = height
 					} else {
 						msg := "create_image: Resolve(): " + errMsg
 						log.Println(msg)
@@ -329,10 +331,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 
 				_, ok := params.Args["file_field_name"].(string)
 				if ok {
-					path, _, _, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
+					path, width, height, thumbs, errMsg := SaveUploadedImage(params, "file_field_name")
 					if errMsg == "" {
 						params.Args["filepath"] = path
 						params.Args["thumbs"] = thumbs
+						params.Args["width"] = width
+						params.Args["height"] = height
 					} else {
 						msg := "update_image: Resolve(): " + errMsg
 						log.Println(msg)

@@ -158,6 +158,14 @@ var imageFields = gq.Fields{
 		Type:        gq.String,
 		Description: "Источник медиа",
 	},
+	"width": &gq.Field{
+		Type:        gq.Int,
+		Description: "Ширина в пикселях",
+	},
+	"height": &gq.Field{
+		Type:        gq.Int,
+		Description: "Высота в пикселях",
+	},
 }
 
 var listBroadcastFields = gq.Fields{
