@@ -2,6 +2,8 @@ package embeds
 
 import (
 	"fmt"
+	"io/ioutil"
+	"strings"
 	"testing"
 )
 
@@ -106,11 +108,17 @@ END----------------------------
 `
 
 func Test_GetSocialsJSON(m *testing.T) {
-	json := GetSocialsJSON(text)
-	fmt.Println(json)
+
+	jsonBytes, err := ioutil.ReadFile("_broadcast354.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(jsonBytes))
+
+	txt, json := GetSocialsJSON(text)
+	fmt.Println(txt, strings.Repeat("=", 100)+"\n", json)
 }
 
-func Test_ClearText(m *testing.T) {
-	txt := ClearText(text)
-	fmt.Println(txt)
+func Test_aaa(m *testing.T) {
+	aaa()
 }

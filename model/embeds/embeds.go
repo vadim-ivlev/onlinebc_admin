@@ -9,6 +9,8 @@ import (
 	"log"
 	"regexp"
 	"strings"
+
+	"github.com/tidwall/gjson"
 )
 
 // регулярные выражения фрагментов для удаления из текста
@@ -27,7 +29,7 @@ type soc struct {
 }
 
 // перечень типов виджетов для обработки
-var chunks = map[string]soc{
+var widgets = map[string]soc{
 	"Youtube": soc{
 		re: regexp.MustCompile(`https://www.youtube.com/embed/[^"]*`),
 		gen: func(chunk string) map[string]string {
@@ -86,17 +88,17 @@ func getLastPart(ss string) string {
 
 // GetSocialsJSON Возвращает JSON социальных вставок найденных в тексте.
 // https://git.rgwork.ru/masterback/onlinebc_admin/issues/27
-func GetSocialsJSON(text string) string {
+func GetSocialsJSON(text string) (strippedText string, widgetsJSON string) {
 	// накопительный массив для записей о виджетах
 	arr := make([]map[string]string, 0)
 
 	// для всех видов виджетов
-	for _, soc := range chunks {
+	for _, w := range widgets {
 		// выдираем из текста характерные кусочки
-		extracts := soc.re.FindAllString(text, -1)
+		extracts := w.re.FindAllString(text, -1)
 		// для каждого кусочка генерируем структуру и добавляем ее в массив
 		for _, extract := range extracts {
-			m := soc.gen(extract)
+			m := w.gen(extract)
 			arr = append(arr, m)
 		}
 	}
@@ -106,7 +108,9 @@ func GetSocialsJSON(text string) string {
 	if err != nil {
 		log.Panicln(err)
 	}
-	return string(bytes)
+	widgetsJSON = string(bytes)
+	strippedText = ClearText(text)
+	return
 }
 
 // ClearText - возвращает текст очищенный от социальных вставок.
@@ -116,4 +120,12 @@ func ClearText(text string) string {
 		s = re.ReplaceAllString(s, strings.ToUpper(k))
 	}
 	return s
+}
+
+const json1 = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
+
+func aaa() {
+	value := gjson.Get(json1, "name.last")
+
+	println(value.String())
 }

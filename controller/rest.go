@@ -32,12 +32,21 @@ func (dummy) GetAnswers(c *gin.Context) {
 // GetPosts возвращает посты трансляции по её id
 func (dummy) GetPosts(c *gin.Context) {
 	row, _ := db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))
+	// err := ioutil.WriteFile("./posts354.json", row["res"].([]byte), 0644)
+	// if err != nil {
+	// 	fmt.Println("ERR", err)
+	// }
 	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 
 // GetFullBroadcast возвращает трансляцию с постами по её id
 func (dummy) GetFullBroadcast(c *gin.Context) {
 	row, _ := db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", getIntID(c))
+	// err := ioutil.WriteFile("./broadcast354.json", row["res"].([]byte), 0644)
+	// if err != nil {
+	// 	fmt.Println("ERR", err)
+	// }
+
 	fmt.Fprintf(c.Writer, "%s", row["res"])
 }
 
