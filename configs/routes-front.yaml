@@ -17,41 +17,41 @@
   example: /api/broadcasts
   controller: GetBroadcasts
 
-- comment: Трасляция с идентификатором id и ее постами
+- comment: Трансляция с идентификатором id и ее постами
   methods: [GET]
   path: /api/full-broadcast/:id
   example: /api/full-broadcast/354
   controller: GetFullBroadcast
 
-- comment: Посты трансляции с идентификатором id
-  methods: [GET]
-  path: /api/posts/:id
-  example: /api/posts/354
-  controller: GetPosts
+# - comment: Посты трансляции с идентификатором id
+#   methods: [GET]
+#   path: /api/posts/:id
+#   example: /api/posts/354
+#   controller: GetPosts
 
-- comment: Ответы к посту с идентификатором id
-  methods: [GET]
-  path: /api/answers/:id
-  example: /api/answers/23932
-  controller: GetAnswers
+# - comment: Ответы к посту с идентификатором id
+#   methods: [GET]
+#   path: /api/answers/:id
+#   example: /api/answers/23932
+#   controller: GetAnswers
 
-- comment: Медиа для поста с идентификатором id
-  methods: [GET]
-  path: /api/images/:id
-  example: /api/images/23932
-  controller: GetMedia
+# - comment: Медиа для поста с идентификатором id
+#   methods: [GET]
+#   path: /api/images/:id
+#   example: /api/images/23932
+#   controller: GetMedia
 
-- comment: Трасляция с идентификатором id и ее постами. Legacy
-  methods: [GET]
-  path: /api/online.php
-  example: /api/online.php
-  controller: GetFullBroadcastLegacy
-  params:
-  - comment: Идентификатор трансляции
-    name: id
-    inptype : number
-    value: ':id'
-    test: 354
+# - comment: Трасляция с идентификатором id и ее постами. Legacy
+#   methods: [GET]
+#   path: /api/online.php
+#   example: /api/online.php
+#   controller: GetFullBroadcastLegacy
+#   params:
+#   - comment: Идентификатор трансляции
+#     name: id
+#     inptype : number
+#     value: ':id'
+#     test: 354
 
 # - comment: Список трансляций.Legacy
 #   methods: [GET, HEAD]

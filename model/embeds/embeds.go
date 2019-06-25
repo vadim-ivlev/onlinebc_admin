@@ -10,16 +10,16 @@ import (
 	"log"
 	"regexp"
 	"strings"
-	// "github.com/tidwall/gjson"
 )
 
 // регулярные выражения фрагментов для удаления из текста
-var fragmentsToClear = map[string]*regexp.Regexp{
-	"vkpost":     regexp.MustCompile(`(?s)<div.*?vk_post_.*?</div>`),
-	"fbpost":     regexp.MustCompile(`(?s)<div.*?class="fb-post".*?</div>`),
-	"script":     regexp.MustCompile(`(?s)<script.*?</script>`),
-	"blockquote": regexp.MustCompile(`(?s)<blockquote.*?</blockquote>`),
-	"iframe":     regexp.MustCompile(`(?s)<iframe.*?</iframe>`),
+
+var fragmentsToClear = []*regexp.Regexp{
+	regexp.MustCompile(`(?s)<script.*?</script>`),
+	regexp.MustCompile(`(?s)<iframe.*?</iframe>`),
+	regexp.MustCompile(`(?s)<blockquote.*?</blockquote>`),
+	regexp.MustCompile(`(?s)<div.*?vk_post_.*?</div>`),
+	regexp.MustCompile(`(?s)<div.*?class="fb-post".*?</div>`),
 }
 
 // регулярное выражение для обнаружения виджета в тексте и функция для генерации  заготовки JSON.
@@ -40,7 +40,7 @@ var widgets = map[string]soc{
 		},
 	},
 	"Instagram": soc{
-		re: regexp.MustCompile(`https://www.instagram.com/p/[^"]*`),
+		re: regexp.MustCompile(`data-instgrm-permalink="https://www.instagram.com/p/[^"]*`),
 		gen: func(chunk string) map[string]string {
 			return map[string]string{
 				"type":           "instagram",
@@ -69,17 +69,26 @@ var widgets = map[string]soc{
 	"VK": soc{
 		re: regexp.MustCompile(`VK.Widgets.Post\([^)]*`),
 		gen: func(chunk string) map[string]string {
+			s := strings.TrimPrefix(chunk, "VK.Widgets.Post(")
+			args := strings.Split(s, ",")
+			firstArgParts := strings.Split(args[0], "_")
+			embedType := firstArgParts[1]
+			ownerID := strings.Trim(args[1], " ")
+			postID := strings.Trim(args[2], " ")
+			hashQuoted := strings.Trim(args[3], " ")
+			hash := strings.Trim(hashQuoted, "'")
 			return map[string]string{
 				"type":           "vk",
-				"data-embedtype": "embedtype",
-				"data-owner-id":  "oid",
-				"data-post-id":   "pid",
-				"data-hash":      "hash",
+				"data-embedtype": embedType,
+				"data-owner-id":  ownerID,
+				"data-post-id":   postID,
+				"data-hash":      hash,
 			}
 		},
 	},
 }
 
+// getLastPart возвращает последнюю часть пути
 func getLastPart(ss string) string {
 	s := strings.TrimSuffix(ss, "/")
 	a := strings.Split(s, "/")
@@ -102,13 +111,6 @@ func GetClearTextAndWidgets(text string) (strippedText string, widgetsJSON []map
 			arr = append(arr, m)
 		}
 	}
-
-	// сериализуем массив
-	// bytes, err := json.MarshalIndent(arr, "", "  ")
-	// if err != nil {
-	// 	log.Println(err)
-	// }
-	// widgetsJSON = string(bytes)
 	widgetsJSON = arr
 	strippedText = ClearText(text)
 	return
@@ -117,46 +119,45 @@ func GetClearTextAndWidgets(text string) (strippedText string, widgetsJSON []map
 // ClearText - возвращает текст очищенный от социальных вставок.
 func ClearText(text string) string {
 	s := text
-	for k, re := range fragmentsToClear {
-		s = re.ReplaceAllString(s, strings.ToUpper(k))
+	for _, re := range fragmentsToClear {
+		s = re.ReplaceAllString(s, "")
 	}
 	return s
 }
 
-// const json1 = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
+// AmendPostsAndAnswers для каждого поста и ответа к посту добавляем вычисляемые поля.
+// Основная функция пакета.
+func AmendPostsAndAnswers(jsonBytes []byte) []byte {
 
-// func aaa() {
-// 	value := gjson.Get(json1, "name.last")
-
-// 	println(value.String())
-// }
-
-func amendPostsAndAnswers(jsonBytes []byte) string {
+	// десериализуем текст в структуру
 	var broadcasts []Broadcast
 	err := json.Unmarshal(jsonBytes, &broadcasts)
 	if err != nil {
 		fmt.Println("ERR", err)
 	}
 
+	// для каждого поста и ответа к посту добавляем вычисляемые поля
 	for i, broadcast := range broadcasts {
+
+		// для каждого поста добавляем вычисляемые поля
 		for j, post := range broadcast.Posts {
 			txt, ws := GetClearTextAndWidgets(post.PostsText)
-			// post.PostsClearText = txt
-			// post.PostsSocials = jsonText
-
 			broadcasts[i].Posts[j].PostsClearText = txt
-			broadcasts[i].Posts[j].PostsSocials = ws
-			//TODO: answers
+			broadcasts[i].Posts[j].PostsEmbeds = ws
+
+			// для каждого ответа к посту добавляем вычисляемые поля
+			for k, answer := range post.PostsAnswers {
+				txt, ws := GetClearTextAndWidgets(answer.PostsAnswerText)
+				broadcasts[i].Posts[j].PostsAnswers[k].PostsAnswerClearText = txt
+				broadcasts[i].Posts[j].PostsAnswers[k].PostsAnswerEmbeds = ws
+			}
 		}
 	}
 
-	// сериализуем массив
+	// сериализуем структуру обратно в текст
 	bytes, err := json.MarshalIndent(broadcasts, "", "  ")
 	if err != nil {
 		log.Println("ERR serial:", err)
 	}
-	finalText := string(bytes)
-	fmt.Println(finalText)
-	return finalText
-
+	return bytes
 }

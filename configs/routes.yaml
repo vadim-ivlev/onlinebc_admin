@@ -40,7 +40,7 @@
 
 
 # Фронтэнд ---------------------------------------------------  
-
+# TODO: комментированные методы оставлены на всякий случай, если понадобится расширить API
 
 - comment: Список трансляций
   methods: [GET]
@@ -54,35 +54,35 @@
   example: /api/full-broadcast/354
   controller: GetFullBroadcast
 
-- comment: Посты трансляции с идентификатором id
-  methods: [GET]
-  path: /api/posts/:id
-  example: /api/posts/354
-  controller: GetPosts
+# - comment: Посты трансляции с идентификатором id
+#   methods: [GET]
+#   path: /api/posts/:id
+#   example: /api/posts/354
+#   controller: GetPosts
 
-- comment: Ответы к посту с идентификатором id
-  methods: [GET]
-  path: /api/answers/:id
-  example: /api/answers/23932
-  controller: GetAnswers
+# - comment: Ответы к посту с идентификатором id
+#   methods: [GET]
+#   path: /api/answers/:id
+#   example: /api/answers/23932
+#   controller: GetAnswers
 
-- comment: Медиа для поста с идентификатором id
-  methods: [GET]
-  path: /api/images/:id
-  example: /api/images/23932
-  controller: GetMedia
+# - comment: Медиа для поста с идентификатором id
+#   methods: [GET]
+#   path: /api/images/:id
+#   example: /api/images/23932
+#   controller: GetMedia
 
-- comment: Трансляция с идентификатором id и ее постами. Legacy
-  methods: [GET]
-  path: /api/online.php
-  example: /api/online.php
-  controller: GetFullBroadcastLegacy
-  params:
-  - comment: Идентификатор трансляции
-    name: id
-    inptype : number
-    value: ':id'
-    test: 354
+# - comment: Трансляция с идентификатором id и ее постами. Legacy
+#   methods: [GET]
+#   path: /api/online.php
+#   example: /api/online.php
+#   controller: GetFullBroadcastLegacy
+#   params:
+#   - comment: Идентификатор трансляции
+#     name: id
+#     inptype : number
+#     value: ':id'
+#     test: 354
 
 # - comment: Список трансляций.Legacy
 #   methods: [GET, HEAD]

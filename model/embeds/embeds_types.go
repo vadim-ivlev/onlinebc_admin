@@ -1,5 +1,7 @@
 package embeds
 
+// Типы используемые для десериализации/сериализации JSON перед отдачей его клиенту
+
 type Broadcasts []Broadcast
 
 type Broadcast struct {
@@ -41,6 +43,8 @@ type PostsAnswers struct {
 	PostsAnswerURI       string      `json:"posts__answer__uri"`
 	PostsAnswerDate      string      `json:"posts__answer__date"`
 	PostsAnswerText      string      `json:"posts__answer__text"`
+	PostsAnswerClearText string      `json:"posts__answer__clear_text"` //amended
+	PostsAnswerEmbeds    interface{} `json:"posts__answer__embeds"`     //amended
 	PostsAnswerTime      string      `json:"posts__answer__time"`
 	PostsAnswerType      int         `json:"posts__answer__type"`
 	PostsAnswerAuthor    string      `json:"posts__answer__author"`
@@ -55,8 +59,8 @@ type Posts struct {
 	HasBigImg      int            `json:"has_big_img"`
 	PostsDate      string         `json:"posts__date"`
 	PostsText      string         `json:"posts__text"`
-	PostsClearText string         `json:"posts__clear_text"` //new
-	PostsSocials   interface{}    `json:"posts__socials"`    //new
+	PostsClearText string         `json:"posts__clear_text"` //amended
+	PostsEmbeds    interface{}    `json:"posts__embeds"`     //amended
 	PostsTime      string         `json:"posts__time"`
 	PostsType      int            `json:"posts__type"`
 	IDBroadcast    int            `json:"id_broadcast"`

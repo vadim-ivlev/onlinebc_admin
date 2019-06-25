@@ -19,24 +19,26 @@ func ReadTextFile(fileName string) []byte {
 	return bytes
 }
 
+// зачитываем текстовые файлы
 func TestMain(m *testing.M) {
-	fmt.Println("Тесты Embeds ******************************************************")
-
 	textBytes = ReadTextFile("post-text.txt")
 	jsonBytes = ReadTextFile("_broadcast354.json")
-
 	os.Exit(m.Run())
 }
 
-func Test_GetSocialsJSON(m *testing.T) {
-
-	// jsonBytes := ReadTextFile("_broadcast354.json")
-	// fmt.Println(string(jsonBytes))
-
-	txt, json := GetClearTextAndWidgets(string(textBytes))
-	fmt.Println(txt, strings.Repeat("=", 100)+"\n", json)
+// Чистим текст и строим список эмбедов
+func Test_GetClearTextAndWidgets(m *testing.T) {
+	txt, ws := GetClearTextAndWidgets(string(textBytes))
+	fmt.Println(txt, strings.Repeat("=", 100)+"\n", ws)
+	for i, w := range ws {
+		fmt.Println(i)
+		for k, v := range w {
+			fmt.Printf("%s: %s\n", k, v)
+		}
+	}
 }
 
-func Test_traversePosts(m *testing.T) {
-	amendPostsAndAnswers(jsonBytes)
+// преобразуем финальный JSON
+func Test_AmendPostsAndAnswers(m *testing.T) {
+	fmt.Println(string(AmendPostsAndAnswers(jsonBytes)))
 }

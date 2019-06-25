@@ -3,10 +3,12 @@ package controller
 import (
 	"fmt"
 	"onlinebc_admin/model/db"
+	"onlinebc_admin/model/embeds"
 
 	"github.com/gin-gonic/gin"
 )
 
+// TODO: комментированные методы оставлены на всякий случай, если понадобится расширить API
 // Общие методы************************************************************************
 
 // LandingPage тестовая страница API в браузере.
@@ -18,45 +20,39 @@ func (dummy) LandingPage(c *gin.Context) {
 // ************************************************************************
 
 // GetMedia возвращает все медиа поста по его id
-func (dummy) GetMedia(c *gin.Context) {
-	row, _ := db.QueryRowMap("SELECT get_images($1) AS res;", getIntID(c))
-	fmt.Fprintf(c.Writer, "%s", row["res"])
-}
+// func (dummy) GetMedia(c *gin.Context) {
+// 	row, _ := db.QueryRowMap("SELECT get_images($1) AS res;", getIntID(c))
+// 	fmt.Fprintf(c.Writer, "%s", row["res"])
+// }
 
-// GetAnswers возвращает ответы к посту по его id
-func (dummy) GetAnswers(c *gin.Context) {
-	row, _ := db.QueryRowMap("SELECT get_answers($1) AS res;", getIntID(c))
-	fmt.Fprintf(c.Writer, "%s", row["res"])
-}
+// // GetAnswers возвращает ответы к посту по его id
+// func (dummy) GetAnswers(c *gin.Context) {
+// 	row, _ := db.QueryRowMap("SELECT get_answers($1) AS res;", getIntID(c))
+// 	fmt.Fprintf(c.Writer, "%s", row["res"])
+// }
 
-// GetPosts возвращает посты трансляции по её id
-func (dummy) GetPosts(c *gin.Context) {
-	row, _ := db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))
-	// err := ioutil.WriteFile("./posts354.json", row["res"].([]byte), 0644)
-	// if err != nil {
-	// 	fmt.Println("ERR", err)
-	// }
-	fmt.Fprintf(c.Writer, "%s", row["res"])
-}
+// // GetPosts возвращает посты трансляции по её id
+// func (dummy) GetPosts(c *gin.Context) {
+// 	row, _ := db.QueryRowMap("SELECT get_posts($1) AS res;", getIntID(c))
+// 	fmt.Fprintf(c.Writer, "%s", row["res"])
+// }
 
 // GetFullBroadcast возвращает трансляцию с постами по её id
 func (dummy) GetFullBroadcast(c *gin.Context) {
 	row, _ := db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", getIntID(c))
-	// err := ioutil.WriteFile("./broadcast354.json", row["res"].([]byte), 0644)
-	// if err != nil {
-	// 	fmt.Println("ERR", err)
-	// }
-
-	fmt.Fprintf(c.Writer, "%s", row["res"])
+	jsonBytes := row["res"]
+	// fmt.Fprintf(c.Writer, "%s", jsonBytes)
+	amendedJsonText := embeds.AmendPostsAndAnswers(jsonBytes.([]byte))
+	fmt.Fprintf(c.Writer, "%s", amendedJsonText)
 }
 
 // GetFullBroadcastLegacy возвращает трансляцию с постами по её id
-func (dummy) GetFullBroadcastLegacy(c *gin.Context) {
-	_ = c.Request.ParseForm()
-	id := c.Request.FormValue("id")
-	row, _ := db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", id)
-	fmt.Fprintf(c.Writer, "%s", row["res"])
-}
+// func (dummy) GetFullBroadcastLegacy(c *gin.Context) {
+// 	_ = c.Request.ParseForm()
+// 	id := c.Request.FormValue("id")
+// 	row, _ := db.QueryRowMap("SELECT get_full_broadcast($1) AS res;", id)
+// 	fmt.Fprintf(c.Writer, "%s", row["res"])
+// }
 
 // GetBroadcasts Получить список трансляций
 func (dummy) GetBroadcasts(c *gin.Context) {
