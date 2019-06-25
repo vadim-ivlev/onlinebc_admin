@@ -132,7 +132,11 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return updateRecord(params, "broadcast", "full_broadcast")
+				res, err := updateRecord(params, "broadcast", "full_broadcast")
+				if err == nil {
+					clearRedisByBroadcastID(params.Args["id"])
+				}
+				return res, err
 			},
 		},
 
@@ -146,7 +150,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return deleteRecord(params, "broadcast", "full_broadcast")
+				res, err := deleteRecord(params, "broadcast", "full_broadcast")
+				if err == nil {
+					clearRedisByBroadcastID(params.Args["id"])
+				}
+				return res, err
+
 			},
 		},
 
@@ -243,7 +252,11 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					params.Args["id_parent"] = nil
 				}
 
-				return updateRecord(params, "post", "full_post")
+				res, err := updateRecord(params, "post", "full_post")
+				// if err == nil && params.Args["id_parent"] != nil {
+				// 	clearRedisByPostID(params.Args["id_parent"])
+				// }
+				return res, err
 			},
 		},
 

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"path"
 	"path/filepath"
@@ -17,6 +18,7 @@ import (
 	"onlinebc_admin/model/db"
 	"onlinebc_admin/model/img"
 	srv "onlinebc_admin/model/imgserver"
+	"onlinebc_admin/model/redis"
 
 	"github.com/gin-gonic/gin"
 	gq "github.com/graphql-go/graphql"
@@ -261,6 +263,15 @@ func SaveUploadedImage(params gq.ResolveParams, fileFieldName string) (
 	}
 
 	return serverPath, width, height, thumbsJSONStr, errMsg
+}
+
+// clearRedisByBroadcastID чистим redis по id трансляции
+func clearRedisByBroadcastID(id interface{}) {
+	key := fmt.Sprintf("/api/full-broadcast/%v?", id)
+	err := redis.Del(key)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 // G R A P H Q L ********************************************************************************

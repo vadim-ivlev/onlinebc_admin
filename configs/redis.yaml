@@ -1,6 +1,6 @@
 dev:
   connection string:      127.0.0.1:6389
-  time to live:           10  
+  time to live:           60  
 
 
 docker:
