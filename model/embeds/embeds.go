@@ -6,11 +6,11 @@ package embeds
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"regexp"
 	"strings"
-
-	"github.com/tidwall/gjson"
+	// "github.com/tidwall/gjson"
 )
 
 // регулярные выражения фрагментов для удаления из текста
@@ -86,10 +86,10 @@ func getLastPart(ss string) string {
 	return a[len(a)-1]
 }
 
-// GetSocialsJSON Возвращает JSON социальных вставок найденных в тексте.
+// GetClearTextAndWidgets Возвращает очищенный текст и социальные вставки найденные в тексте.
 // https://git.rgwork.ru/masterback/onlinebc_admin/issues/27
-func GetSocialsJSON(text string) (strippedText string, widgetsJSON string) {
-	// накопительный массив для записей о виджетах
+func GetClearTextAndWidgets(text string) (strippedText string, widgetsJSON []map[string]string) {
+	// накопительный массив для записей о виджета. FIXME:?
 	arr := make([]map[string]string, 0)
 
 	// для всех видов виджетов
@@ -104,11 +104,12 @@ func GetSocialsJSON(text string) (strippedText string, widgetsJSON string) {
 	}
 
 	// сериализуем массив
-	bytes, err := json.MarshalIndent(arr, "", "  ")
-	if err != nil {
-		log.Panicln(err)
-	}
-	widgetsJSON = string(bytes)
+	// bytes, err := json.MarshalIndent(arr, "", "  ")
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// widgetsJSON = string(bytes)
+	widgetsJSON = arr
 	strippedText = ClearText(text)
 	return
 }
@@ -122,10 +123,40 @@ func ClearText(text string) string {
 	return s
 }
 
-const json1 = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
+// const json1 = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
 
-func aaa() {
-	value := gjson.Get(json1, "name.last")
+// func aaa() {
+// 	value := gjson.Get(json1, "name.last")
 
-	println(value.String())
+// 	println(value.String())
+// }
+
+func amendPostsAndAnswers(jsonBytes []byte) string {
+	var broadcasts []Broadcast
+	err := json.Unmarshal(jsonBytes, &broadcasts)
+	if err != nil {
+		fmt.Println("ERR", err)
+	}
+
+	for i, broadcast := range broadcasts {
+		for j, post := range broadcast.Posts {
+			txt, ws := GetClearTextAndWidgets(post.PostsText)
+			// post.PostsClearText = txt
+			// post.PostsSocials = jsonText
+
+			broadcasts[i].Posts[j].PostsClearText = txt
+			broadcasts[i].Posts[j].PostsSocials = ws
+			//TODO: answers
+		}
+	}
+
+	// сериализуем массив
+	bytes, err := json.MarshalIndent(broadcasts, "", "  ")
+	if err != nil {
+		log.Println("ERR serial:", err)
+	}
+	finalText := string(bytes)
+	fmt.Println(finalText)
+	return finalText
+
 }

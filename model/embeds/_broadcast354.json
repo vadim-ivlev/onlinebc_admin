@@ -8,7 +8,7 @@
                 "posts__uri": "",
                 "has_big_img": 0,
                 "posts__date": "07.06.2018",
-                "posts__text": "\"Прямая линия\" с Владимиром Путиным завершилась.\n",
+                "posts__text": "\"Прямая линия\" с Владимиром Путиным завершилась.\n  <iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/qIcTM8WXFjk\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe> ",
                 "posts__time": "13:26",
                 "posts__type": 1,
                 "id_broadcast": 354,

@@ -1,0 +1,125 @@
+[
+    {
+        "id": 354,
+        "posts": [
+            {
+                "id": 23932,
+                "id_parent": null,
+                "posts__uri": "",
+                "has_big_img": 1,
+                "posts__date": "07.06.2018",
+                "posts__text": "Алтайский край: В нашем селе единственная школа, где местные дети могут учиться до 9 класса. Недавно стало известно, что школу закрывают. Если это случится, село умрет. Помогите, пожалуйста, не дайте закрыть школу. \n\nНаталья: Мой внук обучается в этой школе. На наши обращения все отвечают по-разному. Нашей школе 19 лет, в ней ни разу не было ремонта. Чиновникам проще ее закрыть. Детей предлагают возить в село, расположенное в 7 километрах от нас. Помогите решить нашу проблему!",
+                "posts__time": "13:07",
+                "posts__type": 3,
+                "id_broadcast": 354,
+                "posts__author": "Илья Максимов",
+                "posts__images": [
+                    {
+                        "id": 5330,
+                        "width": null,
+                        "height": null,
+                        "source": "updated телевизор",
+                        "thumbs": [
+                            {
+                                "type": "small",
+                                "width": 200,
+                                "height": 134,
+                                "filepath": "/images/my-small1.jpg"
+                            },
+                            {
+                                "type": "middle",
+                                "width": 310,
+                                "height": 206,
+                                "filepath": "/images/my-middle1.jpg"
+                            }
+                        ],
+                        "post_id": 23932,
+                        "filepath": "updated_image.jpg"
+                    },
+                    {
+                        "id": 5409,
+                        "width": null,
+                        "height": null,
+                        "source": "новый телевизор",
+                        "thumbs": [
+                            {
+                                "type": "small",
+                                "width": 200,
+                                "height": 134,
+                                "filepath": "/images/my-small1.jpg"
+                            },
+                            {
+                                "type": "middle",
+                                "width": 310,
+                                "height": 206,
+                                "filepath": "/images/my-middle1.jpg"
+                            }
+                        ],
+                        "post_id": 23932,
+                        "filepath": "created_image.jpg"
+                    }
+                ],
+                "posts__answers": [
+                    {
+                        "id": 23935,
+                        "id_parent": 23932,
+                        "has_big_img": 0,
+                        "id_broadcast": 354,
+                        "posts__answer__uri": "",
+                        "posts__answer__date": "07.06.2018",
+                        "posts__answer__text": "Виктор Томенко, врио губернатора Алтайского края: Школа является филиалом, она действительно малокомплектная, есть проблемы в укомплектовании преподавательского состава. Однако в планах закрытия ее нет, тут, видимо, был какой-то информационный сбой. Проблемы будут решаться.",
+                        "posts__answer__time": "13:11",
+                        "posts__answer__type": 4,
+                        "posts__answer__author": "Дмитрий Сосновский",
+                        "posts__answer__images": null,
+                        "posts__answer__answers": null,
+                        "posts__answer__timestamp": 1528377060
+                    },
+                    {
+                        "id": 23934,
+                        "id_parent": 23932,
+                        "has_big_img": 0,
+                        "id_broadcast": 354,
+                        "posts__answer__uri": "",
+                        "posts__answer__date": "07.06.2018",
+                        "posts__answer__text": "У нас целые программы созданы по развитию школьного дела. Я хотел бы, чтобы и. о. губернатора обратился к этой проблеме и помог сохранить школу.",
+                        "posts__answer__time": "13:09",
+                        "posts__answer__type": 4,
+                        "posts__answer__author": "Илья Максимов",
+                        "posts__answer__images": null,
+                        "posts__answer__answers": null,
+                        "posts__answer__timestamp": 1528376940
+                    },
+                    {
+                        "id": 23933,
+                        "id_parent": 23932,
+                        "has_big_img": 0,
+                        "id_broadcast": 354,
+                        "posts__answer__uri": "",
+                        "posts__answer__date": "07.06.2018",
+                        "posts__answer__text": "Проблема в целом понятна. Это не единственный случай подобного рода. Мы много говорили о проблемах подобного рода. 47 человек, как у вас, - это не такая уж малокомплектная школа. Вопрос в техническом обеспечении и укомплектовании школы преподавателями.",
+                        "posts__answer__time": "13:08",
+                        "posts__answer__type": 4,
+                        "posts__answer__author": "Дмитрий Сосновский",
+                        "posts__answer__images": null,
+                        "posts__answer__answers": null,
+                        "posts__answer__timestamp": 1528376880
+                    }
+                ],
+                "posts__timestamp": 1528376820
+            }
+        ],
+        "title": "Обновленная трансляция",
+        "is_diary": 0,
+        "is_ended": 1,
+        "link_img": "//cdnimg.rg.ru/pril/article/126/55/62/lukjanov-zavrazhin100.jpg",
+        "show_date": 1,
+        "show_time": 0,
+        "time_begin": 1528376820,
+        "diary_author": "Новиков",
+        "link_article": "http://www.rg.ru/2013/08/09/zhrebiy-site-anons.html",
+        "time_created": 1528376820,
+        "groups_create": 0,
+        "show_main_page": 0
+    }
+]
