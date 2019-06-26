@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log"
 	"onlinebc_admin/model/db"
+	"onlinebc_admin/model/redis"
 
 	gq "github.com/graphql-go/graphql"
 )
@@ -134,7 +135,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				res, err := updateRecord(params, "broadcast", "full_broadcast")
 				if err == nil {
-					clearRedisByBroadcastID(params.Args["id"])
+					redis.ClearByBroadcastID(params.Args["id"])
 				}
 				return res, err
 			},
@@ -152,7 +153,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				res, err := deleteRecord(params, "broadcast", "full_broadcast")
 				if err == nil {
-					clearRedisByBroadcastID(params.Args["id"])
+					redis.ClearByBroadcastID(params.Args["id"])
 				}
 				return res, err
 
@@ -200,7 +201,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return createRecord(params, "post", "full_post")
+				res, err := createRecord(params, "post", "full_post")
+				if err == nil {
+					redis.ClearByBroadcastID(params.Args["id_broadcast"])
+				}
+				return res, err
+
 			},
 		},
 
@@ -246,6 +252,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
+				// запоминаем старых родителей, на случай перепривязки
+				id_broadcast_old, id_parend_old, err := redis.GetPostParentIDs(params.Args["id"])
+				if err != nil {
+					log.Println("update_post:getPostParentIDs:", err)
+				}
+
 				// если id_parent отрицательный отвязываем запись
 				id_parent, ok := params.Args["id_parent"].(int)
 				if ok && id_parent < 0 {
@@ -253,9 +265,11 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				}
 
 				res, err := updateRecord(params, "post", "full_post")
-				// if err == nil && params.Args["id_parent"] != nil {
-				// 	clearRedisByPostID(params.Args["id_parent"])
-				// }
+				if err == nil {
+					redis.ClearByBroadcastID(id_broadcast_old)
+					redis.ClearByPostID(id_parend_old)
+					redis.ClearByPostID(params.Args["id"])
+				}
 				return res, err
 			},
 		},
@@ -269,7 +283,18 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					Description: "Идентификатор поста"},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return deleteRecord(params, "post", "full_post")
+				// запоминаем старых родителей, на случай перепривязки
+				id_broadcast_old, id_parend_old, err := redis.GetPostParentIDs(params.Args["id"])
+				if err != nil {
+					log.Println("delete_post:getPostParentIDs:", err)
+				}
+
+				res, err := deleteRecord(params, "post", "full_post")
+				if err == nil {
+					redis.ClearByBroadcastID(id_broadcast_old)
+					redis.ClearByPostID(id_parend_old)
+				}
+				return res, err
 			},
 		},
 
@@ -314,7 +339,11 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					}
 				}
 				delete(params.Args, "file_field_name")
-				return db.CreateRow("image", params.Args)
+				res, err := db.CreateRow("image", params.Args)
+				if err == nil {
+					redis.ClearByPostID(params.Args["post_id"])
+				}
+				return res, err
 
 			},
 		},
@@ -358,7 +387,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				}
 				delete(params.Args, "file_field_name")
 
-				return db.UpdateRowByID("image", params.Args["id"].(int), params.Args)
+				res, err := db.UpdateRowByID("image", params.Args["id"].(int), params.Args)
+				if err == nil {
+					redis.ClearByImageID(params.Args["id"])
+				}
+				return res, err
+
 			},
 		},
 
@@ -372,7 +406,12 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return db.DeleteRowByID("image", params.Args["id"].(int))
+				post_id_old := redis.GetImagePostID(params.Args["id"])
+				res, err := db.DeleteRowByID("image", params.Args["id"].(int))
+				if err == nil {
+					redis.ClearByPostID(post_id_old)
+				}
+				return res, err
 			},
 		},
 	},

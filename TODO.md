@@ -1,9 +1,8 @@
 
 TODO:
 ====
-- чистить редис при обновлении постов, ответов и изображений.
-clearRedisByBroadcastID(id), clearRedisByPostID(id), clearRedisByImageID(id)
 
+- тестирование: create_post with id_parent does not invalidate redis
 
 
 - Прикрутить профилирование pprof https://habr.com/ru/company/badoo/blog/301990/
