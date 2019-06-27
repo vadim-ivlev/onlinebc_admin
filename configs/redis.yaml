@@ -5,10 +5,10 @@ dev:
 
 docker:
   connection string:      redis:6379
-  time to live:           10    
+  time to live:           60    
 
 
 prod:
   connection string:      127.0.0.1:6389
-  time to live:           10  
+  time to live:           60  
 

@@ -16,24 +16,22 @@ var redisdb *redis.Client
 func Init() {
 	redisdb = redis.NewClient(&redis.Options{Addr: params.ConnectStr})
 	pong, err := redisdb.Ping().Result()
-	fmt.Println("REDIS INIT:", pong, err)
+	log.Println("REDIS INIT:", pong, err)
 }
 
 // Get возвращает значение по ключу
 func Get(key string) (string, error) {
-	fmt.Println("Redis Get:", key)
 	return redisdb.Get("onlinebc:" + key).Result()
 }
 
 // Set сохраняет значение ключа в Redis на установленное время.
 func Set(key string, value string) error {
-	fmt.Println("Redis Set:", key)
 	return redisdb.Set("onlinebc:"+key, value, time.Second*time.Duration(params.TTL)).Err()
 }
 
 // Del удаляет запись по ключу
 func Del(key string) error {
-	fmt.Println("Redis Del:", key)
+	log.Println("Redis Del:", key)
 	return redisdb.Del("onlinebc:" + key).Err()
 }
 
@@ -66,17 +64,11 @@ func ClearByPostID(id interface{}) {
 		return
 	}
 
-	// если это пост чистим трансляцию
-	if id_broadcast.(int64) > 0 {
-		ClearByBroadcastID(id_broadcast)
-		return
-	}
+	// чистим трансляцию
+	ClearByBroadcastID(id_broadcast)
 
 	// если это ответ к посту рекурсивно вызываем себя с параметром id_parent
-	if id_parent.(int64) > 0 {
-		ClearByPostID(id_parent)
-		return
-	}
+	ClearByPostID(id_parent)
 }
 
 // ClearByImageID чистим redis по id изображения.

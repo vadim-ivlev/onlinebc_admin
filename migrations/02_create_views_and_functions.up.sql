@@ -142,8 +142,8 @@ AS SELECT post.id,
     post.post_type  AS posts__answer__type,
     post.link       AS posts__answer__uri,
     post.post_time  AS posts__answer__timestamp,
-    to_char(to_timestamp(post.post_time::double precision), 'DD.MM.YYYY'::text) AS posts__answer__date,
-    to_char(to_timestamp(post.post_time::double precision), 'HH24:MI'::text)    AS posts__answer__time,
+    -- to_char(to_timestamp(post.post_time::double precision), 'DD.MM.YYYY'::text) AS posts__answer__date,
+    -- to_char(to_timestamp(post.post_time::double precision), 'HH24:MI'::text)    AS posts__answer__time,
     
     get_images(post.id)      AS posts__answer__images,
     get_answers(post.id)    AS posts__answer__answers
@@ -161,8 +161,8 @@ AS SELECT post.id,
     post.post_type AS posts__type,
     post.link AS posts__uri,
     post.post_time AS posts__timestamp,
-    to_char(to_timestamp(post.post_time::double precision), 'DD.MM.YYYY'::text) AS posts__date,
-    to_char(to_timestamp(post.post_time::double precision), 'HH24:MI'::text) AS posts__time,
+    -- to_char(to_timestamp(post.post_time::double precision), 'DD.MM.YYYY'::text) AS posts__date,
+    -- to_char(to_timestamp(post.post_time::double precision), 'HH24:MI'::text) AS posts__time,
     
     get_images(post.id) AS posts__images,
     get_answers(post.id) AS posts__answers

@@ -204,6 +204,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				res, err := createRecord(params, "post", "full_post")
 				if err == nil {
 					redis.ClearByBroadcastID(params.Args["id_broadcast"])
+					redis.ClearByPostID(params.Args["id_parent"])
 				}
 				return res, err
 
