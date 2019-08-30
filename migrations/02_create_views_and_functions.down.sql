@@ -1,5 +1,5 @@
 -- GRAPHQL ---------------------------------
-DROP VIEW IF EXISTS public.full_broadcast;
+-- DROP VIEW IF EXISTS public.full_broadcast;
 DROP VIEW IF EXISTS public.full_post;
 DROP VIEW IF EXISTS public.full_answer;
 

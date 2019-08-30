@@ -67,11 +67,10 @@ func getPayload3(c *gin.Context) (query string, variables map[string]interface{}
 }
 
 // createRecord вставляет запись в таблицу tableToUpdate,
-// и возвращает вставленную  запись из таблицы tableToSelectFrom,
-// которая является представлением с более богатым содержимым,
+// и возвращает вставленную с более богатым содержимым,
 // чем обновленная таблица.
 // Используется в запросах GraphQL на вставку записей.
-func createRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFrom string) (interface{}, error) {
+func createRecord(params gq.ResolveParams, tableToUpdate string) (interface{}, error) {
 	// вставляем запись
 	fieldValues, err := db.CreateRow(tableToUpdate, params.Args)
 	if err != nil {
@@ -83,15 +82,14 @@ func createRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFr
 	// возвращаем ответ
 	path := params.Info.FieldName
 	fields := getSelectedFields([]string{path}, params)
-	return db.QueryRowMap("SELECT "+fields+" FROM "+tableToSelectFrom+" WHERE id = $1 ;", id)
+	return db.QueryRowMap("SELECT "+fields+" FROM "+tableToUpdate+" WHERE id = $1 ;", id)
 }
 
 // updateRecord обновляет запись в таблице tableToUpdate,
-// и возвращает обновленную запись из таблицы tableToSelectFrom,
-// которая является представлением с более богатым содержимым,
+// и возвращает обновленную запись с более богатым содержимым,
 // чем обновленная таблица.
 // Используется в запросах GraphQL на обновление записей.
-func updateRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFrom string) (interface{}, error) {
+func updateRecord(params gq.ResolveParams, tableToUpdate string) (interface{}, error) {
 	id := params.Args["id"].(int)
 	fieldValues, err := db.UpdateRowByID(tableToUpdate, id, params.Args)
 	if err != nil {
@@ -99,20 +97,19 @@ func updateRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFr
 	}
 	path := params.Info.FieldName
 	fields := getSelectedFields([]string{path}, params)
-	return db.QueryRowMap("SELECT "+fields+" FROM "+tableToSelectFrom+" WHERE id = $1 ;", id)
+	return db.QueryRowMap("SELECT "+fields+" FROM "+tableToUpdate+" WHERE id = $1 ;", id)
 }
 
 // deleteRecord удаляет запись из таблицы tableToUpdate,
-// и возвращает удаленную запись из таблицы tableToSelectFrom,
-// которая является представлением с более богатым содержимым,
+// и возвращает удаленную запись с более богатым содержимым,
 // чем обновленная таблица.
 // Используется в запросах GraphQL на удаление записей.
-func deleteRecord(params gq.ResolveParams, tableToUpdate string, tableToSelectFrom string) (interface{}, error) {
+func deleteRecord(params gq.ResolveParams, tableToUpdate string) (interface{}, error) {
 	// сохраняем запись, которую собираемся удалять
 	id := params.Args["id"].(int)
 	path := params.Info.FieldName
 	fields := getSelectedFields([]string{path}, params)
-	fieldValues, err := db.QueryRowMap("SELECT "+fields+" FROM "+tableToSelectFrom+" WHERE id = $1 ;", id)
+	fieldValues, err := db.QueryRowMap("SELECT "+fields+" FROM "+tableToUpdate+" WHERE id = $1 ;", id)
 	if err != nil {
 		return nil, err
 	}
@@ -174,11 +171,25 @@ func getSelectedFields(selectionPath []string, resolveParams gq.ResolveParams) s
 	for _, field := range fields {
 		name := field.Name.Value
 		if name != "__typename" {
-			collect = append(collect, field.Name.Value)
+			collect = append(collect, NameToExpression(field.Name.Value))
 		}
 	}
 	s := strings.Join(collect, ", ")
 	return s
+}
+
+// NameToExpression преобразует имя вычисляемого поля в его SQL выражение
+func NameToExpression(name string) string {
+	var NameExpressionMap = map[string]string{
+		"posts":   "get_full_broadcast_posts(broadcast.id) AS posts",
+		"answers": "get_full_post_answers(post.id) AS answers",
+		"images":  "get_full_post_images(post.id) AS images",
+	}
+	expression, ok := NameExpressionMap[name]
+	if !ok {
+		expression = name
+	}
+	return expression
 }
 
 // SaveUploadedFile - сохраняет первый присоединенный в поле fileFieldName файл во временную директорию,

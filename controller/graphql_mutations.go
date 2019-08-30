@@ -71,7 +71,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				return createRecord(params, "broadcast", "full_broadcast")
+				return createRecord(params, "broadcast")
 			},
 		},
 
@@ -133,7 +133,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				res, err := updateRecord(params, "broadcast", "full_broadcast")
+				res, err := updateRecord(params, "broadcast")
 				if err == nil {
 					redis.ClearByBroadcastID(params.Args["id"])
 				}
@@ -151,7 +151,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				res, err := deleteRecord(params, "broadcast", "full_broadcast")
+				res, err := deleteRecord(params, "broadcast")
 				if err == nil {
 					redis.ClearByBroadcastID(params.Args["id"])
 				}
@@ -201,7 +201,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 				},
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
-				res, err := createRecord(params, "post", "full_post")
+				res, err := createRecord(params, "post")
 				if err == nil {
 					redis.ClearByBroadcastID(params.Args["id_broadcast"])
 					redis.ClearByPostID(params.Args["id_parent"])
@@ -265,7 +265,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					params.Args["id_parent"] = nil
 				}
 
-				res, err := updateRecord(params, "post", "full_post")
+				res, err := updateRecord(params, "post")
 				if err == nil {
 					redis.ClearByBroadcastID(id_broadcast_old)
 					redis.ClearByPostID(id_parend_old)
@@ -290,7 +290,7 @@ var rootMutation = gq.NewObject(gq.ObjectConfig{
 					log.Println("delete_post:getPostParentIDs:", err)
 				}
 
-				res, err := deleteRecord(params, "post", "full_post")
+				res, err := deleteRecord(params, "post")
 				if err == nil {
 					redis.ClearByBroadcastID(id_broadcast_old)
 					redis.ClearByPostID(id_parend_old)

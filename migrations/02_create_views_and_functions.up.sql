@@ -250,9 +250,9 @@ CREATE OR REPLACE VIEW public.full_post AS
     FROM post
 ;
 
-CREATE OR REPLACE VIEW public.full_broadcast AS 
-    SELECT  *
-            , get_full_broadcast_posts(broadcast.id) AS posts
-    FROM broadcast
-;
+-- CREATE OR REPLACE VIEW public.full_broadcast AS 
+--     SELECT  *
+--             , get_full_broadcast_posts(broadcast.id) AS posts
+--     FROM broadcast
+-- ;
 

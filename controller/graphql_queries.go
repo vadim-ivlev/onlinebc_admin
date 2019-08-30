@@ -25,7 +25,7 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_broadcast"}, params)
-				return db.QueryRowMap("SELECT "+fields+" FROM full_broadcast WHERE id = $1 ;", params.Args["id"].(int))
+				return db.QueryRowMap("SELECT "+fields+" FROM broadcast WHERE id = $1 ;", params.Args["id"].(int))
 			},
 		},
 
@@ -40,7 +40,7 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 			},
 			Resolve: func(params gq.ResolveParams) (interface{}, error) {
 				fields := getSelectedFields([]string{"get_post"}, params)
-				return db.QueryRowMap("SELECT "+fields+" FROM full_post WHERE id = $1 ;", params.Args["id"].(int))
+				return db.QueryRowMap("SELECT "+fields+" FROM post WHERE id = $1 ;", params.Args["id"].(int))
 			},
 		},
 
@@ -270,11 +270,11 @@ var rootQuery = gq.NewObject(gq.ObjectConfig{
 				wherePart, orderAndLimits := queryEnd(params)
 				fields := getSelectedFields([]string{"list_full_broadcast", "list"}, params)
 
-				list, err := db.QuerySliceMap("SELECT " + fields + " FROM full_broadcast" + wherePart + orderAndLimits)
+				list, err := db.QuerySliceMap("SELECT " + fields + " FROM broadcast" + wherePart + orderAndLimits)
 				if err != nil {
 					return nil, err
 				}
-				count, err := db.QueryRowMap("SELECT count(*) AS count FROM full_broadcast" + wherePart)
+				count, err := db.QueryRowMap("SELECT count(*) AS count FROM broadcast" + wherePart)
 				if err != nil {
 					return nil, err
 				}
